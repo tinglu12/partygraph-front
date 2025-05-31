@@ -1,0 +1,65 @@
+[33mcommit 802d4a5b8a95bde1f64d1c96a78c514aa6e4d1f7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: tinglu <tinglu30@gmail.com>
+Date:   Sat May 31 16:33:48 2025 -0400
+
+    first push of cytoscope
+
+[33mcommit c4816a275b89d74923897575ec31597700d7ee5e[m
+Merge: fc424b4 78121e8
+Author: tinglu <tinglu30@gmail.com>
+Date:   Sat May 31 15:24:49 2025 -0400
+
+    Merge branch 'main' of https://github.com/tinglu12/partygraph-front
+
+[33mcommit fc424b44013434662cd3c63b5e37e4ccea1f0861[m
+Author: tinglu <tinglu30@gmail.com>
+Date:   Sat May 31 15:24:31 2025 -0400
+
+    fix builds
+
+[33mcommit 78121e89844d33b76ae210767aafeee71b403296[m
+Merge: 6b95f2a d1ce78c
+Author: bencrystal <benjamincrystal8@gmail.com>
+Date:   Sat May 31 15:15:50 2025 -0400
+
+    Merge branch 'main' of https://github.com/tinglu12/partygraph-front
+
+[33mcommit 6b95f2a3fee86e1622a91f334707555fa11ee3e1[m
+Author: bencrystal <benjamincrystal8@gmail.com>
+Date:   Sat May 31 15:14:55 2025 -0400
+
+    Sample Markdown Data Structure
+    
+    Added fake events -- Bounce House is in initial proper format
+
+[33mcommit d1ce78c9e752df38485f63d71633afa7794165d3[m
+Author: tinglu <tinglu30@gmail.com>
+Date:   Sat May 31 15:13:52 2025 -0400
+
+    replaced with nextjs
+
+[33mcommit 3a561b402fc59481e3a508a18777d806872fb166[m
+Author: DC <dc@rik.ai>
+Date:   Sat May 31 14:52:44 2025 -0400
+
+    added raw data
+
+[33mcommit dfaa72b1c770003b10ef266f81a73ac8976c17de[m
+Author: DC <dc@rik.ai>
+Date:   Sat May 31 14:50:01 2025 -0400
+
+    touch
+
+[33mcommit 8a583c3461aca85893e4a43589efea0e723b43ad[m
+Author: gpt-engineer-app[bot] <159125892+gpt-engineer-app[bot]@users.noreply.github.com>
+Date:   Sat May 31 18:26:05 2025 +0000
+
+    Add basic landing page
+    
+    Implement a landing page for an event finder with a node visualizer.
+
+[33mcommit 82526686c6d175fd44117d74c6dc8f4f9c63b0bf[m
+Author: gpt-engineer-app[bot] <159125892+gpt-engineer-app[bot]@users.noreply.github.com>
+Date:   Sat May 31 18:25:04 2025 +0000
+
+    Use tech stack vite_react_shadcn_ts

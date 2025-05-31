@@ -1,0 +1,90 @@
+export interface EventNode {
+  id: string;
+  title: string;
+  date: string;
+  description: string;
+  category?: string;
+  tags?: string[];
+  connections?: string[]; // IDs of connected nodes
+}
+
+export interface GraphData {
+  nodes: EventNode[];
+  edges?: Array<{
+    source: string;
+    target: string;
+    label: string;
+  }>;
+}
+
+export const sampleEvents: EventNode[] = [
+  {
+    id: "1",
+    title: "Summer Music Festival",
+    date: "2024-07-15",
+    description: "Annual music festival featuring top artists",
+    category: "Music",
+    tags: ["festival", "outdoor", "music"],
+    connections: ["2", "3"]
+  },
+  {
+    id: "2",
+    title: "Food & Wine Expo",
+    date: "2024-07-16",
+    description: "Culinary delights and wine tasting",
+    category: "Food",
+    tags: ["food", "wine", "tasting"],
+    connections: ["1", "4"]
+  },
+  {
+    id: "3",
+    title: "Art Gallery Opening",
+    date: "2024-07-17",
+    description: "Contemporary art exhibition",
+    category: "Art",
+    tags: ["art", "exhibition", "gallery"],
+    connections: ["1", "5"]
+  },
+  {
+    id: "4",
+    title: "Tech Conference",
+    date: "2024-07-18",
+    description: "Latest innovations in technology",
+    category: "Technology",
+    tags: ["tech", "conference", "innovation"],
+    connections: ["2", "5"]
+  },
+  {
+    id: "5",
+    title: "Fashion Show",
+    date: "2024-07-19",
+    description: "Spring/Summer collection showcase",
+    category: "Fashion",
+    tags: ["fashion", "show", "design"],
+    connections: ["3", "4"]
+  }
+];
+
+export const generateEdgesFromConnections = (nodes: EventNode[]) => {
+  const edges: Array<{ source: string; target: string; label: string }> = [];
+  
+  nodes.forEach(node => {
+    if (node.connections) {
+      node.connections.forEach(targetId => {
+        // Only create edge if it doesn't already exist
+        if (!edges.some(edge => 
+          (edge.source === node.id && edge.target === targetId) ||
+          (edge.source === targetId && edge.target === node.id)
+        )) {
+          edges.push({
+            source: node.id,
+            target: targetId,
+            label: 'Connected'
+          });
+        }
+      });
+    }
+  });
+  
+  return edges;
+}; 
