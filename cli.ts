@@ -33,8 +33,12 @@ async function main() {
     messages: [{ content: prompt, role: "user" }],
     model: model,
   });
+  const content = createChatCompletionResponse.completion_message?.content;
+  console.log(content);
 
-  console.log(createChatCompletionResponse.completion_message);
+  // @ts-ignore
+  const category = content?.text.trim();
+  console.log(category);
 }
 
 (async () => {
