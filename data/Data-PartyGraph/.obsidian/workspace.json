@@ -95,7 +95,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#neighborhood/Meatpacking",
+                "query": "tag:#type/music",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -213,9 +213,10 @@
   },
   "active": "0533ed99591e1e9b",
   "lastOpenFiles": [
+    "Untitled 1.canvas",
+    "Manhattan Bounce House Club.md",
     "Mozzarella-Making at Silvana.md",
     "Untitled.canvas",
-    "Manhattan Bounce House Club.md",
     "Welcome.md",
     "Deep Listening Bath.md"
   ]

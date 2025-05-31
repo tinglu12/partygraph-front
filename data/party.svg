@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <!-- Background -->
+  <rect x="0" y="0" width="600" height="400" fill="#87CEEB" />
+
+  <!-- Confetti -->
+  <g>
+    <circle cx="50" cy="50" r="5" fill="#FF69B4" />
+    <circle cx="100" cy="70" r="4" fill="#33CC33" />
+    <circle cx="150" cy="30" r="3" fill="#6666FF" />
+    <!-- Add more confetti circles here with different positions and colors -->
+  </g>
+
+  <!-- Balloons -->
+  <g>
+    <ellipse cx="200" cy="100" rx="20" ry="30" fill="#FF0000" />
+    <ellipse cx="250" cy="120" rx="25" ry="35" fill="#00FF00" />
+    <ellipse cx="300" cy="90" rx="20" ry="30" fill="#0000FF" />
+    <!-- Add more balloons here -->
+  </g>
+
+  <!-- Cake -->
+  <g>
+    <rect x="350" y="200" width="100" height="50" fill="#FFFFFF" />
+    <rect x="360" y="180" width="80" height="20" fill="#FFFFFF" />
+    <circle cx="380" cy="160" r="10" fill="#FF0000" />
+    <circle cx="420" cy="160" r="10" fill="#FF0000" />
+    <!-- Candles and other decorations on the cake -->
+  </g>
+
+  <!-- Streamers -->
+  <g>
+    <path d="M 0,200 Q 150,150 300,200" stroke="#FF00FF" stroke-width="5" fill="none" />
+    <path d="M 0,220 Q 150,170 300,220" stroke="#00FFFF" stroke-width="5" fill="none" />
+    <!-- Add more streamers -->
+  </g>
+
+  <!-- Text -->
+  <text x="300" y="380" font-size="24" text-anchor="middle" fill="#000000">Let's Party!</text>
+</svg>
