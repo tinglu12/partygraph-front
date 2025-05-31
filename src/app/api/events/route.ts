@@ -1,29 +1,15 @@
+import { getCategory } from "@/server/LamService";
 import { EventType } from "@/types/EventType";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const events: EventType[] = [
-    {
-      name: "event 1",
-      date: new Date().toISOString(),
-      location: "venue 1",
-      description: "description 1",
-      attendees: 100,
-      cost: 100,
-      budget: 100,
-      tags: ["party", "bar"],
-    },
-    {
-      name: "event 2",
-      date: new Date().toISOString(),
-      location: "venue 2",
-      description: "description 2",
-      attendees: 200,
-      cost: 200,
-      budget: 200,
-      tags: ["party", "music"],
-    },
-  ];
-
-  return NextResponse.json(events);
+  const event: EventType = {
+    name: "launch party",
+    description:
+      "We are launching a new product and we want to celebrate with a party.",
+  };
+  const category = await getCategory(event);
+  event.tags = [category];
+  console.log("event categorized", { category, event });
+  return NextResponse.json([event]);
 }

@@ -39,9 +39,6 @@ export default function ChatterBox() {
             <li key={event.name}>
               <h4>{event.name}</h4>
               <p>{event.description}</p>
-              <p>{event.location}</p>
-              <p>{event.date}</p>
-              <p>{event.attendees}</p>
               <p>tags: {event.tags?.join(", ")}</p>
             </li>
           ))}
@@ -50,3 +47,7 @@ export default function ChatterBox() {
     </div>
   );
 }
+
+// <p>{event.location}</p>
+// <p>{event.date}</p>
+// <p>{event.attendees}</p>
