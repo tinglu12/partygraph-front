@@ -22,18 +22,21 @@ export const Graph = ({
   edges = generateEdgesFromConnections(sampleEvents)
 }: GraphProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const cyRef = useRef<cytoscape.Core | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<EventNode | null>(null);
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [filteredEdges, setFilteredEdges] = useState(edges);
 
+  // Initialize Cytoscape
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || cyRef.current) return;
 
     // Use provided data or fallback to props
     const graphEvents = data?.nodes || filteredEvents;
     const graphEdges = data?.edges || filteredEdges;
 
     const cy = initializeCytoscape(containerRef.current, graphEvents, graphEdges);
+    cyRef.current = cy;
 
     // Add click handler for nodes
     cy.on('tap', 'node', (evt) => {
@@ -52,8 +55,63 @@ export const Graph = ({
     });
 
     return () => {
-      cy.destroy();
+      if (cyRef.current) {
+        cyRef.current.destroy();
+        cyRef.current = null;
+      }
     };
+  }, []); // Only run on mount
+
+  // Update graph when filtered data changes
+  useEffect(() => {
+    if (!cyRef.current) return;
+
+    const graphEvents = data?.nodes || filteredEvents;
+    const graphEdges = data?.edges || filteredEdges;
+
+    // Remove existing elements
+    cyRef.current.elements().remove();
+
+    // Add new elements
+    cyRef.current.add(graphEvents.map(event => ({
+      group: 'nodes',
+      data: {
+        id: event.id,
+        title: event.title,
+        date: event.date,
+        description: event.description
+      }
+    })));
+
+    cyRef.current.add(graphEdges.map(edge => ({
+      group: 'edges',
+      data: {
+        source: edge.source,
+        target: edge.target,
+        label: edge.label
+      }
+    })));
+
+    // Run layout
+    cyRef.current.layout({
+      name: 'cose-bilkent',
+      idealEdgeLength: 250,
+      nodeOverlap: 100,
+      refresh: 20,
+      fit: true,
+      padding: 100,
+      randomize: true,
+      componentSpacing: 400,
+      nodeRepulsion: 1000000,
+      edgeElasticity: 400,
+      nestingFactor: 0.1,
+      gravity: 0.1,
+      numIter: 5000,
+      initialTemp: 2000,
+      coolingFactor: 0.99,
+      minTemp: 1.0,
+      quality: 'proof'
+    } as any).run();
   }, [data, filteredEvents, filteredEdges]);
 
   const handleSearch = (query: string) => {

@@ -80,7 +80,7 @@ export const generateEdgesFromConnections = (nodes: EventNode[]) => {
           edges.push({
             source: node.id,
             target: targetId,
-            label: 'Connected'
+            label: ''
           });
         }
       });

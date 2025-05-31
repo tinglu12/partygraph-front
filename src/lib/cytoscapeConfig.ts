@@ -72,12 +72,13 @@ export const initializeCytoscape = (
         style: {
           'background-color': '#4CAF50',
           'label': 'data(title)',
-          'text-valign': 'center',
+          'text-valign': 'bottom',
           'text-halign': 'center',
           'text-wrap': 'wrap',
           'text-max-width': '100px',
-          'padding': '10px',
-          'shape': 'roundrectangle'
+          'width': 40,
+          'height': 40,
+          'shape': 'ellipse'
         }
       },
       {
