@@ -1,0 +1,222 @@
+{
+  "main": {
+    "id": "53408096c897e39b",
+    "type": "split",
+    "children": [
+      {
+        "id": "43e061c3f552dde1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0533ed99591e1e9b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Manhattan Bounce House Club.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Manhattan Bounce House Club"
+            }
+          },
+          {
+            "id": "de4b4c8647ae643f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Manhattan Bounce House Club.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Manhattan Bounce House Club"
+            }
+          },
+          {
+            "id": "b97d7c28597e8695",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Mozzarella-Making at Silvana.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Mozzarella-Making at Silvana"
+            }
+          },
+          {
+            "id": "1021dc21a28bb152",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Manhattan Bounce House Club.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Manhattan Bounce House Club"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b3791441b972aba8",
+    "type": "split",
+    "children": [
+      {
+        "id": "9d71c718c89966b0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0d967f423f90870a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "351f184a56c1282f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#neighborhood/Meatpacking",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "7edb6b114bf64027",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e02fab64f7143f74",
+    "type": "split",
+    "children": [
+      {
+        "id": "9517d892b8aae0e2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fade5cf2a0dd4392",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Manhattan Bounce House Club.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Manhattan Bounce House Club"
+            }
+          },
+          {
+            "id": "023151e00ab98120",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Manhattan Bounce House Club.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Manhattan Bounce House Club"
+            }
+          },
+          {
+            "id": "f54c0cededcdddfa",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "56990df003ed0d24",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Manhattan Bounce House Club.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Manhattan Bounce House Club"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "0533ed99591e1e9b",
+  "lastOpenFiles": [
+    "Mozzarella-Making at Silvana.md",
+    "Untitled.canvas",
+    "Manhattan Bounce House Club.md",
+    "Welcome.md",
+    "Deep Listening Bath.md"
+  ]
+}
