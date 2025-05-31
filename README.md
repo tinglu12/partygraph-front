@@ -1,3 +1,8 @@
+## Data
+
+is in /data
+
+
 # Welcome to your Lovable project
 
 ## Project info
