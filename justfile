@@ -1,0 +1,3 @@
+dev:
+  pnpm dev
+
