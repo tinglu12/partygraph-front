@@ -67,12 +67,13 @@ export const sampleEvents: EventNode[] = [
 
 export const generateEdgesFromConnections = (nodes: EventNode[]) => {
   const edges: Array<{ source: string; target: string; label: string }> = [];
+  const nodeIds = new Set(nodes.map(node => node.id));
   
   nodes.forEach(node => {
     if (node.connections) {
       node.connections.forEach(targetId => {
-        // Only create edge if it doesn't already exist
-        if (!edges.some(edge => 
+        // Only create edge if target node exists and edge doesn't already exist
+        if (nodeIds.has(targetId) && !edges.some(edge => 
           (edge.source === node.id && edge.target === targetId) ||
           (edge.source === targetId && edge.target === node.id)
         )) {
