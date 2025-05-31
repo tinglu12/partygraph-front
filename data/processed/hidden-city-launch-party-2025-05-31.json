@@ -1,0 +1,62 @@
+{
+  "title": "Hidden City Launch Party",
+  "date": "Friday, May 9, 2025",
+  "time": "6p-midnight",
+  "location": "The Shell, 141 Moffat Street",
+  "neighborhood": "East Bushwick",
+  "price": "under_25",
+  "accessibility": "unknown",
+  "link": "https://withfriends.events/event/hidden-city-launch-party/",
+  "description": "Hidden City Launch Party at The Shell, a new DIY venue in East Bushwick. Live music performances and DJ set with interactive painting.",
+  "tags": {
+    "type": [
+      "music",
+      "popup",
+      "community_building"
+    ],
+    "goal": [
+      "community_building",
+      "creative_expression",
+      "entertainment"
+    ],
+    "vibe": [
+      "casual",
+      "high_energy",
+      "house_party"
+    ],
+    "genre": [
+      "electronic",
+      "indie_rock"
+    ],
+    "audience": [
+      "art_kids",
+      "young_professionals",
+      "creatives"
+    ],
+    "venue_type": [
+      "art_space",
+      "house_party",
+      "warehouse"
+    ],
+    "borough": [
+      "Brooklyn"
+    ],
+    "neighborhood": [
+      "East Bushwick"
+    ],
+    "timeofday": [
+      "evening",
+      "late_night"
+    ],
+    "language": [
+      "English"
+    ],
+    "flexible_tags": [
+      "interactive",
+      "participatory",
+      "local_artists",
+      "under_25",
+      "DIY"
+    ]
+  }
+}
