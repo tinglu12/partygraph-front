@@ -1,0 +1,1872 @@
+Delivered-To: dc@rik.ai
+Received: by 2002:a5d:40d0:0:b0:3a0:6577:2911 with SMTP id b16csp534648wrq;
+        Fri, 9 May 2025 13:09:14 -0700 (PDT)
+X-Forwarded-Encrypted: i=3; AJvYcCW8RlwOS7nS31+ra+tK5XmjRnHFKODLCc0s/5wRx6QR8hlLPYRzBNwkYPBWDz1YxnXwYQ==@rik.ai
+X-Google-Smtp-Source: AGHT+IEsA8cxdwJUJDId97YmnU+HWC7tlk2qqJsvD8Qfgf7Lx84GRSuP87JEdCx1FFloXRUmy8Nu
+X-Received: by 2002:a17:90b:35d0:b0:2ff:7ad4:77b1 with SMTP id 98e67ed59e1d1-30c3cb1a3bfmr7485209a91.2.1746821353826;
+        Fri, 09 May 2025 13:09:13 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1746821353; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=Y51XGu7C2mn8vFjFymF27QCxYlCaQf0teyOjAC6G3glB8iz2q8k7Yc+SoTAUNukzNr
+         AUeWX52HOBn9fXsd9hNNWeJwomo7PnEYVkyQXKjRWCFmmuwb4Q/naoGh/8pLODXaXHHK
+         NSCXn333r46/TZXue1DjW3+18vsz2Vvmn5SzgoDuPsHAL+LgLpi9aqc7Trn/JRZYMzGP
+         FpXzXjlLWkoxQIq8/lH36G33W9xBN6wVOFUMYCDx4km+n/DGIn2SIkji4vU5CnG3Asnu
+         5lQqv2CAEy7BmsNO/LIQm/BHS+wVX43Gnc0jcqbwgExHpbfZYa6Mr9XoSBNTF+8l/FYE
+         FcRQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=feedback-id:subject:mime-version:content-transfer-encoding
+         :message-id:list-url:list-unsubscribe-post:list-unsubscribe
+         :list-subscribe:list-post:list-owner:list-id:list:precedence:to:from
+         :date:dkim-signature:dkim-signature:dkim-signature;
+        bh=/qHdAxpyk/UFuf6Hls6cZeDP5V4Aq5frE45EjRdYeJY=;
+        fh=sEHnxxokuNIOr0ilvpFwmvEArJ+PPN2TV9kvibp1jd8=;
+        b=FdcSj37e2iVOIXOLUhf/KOjZkKvEXpMWk1NDYNxXi3pOwEXibyVzpPgZNjBpyuqAXl
+         5ANpavuzOkBEqwudzzKTOMJhQ4tXSE5KFhhVj4V412p8yp4sMmtJ+/2aY0hKU+QkMWV5
+         9Mo+xftvuu2eKEwW48ibE9OodZ9+CzhAQXvSIn1dtOWH4BEhwLx7fjLqRqd7+06TAOI6
+         Wgs2+vWUSYqrkzdW9bfIKtADAbDrsEeW9IL7t5M9ccIOmDpqUAwEyvQWtZkxdpUqG2Fn
+         g3pV01MwYGRHmWLu8SaHLiqs3AzlWd3qO2Kgk405KMJFcgM2LadZiFfoaWEALWRm+5X0
+         fBuw==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@cloudflare-email.net header.s=cf2024-1 header.b=PBWRBpEZ;
+       dkim=pass header.i=@nonsensenyc.com header.s=oa62sf5dyt4wyirkqb7hmcfpjvfyr4he header.b=RZ254+8w;
+       dkim=pass header.i=@amazonses.com header.s=gdwg2y3kokkkj5a55z2ilkup5wp5hhxx header.b=BV1s6qt5;
+       arc=pass (i=1 spf=pass spfdomain=us-west-2.amazonses.com dkim=pass dkdomain=nonsensenyc.com dkim=pass dkdomain=amazonses.com dmarc=pass fromdomain=nonsensenyc.com);
+       spf=pass (google.com: domain of cfbounces+ndrdrop@knowbase.cc designates 104.30.8.97 as permitted sender) smtp.mailfrom=cfbounces+ndrdrop@knowbase.cc;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=nonsensenyc.com
+Return-Path: <cfbounces+ndrdrop@knowbase.cc>
+Received: from i-jh.cloudflare-email.net (i-jh.cloudflare-email.net. [104.30.8.97])
+        by mx.google.com with ESMTPS id 98e67ed59e1d1-30c39ef3e6esi3770251a91.130.2025.05.09.13.09.11
+        for <dc@rik.ai>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 09 May 2025 13:09:13 -0700 (PDT)
+Received-SPF: pass (google.com: domain of cfbounces+ndrdrop@knowbase.cc designates 104.30.8.97 as permitted sender) client-ip=104.30.8.97;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@cloudflare-email.net header.s=cf2024-1 header.b=PBWRBpEZ;
+       dkim=pass header.i=@nonsensenyc.com header.s=oa62sf5dyt4wyirkqb7hmcfpjvfyr4he header.b=RZ254+8w;
+       dkim=pass header.i=@amazonses.com header.s=gdwg2y3kokkkj5a55z2ilkup5wp5hhxx header.b=BV1s6qt5;
+       arc=pass (i=1 spf=pass spfdomain=us-west-2.amazonses.com dkim=pass dkdomain=nonsensenyc.com dkim=pass dkdomain=amazonses.com dmarc=pass fromdomain=nonsensenyc.com);
+       spf=pass (google.com: domain of cfbounces+ndrdrop@knowbase.cc designates 104.30.8.97 as permitted sender) smtp.mailfrom=cfbounces+ndrdrop@knowbase.cc;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=nonsensenyc.com
+DKIM-Signature: v=1; a=rsa-sha256; s=cf2024-1; d=cloudflare-email.net; c=relaxed/relaxed;
+	h=Subject:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-ID:To
+	:From:Date:reply-to:cc:resent-date:resent-from:resent-to:resent-cc
+	:in-reply-to:references:list-help:list-archive; t=1746821352; x=1747426152; bh=/
+	qHdAxpyk/UFuf6Hls6cZeDP5V4Aq5frE45EjRdYeJY=; b=PBWRBpEZMIZhckXmFmmsQYsud80t
+	wX9H9fNVo6hv/kmKZhZkVEIYE8ekt2LRrbGjoo7AliyEvBBw5/tWbZ1qkX3aFQRNq8Lm28PELzz
+	4MgIQ1avAKPxqQrA2iZDdfKHa2Q6eSuHR5TPuGsJsAsGZdgw4BFV9sSFCIqcAnSmIa+YixLExYM
+	JKo42yGt8MMDnhVw2/39j1BGG8rgSQFUp7pA8bV1vZZCg3HiNO69Dra+zkEwguoES5mtDVYjcrk
+	BGS50d+eEHB9SStJChuQZhv7FGwg6JPegz+HIIwNzD73bB6Tuhael+9uPuntvMUuwGaXFqNsPU3
+	c5AO/fbDw6A20w==;
+X-Forwarded-To: dc@rik.ai
+X-Forwarded-For: dc@knowbase.cc dc@rik.ai
+Received: from a27-196.smtp-out.us-west-2.amazonses.com (54.240.27.196)
+        by cloudflare-email.net (unknown) id 8SFchPlwxqaM
+        for <dc@knowbase.cc>; Fri, 09 May 2025 20:09:08 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=cf2024-1; d=cloudflare-email.net; cv=none;
+	b=HpvrBNbrGGeiUuY0AybJuW450w0hBzydx9jKzFxDC6B16+RdSUQ+MFPLm7H0/Dor04FQFvznv
+	+3Kp4W0+YccI4bTQcJl3L9XKm2E5yrbOP+xAxpDS//ESgKW4JqupIcAVg6mftZS79S9qRd/cEOp
+	dCi5/P/zUNXsX+4n743qI+ikkHfinPN/LtwfCcQY54j613DDzOl07Eq8w2B4K0mpDBAp+CZONTi
+	0BrGNJ5i/fpnyOwWp5p4UyaD1+rjAcPkH7aPz+0kZLYhIknWfZXOqvrhgdSEeepJHBy8NaQYv+O
+	BswhY1ao/sNaR2DpCuXg8YhIfG7pTj3f80ImdCjll03A==;
+ARC-Message-Signature: i=1; a=rsa-sha256; s=cf2024-1; d=cloudflare-email.net; c=relaxed/relaxed;
+	h=Subject:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-ID:To
+	:From:Date:reply-to:cc:resent-date:resent-from:resent-to:resent-cc
+	:in-reply-to:references:list-help:list-archive; t=1746821350; x=1747426150; bh=/
+	qHdAxpyk/UFuf6Hls6cZeDP5V4Aq5frE45EjRdYeJY=; b=Q5zWm+yjD2+puh+gZjdxVNJtcnn0
+	AD9ybDR52bJEb3ky2Hfbf/fWLdKSIEjXk4e1R0y+/UH0EUVMBMTwxx1m9AgGPBvtYMl2zhDhJPh
+	9ZJeLz4FqWkgXTXHQ6LH2qdyJEa8gOkyLSQJRzwBDMb8AcPfW2fxgE1EX8hSxOYtlTsk9rdOh2C
+	Riixhtb9SLchGTEaKIRFJdFL/9KDjYxQiL+Kci1BXGiVu6XkyypjEQ13gJKQjn9nggpVUJ3DcEz
+	mrgOInk/FNEymIMOQJVwQHwNEIqGYB5aan79YArI56AjWYcnvogXUr5t5eL4v1V76ALVgvdmmQX
+	s9yvHSlR940eQw==;
+ARC-Authentication-Results: i=1; mx.cloudflare.net;
+	dkim=pass header.d=nonsensenyc.com header.s=oa62sf5dyt4wyirkqb7hmcfpjvfyr4he header.b=RZ254+8w;
+	dkim=pass header.d=amazonses.com header.s=gdwg2y3kokkkj5a55z2ilkup5wp5hhxx header.b=BV1s6qt5;
+	dmarc=pass header.from=nonsensenyc.com policy.dmarc=none;
+	spf=none (mx.cloudflare.net: no SPF records found for postmaster@a27-196.smtp-out.us-west-2.amazonses.com) smtp.helo=a27-196.smtp-out.us-west-2.amazonses.com;
+	spf=pass (mx.cloudflare.net: domain of 01010196b6aa780e-31ca21c2-e03b-4f52-b266-2d6290e74675-000000@us-west-2.amazonses.com designates 54.240.27.196 as permitted sender) smtp.mailfrom=01010196b6aa780e-31ca21c2-e03b-4f52-b266-2d6290e74675-000000@us-west-2.amazonses.com;
+	arc=none smtp.remote-ip=54.240.27.196
+Received-SPF: pass (mx.cloudflare.net: domain of 01010196b6aa780e-31ca21c2-e03b-4f52-b266-2d6290e74675-000000@us-west-2.amazonses.com designates 54.240.27.196 as permitted sender)
+	receiver=mx.cloudflare.net; client-ip=54.240.27.196; envelope-from="01010196b6aa780e-31ca21c2-e03b-4f52-b266-2d6290e74675-000000@us-west-2.amazonses.com"; helo=a27-196.smtp-out.us-west-2.amazonses.com;
+Authentication-Results: mx.cloudflare.net;
+	dkim=pass header.d=nonsensenyc.com header.s=oa62sf5dyt4wyirkqb7hmcfpjvfyr4he header.b=RZ254+8w;
+	dkim=pass header.d=amazonses.com header.s=gdwg2y3kokkkj5a55z2ilkup5wp5hhxx header.b=BV1s6qt5;
+	dmarc=pass header.from=nonsensenyc.com policy.dmarc=none;
+	spf=none (mx.cloudflare.net: no SPF records found for postmaster@a27-196.smtp-out.us-west-2.amazonses.com) smtp.helo=a27-196.smtp-out.us-west-2.amazonses.com;
+	spf=pass (mx.cloudflare.net: domain of 01010196b6aa780e-31ca21c2-e03b-4f52-b266-2d6290e74675-000000@us-west-2.amazonses.com designates 54.240.27.196 as permitted sender) smtp.mailfrom=01010196b6aa780e-31ca21c2-e03b-4f52-b266-2d6290e74675-000000@us-west-2.amazonses.com;
+	arc=none smtp.remote-ip=54.240.27.196
+X-CF-SpamH-Score: 1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=oa62sf5dyt4wyirkqb7hmcfpjvfyr4he; d=nonsensenyc.com;
+	t=1746821347;
+	h=Date:From:To:List-ID:List-Owner:List-Post:List-Subscribe:List-Unsubscribe:List-Unsubscribe-Post:Message-ID:Content-type:Content-Transfer-Encoding:MIME-Version:Subject;
+	bh=3FdznXoYtjmDLjfgMC/1jYGnLQ4ZucCicU87MguCzyA=;
+	b=RZ254+8wKu7gEe+CmbjShOmDAJTa+KqYWzvs0HHsLib21dsjz5D1YRBzstIz/IQg
+	giSPCWQCrqfAvFzPNam7qJkpB43gp2OodJ3M28VfLrDE7ZBbPhFrzgd0nh3HA/qfIlF
+	FcptHi9VsbgxP8w9uqLh+hQIbghGhu6IFuMs3TBk=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=gdwg2y3kokkkj5a55z2ilkup5wp5hhxx; d=amazonses.com; t=1746821347;
+	h=Date:From:To:List-ID:List-Owner:List-Post:List-Subscribe:List-Unsubscribe:List-Unsubscribe-Post:Message-ID:Content-type:Content-Transfer-Encoding:MIME-Version:Subject:Feedback-ID;
+	bh=3FdznXoYtjmDLjfgMC/1jYGnLQ4ZucCicU87MguCzyA=;
+	b=BV1s6qt5DIGqRadZv79IX/7j8rLZjEwU8GhaKZzVOafLvicNPCVMJCZPbVJbmm2e
+	ML1n+L1PXbDDGu+Qc68xrL+XLrJXNfv66wDx2ohKwI9bOKSmDOKOs2iYjUIrn+g4E6w
+	uhUyT9Y2E/6zA2TtmNZ4ClFZdHphWeW/HGv4wGoY=
+Date: Fri, 9 May 2025 20:09:07 +0000
+From: nonsense nyc <jstark@nonsensenyc.com>
+To: nonsense nyc Subscriber <dc@knowbase.cc>
+X-Priority: 3
+Precedence: list
+List: nonsensenyc
+List-ID: <nonsensenyc.web15.tigertech.net>
+List-Owner: <jstark@nonsensenyc.com>
+List-Post: NO
+List-Subscribe: <https://nonsensenyc.com/cgi-bin/dada/mail.cgi/s/nonsensenyc/dc/knowbase.cc/>
+List-Unsubscribe: <mailto:jstark@nonsensenyc.com?Subject=Unsubscribe%20dc%40knowbase.cc%20from%20nonsensenyc&Body=Unsubscripton%20Link%20for%20dc%40knowbase.cc%3A%20%0A%0Ahttps%3A%2F%2Fnonsensenyc.com%2Fcgi-bin%2Fdada%2Fmail.cgi%2Ft%2FCjXHkyWZWZDIGynsSYiXYo8Wi3o4nFDiOi3GYeap%2Ffrom_email_header%2F>, <https://nonsensenyc.com/cgi-bin/dada/mail.cgi/t/CjXHkyWZWZDIGynsSYiXYo8Wi3o4nFDiOi3GYeap/from_email_header/>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+List-URL: <https://nonsensenyc.com/cgi-bin/dada/mail.cgi/list/nonsensenyc/>
+X-BeenThere: https://nonsensenyc.com/cgi-bin/dada/mail.cgi
+X-Message-ID: <20250509115257.94245520@nonsensenyc.com>
+Message-ID: <01010196b6aa780e-31ca21c2-e03b-4f52-b266-2d6290e74675-000000@us-west-2.amazonses.com>
+X-Mailer: Pro Dada v11.21.0 stable 2023-08-07 
+Content-type: multipart/alternative;
+ boundary="----------=_1746816777-3057801-0"; charset=iso-8859-1
+Content-Transfer-Encoding: binary
+MIME-Version: 1.0
+Subject: nonsense: 5.9 to 5.16
+Feedback-ID: ::1.us-west-2.9Ssb++hIPpKZAe/7z4rkNKRBBgxGVyeFEiOM37a9AJI=:AmazonSES
+X-SES-Outgoing: 2025.05.09-54.240.27.196
+
+This is a multi-part message in MIME format...
+
+------------=_1746816777-3057801-0
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+X-Mailer: MIME-tools 5.510 (Entity 5.510)
+
+
+Unsubscribe Automatically:
+https://nonsensenyc.com/cgi-bin/dada/mail.cgi/t/CjXHkyWZWZDIGynsSYiXYo8Wi3o4nFDiOi3GYeap/lus/1746821347
+
+Unsubscribe Automatically 
+Friday, May 9
+
+* Glamdammit, Manhattan
+
+* Hidden City Launch Party, Brooklyn
+
+* Vocabaret Eric Adams, Manhattan
+
+* Ocean of Eros, Brooklyn
+Saturday, May 10
+
+* Hole! Brooklyn
+
+* Come On! Volume 3, Manhattan
+
+* Back to the Moon: Billionaire Blast Off, Manhattan
+Sunday, May 11
+
+* NowNet Arts Lab Ensemble, Brooklyn
+
+* Public Victories, Brooklyn
+Monday, May 12
+
+* Dinner Together, Brooklyn
+Tuesday, May 13
+
+* ForbHIDDEN People: An Elven Burlesque, Queens
+
+* Spirited Away Psychic and Paranormal Night, Brooklyn
+
+* Fresh: Circus School All Stars, Manhattan
+
+* Gowanus Current Screening, Brooklyn
+
+* Booze and Build, Queens
+Wednesday, May 14
+
+* Music Research Strategies: Listen Like Wolves -- A Grammar of Motives, Manhattan
+
+* Immersive Experience Day, Brooklyn
+Thursday, May 15
+
+* Bad Art Party, Brooklyn
+
+* Lowkey Clothing Swap and Block Printing Workshop, Brooklyn
+Friday, May 16
+
+* The Trash King, Manhattan
+
+* Cookbook Club, Manhattan
+
+* Model Majority American History Comedy Show, Manhattan
+Spectre
+
+* Bilingual Parrots
+Learning
+
+* Walk the Last Mile
+NOTE: For some navigation help, or an explanation for what this is all about, scroll all the way down to NONSENSE. You can donate to this project at nonsensenyc.com/special. Also: We make a lot of mistakes, especially with dates; you should always double check our work before you go out.
+XXXXX COVER ART XXXXX
+cancan ruffle
+XXXXX FRIDAY, MAY 9 XXXXX
+Glamdammit 
+Glamdammit is pleased to present a tribute to the Clash -- the Only Band That Matters, performed by Pale Moon Gang. Plus the Ritualists, Spike Polite and Sewage, and Sunrisers. Hosted by the Inimitable Michael T and Atz Magick. Go-Go Extraordinaire Anna Copa Cabanna. DJ set by Twig the Wonderkid. 
+Baker Falls 
+
+192 Allen Street, Manhattan
+
+7:30p; $10 advance, $15 general admission
+
+21 and over
+
+https://tickets.venuepilot.com/e/glamdammit-the-clash-live-tribute-by-pale-moon-gang-with-the-ritualists-spike-polite-sewage-nyc-savag-82bf8c
+***** Also on FRIDAY, MAY 9 *****
+Hidden City Launch Party
+Hidden City is a collective run by event organizers and performers who have been working in the DIY space in NYC for over 10 years. As we've watched our city become more expensive and hostile to artists, we were inspired to grow Hidden City to help revive a scene that is sustainable, diverse, and artist-friendly.
+The Shell is a new DIY venue in East Bushwick with a basement set up for live music and a backyard. Claire Hawkins and Moonmill will be releasing singles. They’ll be supported with performances by Angel Grace, Lukka, KRC Band, and Fox Indigo.
+DJ Glitch Witch will host a DJ set outside. We'll also have interactive painting that everyone can participate in.
+The Shell
+
+141 Moffat Street, East Bushwick, Brooklyn
+
+6p-midnight; $10 online, $15 door
+
+https://withfriends.events/event/hidden-city-launch-party/
+***** Also on FRIDAY *****
+Vocabaret Eric Adams
+Live from the "Istanbul of America," Vocabaret's wordsmiths are doing their first-ever show taking on the words of a single person: Mayor Eric Adams. We'll analyze the swaggiest, weirdest and most out-of-pocket quotes and claims over the years from our "perfectly imperfect" mayor in advance of June's primary election, in an attempt to understand what he's saying and how it's affected our city. Whether you're a "hater" or a "waiter" or just confusing Italian for Spanish on a T-shirt, you won't want to miss your seat at this "table of success."
+Caveat
+
+21A Clinton, Manhattan
+
+6:30p doors, 7p show; $20 door, $10 livestream, discount tickets with code CAVEATORB
+
+https://caveat.nyc/events/vocabaret-5-9-2025
+***** Also on FRIDAY *****
+Ocean of Eros
+Join artists Mela Closs, Samantha Sea Sea, and Angad (Angu) Singh for an evening of ambient and industrial soundscapes, movement, visuals, poetry, and interactive performance that play with eros and whimsy. Take off your shoes, lounge, and let your body and senses be stirred. There will be time to meet the artists, have a drink, hang out in an art installation, and explore Mela’s interactive altar where you can interpret the divinatory meaning of the shell you receive during her performance.
+Delight Factory
+
+303 Saratoga Avenue, Brooklyn
+
+C train to Rockaway Avenue, J train to Chauncey stations
+
+7p doors, 7:30-9 performances with short breaks, $20 suggested donation
+
+delightfactorynyc@gmail.com
+
+https://www.delightfactorynyc.com/events/ocean-of-eros
+
+https://www.eventbrite.com/e/ocean-of-eros-tickets-1323604329179
+XXXXX SATURDAY, MAY 10 XXXXX
+American Sing-Song Presents: 
+Hole!
+Hole! is a musical about a strict religious sect in Nebraska who wear butt plugs at all times. In a world where pulling your plug spells certain death, two young men who are definitely not in love embark on an epic mission to discover life outside their cult. Along the way, they find themselves, each other and the true meaning of Hole.
+Presented, conceived, and performed by American Sing-Song (A.S.S), a musical theater collective of two queerdos (Jake Brasch and Nadja Leonhard-Hooper) who write and perform epic, impossible musicals that can (and should) only exist in your mind.
+The Bell House
+
+149 7th Street, Brooklyn
+
+7p doors, 7:30p start; $35
+
+https://concerts.livenation.com/american-singsong-presents-hole-brooklyn-new-york-05-10-2025/event/30006279042432DE?1
+***** Also on SATURDAY *****
+Come On! Volume 3
+Come one! Come all! Come on! Our third event with bands good looking people, Kablamo, and Cult Goddess (ep release party) hosted by Child of Venus and Mars and art and clothing vendors.
+KGB Bar 
+
+85 East 4th Street, Manhattan
+
+6:30p-late; $10
+
+https://partiful.com/e/tgB21BdcAYnNuSFxi1KD
+***** Also on SATURDAY *****
+Back to the Moon: Billionaire Blast Off
+Blast off for a night of fun, food, drinks, and plenty of foolery. One ticket gets you unlimited drinks (beer, wine, and themed cocktails) and out-of-this-world entertainment. Dress in your extraterrestrial or billionaire best for a chance to win. A party and fundraiser for our theater company. We will have drinks, food, DJ, a raffle, and merch giveaways.
+1162 Broadway, Manhattan
+
+8:30p to 12:30a; $35 includes entry and unlimited drinks
+
+https://www.softbraintheatrecompany.com/event-details/fools-fest-2025-back-to-the-moon
+XXXXX SUNDAY, MAY 11 XXXXX
+NowNet Arts Lab Ensemble
+Spring is here -- time to get back outside. Sailor Sarah Weaver will conduct the NowNet Arts Lab Ensemble for an international live streaming concert uniting musicians playing together from five countries across three continents. Then, a Virtuoso Improvisation with our very own Katy Gunn on her magic violin. Finally, Daniele Onorati from Teatro dei Calanchi closes out this daytime event with an unexpected bonus act.
+@Motherhsip NYC
+
+252 Green Street, Brooklyn
+
+1:30-4:30p; $?
+
+https://nownetarts.org/venue
+***** Also on SUNDAY *****
+Public Victories
+True stories of winning, great, and small. From changing the sheets to changing your mindset -- show us your victories. Public Victories features four performers and one audience member each telling a true story about a win, triumph, or victory. A portion of the proceeds from each show goes to a community organization that supports the marginalized. Come join us for good vibes, celebration, laughter, and triumph. This month’s performers: Gillian Gurganus, Scott Austin, Esther Fallick and Brittany Cardwell. 
+Young Ethels 
+
+506 5th Avenue, Brooklyn
+
+6-7p; $free
+XXXXX MONDAY, MAY 12 XXXXX
+Dinner Together
+The United States recently dropped in the happiness index. One reason cited was an increase in dining alone. I thought, Let’s have dinner together. Please join for a public potluck on Monday evening in Prospect Park. Bring food to share, a plate, utensils, and a cup. Canceled if it rains.
+Prospect Park Meadows, look for the tables, Brooklyn 
+
+6p; $free
+
+dinnertogethernyc@gmail.com
+XXXXX TUESDAY, MAY 13 XXXXX
+ForbHIDDEN People: An Elven Burlesque
+An American burlesque and variety show celebrating the mystical and magical realm of Icelandic folklore, set to have its NYC premiere before traveling to Reykjavik, Iceland. This is a celebration of the untamable forces of nature which stand in defiance of industry and exploitation. Elizabeth “Bitsy” Bays, Persé Fanny, and Rosie Tulips have mixed the realms of storytelling and striptease to create a unique performance for audiences. Join them as they take you on a spellbinding journey exploring everything fantastically fae.
+Footlight Underground at the Windjammer
+
+552 Grandview Avenue, Ridgewood, Queens
+
+7:30p doors, 8p show; $10 suggested donation 
+
+https://withfriends.co/event/23120478/forbhidden_people_an_elven_burlesque
+***** Also on TUESDAY *****
+Spirited Away Psychic and Paranormal Night
+Gather with NYC’s finest readers and psychics for a glorious spring evening of readings and craft cocktails, hosted by the Oracle. Tarot readings, lipstick readings, wishing cauldron, love readings, spirit guide readings, palm readings, purse readings, astrology readings, aura photography, oracle answers, and craft cocktails. 
+Barrow's Intense Tasting Room, Industry City Courtyard 
+
+86 34th Street, Brooklyn
+
+6-9p, $free admission, readers charge a range of prices
+
+https://www.eventbrite.com/e/spirited-away-psychic-paranormal-night-tickets-1001770110367
+***** Also on TUESDAY *****
+Fresh: Circus School All Stars
+Anver Entertainment presents Fresh, a show featuring the next generation of elite artist-athletes. Fresh off of graduation from NECCA, one of the only circus conservatory programs in the United States, these performers will be joined on stage by host Ivory Fox, along with international performers Ryan Shinji and Kyla.
+Slipper Room
+
+167 Orchard Street, enter on Stanton, Manhattan
+
+9p-midnight; $30 door, $35
+
+https://www.slipperroom.com/event-details/guest-event-fresh-may-13 
+***** Also on TUESDAY *****
+Gowanus Current Screening
+Please join us for a special screening of Gowanus Current. It is a local, timely, immersive documentary feature that asks what is of value in a community, and who gets to decide. There will be a discussion with the filmmakers after the film. 
+Cobble Hill Cinemas
+
+265 Court Street, Brooklyn
+
+7p; $20
+***** Also on TUESDAY *****
+Booze and Build 
+Booze and Build is back again. Join us at an event where adults are allowed to be kids again. Admission includes the evenings rental of your very own building set and instructions or challenge yourself with freestyle building bricks and build from your imagination. Grab a drink, make some friends and build solo or as a team. For attendees who love a competition, we will have drinking games, fun challenges, and prizes throughout the evening. Great for a date night, meeting new people, or a group of friends just looking for new unique activity. 
+QED Astoria 
+
+2716 23rd Avenue, Astoria, Queens
+
+7:30-9:30p; $12
+
+https://qedastoria.com/products/booze-build?event=2025-05-13T19:30:00
+XXXXX WEDNESDAY, MAY 14 XXXXX
+Music Research Strategies: Listen Like Wolves -- A Grammar of Motives
+Join Music Research Strategies for a participatory listening engagement which explores metaphors of surveillance management and technologies of resistance, particularly through improvisation techniques. Led by Music Research Strategies, the cultural work persona of Creative Music percussionist Marshall Trammell as well as a community engagement platform, the audience will participate as conductors to form an Insurgent Learning Conductor Ensemble.
+CTHQ
+
+59 East 4th Street, seventh floor, no. 14, Manhattan
+
+6-8p; $free
+
+https://www.eventbrite.com/e/1301517516929
+***** Also on WEDNSDAY *****
+Immersive Experience Day
+Join for a day of creativity, healing, and joyful community at Sound Mind Center in DUMBO. Explore wellness workshops with Spinach Records and beloved facilitators Rachel Heinkel, Lily Richards, and Jason Lewis, then lift your voice in harmony during an immersive One Day Choir experience with Gaia Music Collective. Be moved by the powerful sounds of live Qawwali music from the Saami Brothers, presented by Beyond Barzakh, honoring 800 years of sacred musical tradition. We’ll close the night in celebration with an Ecstatic Dance journey led by Ecstatic Dance NYC -- come dance it all out with us.
+Sound Mind Center 
+
+202B Plymouth Street, Brooklyn
+
+12:30-11p; $35
+
+info@soundmindlive.org
+
+https://www.tixr.com/groups/soundmindlive/events/sound-mind-center-immersive-experience-day-part-of-the-sound-mind-festival--138347
+XXXXX THURSDAY, MAY 15 XXXXX
+Bad Art Party
+Bad at arts and crafts but like parties, drinks, food and meeting new people? This is the event for you. Over food and drink, meet new people, have fun with art, and try something new. The more you drink the better your art looks.
+We’ll have supplies for collage, paint, pastels, drawing, and air dry clay. Symphony is a community platform to connect people through engaging and creative events. We partner with amazing third places to throw events that are community-oriented, creative, and push your comfort zone. After great success we're throwing the Bad Art Party again and we’re excited to connect with people over (bad) art. 
+PinkFrog Cafe
+
+221 North 9th Street, Williamsburg, Brooklyn
+
+6:30-8:30p; $20
+
+@symphony.nyc
+
+https://partiful.com/e/9rS8RF37cAx6e5KXTuJe
+***** Also on THURSDAY *****
+Lowkey Clothing Swap and Block Printing Workshop
+Cut, design, and create your own rubber stamp and use it to upcycle old clothes from the swap. With Fat Dino and ERF. Bring old clothes to donate or upcycle.
+349 Suydam Street, Brooklyn
+
+7:30-10p; $15 advance 
+
+https://partiful.com/e/r8zCSSgndcmhogRLEq4K
+XXXXX FRIDAY, MAY 16 XXXXX
+The Trash King
+The Trash King is a contest and celebration of the dumbest, craziest bits performers think are too wild to perform anywhere else. Comedians will compete head-to-head, performing their bits for the Trash King, who sits atop his trash throne and judges who advances in the contest and who is sent home. Come see the return of insane, anything-can-happen late-night comedy at the UCB theater. Featuring Chris Gethard, Joey Dardano, Aaron LaRoche, Saidah Belo-Osagie, Clint, and Eleanor Lewis. Hosted by Josh Nasser, Benny Benedetto, and Jared Bronen. 
+Upright Citizens Brigade Theater
+
+242 East 14th Street, Manhattan
+
+10:30p; $10 advance, $15
+
+https://ucbcomedy.com/show/the-trash-king-7/
+***** Also on FRIDAY, MAY 16 *****
+Cookbook Club 
+Celebrate Spring by connecting with the earth and local food experts for an evening focused on sustainable, seasonal, local eating featuring Chef Camille Becerra. Learn food sourcing and cooking tips from farmers, chefs, and sustainability experts. After a panel talk, we'll mingle over light, farm-fresh bites from Chef Becerra's book, Bright Cooking. Put what you learned into action by volunteering to lead or planning to attend a community Farmer’s Market Field Trip.
+Our Letters from the Table cookbook club is a growing community of folks who love to cook and gather. This month, we’ll be cooking and sharing dishes from Camille Becerra’s cookbook, Bright Cooking. We’re honored to have Chef Becerra joining us for the evening to share her expertise and ethos for creating flavorful, beautiful, sustainable plant-based meals. With Claire Matern, Anina von Haeften, Jess Vetterli, and moderator Sonia Ketkar. 
+Fabrik NYC
+
+12-16 Vestry Street, fourth floor, Manhattan
+
+6-8:30p; $20
+
+https://lu.ma/kw0wd2qq
+***** Also on FRIDAY, MAY 16 *****
+Model Majority American History Comedy Show
+Celebrate May, which is Asian American Native Hawaiian Pacific Islander Heritage Month, by joining Model Majority for a historic night of comedy, prizes, Asian snacks and more. Come before Model Majority gets banned for telling you about American history through history and pop culture inspired comedy sketches. This event is in partnership with Asian Hustle Network.
+Under St Marks Theater
+
+94 St. Marks Place, Manhattan
+
+10p; $25 advance, $30 door, $15 streaming
+
+https://tickets.frigid.nyc/event/6897:1164/
+XXXXX UPCOMING XXXXX
+* Club Video, May 17
+
+* The Mp3 Experiment 20, June 21
+
+* Porch Stomp, June 21 
+XXXXX WISHLIST XXXXX
+What have you been wishing for? Collaborators, grant monies, a new home? Please send brief listings to jstark@nonsensenyc.com. In the SPACES section we only list available apartments, lofts, studios, and one-off rentals -- not spaces wanted.
+***** ARTY STUFF *****
+* Dixon Place is now accepting proposals for this year's beloved HOT festival. Have you been working on new material that's just begging to be performed? Bring it on. Deadline for Submission: Monday, April 21. https://docs.google.com/forms/d/e/1FAIpQLSeIWeBWZOUHhNiq-LaavdSc3BNWRXp5UXCW-6KNo0O-XaRbUg/viewform
+XXXXX SPECTRE PRIORITY XXXXX
+Before it had a name, Spectre Event Horizon Group used to meet at a bar to commiserate and grok the increasingly sci-fi present. Along the way #SPECTRE developed an online platform for sharing specialized investigative research, presented as gossip for non-specialists, all searchable here: spectrevision.net. Excerpts are compiled for Nonsense by J. Sinopoli. Please recommend relevant search terms or search results to spectre.event.horizon.group]at]gmail.com.
+***** Bilingual Parrots *****
+https://spectrevision.net/2025/05/08/bilingual-parrots/
+"As the parrots’ populations crashed, their regional contact calls also changed. The researchers found that many parrots were becoming bilingual as they formed pair bonds across the formerly distinct North-South acoustic boundary. Amongst parrots speaking the North dialect, the researchers observed many bilingual parrots using both the North and the South dialects. But this flexibility has worrying implications for threatened species -- how will bilingual parrots be able to communicate with each other?"
+XXXXX LEARNING XXXXX 
+Learning is something you do, but it’s also a reflection of who you’d like to be. We like to be cheap and eclectic, with a mix of classes or events that will make our world a little bigger and more interesting. Who do you want to be? Maybe it's in here.
+One-time listings are categorized weekly, with general recurring classes listed at the end on the first Friday of each month.
+Learning is compiled and edited weekly by Corinne Brenner. Please send listing suggestions to learning@]nonsensenyc.com.
+***** LEARNING: FRIDAY *****
+Walk the Last Mile
+Join the Newtown Creek Alliance and the Last Mile Coalition for an exciting walking tour showcasing existing and planned freight infrastructure around the Dutch Kills tributary in Long Island City, Queens. In recent years, mega-warehouses (dubbed last mile facilities), have proliferated in industrial areas around Newtown Creek and other neighborhoods of New York City.
+The rise of e-commerce has seen a rapid increase in last-mile developments in the industrial business zones, like those surrounding Newtown Creek. These mega facilities bring significant amounts of increased truck traffic to overburdened communities leading to higher levels of congestion, worsened air quality, urban heat island impacts, stormwater runoff, as well as ongoing issues with worker protections, fair wagers, and labor rights. NYC is now working to implement a special permit process to curtail the proliferation of last mile facilities, thanks in large part to the advocacy from elected leaders and the Last Mile Coalition (of which NCA is a member).
+The guided walk will begin at the Hunters Point Avenue 7 train station and head towards the Dutch Kills tributary before ending at the Kingsland Wildflowers green roof, where participants can join in NCA’s weekly Open Hours series to enjoy the sunset from the green roof meadows and redraw our walking path.
+In total, the walk is approx. 2.25 miles long. We ask that all attendees wear closed toe shoes and be prepared for walking on rugged industrial terrain. This tour is free, space is limited. We ask that attendees fill out a liability waiver and photo consent form prior to joining.
+Newtown Creek Alliance
+
+Meet at Hunters Point Avenue, Queens
+
+6-8p; $free
+
+eventbrite.com/e/walk-the-last-mile-tickets-1300986669149
+***** LEARNING: SATURDAY *****
+Free Puppetry and Costume Workshops: Tarot Themed
+Come learn and build enormous puppets and costumes with Heather Rose Piper, Sally Twin and stars of the high quality/good times scenic arts worlds. Free workshops, snacks and materials will be provided.
+This is leading up to a May 17 Tarot themed parade along and in the waterways of Long Island City. The Tarot Parade Arcana Crawl: Creek to River will be a joyful night parade in southwest Queens, gathering more than 125 people along Newtown Creek and the East River at Flux IV in Hunters Point South, to Gantry Plaza State Park, and back. 
+Per the Tarot card theme, giant puppets will depict The Fool, The Magician, The Lovers, The World, and more of the 22 Major Arcana. Participants will dance and play during the parade; accompanied by hundreds of LED-lit, hand-held bamboo and paper sculptures; live harp, violin, and the sounds of waterways; and solar energy-powered projectors will show exciting animations en route. 
+Come make things with us May 3,4,10,11 in a party atmosphere at 1st Floor, LIC Artists Space, 30-30 47th Ave, Long Island City....and we will parade your creations.
+Flux Factory
+
+1st Floor, LIC Artists Space, 30-30 47th Ave, Long Island City
+
+Noon-7p May 3, 4, 10 and 11; $free
+
+fluxfactory.org/event/the-arcanacrawl-creek-to-river-parade/
+***** LEARNING: SATURDAY *****
+Deep Fun
+Deep Fun is a highly physical facilitated communal play (no, not sex) session, drawing loosely on my years of experience as an actor, performer, and educator and with my work at Bond Street Theatre, an NGO that initiates theater projects for peace-building and reconciliation in global post-conflict zones. For two hours, we actively "research" the feeling of physical pleasure, wild abandon, playfulness, and collective eﬀervescence as its own end through a series of four categories of play/game: Collective Play, Collective Competition, Duo Play, and Individual Play (we may not get to all of these categories, and that’s okay!). "Playing" comes in the form of collective exercises, frivolous activities, cooperative games, on-your-feet group problem solving, singing simple songs with great gusto (if that's the vibe), and much running (and perhaps rolling) around. It's a fast-paced, high energy, game-packed play session intended to invite vulnerability and connection through a heightened state of presence. 
+This is an opportunity to revisit how fun it was to goof around with our friends at recess. We'll live the quote "You can learn more about a person through an hour of play than a year of conversation". We’ll shake up our adult egos and stories about play and research what is truly fun in our bodies, and when we’ve reached the peak of our fun. We’ll all probably look like idiots, but at least we’ll be doing it together! If this sounds scary to you, even more reason to come.
+Some philosophical jazz: Beyond just being "whimsical", playfulness is an attitude towards life that allows room for and celebrates failure, risk taking, and the general messiness (and courage) of humanity. In a communal state of play, we reveal parts of ourselves and our fellows we wouldn't have discovered otherwise, and we become more available to express ourselves and receive others' expression. The way you play reflects the way you live, solve problems, connect with others, and learn new things, so this laughter-filled workshop will be an opportunity for exuberant self-exploration and to connect with others in a deeply playful, low-stakes way. There will be space for play and reflection. Wear clothes to move vigorously in.
+Houghton Hall Arts Community 
+
+22 East 30th Street, Manhattan
+
+3-5p; $20-40 sliding scale
+
+https://partiful.com/e/4fo62QizbEtvmdHiDaN1
+***** LEARNING: SUNDAY *****
+Meal Prep 101: L9 Dumplings
+The thesis of this series is to teach and practice basic knife skills, increase comfortability in the kitchen, and develop knowledge of flavor combinations, portion-size, produce selection, and active refrigerator inventory to better feed oneself with healthy, delicious, and affordable meals.
+Each class will take home between three and eight portions of pre-prepared, or low-effort meals along with spice blends, marinates, and other kitchen essentials to make cooking easier and better at home.
+Meals will center around vegetables. Groceries will be provided with RSVP. Please discuss for other dietary restrictions or allergies before attending. We will do our best to accommodate. Menu: dumplings, veg and meat options available.
+NYC Resistor
+
+87 3rd Avenue, 4th floor, Brooklyn
+
+3:30-8p; $92.55
+
+eventbrite.com/e/meal-prep-101-l9-dumplings-tickets-1335493209139
+***** LEARNING: SUNDAY *****
+Cyanotypes
+Step into the world of alternative photography with our hands-on Intro to Cyanotype Workshop. Cyanotype is a historic photographic printing process that produces stunning blue-toned images. In this workshop, you'll learn how to coat paper, expose your designs using sunlight or UV light, and develop your prints to reveal the rich, iconic blue hues.
+This class is perfect for beginners and anyone looking to explore creative ways to make unique prints. Whether you're a photographer, artist, or simply curious, you'll leave with your own beautiful cyanotype creations and the skills to continue experimenting at home.
+We provide all materials, including pre-made negatives, objects for photograms, and papers for coating. Feel free to bring personal items like lace, leaves, or printed transparencies to make your prints uniquely yours.
+Bushwick Community Darkroom
+
+334 Himrod Street, Brooklyn
+
+1-4p; $150
+
+bushwickcommunitydarkroom.com/events/cyanotypes-4sxsr-2d3fg
+***** LEARNING: TUESDAY *****
+Help Build the Guide
+Soft Power Vote members Melissa and Molly welcome those interested in helping to research and build the voter guide spreadsheet. Learn strategies and tips for researching policy, gut-checking candidate’s platforms (is it legit or fluff?) and help build one of the most essential tools that Soft Power Vote provides every election.
+Secret Riso Club
+
+122 Central Avenue, Brooklyn
+
+6p; $free
+
+withfriends.co/event/23297793/help_build_the_guide
+***** LEARNING: TUESDAY *****
+Emerging Scholars: Cliff Dwellers’ Portrayals and Furniture on the Move
+The Victorian Society New York’s 2025 Emerging Scholars winners will shed light on little-known yet influential aspects of Gilded Age history, literature, international trade, and design.
+Sarah Egan, a graduate student at the Bard Graduate Center, will discuss Illinois education advocate Clara Kern Bayliss (1848-1948), who authored early 1900s children’s books about Lolami, a fictional "Little Cliff Dweller" in Arizona. In the books, Lolami becomes orphaned, explores abandoned cliff settlements, and then becomes ingratiated with another local indigenous group, the Hopi. Egan will look at Bayliss’s archaeological and historical sources, including displays at the 1893 Chicago World’s Fair, and the books’ classroom uses that shaped children’s thinking about American history and Americanness and reflected and transmitted harmful and reductive racial and social hierarchies.
+Steven Baltsas, a graduate student in the Winterthur Program in American Material Culture, University of Delaware, will explore how, in the mid-19th century, Alexander Roux and his brother Frédéric organized a transnational furniture enterprise between New York and Paris. The brothers catered to cosmopolitan customers via networks of manufactories, retailers, and display rooms.
+Victorian Society of New York
+
+The Center at West Park, 165 West 86th Street, Manhattan
+
+6:30-8p; $donation
+
+eventbrite.com/e/emerging-scholars-cliff-dwellers-portrayals-and-furniture-on-the-move-tickets-1307532447749
+***** LEARNING: TUESDAY *****
+From Waste to Wonder: How Material Innovation is Reshaping Design
+From seaweed polybags to algae ink to reclaimed materials, today’s emerging technologies have the potential to revolutionize the way we make products and packaging. But turning an exciting technology into a commercially viable product is no easy task.
+During this discussion, panelists will share in-the-trenches experiences of bringing novel materials to market, including how they vet sustainable alternatives, approach commercialization, and the (sometimes many) failures they experience along the way.
+Index NYC
+
+120 Walker Street, Manhattan
+
+7-8:30p; $free
+
+index-space.org/products/from-waste-to-wonder-how-material-innovation-is-reshaping-design
+***** LEARNING: WEDNESDAY *****
+Ancestral Plants of Palestine
+Palestinians are people of the land, and plants serve as an integral part of this connection. But what happens when this relationship is severed? In this knowledge share, we will examine ancestral plants and the role they play in Palestinian food and land-based culture. Together we’ll move through the history of foraging and generations-old culinary traditions, while discussing the devastating effects that genocide, forced famine and mass displacement can have on these practices. We will learn about how Palestinians on the land are preserving these traditions, and ways of remembering in the diaspora.
+We will explore:
+
+a deeper understanding of a variety of Palestinian ancestral plants and their uses
+
+ethical foraging practices
+
+examples of remembrance work
+
+resources for further education.
+Herban Cura
+
+Remote via Zoom
+
+5-7p; $45-90 sliding scale
+
+herbancura.com/knowledge-shares/ancestral-plants-of-palestine
+***** LEARNING: WEDNESDAY *****
+Zine and Accordion Workshop
+Join us in our zine and accordion book-making gathering. This is a creative workshop where participants come together to make their own small self-published booklets (zines) and accordion-style books. It's a hands-on experience that celebrates self-expression, storytelling, and the DIY culture. Participants will learn about layout designs, combining text and visuals, and different binding methods while connecting with like-minded individuals and sharing their work. It's a collaborative and empowering event that encourages individual creativity and the exploration of alternative publishing formats.
+Studio 45
+
+213 Troutman Street, Brooklyn
+
+6:30-8:30; $23.18-33.85, sliding scale
+
+eventbrite.com/e/zine-and-accordion-workshop-tickets-1334306971069
+***** LEARNING: WEDNESDAY *****
+2025 Five Borough Waterfront Mayoral Forum
+The Gowanus Dredgers are co-sponsoring the 2025 Five Borough Waterfront Mayoral Forum. We advocate for and operate water access in seven locations across Brooklyn, Queens, and Staten Island, and we’re excited to hear from this year’s mayoral candidates on their vision for our collective waterfront.
+New York City’s waterfront is home to people, parks and beaches, businesses, docks, trains, roads, ports, and critical infrastructure that support our daily lives. The next Mayor must embrace the waterfront as a signature priority of their administration. We will be asking candidates a series of questions about the various aspects of the waterfront. The Five Borough Waterfront Forum is where candidates for Mayor will answer questions and present their vision for climate, recreation, maritime, workforce, public access, and all things across New York City’s 520 linear miles of shoreline.
+This event is coupled with the 2025 Waterfront Conference, hosted in-person at the Museum of Jewish Heritage in Battery Park City, on May 13. Registration for the Waterfront Conference is not required to attend the Virtual Mayoral Candidates Forum.
+Gowanus Dredgers
+
+Remote via Zoom
+
+7-8:30p; $free
+
+gowanusdredgers.org/event/2025-five-borough-waterfront-mayoral-forum/
+***** LEARNING: UPCOMING *****
+Watershed Forestry Institute for Teachers
+Discover how woods wash water for millions of New Yorkers at the Watershed Agricultural Council's annual Watershed Forestry Institute for Teachers. Their FREE 2025 institute is for 6th - 12th grade teachers and non-formal educators teaching in NYC and the upstate NYC drinking watersheds.
+Come explore the forests, waters, science, engineering, history, and world-famous partnerships of the NYC Watershed. You’ll get informed, inspired and equipped to teach watershed forestry topics to your students. Participants are required to attend a Zoom orientation meeting in late June or mid-July.
+Watershed Agricultural Council
+
+Taconic Outdoor Education Center in Cold Spring
+
+July 21-July 25; $free, application due May 16
+
+education@nycwatershed.org.
+
+surveymonkey.com/r/WFIT2025
+XXXXX HELP XXXXX
+We want to help you find help for short-term projects. Do you have a project, an event, or an action that needs an extra push, a few more people, or an extra set of hands? Please send your calls for help to: help@nonsensenyc.com.
+XXXXX NONSENSE XXXXX
+nonsense nyc is a discriminating resource for independent art, weird events, strange happenings, unique parties, and senseless culture in new york city.
+please remember you are welcome to pass nonsense along to anyone who needs to see it, but you do not have permission to use any of the listings for your commercial endeavor. if you are receiving this list as a forward you can sign up for yourself at nonsensenyc.com/subscribe.
+if you believe independent artists should support other independent artists, we accept donations. here's a link to support nonsense all year long: https://withfriends.co/nonsense_nyc/join. thanks.
+XXXXX END XXXXX
+To unsubscribe from this list, click here.
+http://nonsensenyc.com/cgi-bin/dada/mail.cgi/t/peqwJbiOvgufcOSemXhpvhmUoFA4rYo8jOrNYQUw/
+
+------------=_1746816777-3057801-0
+Content-Type: text/html; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+X-Mailer: MIME-tools 5.510 (Entity 5.510)
+
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div><span style="font-family:Courier New,Courier,monospace;"><a href="https://nonsensenyc.com/cgi-bin/dada/mail.cgi/t/CjXHkyWZWZDIGynsSYiXYo8Wi3o4nFDiOi3GYeap/lus/1746821347">Unsubscribe Automatically </a></span></div>
+
+<div>&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Friday, May 9</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Glamdammit, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Hidden City Launch Party, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Vocabaret Eric Adams, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Ocean of Eros, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Saturday, May 10</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Hole! Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Come On! Volume 3, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Back to the Moon: Billionaire Blast Off, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Sunday, May 11</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* NowNet Arts Lab Ensemble, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Public Victories, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Monday, May 12</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Dinner Together, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Tuesday, May 13</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* ForbHIDDEN People: An Elven Burlesque, Queens</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Spirited Away Psychic and Paranormal Night, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Fresh: Circus School All Stars, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Gowanus Current Screening, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Booze and Build, Queens</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Wednesday, May 14</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Music Research Strategies: Listen Like Wolves -- A Grammar of Motives, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Immersive Experience Day, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Thursday, May 15</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Bad Art Party, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Lowkey Clothing Swap and Block Printing Workshop, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Friday, May 16</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* The Trash King, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Cookbook Club, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Model Majority American History Comedy Show, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Spectre</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Bilingual Parrots</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Learning</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Walk the Last Mile</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">NOTE: For some navigation help, or an explanation for what this is all about, scroll all the way down to NONSENSE. You can donate to this project at nonsensenyc.com/special. Also: We make a lot of mistakes, especially with dates; you should always double check our work before you go out.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX COVER ART XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">cancan ruffle</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX FRIDAY, MAY 9 XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Glamdammit </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Glamdammit is pleased to present a tribute to the Clash -- the Only Band That Matters, performed by Pale Moon Gang. Plus the Ritualists, Spike Polite and Sewage, and Sunrisers. Hosted by the Inimitable Michael T and Atz Magick. Go-Go Extraordinaire Anna Copa Cabanna. DJ set by Twig the Wonderkid. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Baker Falls </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">192 Allen Street, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7:30p; $10 advance, $15 general admission</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">21 and over</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://tickets.venuepilot.com/e/glamdammit-the-clash-live-tribute-by-pale-moon-gang-with-the-ritualists-spike-polite-sewage-nyc-savag-82bf8c</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on FRIDAY, MAY 9 *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Hidden City Launch Party</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Hidden City is a collective run by event organizers and performers who have been working in the DIY space in NYC for over 10 years. As we&#39;ve watched our city become more expensive and hostile to artists, we were inspired to grow Hidden City to help revive a scene that is sustainable, diverse, and artist-friendly.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The Shell is a new DIY venue in East Bushwick with a basement set up for live music and a backyard. Claire Hawkins and Moonmill will be releasing singles. They&rsquo;ll be supported with performances by Angel Grace, Lukka, KRC Band, and Fox Indigo.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">DJ Glitch Witch will host a DJ set outside. We&#39;ll also have interactive painting that everyone can participate in.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The Shell</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">141 Moffat Street, East Bushwick, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6p-midnight; $10 online, $15 door</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://withfriends.events/event/hidden-city-launch-party/</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on FRIDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Vocabaret Eric Adams</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Live from the &quot;Istanbul of America,&quot; Vocabaret&#39;s wordsmiths are doing their first-ever show taking on the words of a single person: Mayor Eric Adams. We&#39;ll analyze the swaggiest, weirdest and most out-of-pocket quotes and claims over the years from our &quot;perfectly imperfect&quot; mayor in advance of June&#39;s primary election, in an attempt to understand what he&#39;s saying and how it&#39;s affected our city. Whether you&#39;re a &quot;hater&quot; or a &quot;waiter&quot; or just confusing Italian for Spanish on a T-shirt, you won&#39;t want to miss your seat at this &quot;table of success.&quot;</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Caveat</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">21A Clinton, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6:30p doors, 7p show; $20 door, $10 livestream, discount tickets with code CAVEATORB</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://caveat.nyc/events/vocabaret-5-9-2025</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on FRIDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Ocean of Eros</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Join artists Mela Closs, Samantha Sea Sea, and Angad (Angu) Singh for an evening of ambient and industrial soundscapes, movement, visuals, poetry, and interactive performance that play with eros and whimsy. Take off your shoes, lounge, and let your body and senses be stirred. There will be time to meet the artists, have a drink, hang out in an art installation, and explore Mela&rsquo;s interactive altar where you can interpret the divinatory meaning of the shell you receive during her performance.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Delight Factory</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">303 Saratoga Avenue, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">C train to Rockaway Avenue, J train to Chauncey stations</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7p doors, 7:30-9 performances with short breaks, $20 suggested donation</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">delightfactorynyc@gmail.com</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://www.delightfactorynyc.com/events/ocean-of-eros</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://www.eventbrite.com/e/ocean-of-eros-tickets-1323604329179</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX SATURDAY, MAY 10 XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">American Sing-Song Presents: </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Hole!</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Hole! is a musical about a strict religious sect in Nebraska who wear butt plugs at all times. In a world where pulling your plug spells certain death, two young men who are definitely not in love embark on an epic mission to discover life outside their cult. Along the way, they find themselves, each other and the true meaning of Hole.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Presented, conceived, and performed by American Sing-Song (A.S.S), a musical theater collective of two queerdos (Jake Brasch and Nadja Leonhard-Hooper) who write and perform epic, impossible musicals that can (and should) only exist in your mind.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The Bell House</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">149 7th Street, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7p doors, 7:30p start; $35</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://concerts.livenation.com/american-singsong-presents-hole-brooklyn-new-york-05-10-2025/event/30006279042432DE?1</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on SATURDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Come On! Volume 3</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Come one! Come all! Come on! Our third event with bands good looking people, Kablamo, and Cult Goddess (ep release party) hosted by Child of Venus and Mars and art and clothing vendors.</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">KGB Bar </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">85 East 4th Street, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6:30p-late; $10</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://partiful.com/e/tgB21BdcAYnNuSFxi1KD</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on SATURDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Back to the Moon: Billionaire Blast Off</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Blast off for a night of fun, food, drinks, and plenty of foolery. One ticket gets you unlimited drinks (beer, wine, and themed cocktails) and out-of-this-world entertainment. Dress in your extraterrestrial or billionaire best for a chance to win. A party and fundraiser for our theater company. We will have drinks, food, DJ, a raffle, and merch giveaways.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">1162 Broadway, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">8:30p to 12:30a; $35 includes entry and unlimited drinks</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://www.softbraintheatrecompany.com/event-details/fools-fest-2025-back-to-the-moon</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX SUNDAY, MAY 11 XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">NowNet Arts Lab Ensemble</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Spring is here -- time to get back outside. Sailor Sarah Weaver will conduct the NowNet Arts Lab Ensemble for an international live streaming concert uniting musicians playing together from five countries across three continents. Then, a Virtuoso Improvisation with our very own Katy Gunn on her magic violin. Finally, Daniele Onorati from Teatro dei Calanchi closes out this daytime event with an unexpected bonus act.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">@Motherhsip NYC</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">252 Green Street, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">1:30-4:30p; $?</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://nownetarts.org/venue</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on SUNDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Public Victories</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">True stories of winning, great, and small. From changing the sheets to changing your mindset -- show us your victories. Public Victories features four performers and one audience member each telling a true story about a win, triumph, or victory. A portion of the proceeds from each show goes to a community organization that supports the marginalized. Come join us for good vibes, celebration, laughter, and triumph. This month&rsquo;s performers: Gillian Gurganus, Scott Austin, Esther Fallick and Brittany Cardwell. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Young Ethels </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">506 5th Avenue, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6-7p; $free</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX MONDAY, MAY 12 XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Dinner Together</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The United States recently dropped in the happiness index. One reason cited was an increase in dining alone. I thought, Let&rsquo;s have dinner together. Please join for a public potluck on Monday evening in Prospect Park. Bring food to share, a plate, utensils, and a cup. Canceled if it rains.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Prospect Park Meadows, look for the tables, Brooklyn </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6p; $free</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">dinnertogethernyc@gmail.com</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX TUESDAY, MAY 13 XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">ForbHIDDEN People: An Elven Burlesque</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">An American burlesque and variety show celebrating the mystical and magical realm of Icelandic folklore, set to have its NYC premiere before traveling to Reykjavik, Iceland. This is a celebration of the untamable forces of nature which stand in defiance of industry and exploitation. Elizabeth &ldquo;Bitsy&rdquo; Bays, Pers&eacute; Fanny, and Rosie Tulips have mixed the realms of storytelling and striptease to create a unique performance for audiences. Join them as they take you on a spellbinding journey exploring everything fantastically fae.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Footlight Underground at the Windjammer</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">552 Grandview Avenue, Ridgewood, Queens</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7:30p doors, 8p show; $10 suggested donation </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://withfriends.co/event/23120478/forbhidden_people_an_elven_burlesque</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on TUESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Spirited Away Psychic and Paranormal Night</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Gather with NYC&rsquo;s finest readers and psychics for a glorious spring evening of readings and craft cocktails, hosted by the Oracle. Tarot readings, lipstick readings, wishing cauldron, love readings, spirit guide readings, palm readings, purse readings, astrology readings, aura photography, oracle answers, and craft cocktails. </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Barrow&#39;s Intense Tasting Room, Industry City Courtyard </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">86 34th Street, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6-9p, $free admission, readers charge a range of prices</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://www.eventbrite.com/e/spirited-away-psychic-paranormal-night-tickets-1001770110367</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on TUESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Fresh: Circus School All Stars</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Anver Entertainment presents Fresh, a show featuring the next generation of elite artist-athletes. Fresh off of graduation from NECCA, one of the only circus conservatory programs in the United States, these performers will be joined on stage by host Ivory Fox, along with international performers Ryan Shinji and Kyla.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Slipper Room</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">167 Orchard Street, enter on Stanton, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">9p-midnight; $30 door, $35</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://www.slipperroom.com/event-details/guest-event-fresh-may-13 </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on TUESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Gowanus Current Screening</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Please join us for a special screening of Gowanus Current. It is a local, timely, immersive documentary feature that asks what is of value in a community, and who gets to decide. There will be a discussion with the filmmakers after the film. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Cobble Hill Cinemas</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">265 Court Street, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7p; $20</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on TUESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Booze and Build </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Booze and Build is back again. Join us at an event where adults are allowed to be kids again. Admission includes the evenings rental of your very own building set and instructions or challenge yourself with freestyle building bricks and build from your imagination. Grab a drink, make some friends and build solo or as a team. For attendees who love a competition, we will have drinking games, fun challenges, and prizes throughout the evening. Great for a date night, meeting new people, or a group of friends just looking for new unique activity. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">QED Astoria </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">2716 23rd Avenue, Astoria, Queens</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7:30-9:30p; $12</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://qedastoria.com/products/booze-build?event=2025-05-13T19:30:00</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX WEDNESDAY, MAY 14 XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Music Research Strategies: Listen Like Wolves -- A Grammar of Motives</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Join Music Research Strategies for a participatory listening engagement which explores metaphors of surveillance management and technologies of resistance, particularly through improvisation techniques. Led by Music Research Strategies, the cultural work persona of Creative Music percussionist Marshall Trammell as well as a community engagement platform, the audience will participate as conductors to form an Insurgent Learning Conductor Ensemble.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">CTHQ</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">59 East 4th Street, seventh floor, no. 14, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6-8p; $free</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://www.eventbrite.com/e/1301517516929</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on WEDNSDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Immersive Experience Day</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Join for a day of creativity, healing, and joyful community at Sound Mind Center in DUMBO. Explore wellness workshops with Spinach Records and beloved facilitators Rachel Heinkel, Lily Richards, and Jason Lewis, then lift your voice in harmony during an immersive One Day Choir experience with Gaia Music Collective. Be moved by the powerful sounds of live Qawwali music from the Saami Brothers, presented by Beyond Barzakh, honoring 800 years of sacred musical tradition. We&rsquo;ll close the night in celebration with an Ecstatic Dance journey led by Ecstatic Dance NYC -- come dance it all out with us.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Sound Mind Center </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">202B Plymouth Street, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">12:30-11p; $35</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">info@soundmindlive.org</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://www.tixr.com/groups/soundmindlive/events/sound-mind-center-immersive-experience-day-part-of-the-sound-mind-festival--138347</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX THURSDAY, MAY 15 XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Bad Art Party</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Bad at arts and crafts but like parties, drinks, food and meeting new people? This is the event for you. Over food and drink, meet new people, have fun with art, and try something new. The more you drink the better your art looks.</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">We&rsquo;ll have supplies for collage, paint, pastels, drawing, and air dry clay. Symphony is a community platform to connect people through engaging and creative events. We partner with amazing third places to throw events that are community-oriented, creative, and push your comfort zone. After great success we&#39;re throwing the Bad Art Party again and we&rsquo;re excited to connect with people over (bad) art. </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">PinkFrog Cafe</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">221 North 9th Street, Williamsburg, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6:30-8:30p; $20</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">@symphony.nyc</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://partiful.com/e/9rS8RF37cAx6e5KXTuJe</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on THURSDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Lowkey Clothing Swap and Block Printing Workshop</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Cut, design, and create your own rubber stamp and use it to upcycle old clothes from the swap. With Fat Dino and ERF. Bring old clothes to donate or upcycle.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">349 Suydam Street, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7:30-10p; $15 advance </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://partiful.com/e/r8zCSSgndcmhogRLEq4K</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX FRIDAY, MAY 16 XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The Trash King</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The Trash King is a contest and celebration of the dumbest, craziest bits performers think are too wild to perform anywhere else. Comedians will compete head-to-head, performing their bits for the Trash King, who sits atop his trash throne and judges who advances in the contest and who is sent home. Come see the return of insane, anything-can-happen late-night comedy at the UCB theater. Featuring Chris Gethard, Joey Dardano, Aaron LaRoche, Saidah Belo-Osagie, Clint, and Eleanor Lewis. Hosted by Josh Nasser, Benny Benedetto, and Jared Bronen. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Upright Citizens Brigade Theater</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">242 East 14th Street, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">10:30p; $10 advance, $15</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://ucbcomedy.com/show/the-trash-king-7/</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on FRIDAY, MAY 16 *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Cookbook Club </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Celebrate Spring by connecting with the earth and local food experts for an evening focused on sustainable, seasonal, local eating featuring Chef Camille Becerra. Learn food sourcing and cooking tips from farmers, chefs, and sustainability experts. After a panel talk, we&#39;ll mingle over light, farm-fresh bites from Chef Becerra&#39;s book, Bright Cooking. Put what you learned into action by volunteering to lead or planning to attend a community Farmer&rsquo;s Market Field Trip.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Our Letters from the Table cookbook club is a growing community of folks who love to cook and gather. This month, we&rsquo;ll be cooking and sharing dishes from Camille Becerra&rsquo;s cookbook, Bright Cooking. We&rsquo;re honored to have Chef Becerra joining us for the evening to share her expertise and ethos for creating flavorful, beautiful, sustainable plant-based meals. With Claire Matern, Anina von Haeften, Jess Vetterli, and moderator Sonia Ketkar. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Fabrik NYC</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">12-16 Vestry Street, fourth floor, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6-8:30p; $20</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://lu.ma/kw0wd2qq</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Also on FRIDAY, MAY 16 *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Model Majority American History Comedy Show</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Celebrate May, which is Asian American Native Hawaiian Pacific Islander Heritage Month, by joining Model Majority for a historic night of comedy, prizes, Asian snacks and more. Come before Model Majority gets banned for telling you about American history through history and pop culture inspired comedy sketches. This event is in partnership with Asian Hustle Network.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Under St Marks Theater</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">94 St. Marks Place, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">10p; $25 advance, $30 door, $15 streaming</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://tickets.frigid.nyc/event/6897:1164/</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX UPCOMING XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Club Video, May 17</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* The Mp3 Experiment 20, June 21</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Porch Stomp, June 21 </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX WISHLIST XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">What have you been wishing for? Collaborators, grant monies, a new home? Please send brief listings to jstark@nonsensenyc.com. In the SPACES section we only list available apartments, lofts, studios, and one-off rentals -- not spaces wanted.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** ARTY STUFF *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">* Dixon Place is now accepting proposals for this year&#39;s beloved HOT festival. Have you been working on new material that&#39;s just begging to be performed? Bring it on. Deadline for Submission: Monday, April 21. https://docs.google.com/forms/d/e/1FAIpQLSeIWeBWZOUHhNiq-LaavdSc3BNWRXp5UXCW-6KNo0O-XaRbUg/viewform</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX SPECTRE PRIORITY XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Before it had a name, Spectre Event Horizon Group used to meet at a bar to commiserate and grok the increasingly sci-fi present. Along the way #SPECTRE developed an online platform for sharing specialized investigative research, presented as gossip for non-specialists, all searchable here: spectrevision.net. Excerpts are compiled for Nonsense by J. Sinopoli. Please recommend relevant search terms or search results to spectre.event.horizon.group]at]gmail.com.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** Bilingual Parrots *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://spectrevision.net/2025/05/08/bilingual-parrots/</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&quot;As the parrots&rsquo; populations crashed, their regional contact calls also changed. The researchers found that many parrots were becoming bilingual as they formed pair bonds across the formerly distinct North-South acoustic boundary. Amongst parrots speaking the North dialect, the researchers observed many bilingual parrots using both the North and the South dialects. But this flexibility has worrying implications for threatened species -- how will bilingual parrots be able to communicate with each other?&quot;</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX LEARNING XXXXX </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Learning is something you do, but it&rsquo;s also a reflection of who you&rsquo;d like to be. We like to be cheap and eclectic, with a mix of classes or events that will make our world a little bigger and more interesting. Who do you want to be? Maybe it&#39;s in here.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">One-time listings are categorized weekly, with general recurring classes listed at the end on the first Friday of each month.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Learning is compiled and edited weekly by Corinne Brenner. Please send listing suggestions to learning@]nonsensenyc.com.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: FRIDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Walk the Last Mile</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Join the Newtown Creek Alliance and the Last Mile Coalition for an exciting walking tour showcasing existing and planned freight infrastructure around the Dutch Kills tributary in Long Island City, Queens. In recent years, mega-warehouses (dubbed last mile facilities), have proliferated in industrial areas around Newtown Creek and other neighborhoods of New York City.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The rise of e-commerce has seen a rapid increase in last-mile developments in the industrial business zones, like those surrounding Newtown Creek. These mega facilities bring significant amounts of increased truck traffic to overburdened communities leading to higher levels of congestion, worsened air quality, urban heat island impacts, stormwater runoff, as well as ongoing issues with worker protections, fair wagers, and labor rights. NYC is now working to implement a special permit process to curtail the proliferation of last mile facilities, thanks in large part to the advocacy from elected leaders and the Last Mile Coalition (of which NCA is a member).</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The guided walk will begin at the Hunters Point Avenue 7 train station and head towards the Dutch Kills tributary before ending at the Kingsland Wildflowers green roof, where participants can join in NCA&rsquo;s weekly Open Hours series to enjoy the sunset from the green roof meadows and redraw our walking path.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">In total, the walk is approx. 2.25 miles long. We ask that all attendees wear closed toe shoes and be prepared for walking on rugged industrial terrain. This tour is free, space is limited. We ask that attendees fill out a liability waiver and photo consent form prior to joining.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Newtown Creek Alliance</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Meet at Hunters Point Avenue, Queens</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6-8p; $free</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">eventbrite.com/e/walk-the-last-mile-tickets-1300986669149</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: SATURDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Free Puppetry and Costume Workshops: Tarot Themed</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Come learn and build enormous puppets and costumes with Heather Rose Piper, Sally Twin and stars of the high quality/good times scenic arts worlds. Free workshops, snacks and materials will be provided.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">This is leading up to a May 17 Tarot themed parade along and in the waterways of Long Island City. The Tarot Parade Arcana Crawl: Creek to River will be a joyful night parade in southwest Queens, gathering more than 125 people along Newtown Creek and the East River at Flux IV in Hunters Point South, to Gantry Plaza State Park, and back. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Per the Tarot card theme, giant puppets will depict The Fool, The Magician, The Lovers, The World, and more of the 22 Major Arcana. Participants will dance and play during the parade; accompanied by hundreds of LED-lit, hand-held bamboo and paper sculptures; live harp, violin, and the sounds of waterways; and solar energy-powered projectors will show exciting animations en route. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Come make things with us May 3,4,10,11 in a party atmosphere at 1st Floor, LIC Artists Space, 30-30 47th Ave, Long Island City....and we will parade your creations.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Flux Factory</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">1st Floor, LIC Artists Space, 30-30 47th Ave, Long Island City</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Noon-7p May 3, 4, 10 and 11; $free</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">fluxfactory.org/event/the-arcanacrawl-creek-to-river-parade/</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: SATURDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Deep Fun</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Deep Fun is a highly physical facilitated communal play (no, not sex) session, drawing loosely on my years of experience as an actor, performer, and educator and with my work at Bond Street Theatre, an NGO that initiates theater projects for peace-building and reconciliation in global post-conflict zones. For two hours, we actively &quot;research&quot; the feeling of physical pleasure, wild abandon, playfulness, and collective eﬀervescence as its own end through a series of four categories of play/game: Collective Play, Collective Competition, Duo Play, and Individual Play (we may not get to all of these categories, and that&rsquo;s okay!). &quot;Playing&quot; comes in the form of collective exercises, frivolous activities, cooperative games, on-your-feet group problem solving, singing simple songs with great gusto (if that&#39;s the vibe), and much running (and perhaps rolling) around. It&#39;s a fast-paced, high energy, game-packed play session intended to invite vulnerability and connection through a heightened state of presence. </span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">This is an opportunity to revisit how fun it was to goof around with our friends at recess. We&#39;ll live the quote &quot;You can learn more about a person through an hour of play than a year of conversation&quot;. We&rsquo;ll shake up our adult egos and stories about play and research what is truly fun in our bodies, and when we&rsquo;ve reached the peak of our fun. We&rsquo;ll all probably look like idiots, but at least we&rsquo;ll be doing it together! If this sounds scary to you, even more reason to come.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Some philosophical jazz: Beyond just being &quot;whimsical&quot;, playfulness is an attitude towards life that allows room for and celebrates failure, risk taking, and the general messiness (and courage) of humanity. In a communal state of play, we reveal parts of ourselves and our fellows we wouldn&#39;t have discovered otherwise, and we become more available to express ourselves and receive others&#39; expression. The way you play reflects the way you live, solve problems, connect with others, and learn new things, so this laughter-filled workshop will be an opportunity for exuberant self-exploration and to connect with others in a deeply playful, low-stakes way. There will be space for play and reflection. Wear clothes to move vigorously in.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Houghton Hall Arts Community </span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">22 East 30th Street, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">3-5p; $20-40 sliding scale</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">https://partiful.com/e/4fo62QizbEtvmdHiDaN1</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: SUNDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Meal Prep 101: L9 Dumplings</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The thesis of this series is to teach and practice basic knife skills, increase comfortability in the kitchen, and develop knowledge of flavor combinations, portion-size, produce selection, and active refrigerator inventory to better feed oneself with healthy, delicious, and affordable meals.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Each class will take home between three and eight portions of pre-prepared, or low-effort meals along with spice blends, marinates, and other kitchen essentials to make cooking easier and better at home.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Meals will center around vegetables. Groceries will be provided with RSVP. Please discuss for other dietary restrictions or allergies before attending. We will do our best to accommodate. Menu: dumplings, veg and meat options available.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">NYC Resistor</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">87 3rd Avenue, 4th floor, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">3:30-8p; $92.55</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">eventbrite.com/e/meal-prep-101-l9-dumplings-tickets-1335493209139</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: SUNDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Cyanotypes</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Step into the world of alternative photography with our hands-on Intro to Cyanotype Workshop. Cyanotype is a historic photographic printing process that produces stunning blue-toned images. In this workshop, you&#39;ll learn how to coat paper, expose your designs using sunlight or UV light, and develop your prints to reveal the rich, iconic blue hues.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">This class is perfect for beginners and anyone looking to explore creative ways to make unique prints. Whether you&#39;re a photographer, artist, or simply curious, you&#39;ll leave with your own beautiful cyanotype creations and the skills to continue experimenting at home.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">We provide all materials, including pre-made negatives, objects for photograms, and papers for coating. Feel free to bring personal items like lace, leaves, or printed transparencies to make your prints uniquely yours.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Bushwick Community Darkroom</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">334 Himrod Street, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">1-4p; $150</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">bushwickcommunitydarkroom.com/events/cyanotypes-4sxsr-2d3fg</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: TUESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Help Build the Guide</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Soft Power Vote members Melissa and Molly welcome those interested in helping to research and build the voter guide spreadsheet. Learn strategies and tips for researching policy, gut-checking candidate&rsquo;s platforms (is it legit or fluff?) and help build one of the most essential tools that Soft Power Vote provides every election.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Secret Riso Club</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">122 Central Avenue, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6p; $free</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">withfriends.co/event/23297793/help_build_the_guide</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: TUESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Emerging Scholars: Cliff Dwellers&rsquo; Portrayals and Furniture on the Move</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The Victorian Society New York&rsquo;s 2025 Emerging Scholars winners will shed light on little-known yet influential aspects of Gilded Age history, literature, international trade, and design.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Sarah Egan, a graduate student at the Bard Graduate Center, will discuss Illinois education advocate Clara Kern Bayliss (1848-1948), who authored early 1900s children&rsquo;s books about Lolami, a fictional &quot;Little Cliff Dweller&quot; in Arizona. In the books, Lolami becomes orphaned, explores abandoned cliff settlements, and then becomes ingratiated with another local indigenous group, the Hopi. Egan will look at Bayliss&rsquo;s archaeological and historical sources, including displays at the 1893 Chicago World&rsquo;s Fair, and the books&rsquo; classroom uses that shaped children&rsquo;s thinking about American history and Americanness and reflected and transmitted harmful and reductive racial and social hierarchies.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Steven Baltsas, a graduate student in the Winterthur Program in American Material Culture, University of Delaware, will explore how, in the mid-19th century, Alexander Roux and his brother Fr&eacute;d&eacute;ric organized a transnational furniture enterprise between New York and Paris. The brothers catered to cosmopolitan customers via networks of manufactories, retailers, and display rooms.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Victorian Society of New York</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The Center at West Park, 165 West 86th Street, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6:30-8p; $donation</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">eventbrite.com/e/emerging-scholars-cliff-dwellers-portrayals-and-furniture-on-the-move-tickets-1307532447749</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: TUESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">From Waste to Wonder: How Material Innovation is Reshaping Design</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">From seaweed polybags to algae ink to reclaimed materials, today&rsquo;s emerging technologies have the potential to revolutionize the way we make products and packaging. But turning an exciting technology into a commercially viable product is no easy task.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">During this discussion, panelists will share in-the-trenches experiences of bringing novel materials to market, including how they vet sustainable alternatives, approach commercialization, and the (sometimes many) failures they experience along the way.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Index NYC</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">120 Walker Street, Manhattan</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7-8:30p; $free</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">index-space.org/products/from-waste-to-wonder-how-material-innovation-is-reshaping-design</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: WEDNESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Ancestral Plants of Palestine</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Palestinians are people of the land, and plants serve as an integral part of this connection. But what happens when this relationship is severed? In this knowledge share, we will examine ancestral plants and the role they play in Palestinian food and land-based culture. Together we&rsquo;ll move through the history of foraging and generations-old culinary traditions, while discussing the devastating effects that genocide, forced famine and mass displacement can have on these practices. We will learn about how Palestinians on the land are preserving these traditions, and ways of remembering in the diaspora.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">We will explore:</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">a deeper understanding of a variety of Palestinian ancestral plants and their uses</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">ethical foraging practices</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">examples of remembrance work</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">resources for further education.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Herban Cura</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Remote via Zoom</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">5-7p; $45-90 sliding scale</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">herbancura.com/knowledge-shares/ancestral-plants-of-palestine</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: WEDNESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Zine and Accordion Workshop</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Join us in our zine and accordion book-making gathering. This is a creative workshop where participants come together to make their own small self-published booklets (zines) and accordion-style books. It&#39;s a hands-on experience that celebrates self-expression, storytelling, and the DIY culture. Participants will learn about layout designs, combining text and visuals, and different binding methods while connecting with like-minded individuals and sharing their work. It&#39;s a collaborative and empowering event that encourages individual creativity and the exploration of alternative publishing formats.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Studio 45</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">213 Troutman Street, Brooklyn</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">6:30-8:30; $23.18-33.85, sliding scale</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">eventbrite.com/e/zine-and-accordion-workshop-tickets-1334306971069</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: WEDNESDAY *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">2025 Five Borough Waterfront Mayoral Forum</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">The Gowanus Dredgers are co-sponsoring the 2025 Five Borough Waterfront Mayoral Forum. We advocate for and operate water access in seven locations across Brooklyn, Queens, and Staten Island, and we&rsquo;re excited to hear from this year&rsquo;s mayoral candidates on their vision for our collective waterfront.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">New York City&rsquo;s waterfront is home to people, parks and beaches, businesses, docks, trains, roads, ports, and critical infrastructure that support our daily lives. The next Mayor must embrace the waterfront as a signature priority of their administration. We will be asking candidates a series of questions about the various aspects of the waterfront. The Five Borough Waterfront Forum is where candidates for Mayor will answer questions and present their vision for climate, recreation, maritime, workforce, public access, and all things across New York City&rsquo;s 520 linear miles of shoreline.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">This event is coupled with the 2025 Waterfront Conference, hosted in-person at the Museum of Jewish Heritage in Battery Park City, on May 13. Registration for the Waterfront Conference is not required to attend the Virtual Mayoral Candidates Forum.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Gowanus Dredgers</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Remote via Zoom</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">7-8:30p; $free</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">gowanusdredgers.org/event/2025-five-borough-waterfront-mayoral-forum/</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">***** LEARNING: UPCOMING *****</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Watershed Forestry Institute for Teachers</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Discover how woods wash water for millions of New Yorkers at the Watershed Agricultural Council&#39;s annual Watershed Forestry Institute for Teachers. Their FREE 2025 institute is for 6th - 12th grade teachers and non-formal educators teaching in NYC and the upstate NYC drinking watersheds.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Come explore the forests, waters, science, engineering, history, and world-famous partnerships of the NYC Watershed. You&rsquo;ll get informed, inspired and equipped to teach watershed forestry topics to your students. Participants are required to attend a Zoom orientation meeting in late June or mid-July.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Watershed Agricultural Council</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">Taconic Outdoor Education Center in Cold Spring</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">July 21-July 25; $free, application due May 16</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">education@nycwatershed.org.</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">surveymonkey.com/r/WFIT2025</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX HELP XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">We want to help you find help for short-term projects. Do you have a project, an event, or an action that needs an extra push, a few more people, or an extra set of hands? Please send your calls for help to: help@nonsensenyc.com.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX NONSENSE XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">nonsense nyc is a discriminating resource for independent art, weird events, strange happenings, unique parties, and senseless culture in new york city.</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">please remember you are welcome to pass nonsense along to anyone who needs to see it, but you do not have permission to use any of the listings for your commercial endeavor. if you are receiving this list as a forward you can sign up for yourself at nonsensenyc.com/subscribe.</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">&nbsp;</span></span></span></div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">if you believe independent artists should support other independent artists, we accept donations. here&#39;s a link to support nonsense all year long: https://withfriends.co/nonsense_nyc/join. thanks.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">XXXXX END XXXXX</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">To unsubscribe from this list, click here.</span></span></span></div>
+
+<div class="Body" style="border: medium;">&nbsp;</div>
+
+<div class="Body" style="border: medium;"><span style="font-family:Courier New,Courier,monospace;"><span style="font-size:12pt"><span style="color:black">http://nonsensenyc.com/cgi-bin/dada/mail.cgi/t/peqwJbiOvgufcOSemXhpvhmUoFA4rYo8jOrNYQUw/</span></span></span></div>
+<!--open_img--><img src="https://nonsensenyc.com/cgi-bin/dada/mail.cgi/spacer_image/nonsensenyc/20250509115257/dae290ec2b6c4e8b75cfcc145f9b26a6/spacer.png" width="1" height="1" alt="" /><!--/open_img-->
+</body>
+</html>
+
+------------=_1746816777-3057801-0--
+

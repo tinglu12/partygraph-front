@@ -1,0 +1,981 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Luma//What‘s Happening in New York//EN
+X-WR-CALNAME:What‘s Happening in New York
+X-WR-CALDESC:Luma Calendar
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART:20250531T190000Z
+DTEND:20250531T210000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Queens Collaborative":MAILTO:calendar-invite@lu.ma
+UID:evt-sfiGuZbvxcetuqH@events.lu.ma
+SUMMARY:Poetry is Play Presents: Heatwaves & Heartbeats
+DESCRIPTION:Get up-to-date information at: https://lu.ma/x00dio6n\n\nAddres
+ s:\n4009 21st St\nEnter under the yellow awning on street level. Please wai
+ t in the lobby until one of our team members comes to check you in and guid
+ e you to our studio space.\nQueens County, New York\nUnited States\n\nIntro
+ ducing Poetry is Play by Nirvona Soraya-Galo: a guided poetry session inten
+ ded to create a space for personal reflection while fostering collaboration
+  with other participants.\nThis workshop is tailored to accommodate a wide 
+ range of skill levels, offering individuals the opportunity to find wonderm
+ ent, craft together, and explore the kismet nature of our individual and sh
+ ared experiences.\nParticipants will engage with three writing prompts, eac
+ h designed to encourage reflection on a central theme. Nirvona will guide e
+ veryone through each prompt, offering support and inspiration along the…\n\
+ nHosted by Queens Collaborative
+LOCATION:4009 21st St, Long Island City, NY 11101, USA
+GEO:40.754755;-73.941392
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250531T190000Z
+DTEND:20250531T220000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Kelly Ifill":MAILTO:calendar-invite@lu.ma
+UID:evt-z2HjGz0MUiWQg3P@events.lu.ma
+SUMMARY:Snacking Through Bed-Stuy
+DESCRIPTION:Get up-to-date information at: https://lu.ma/ziajvwb7\n\nAddres
+ s:\nCheck event page for more details.\n\nJoin us for a tour through local 
+ Black-owned eateries in Bed-Stuy. We're celebrating the flavor, culture, an
+ d entrepreneurial spirit that makes this neighborhood thrive.\nWhat to expe
+ ct:\nCheck in, grab your crawl passport + map\nEnjoy curated bites and sips
+  at each location\nMeet the owners behind these neighborhood spots\nConnect
+  with fellow food lovers and community members\nFinish at Bed Vyne Brew to 
+ say goodbye to a beloved Black Owned neighborhood gem.\nYour ticket include
+ s food/drink samples at every stop and directly supports the participating 
+ restaurants. In a rapidly changing Brooklyn, our…\n\nHosted by Kelly Ifill
+LOCATION:https://lu.ma/e/evt-z2HjGz0MUiWQg3P
+GEO:40.680939;-73.928815
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250601T140000Z
+DTEND:20250601T170000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="James Q":MAILTO:calendar-invite@lu.ma
+UID:evt-VI4jNbKeqhQppG2@events.lu.ma
+SUMMARY:OTWC Season 6: Part IX
+DESCRIPTION:Get up-to-date information at: https://lu.ma/erlw60hr\n\nAddres
+ s:\nCheck event page for more details.\n\nOTWC is an NYC-based writing comm
+ unity for online writers to write, exchange ideas, and get inspired. Our se
+ ssions look like this:\n1.    Introduce yourselves and talk about what you 
+ plan to write\n2.    Focused writing session\n3.    Get together in small g
+ roups and discuss how the session went\nSnacks and drinks will be provided!
+ \nIf this price is too steep for you for any reason, email us by clicking "
+ Contact the Host" on the left and we’ll give you a pay-what-you-can ticket.
+ \nFollow us on Twitter and Instagram @otwc_nyc to stay updated on future ev
+ ents and announcements!\nHope to see you there…\n\nHosted by James Q & Abi 
+ Suresh
+LOCATION:https://lu.ma/e/evt-VI4jNbKeqhQppG2
+GEO:40.738784;-73.988356
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250601T160000Z
+DTEND:20250601T220000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Sahara Moné":MAILTO:calendar-invite@lu.ma
+UID:evt-6HdXDo6MiBD5UQB@events.lu.ma
+SUMMARY:Play Space @ TAMA Open Streets
+DESCRIPTION:Get up-to-date information at: https://lu.ma/ymk721fi\n\nAddres
+ s:\nTompkins Avenue\nKings County, New York\nUnited States\n\nLet's Play NY
+ C + Make Space =  A Day of Play at TAMA Open Streets! Come find us on Tompk
+ ins Avenue for hands-on craft making, games and good community fun.\nMake S
+ pace and Let's Play NYC are partnering together for the first-ever installm
+ ent of 'Play Space' and what better block to kick this off than Bed-Stuy's 
+ own Tompkins Avenue.\nFrom cutting and collaging: You’ll find a range of ta
+ ctile crafts like leather making, postcard art, and watercolor—all set up o
+ utdoors for easy, joyful creativity.\n\nPrefer a bit of movement or friendl
+ y competition? Join in for Jenga, hopscotch, a classic game of…\n\nHosted b
+ y Sahara Moné & Urechi Oguguo
+LOCATION:Tompkins Avenue, Tompkins Ave, Brooklyn, NY, USA
+GEO:40.689842;-73.945212
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250602T121500Z
+DTEND:20250602T134500Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Rippling Startups Events":MAILTO:calendar-invite@lu.ma
+UID:evt-74lLD9VLakILzNP@events.lu.ma
+SUMMARY:Rippling Founder and VC Barry's Class #NYTechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/atjhnvcl\n\nAddres
+ s:\nBarry's Park Avenue South\nNew York, New York\nUnited States\n\nKICK OF
+ F NY TECH WEEK WITH THE BEST WORKOUT IN THE WORLD™\nKick off NY Tech Week w
+ ith a Barry's class! Experience the legendary workout that combines 50% str
+ ength training with weights, 50% interval cardio on the treadmill, and 100%
+  feel-good movement.\nEVENT DETAILS\n🗓️ Date & Time: Monday, June 2nd at 8
+ :35 AM - 10:00 AM\n📍 Location: Barry's Park Ave South 107 E 27th St, New Y
+ ork, NY 10016\nPost Barry's Coffee 📍 Location: 787 Coffee Shop - 100 Lexin
+ gton Ave, New York, NY 10016\nLOOK FORWARD TO:\nHigh-energy workout led by 
+ elite Barry's trainers\nIconic Rippling swag\nRefreshing post-workout…\n\nH
+ osted by Rippling Startups Events
+LOCATION:Barry's Park Avenue South, 107 E 27th St, New York, NY 10016, USA
+GEO:40.742675;-73.983957
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250602T140000Z
+DTEND:20250602T170000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Sergey Khusnetdinov":MAILTO:calendar-invite@lu.ma
+UID:evt-UqNw9lWcREtkDke@events.lu.ma
+SUMMARY:Web3 & AI Pitch Competition & VC networking by Ga^3in Ventures x Fi
+ bonacci Capital at @TECHWEEK2025 in NYC
+DESCRIPTION:Get up-to-date information at: https://lu.ma/jz5gdw3g\n\nAddres
+ s:\nCheck event page for more details.\n\nWelcome to the Web3 Pitch Competi
+ tion & VC networking TECHWEEK2025 edition in NYC presented by Ga^3in Ventur
+ es!\n\nGa^3in Ventures is a Duke & friends focused Web3 Syndicate & Venture
+  Studio with 16,000 audience across the globe. We host Web3 pitch competiti
+ ons around the world, investor soirees, and crypto funds yachts to grow the
+  Web 3.0 industry.\nTwitter\nFibonacci Capital is a professional market-mak
+ ing partner for CEX and DEX, trusted by top-tier projects from $1M to $500M
+ + market cap. We deliver tailored liquidity strategies, exchange listings, 
+ and trading execution backed by real…\n\nHosted by Sergey Khusnetdinov, Sve
+ tlana Khusnetdinova & Nina
+LOCATION:https://lu.ma/e/evt-UqNw9lWcREtkDke
+GEO:40.748104;-73.974507
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250602T210000Z
+DTEND:20250602T233000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Andrew Chang":MAILTO:calendar-invite@lu.ma
+UID:evt-3MlfUdCFRvTnrGd@events.lu.ma
+SUMMARY:$50k - AI Startup Pitch Day - NYTechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/nytw-AI-Pitch-Day\
+ n\nAddress:\nCheck event page for more details.\n\nKick off NY Tech Week wi
+ th our $50K AI Pitch Day!\nNew York City's top pre-seed AI startups will ta
+ ke the stage to pitch their startups to a roomful of 100 investors.\nThe gr
+ and prize: a $50,000 investment from Next Wave NYC!\nEach startup will pitc
+ h their story and demo their products live on stage. The showcase will be f
+ ollowed by a reception with drinks, light bites and good conversation.\nInv
+ estors: Want to attend?\nRequest a ticket on this page; attendees will be a
+ ccepted on rolling basis.\n*The $50k prize of an investment is subject to r
+ eason & light due diligence.\n\nAbout Next Wave NYC\nNext…\n\nHosted by And
+ rew Chang & 6 others
+LOCATION:https://lu.ma/e/evt-3MlfUdCFRvTnrGd
+GEO:40.756098;-73.990188
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250602T210000Z
+DTEND:20250602T230000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Kyosuke Togami":MAILTO:calendar-invite@lu.ma
+UID:evt-LAsxU70QyABDoYr@events.lu.ma
+SUMMARY:『MELT』150+ Founders x Investors Dynamic Network
+DESCRIPTION:Get up-to-date information at: https://lu.ma/wklelenf\n\nAddres
+ s:\nCheck event page for more details.\n\n🚀Update 2025/05/21/9:50am\n👫We 
+ have over 300 founders and investors registered. Among them, we have select
+ ed some remarkable participants—see this link.\nhttps://docs.google.com/doc
+ ument/d/1kqTpPybTnXzmD-MJav8EVEwA_MyTkE6Q2fY4-F3cFM4/edit?usp=sharing\n\n✧ 
+ Presented By MELT / Kyosuke Togami\nMELT Partners in the past:\nJ.P. Morgan
+  - The largest global bank\nSheppard Mullin - The largest law firm\nNECX - 
+ Tech Giant in Japan $20B ARR\nMinerva University - The hardest university t
+ o get into\nY Combinator – Pylon, Parsana Ai\nTreasure Data - Raised $288m,
+  $200m ARR\nAGI Inc. - Pioneer of AI Agents\nOrbiter…\n\nHosted by Kyosuke 
+ Togami
+LOCATION:https://lu.ma/e/evt-LAsxU70QyABDoYr
+GEO:40.744108;-73.98882
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250602T223000Z
+DTEND:20250603T010000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="RecCreate Collective":MAILTO:calendar-invite@lu.ma
+UID:evt-gKXinkkUpgt0DTE@events.lu.ma
+SUMMARY:Clay Club: Pendants and Keychains
+DESCRIPTION:Get up-to-date information at: https://lu.ma/6iw8bnqr\n\nAddres
+ s:\n20 Grand Ave\nThe venue is a ~hidden~ art studio located on the 6th flo
+ or of a commercial building! When you arrive, buzz #604, push to open and t
+ ake the elevator up to 6 (push the elevator button until it turns red.!!) T
+ ake a right out of the elevator, and a left at the end of the hallway. The 
+ door will be the first one on your right.\nKings County, New York\nUnited S
+ tates\n\nIf you’re sick!! of staring at a screen and looking to get your ha
+ nds messy, introducing a practice of play + tactile making into your life— 
+ clay club is made<3 for <3 u<3\nThis June, you’ll have the chance to design
+  mini objects out of polymer clay! Choose your favorite to turn into a pend
+ ant or keychain (hardware included) and bake off the rest into figurines or
+  charms.\nPerfect for beginners or clay fiends alike, we’ll get you acclima
+ ted to the material and tools and provide you with an inspo + ideation sess
+ ion to get your creativity whirring. We'll then bump the tunes and let you 
+ sculpt…\n\nHosted by RecCreate Collective
+LOCATION:20 Grand Ave, Brooklyn, NY 11205, USA
+GEO:40.697054;-73.964942
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250602T230000Z
+DTEND:20250603T013000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Writers Club":MAILTO:calendar-invite@lu.ma
+UID:evt-24qV69nTYeLzgDU@events.lu.ma
+SUMMARY:Writers Club Spring Salon: Live Reading
+DESCRIPTION:Get up-to-date information at: https://lu.ma/g517e0b0\n\nAddres
+ s:\ndear friend books\nKings County, New York\nUnited States\n\nA literary 
+ night awaits! Listen to a curated collection of new fiction from our eight 
+ Spring Salon fellows in the beautiful Dear Friends Books backyard.\nSet eve
+ rywhere from the L train, where subway-performing friends encounter the unc
+ anny; to a MedSpa that harvests your labor to use after death; to an eerie 
+ New England town where faces are stolen and children disappear, these stori
+ es span surreal and familiar worlds. There’s a tale of returning to a long-
+ abandoned past and a gothic story of a haunted—and hunted—man. Also feature
+ d: sexy, gay chefs (in love); an old, beautiful moth (in a…\n\nHosted by Wr
+ iters Club
+LOCATION:dear friend books, 343A Tompkins Ave, Brooklyn, NY 11216, USA
+GEO:40.686028;-73.944174
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T003000Z
+DTEND:20250603T033000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Dasha":MAILTO:calendar-invite@lu.ma
+UID:evt-oSB9ALfGjZEuxb8@events.lu.ma
+SUMMARY:Women Tech Meetup: Raising on Your Terms - #NYTechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/u78o0kc1\n\nAddres
+ s:\nCheck event page for more details.\n\nNew York! Calling all female foun
+ ders, women in tech, allies, friends, and partners!    Join us on June 2nd 
+ for the Women Tech Meetup: Raising On Your Terms. \n\n Let’s be real — fund
+ raising isn’t one-size-fits-all. And for women founders? The rules aren’t j
+ ust different — they’re nonexistent. \n\nThat’s why we’re bringing together
+  a powerhouse room of female founders, funders, and operators to talk about
+  raising capital your way. \n\nWe'll be talking about: \n- Navigating bias 
+ and owning your narrative \n- Fundraising strategies that actually work in 
+ 2025 \n- Finding aligned investors (and walking…\n\nHosted by Dasha
+LOCATION:https://lu.ma/e/evt-oSB9ALfGjZEuxb8
+GEO:40.751172;-73.99234
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T130000Z
+DTEND:20250603T150000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Grace Gong":MAILTO:calendar-invite@lu.ma
+UID:evt-sLK8QiZZvrwVGp8@events.lu.ma
+SUMMARY:Grace Gong NYC VCs & Founders Breakfast
+DESCRIPTION:Get up-to-date information at: https://lu.ma/t5e03lao\n\nAddres
+ s:\nCheck event page for more details.\n\nJoin an intimate breakfast for VC
+ s, founders, and LPs in New York City, hosted by Grace Gong. This exclusive
+  morning event brings together selected venture capitalists and founders fo
+ r meaningful connections and strategic conversations over breakfast.\nPartn
+ ers:\nVerivend\nStifel\nFondo\nSmart Venture Media\nYour Host\nGrace Gong\n
+ Grace hosts Smart Venture Podcast and Venture with Grace. Her podcasts have
+  featured high-profile guests such as C-level executives and VPs from compa
+ nies like Google, Meta, Amazon, Microsoft, Instagram, DoorDash, Pinterest, 
+ Cisco, NVIDIA, Snowflake and more. Additionally,…\n\nHosted by Grace Gong
+LOCATION:https://lu.ma/e/evt-sLK8QiZZvrwVGp8
+GEO:40.724831;-73.987755
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T140000Z
+DTEND:20250603T200000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Pulse NYC":MAILTO:calendar-invite@lu.ma
+UID:evt-SB5Nnxx4M3ChjTo@events.lu.ma
+SUMMARY:Annual BROOKLYN TECH EXPO - June 3, 2025
+DESCRIPTION:Get up-to-date information at: https://lu.ma/brooklyn-tech-expo
+ -june-2025\n\nAddress:\nCheck event page for more details.\n\nThe Annual BR
+ OOKLYN TECH EXPO — our flagship event & Brooklyn’s largest tech conference,
+  returns on June 3, 2025, in the heart of Dumbo, Brooklyn, organized by Pul
+ se NYC. This high-energy expo focuses on AI and cutting-edge technology, br
+ inging together Brooklyn’s thriving tech and business communities for a day
+  of innovation, networking, and learning.\n\nIf your company is interested 
+ in sponsoring or exhibiting at the expo, please contact us for details. Thi
+ s presents an excellent opportunity for your business to network, gain visi
+ bility, and access the untapped Brooklyn tech market.\nWith an…\n\nHosted b
+ y Pulse NYC
+LOCATION:https://lu.ma/e/evt-SB5Nnxx4M3ChjTo
+GEO:40.703974;-73.984885
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T150000Z
+DTEND:20250603T170000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Andrés Cano":MAILTO:calendar-invite@lu.ma
+UID:evt-3AJfSdnW2eXfILr@events.lu.ma
+SUMMARY:Latino Founders & Investors Speed Dating at Google | US & LatAm
+DESCRIPTION:Get up-to-date information at: https://lu.ma/2zr61rju\n\nAddres
+ s:\nCheck event page for more details.\n\nJoin us for an exclusive speed da
+ ting event designed for Latino founders from the US and Latin America, host
+ ed at Google. This unique networking opportunity is co-hosted by Colectivo,
+  Pygma, and Dux, bringing together a dynamic community of entrepreneurs and
+  General Partners (GPs) to forge powerful connections and explore potential
+  collaborations.\nWhether you're seeking funding, partnerships, or just loo
+ king to expand your network, this event provides the perfect platform to me
+ et face-to-face with top investors and industry leaders who are particularl
+ y interested in the growth and success of…\n\nHosted by Andrés Cano & Colec
+ tivo
+LOCATION:https://lu.ma/e/evt-3AJfSdnW2eXfILr
+GEO:40.741491;-74.003389
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T170000Z
+DTEND:20250603T200000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Realist Lab":MAILTO:calendar-invite@lu.ma
+UID:evt-0SYuITkClAuKdsG@events.lu.ma
+SUMMARY:Future-Proofing Your Business with Artificial Intelligence #CTTechW
+ eek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/qnxaiheh\n\nAddres
+ s:\nHAYVN Coworking - Greenwich\nGreenwich, Connecticut\nUnited States\n\nJ
+ oin us for an afternoon of deep dives into the world of AI and how it can s
+ hape the future of your business. Whether you’re looking to incorporate AI 
+ tools into your marketing strategy or harness the power of data analytics, 
+ this session will give you the knowledge and tools to future-proof your bus
+ iness.\nWhat to Expect:\n\nUsing ChatGPT to Build Marketing Content (1:00 P
+ M - 2:00 PM)\nLearn how to leverage ChatGPT to create marketing content tha
+ t saves you time and enhances your strategy. Get practical tips for integra
+ ting AI into your marketing plan.\nGen AI and Data Analytics (2:00 PM - 3:0
+ 0…\n\nHosted by Realist Lab & CT Tech Week
+LOCATION:HAYVN Coworking - Greenwich, 1700 E Putnam Ave Suite 208, Old Gree
+ nwich, CT 06870, USA
+GEO:41.046189;-73.570097
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T210000Z
+DTEND:20250604T000000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="John Wang":MAILTO:calendar-invite@lu.ma
+UID:evt-25iHz2EFxjukAAk@events.lu.ma
+SUMMARY:AI for support -at Etsy, Ramp, & DailyPay-what’s really happening #
+ nytechweek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/zgk2csdn\n\nAddres
+ s:\nCheck event page for more details.\n\nJoin Assembled and Etsy in Brookl
+ yn for an evening where support leaders can connect over AI strategies that
+  actually work.\nWe'll kick things off with a panel of leaders who've been 
+ in your shoes. You'll hear about implementation challenges, measuring succe
+ ss, avoiding common pitfalls, and other valuable insights.\nBen Levick, Ope
+ rations and AI @ Ramp\nRyan Moore, VP Global Support and BPO Strategy @ Dai
+ lyPay\nSasha Vyshynska, CX Technology Ops Team Manager @ Etsy\nOlivia Teich
+ , Chief Product Officer @ Assembled\nAfter the panel, Assembled co-founder 
+ and CTO John Wang will lead a session about the…\n\nHosted by John Wang & 6
+  others
+LOCATION:https://lu.ma/e/evt-25iHz2EFxjukAAk
+GEO:40.700444;-73.988111
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T220000Z
+DTEND:20250604T000000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="NSDS Tech Comedy Show":MAILTO:calendar-invite@lu.ma
+UID:evt-Fsyk5MwEraVtGrg@events.lu.ma
+SUMMARY:Artificially Un-Intelligent, A Tech Themed Comedy Show @ #NYTechWee
+ k
+DESCRIPTION:Get up-to-date information at: https://lu.ma/NYTechComedy2025\n
+ \nAddress:\nCheck event page for more details.\n\nLeave your jira tickets o
+ pen, term sheets unfilled, and SaaS unscaled for the best night of tech-the
+ med stand up comedy you didn't know you needed. Artificially Un-Intelligent
+  is the flagship event of Tech Week — where tech and comedy collide.\n\nPre
+ sented by Puzzle, Vanta, and Ramp. \n\nThis isn’t your typical networking n
+ ight. We’re bringing the energy, the laughs, and the connections to a whole
+  new level with a one-of-a-kind Stand-Up Comedy Show featuring SWE, PM, Fou
+ nders, and VC comedians seen on Netflix, Tech Roast Show, NPR, Comedy Centr
+ al, Morning Brew, and more! \n\n"Why come?" is the…\n\nHosted by NSDS Tech 
+ Comedy Show & 3 others
+LOCATION:https://lu.ma/e/evt-Fsyk5MwEraVtGrg
+GEO:40.764432;-73.985664
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T220000Z
+DTEND:20250604T000000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Emma Lo":MAILTO:calendar-invite@lu.ma
+UID:evt-0N8wjDZpuZg8Dhh@events.lu.ma
+SUMMARY:Customer Success Happy Hour - #NYTechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/qteeuvhi\n\nAddres
+ s:\nCheck event page for more details.\n\nHosted by CS in Focus × CxXchange
+  | Sponsored by Ask-AI\n\nWe’re bringing the CS crowd back together—NYC sty
+ le.  \n\nJoin us on the rooftop for an evening of bold ideas, GTM insights,
+  and real talk with the leaders scaling Customer Success in 2025.  From AI-
+ powered support to post-sales growth strategies, we’ll mix practical takeaw
+ ays with unbeatable views (and great drinks). \n\nWhether you're a CS exec,
+  founder, or GTM pro, this is your space to connect, recharge, and trade id
+ eas with the people shaping what’s next.  \n\nFeaturing: \n→ Senior CS lead
+ ers from high-growth SaaS \n→ Tactical GTM…\n\nHosted by Emma Lo, Cinthia S
+ ilva & Mike Rodgers
+LOCATION:https://lu.ma/e/evt-0N8wjDZpuZg8Dhh
+GEO:40.731521;-73.989466
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T220000Z
+DTEND:20250604T003000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Benjamin You":MAILTO:calendar-invite@lu.ma
+UID:evt-NFSAn7gw2PZLcHh@events.lu.ma
+SUMMARY:Influence and Advocacy for Engineering Leaders #NYTechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/zz7hlwc4\n\nAddres
+ s:\nCheck event page for more details.\n\nAbout the Event\nJoin our Enginee
+ ring Leadership NYC event, in collaboration with LinkedIn, focused on discu
+ ssing the experiences of women engineering leaders. We’re welcoming all eng
+ ineering leaders to be part of the audience. This event will explore how en
+ gineering leaders can expand their impact by fostering relationships, advoc
+ ating for themselves and others, and driving meaningful change across teams
+  and organizations.\nThe topic will dive deep into:\nHow to foster influenc
+ e through relationships and trust, cultivating allies and making your voice
+  heard with your team/organization.\nAdvocacy…\n\nHosted by Benjamin You, S
+ iri Kostanyan & Mykola Kurutin
+LOCATION:https://lu.ma/e/evt-NFSAn7gw2PZLcHh
+GEO:40.748493;-73.985617
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T223000Z
+DTEND:20250604T010000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Drawing Room":MAILTO:calendar-invite@lu.ma
+UID:evt-w49lMHxKUYjsLLF@events.lu.ma
+SUMMARY:Carve & Print: Wall Hangings
+DESCRIPTION:Get up-to-date information at: https://lu.ma/rvdx3nud\n\nAddres
+ s:\n101 N 10th St #206\nRing suite #206 on intercom by the front door to be
+  buzzed in. Go straight in, take the elevator or the stairs to 2nd floor, a
+ nd take your first right to find us at #206!\nKings County, New York\nUnite
+ d States\n\nThis event of a version of Carve & Print, for which you can fin
+ d details here. Instructed by Meiying, in this workshop we will learn to tr
+ ansform drawings into block printing and create a magical wall hanging.\n\n
+ \n✦\nYour ticket includes access to our Open Hours, to use our space for th
+ e day of the event, so you're welcome to come a bit early and linger later,
+  if you'd like. If you've never been to Open Hours at Drawing Room, it incl
+ udes unlimited loose-leaf tea, coffee, wifi, and access to our games/book l
+ ibrary. We also offer our Art Library for an additional cost. Please show t
+ he front desk…\n\nHosted by Drawing Room & Meiying
+LOCATION:101 N 10th St #206, Brooklyn, NY 11249, USA
+GEO:40.720755;-73.957661
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250603T230000Z
+DTEND:20250604T030000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Brett Perlmutter":MAILTO:calendar-invite@lu.ma
+UID:evt-1NbNXUJJYbyp7aN@events.lu.ma
+SUMMARY:Tech Carnival NYC
+DESCRIPTION:Get up-to-date information at: https://lu.ma/p9p3jd3m\n\nAddres
+ s:\nCheck event page for more details.\n\nBulletpitch's signature Tech Carn
+ ival is coming to NYC. Attendees will walk through a carnival with games an
+ d immersive experiences with a startup twist. Each booth will be run by an 
+ early stage founder or one of our partners who will be incorporating an ele
+ ment of their company into the live experience. There will be food, drinks,
+  and great networking. This event is for founders, funders, and those in te
+ ch.\n\n--\nAll sponsors may use the information you provide to Bulletpitch 
+ to contact you about Bulletpitch's relevant content, products, and services
+ . Bulletpitch will share the information you…\n\nHosted by Brett Perlmutter
+  & Bulletpitch
+LOCATION:https://lu.ma/e/evt-1NbNXUJJYbyp7aN
+GEO:40.718633;-73.989224
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250604T180000Z
+DTEND:20250604T200000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Nance C":MAILTO:calendar-invite@lu.ma
+UID:evt-QUAGGf1MiGYEopJ@events.lu.ma
+SUMMARY:Gam3 On: Chelsea Testnet Launch for Soneium #NYTechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/mvwelyu5\n\nAddres
+ s:\nCheck event page for more details.\n\n🎮 Gam3 On: Chelsea Testnet Launc
+ h for Soneium’s Gaming L3\n🚀  Join us at New York Tech Week, on June 4th, 
+ 2–4 PM as we unveil Chelsea, the testnet launch of our groundbreaking Gamin
+ g L3 on Soneium. This marks a major milestone for the future of onchain gam
+ ing — designed for performance, scale, and seamless developer experience.  
+ This exclusive event will be split into two power-packed sessions followed 
+ by networking and mingling.\n🧠 Part 1: Technical Panel (2:00 – 2:30 PM)\nD
+ iving into Web3 Gaming Infrastructure & Chelsea\nTestnet Hear from leading 
+ builders and researchers on the next…\n\nHosted by Nance C & 4 others
+LOCATION:https://lu.ma/e/evt-QUAGGf1MiGYEopJ
+GEO:40.742065;-74.000226
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250604T200000Z
+DTEND:20250604T230000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Contech Alliance":MAILTO:calendar-invite@lu.ma
+UID:evt-PNNEtB1ujVq4HbU@events.lu.ma
+SUMMARY:Contech Pickleball Tournament & Networking
+DESCRIPTION:Get up-to-date information at: https://lu.ma/contechpickleball\
+ n\nAddress:\n350 5th Ave\nFrom the Main ESB Lobby, take the elevator direct
+ ly to the Club Level and proceed to the Empire Lounge.\nNew York, New York\
+ nUnited States\n\nJoin Contech Alliance for our first-ever Pickleball Tourn
+ ament—a high-spirited evening of friendly competition, industry networking,
+  and community fun.\nWhether you're a pickleball pro or picking up a paddle
+  for the first time, this event is all about bringing together construction
+  tech innovators, builders, and thinkers in a laid-back, engaging atmospher
+ e.\n🎾 Play friendly matches on the court.\n🤝 Connect over refreshments an
+ d conversation off the court.\n🚀 Spark new ideas and collaborations with f
+ ellow industry pros.\n📍Conveniently located at the Empire State Building, 
+ just steps from Penn…\n\nHosted by Contech Alliance
+LOCATION:350 5th Ave, New York, NY 10118, USA
+GEO:40.74817;-73.985008
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250604T223000Z
+DTEND:20250605T003000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Priya Malani":MAILTO:calendar-invite@lu.ma
+UID:evt-mqRyYPGpsgq60Cu@events.lu.ma
+SUMMARY:Buying Your First Home—Brooklyn EDITION
+DESCRIPTION:Get up-to-date information at: https://lu.ma/zzalnyiu\n\nAddres
+ s:\nMadeline's\nKings County, New York\nUnited States\n\nAn unfiltered pane
+ l with the experts who’ve helped hundreds of first-time NYC buyers do it ri
+ ght.\nStill cutting rent checks that could easily be a mortgage? If you’ve 
+ been thinking about buying in Brooklyn but aren’t sure where to start (or i
+ f you can start) - this event is your shortcut to getting smart, fast.\nYou
+ r Landlord Doesn’t Want You to Know This.\nWhether you’re looking to stop o
+ verpaying for someone else’s asset or finally put your high cost of living 
+ to work for you, we’ve got the real talk you won’t get on TikTok.\nHere’s w
+ hat we’re covering:\n✔️ How much you really need to buy in…\n\nHosted by Pr
+ iya Malani
+LOCATION:Madeline's, 113 Franklin St FC, Brooklyn, NY 11222, USA
+GEO:40.730279;-73.957793
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250604T223000Z
+DTEND:20250605T013000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Minh Do":MAILTO:calendar-invite@lu.ma
+UID:evt-n2ysviAcVH8H4s1@events.lu.ma
+SUMMARY:Gen & Juice: [Cancelled for Rooftop Cinema Night]
+DESCRIPTION:Get up-to-date information at: https://lu.ma/p0fwpg6u\n\nAddres
+ s:\nCheck event page for more details.\n\nCancelling this event. Please att
+ end our partners' event! https://lu.ma/ma564fut?tk=GGo1cd - Rooftop Cinema 
+ Night - Tribeca AI\n\nHosted by Minh Do & 3 others
+LOCATION:https://lu.ma/e/evt-n2ysviAcVH8H4s1
+GEO:40.705334;-74.016101
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T000000Z
+DTEND:20250606T023000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="NEW INC":MAILTO:calendar-invite@lu.ma
+UID:evt-2eRGNhq0BvIDjjx@events.lu.ma
+SUMMARY:Diskokina June 4
+DESCRIPTION:Get up-to-date information at: https://lu.ma/DEMO2025-diskokina
+ -june4\n\nAddress:\n180 Maiden Ln\nNew York, New York\nUnited States\n\nPre
+ pare for unforeseen consequences as Kina, the world’s most advanced AI supe
+ rfan, returns to the stage in New York.\nDiskokina is NYC’s own cutting-edg
+ e incubator for “Real-Time Club-Theatre”. Led by Team Rolfes and Club Cring
+ e—Diskokina blends live narrative theatre with collaborations between bleed
+ ing-edge AV artists and stars of the underground.\nWhen we last left our he
+ roes, the fate of the world was hanging in the balance. Now, for two nights
+  at DEMO2025, our heroes return to the stage for the following special perf
+ ormances:\n!321Rule: Live featuring Team Rolfes and Lil Mariko\n\n!Passage…
+ \n\nHosted by NEW INC
+LOCATION:180 Maiden Ln, New York, NY 10038, USA
+GEO:40.705228;-74.005109
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T113000Z
+DTEND:20250605T123000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Kevin Weatherman":MAILTO:calendar-invite@lu.ma
+UID:evt-BreTDHVe8JI44Rp@events.lu.ma
+SUMMARY:Pitch and Run 730am Battery Park - TechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/mw005iqm\n\nAddres
+ s:\nLe Pain Quotidien\nNew York, New York\nUnited States\n\nWe meet at 7:25
+ am - at Le Pain 395 S End Ave, New York, NY 10280, USA\nIntros 7:30am-7:35a
+ m\nPaces from 9min/mile to party pace 11min/mile+\n4.5 miles up the piers a
+ nd back down the WSH\nRoute https://www.strava.com/routes/32132056173393366
+ 16\nCoffee after\n\nHosted by Kevin Weatherman & Chaitenya Razdan
+LOCATION:Le Pain Quotidien, 395 S End Ave, New York, NY 10280, USA
+GEO:40.7113;-74.016193
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T120000Z
+DTEND:20250605T220000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Harry Ratcliffe":MAILTO:calendar-invite@lu.ma
+UID:evt-yr2DzYjPeWCv6Gp@events.lu.ma
+SUMMARY:Generative AI Summit New York
+DESCRIPTION:Get up-to-date information at: https://lu.ma/ymisna8l\n\nAddres
+ s:\nNew York Marriott Marquis\nNew York, New York\nUnited States\n\nNY Tech
+  Week's biggest assembly of AI's engineers, end-users & execs returns.\n→ht
+ tps://agenticaialliance.com/location/agenticainewyork/colocated\n\nDeploy i
+ ndustry-ready applications that are cost-effective, powerful & responsible.
+ \n\nUnite with your builder community for a day of networking and exchange,
+  leaving you able to:\n→ Conquer blockers in infra, data layer, deployment 
+ & optimization.\n→ Validate your ideas, assessing the latest apps, agents &
+  solutions.\n→ Leave with 100s of the most influential engineering leaders 
+ added to your phone book.\n\nHosted by Harry Ratcliffe
+LOCATION:New York Marriott Marquis, 1535 Broadway, New York, NY 10036, USA
+GEO:40.758586;-73.98582
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T123000Z
+DTEND:20250606T000000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Shiv Singh":MAILTO:calendar-invite@lu.ma
+UID:evt-ZvVF7c1JnHPAiyV@events.lu.ma
+SUMMARY:AI Trailblazers Summer Summit
+DESCRIPTION:Get up-to-date information at: https://lu.ma/747wkweb\n\nAddres
+ s:\nCheck event page for more details.\n\nJoin us for the AI Trailblazers S
+ ummer Summit 2025, an exclusive gathering of AI innovators and business lea
+ ders. Building upon the success of our previous summits, this event will fe
+ ature a dynamic mix of keynotes, panel discussions, and networking sessions
+ , focusing on the transformative applications of AI across various industri
+ es. This year’s theme, “From Hype to Hands-On: AI in the Real World,” will 
+ spotlight how industry leaders are moving beyond speculation to real-world 
+ impact. Engage with experts from leading global brands as they share insigh
+ ts on AI-driven product innovation,…\n\nHosted by Shiv Singh, Greg Kahn & A
+ mit Shah
+LOCATION:https://lu.ma/e/evt-ZvVF7c1JnHPAiyV
+GEO:40.741045;-73.984885
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T190000Z
+DTEND:20250605T220000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Manana Samuseva":MAILTO:calendar-invite@lu.ma
+UID:evt-NSpjD6LrMH6RzPT@events.lu.ma
+SUMMARY:📍🇺🇸 Family Offices & Investors Summit 🇺🇸 June 2-8 📍a16z Tech 
+ Week New York
+DESCRIPTION:Get up-to-date information at: https://lu.ma/mzivtk14\n\nAddres
+ s:\nCheck event page for more details.\n\nFamily Offices & Investors Summit
+  (FOIS),  June 2-8, a16z #TechWeek\nJoin us for an exclusive event tailored
+  for elite investors—including Family Offices (FO, Oil/Gas & Finance, Biote
+ ch), Fund of Funds (FoF), Private Equity (PE), Hedge Fund Managers, and Ven
+ ture Capital (VC) firms—with a minimum requirement of $100M AUM. Details & 
+ RSVP: View our Speakers/Host Proposal or contact us at rsvp@familyofficesin
+ vestorssummit.com  https://www.familyofficesinvestorssummit.com\nhttps://ww
+ w.tech-week.com\nUpcoming Events: https://lu.ma/FOI\nRSVP & Pricing Options
+ :\nRSVP Free: (Minimum $100M AUM required)\nVIP…\n\nHosted by Manana Samuse
+ va, familyofficesinvestorssummit.com & Casey | Soulbound TV
+LOCATION:https://lu.ma/e/evt-NSpjD6LrMH6RzPT
+GEO:40.712775;-74.005973
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T200000Z
+DTEND:20250605T212000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="NEW INC":MAILTO:calendar-invite@lu.ma
+UID:evt-PiCWleE24UsD8Fh@events.lu.ma
+SUMMARY:DEMO2025 Social Architecture Mainstage Talks
+DESCRIPTION:Get up-to-date information at: https://lu.ma/DEMO2025-SocialArc
+ hitecture\n\nAddress:\n180 Maiden Ln\nNew York, New York\nUnited States\n\n
+ Join us for Social architecture Track Talks, presented in partnership with 
+ the Jonathan D Lewis + Mark C. Lewis Foundation.\nNEW INC’s member cohort c
+ onsists of 5 unique Tracks or focus areas guided by a Mentor-in-Residence: 
+ Art & Code, Cooperative Studies, Creative Science, Social Architecture, and
+  XR (Extended Realities). At the core of DEMO’s Opening Program, members sh
+ are their individual projects during Track Talks which are followed by a gr
+ oup conversation moderated by the Track Mentor-in-Residence.\nSocial Archit
+ ecture supports place-based initiatives designed with people, natural…\n\nH
+ osted by NEW INC
+LOCATION:180 Maiden Ln, New York, NY 10038, USA
+GEO:40.705228;-74.005109
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T210000Z
+DTEND:20250606T000000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Startup+":MAILTO:calendar-invite@lu.ma
+UID:evt-4PiHcDPmVGZC69b@events.lu.ma
+SUMMARY:Startup & Professional Networking
+DESCRIPTION:Get up-to-date information at: https://lu.ma/3epm7eq1\n\nAddres
+ s:\nSugar Mouse NYC\nNew York, New York\nUnited States\n\nNYC Tech & Startu
+ p Mixer — brought to you by Startup+\nWe’re putting founders, engineers, in
+ vestors, recruiters, freelancers, and mentors in the same room for a night 
+ of straight‑up networking. No panels, no speeches—just real conversations. 
+ If you’re testing an idea, raising cash, or hiring your first dev, this is 
+ the place to be.\nWhy swing by?\nMeet 100+ builders and backers in one go\n
+ Swap stories, get quick feedback, share lessons learned\nSpot future co‑fou
+ nders, investors, customers—maybe all three\nWhat’s the setup?\nWe’ve got a
+  dedicated space, and name tags at the door\nFlash a business…\n\nHosted by
+  Startup+ & Jaynish Shah
+LOCATION:Sugar Mouse NYC, 47 3rd Ave, New York, NY 10003, USA
+GEO:40.730863;-73.988698
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T223000Z
+DTEND:20250606T020000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Andrew Yeung":MAILTO:calendar-invite@lu.ma
+UID:evt-JMKLCHkHKybHPi0@events.lu.ma
+SUMMARY:AI Extravaganza
+DESCRIPTION:Get up-to-date information at: https://lu.ma/extravaganza\n\nAd
+ dress:\nCheck event page for more details.\n\nAI EXTRAVAGANZA — The Most Ex
+ citing AI Event of New York Tech Week\nThis is AI EXTRAVAGANZA — a high-ene
+ rgy, fully immersive experience bringing together the boldest founders, ope
+ rators, investors, and creators at the intersection of artificial intellige
+ nce and culture.\nOn June 5, we’re taking over one of New York City’s large
+ st venues and transforming it into a massive, multi-sensory playground. Exp
+ ect a night of discovery, connection, and unforgettable moments, powered by
+  some of the biggest names in AI.\nWhat’s in store:\n🎮 Multiplayer VR Beat
+  Saber Experience\n🏎 Immersive Car Racing…\n\nHosted by Andrew Yeung & 3 o
+ thers
+LOCATION:https://lu.ma/e/evt-JMKLCHkHKybHPi0
+GEO:40.764014;-73.997637
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250605T223000Z
+DTEND:20250606T003000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Reading Rhythms":MAILTO:calendar-invite@lu.ma
+UID:evt-xKQIOn0VKjcrpXI@events.lu.ma
+SUMMARY:Brooklyn Pages in the Park, PRIDE edition!
+DESCRIPTION:Get up-to-date information at: https://lu.ma/cz9gebgf\n\nAddres
+ s:\nMcCarren Park\nKings County, New York\nUnited States\n\nYou’re invited,
+  girls gays & theys! Allies welcome as well!\nReading Rhythms is a series o
+ f welcoming reading parties designed to make it easy for people to gather a
+ nd read socially. We invite you to bring any book you want and facilitate s
+ ilent reading periods, as well as 1-on-1 breakouts, and group discussions t
+ o pull on the threads of the books that everyone is engaging with.\nIn a wo
+ rld that can often feel devoid of interest and meaningful connection, we br
+ ing readers together to reconnect with our love of learning, to experience 
+ the wonder of beautiful venues and curated music, and to…\n\nHosted by Read
+ ing Rhythms & 3 others
+LOCATION:McCarren Park, 776 Lorimer St, Brooklyn, NY 11222, USA
+GEO:40.721041;-73.951349
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250606T113000Z
+DTEND:20250606T133000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="John DiLoreto":MAILTO:calendar-invite@lu.ma
+UID:evt-vD9yAWEAX9zdFlk@events.lu.ma
+SUMMARY:Tech Pickleball
+DESCRIPTION:Get up-to-date information at: https://lu.ma/xz2bgdyi\n\nAddres
+ s:\nMcCarren Park Tennis Courts\nMeet at the Asphalt lot next to the Tennis
+  courts. Look for the Tech Pickleball sign!\nKings County, New York\nUnited
+  States\n\nJoin us for coffee, bagels, & pickleball with NYC's largest tech
+  networking community, Tech Pickleball!\n\nThis year we are teaming up with
+  Apollo.io to bring you more hype than ever. Stay tuned for more details :)
+  \n\nFirst-timers, intermediate, and advanced players welcome! We'll help p
+ air you up with a group on your skill level. \n\nCome for the coffee & pick
+ leball, stay for the vibes! \n\nTech Pickleball was founded by John (Knock2
+ .ai) & Skyler (Optemization.com) to bring the NYC tech community together i
+ n a fun & casual format + bond over our shared passion for Pickleball. Sinc
+ e then, we've been…\n\nHosted by John DiLoreto & 3 others
+LOCATION:McCarren Park Tennis Courts, 50 Bedford Ave, Brooklyn, NY 11222, U
+ SA
+GEO:40.721751;-73.95457
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250606T125500Z
+DTEND:20250606T141500Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Kevin Weatherman":MAILTO:calendar-invite@lu.ma
+UID:evt-X9gaCHNcuBmD9uG@events.lu.ma
+SUMMARY:Pitch and Run Friday - The Original PNR - TechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/vrqiepu2\n\nAddres
+ s:\nBluestone Lane Chelsea Piers Café\nMeet outside of Bluestone Lane at 8:
+ 55am\nNew York, New York\nUnited States\n\nWe meet at 8:55am \nIntros 9-9:1
+ 0am\nPaces from 9min/mile to party pace 11min/mile+\n\nRun 4.5 Miles down W
+ SH and back https://www.strava.com/routes/3046169780433341292\nStop for Pho
+ tos at Little Island & Battery Park\nCoffee 10am \n\nPitch and Run was foun
+ ded to make it easy for founders to connect with Angels and VCs without the
+  pressure of a pitch meeting and to allow founders and startup employees to
+  connect. Many companies have raised their round, found customers, and met 
+ their co-founders, and even found jobs from connections made at Pitch and R
+ un.\n\nHosted by Kevin Weatherman
+LOCATION:Bluestone Lane Chelsea Piers Café, 62 Chelsea Piers Pier 62, New Y
+ ork, NY 10011, USA
+GEO:40.748538;-74.008746
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250606T130000Z
+DTEND:20250606T230000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Blockchain NYC":MAILTO:calendar-invite@lu.ma
+UID:evt-GsLPGZInWmzWObD@events.lu.ma
+SUMMARY:The AI & Finance Conference
+DESCRIPTION:Get up-to-date information at: https://lu.ma/8751yc11\n\nAddres
+ s:\nCivic Hall\nNew York, New York\nUnited States\n\nWe are an official eve
+ nt of a16z's Tech Week.\nFull agenda and details here: https://aifin.nyc\nO
+ fficial Luma page: https://luma.com/aifin2025\nJoin us for the 3rd annual T
+ he AI & Finance Conference. This year we will be focused on large quantitat
+ ive models, language models, investment management and trading themes. We t
+ ypically get 250-300 people in attendance.\nOur morning will consist of dee
+ ply educational back to back talks from senior executives from Blackrock, M
+ oody's, Numisma Bank, Goldman Sachs, and others.\nOur afternoons feature a 
+ string of panels and discussions with leaders from…\n\nHosted by Blockchain
+  NYC
+LOCATION:Civic Hall, 124 E 14th St, New York, NY 10003, USA
+GEO:40.733829;-73.988863
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250606T170000Z
+DTEND:20250606T210000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="William Lutz":MAILTO:calendar-invite@lu.ma
+UID:evt-Se98UTEFrdBVGBe@events.lu.ma
+SUMMARY:NYC OceanTech Summit 2025
+DESCRIPTION:Get up-to-date information at: https://lu.ma/wwbomvw3\n\nAddres
+ s:\nCheck event page for more details.\n\nThe NYC OceanTech Summit connects
+  ocean innovators, entrepreneurs, investors, and researchers in the tristat
+ e area. Dive into the future of marine science, robotics, AI, climate tech,
+  and the Blue Economy in one transformative day.\n2025 is the second-ever N
+ YC OceanTech Summit. The event is designed to build community and highlight
+  the role of the ocean in climate tech. We are focused on the lab-to-market
+  phase of technologies at the ocean-climate nexus.\nThe day will be split i
+ nto multiple events. This includes innovator pitches, fireside chats, demos
+ , and panels.\nThroughout the day,…\n\nHosted by William Lutz & 3 others
+LOCATION:https://lu.ma/e/evt-Se98UTEFrdBVGBe
+GEO:40.698859;-73.974727
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250606T220000Z
+DTEND:20250607T013000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Khanna Shalumova":MAILTO:calendar-invite@lu.ma
+UID:evt-4UrHfmBxBSBLzzi@events.lu.ma
+SUMMARY:Fashion & Creatives Mixer #NYTechWeek
+DESCRIPTION:Get up-to-date information at: https://lu.ma/hhg6omws\n\nAddres
+ s:\nCheck event page for more details.\n\n🌸 Friday June 6\nComing to the e
+ nd of a PACKED NY Tech Week, we’re going take a moment to connect with comm
+ unity. Plus, we’ll have a DJ, and interactive art showcase, and live tech d
+ emos 💥\nWe’re sashaying into a truly iconic space in Nomad (INDOORS!) and 
+ we want to highlight NYC’s design and tech innovators, and explore how tech
+  is changing the way we live, communicate, and perceive the world.\nHere’s 
+ what you can expect:\n🎵 A live DJ setting the scene\n📱 Real-time exclusiv
+ e app demos\n🎨 An interactive art & design showcase\n😎 A few surprises\n�
+ �Come with an open mind and on THEME — we want to…\n\nHosted by Khanna Shal
+ umova, Tony henry & Ilias Anwar
+LOCATION:https://lu.ma/e/evt-4UrHfmBxBSBLzzi
+GEO:40.741045;-73.984885
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250607T113000Z
+DTEND:20250607T180000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Sam Weintraub":MAILTO:calendar-invite@lu.ma
+UID:evt-fJxtyWe7H4SPdxY@events.lu.ma
+SUMMARY:PeakRankings NYC Tech Week Hike!
+DESCRIPTION:Get up-to-date information at: https://lu.ma/zjyx8l8j\n\nAddres
+ s:\nMount Beacon Fire Tower\nBeacon, New York\nUnited States\n\nCome join u
+ s for a 5-mile hike just outside NYC!\nAbout the hike: https://www.alltrail
+ s.com/trail/us/new-york/beacon-fire-tower-via-casino-wilkinson-memorial-and
+ -breakneck-ridge-trail\nNOTE: While the Breakneck Ridge trailhead to the fi
+ re tower is currently closed, this alternative route is still open.\nWhen:\
+ nDepart from Grand Central at 7:50AM\nArrive at Beacon at 9:27AM\nWe'll sto
+ p for lunch in Beacon after the hike, then take the train back!\nApproximat
+ ely 4-6 hours\nIf you plan to take the train, the fare is $35.50 ($17.75 ea
+ ch way)\nBring:\nWater\nSnacks\nCash/card for lunch\nSee you all soon!\n\nH
+ osted by Sam Weintraub
+LOCATION:Mount Beacon Fire Tower, Beacon, NY 12508, USA
+GEO:41.481379;-73.944641
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250608T163000Z
+DTEND:20250608T183000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="Kyle Ferguson":MAILTO:calendar-invite@lu.ma
+UID:evt-tOMGtmbru5KSNqg@events.lu.ma
+SUMMARY:Startup Friends - Meditative Walk w/ Satori
+DESCRIPTION:Get up-to-date information at: https://lu.ma/x6beklhk\n\nAddres
+ s:\nSheep Meadow\nNew York, New York\nUnited States\n\nYou survived Tech We
+ ek. Panels. Pitches. Pings. Your brain feels like a tab you forgot to close
+ .\nIf you have to explain what you do one more time, you might explode. So 
+ now what?\nZen out or burn out.\nThe meditative walk is a slow, tech-free w
+ alk through Central Park. Phones on airplane mode. No pitches. No pretendin
+ g to be “on.”\nJust actual humans, moving slowly, enjoying nature and breat
+ hing like it’s 1996.\nJoin a crew of ambitious, slightly-fried New Yorkers 
+ as we unplug, walk, and remember how to be human again.\n\nHosted by Kyle F
+ erguson
+LOCATION:Sheep Meadow, 1802 65th Street Transverse, 1802 E 65th St, New Yor
+ k, NY 10065, USA
+GEO:40.771781;-73.974842
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250608T170000Z
+DTEND:20250608T200000Z
+DTSTAMP:20250531T183056Z
+ORGANIZER;CN="M.J.":MAILTO:calendar-invite@lu.ma
+UID:evt-Lh9rH9Duqrklku8@events.lu.ma
+SUMMARY:Freestyle Chess Tournament (5+0)
+DESCRIPTION:Get up-to-date information at: https://lu.ma/stmpajy9\n\nAddres
+ s:\nVanderbilt Market - Bars & Eateries\nTake the 4 5 6 to Grand Central-42
+  St.\nYou can take the Shuttle train (S) from time Times Square to Grand Ce
+ ntral which connects to the 1/2/3/A/C/E/B/D/F/M/Q/R/N/W Trains.\nNew York, 
+ New York\nUnited States\n\n***PLEASE READ THE DESCRIPTION***\n\nALL SKILL L
+ EVELS ARE WELCOME!!!\n22$ Registration Fee (Luma)\n$20 Registration Fee for
+  Cashapp/Venmo/Paypal/Zelle payment method. If using this method mention yo
+ ur first and last name, email, and phone number in the memo.  After receivi
+ ng entry fee, I will manually add you on the list.\nVenmo - @swatidollaz\nC
+ ashapp - @swatimoves97\nPaypay - thechessmaverick@gmail.com\n\nIt is highly
+  recommended to Signup earlier in case the event is canceled, postponed, an
+ d/or relocated. Updates about the Tournament will be sent to the 'Going' gr
+ oup first.\n\nThe Venue was gracious…\n\nHosted by M.J.
+LOCATION:Vanderbilt Market - Bars & Eateries, 230 Park Ave, New York, NY 10
+ 169, USA
+GEO:40.754446;-73.976616
+SEQUENCE:170879456
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20250609T213000Z
+DTEND:20250610T0000
