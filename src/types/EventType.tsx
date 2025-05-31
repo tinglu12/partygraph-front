@@ -1,10 +1,24 @@
 export type EventType = {
-  name: string;
+  title: string;
   date?: string;
+  time?: string;
   location?: string;
+  neighborhood?: string;
+  price?: string;
+  accessibility?: string;
+  link?: string;
   description?: string;
-  attendees?: number;
-  cost?: number;
-  budget?: number;
-  tags?: string[];
+  tags?: {
+    type: string[];
+    goal: string[];
+    vibe: string[];
+    genre: string[];
+    audience: string[];
+    venue_type: string[];
+    borough: string[];
+    neighborhood: string[];
+    timeofday: string[];
+    language: string[];
+    flexible_tags: string[];
+  };
 };
