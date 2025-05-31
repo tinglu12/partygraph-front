@@ -18,7 +18,7 @@ class LamService {
 
   async searchEvent(filter: string, events: EventType[]) {
     const eventString = events
-      .map((event) => `- ${event.name} ${event.description}`)
+      .map((event) => `- ${event.title} ${event.description}`)
       .join("\n");
 
     const prompt = `
@@ -83,7 +83,7 @@ export async function getCategory(event: EventType) {
   const lam = new LamService();
 
   const eventString = `
-  Name: ${event.name}
+  Name: ${event.title}
   Description: ${event.description}
   `;
 

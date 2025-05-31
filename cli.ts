@@ -10,12 +10,12 @@ async function searchEventTest() {
   const filter: string = "launch party";
   const events: EventType[] = [
     {
-      name: "launch party",
+      title: "launch party",
       description:
         "We are launching a new product and we want to celebrate with a party.",
     },
     {
-      name: "restaurant dinner",
+      title: "restaurant dinner",
       description: "a nice dinner at a restaurant",
     },
   ];
@@ -62,5 +62,5 @@ async function main() {
 }
 
 (async () => {
-  await searchEventTest();
+  await main();
 })();

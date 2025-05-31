@@ -1,29 +1,5 @@
+import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
-
-export interface EventData {
-  title: string;
-  date: string;
-  time: string;
-  location: string;
-  neighborhood: string;
-  price: string;
-  accessibility: string;
-  link: string;
-  description: string;
-  tags: {
-    type: string[];
-    goal: string[];
-    vibe: string[];
-    genre: string[];
-    audience: string[];
-    venue_type: string[];
-    borough: string[];
-    neighborhood: string[];
-    timeofday: string[];
-    language: string[];
-    flexible_tags: string[]; // Additional context descriptors
-  };
-}
 
 class EventConverter {
   private client: LlamaAPIClient;
@@ -45,7 +21,7 @@ Ontology:
 - type: music, networking, comedy, art_show, popup, restaurant, workshop, miscellaneous, community_building, cultural_celebration, educational, professional_development, fundraiser, activism, wellness, film_screening, market, festival, conference
 - goal: dancing, meeting_people, learning, relaxing, skill_sharing, knowledge_sharing, networking, community_building, creative_expression, professional_development, activism, wellness, entertainment
 - vibe: casual, fancy, trashy, queer, bar, loud, quiet, seated, high_energy, cozy, romantic, introspective, underground, mainstream, hipster, bougie, gritty, polished, intimate, warehouse_party, rooftop_vibes, dive_bar_energy, gallery_opening, house_party
-- genre: 
+- genre:
   electronic, house, deep_house, tech_house, afro_house, techno, trance, drum_and_bass, dubstep, ambient, experimental_electronic,
   hip_hop, conscious_hip_hop, trap, boom_bap, drill, afrobeat_fusion,
   rock, indie_rock, alt_rock, punk, hardcore, shoegaze, garage_rock, post_punk,
@@ -61,7 +37,7 @@ Ontology:
 - audience: queer, students, families, tourists, art_kids, brownstone_locals, artists, tech_workers, finance_workers, activists, educators, musicians, dancers, writers, immigrants, seniors, young_professionals, creatives, entrepreneurs, community_organizers
 - venue_type: club, rooftop, dive_bar, park, museum, restaurant, house_party, art_space, church_basement, warehouse, loft, speakeasy, gallery, community_center, library, school, hotel_rooftop, pier, beach, boat, bodega_backyard, fire_escape, basement, backyard, studio_space
 - borough: Brooklyn, Manhattan, Queens, Bronx, Staten_Island
-- neighborhood: 
+- neighborhood:
   East_Village, West_Village, SoHo, Tribeca, LES, Chelsea, Harlem, Washington_Heights, Midtown, Financial_District, Murray_Hill, Gramercy, Union_Square,
   Williamsburg, Bushwick, Park_Slope, Crown_Heights, Bed_Stuy, Red_Hook, Dumbo, Prospect_Heights, Greenpoint, Sunset_Park, Bay_Ridge, Flatbush, Fort_Greene,
   Astoria, Long_Island_City, Flushing, Jackson_Heights, Ridgewood, Sunnyside, Elmhurst, Corona, Woodside,
@@ -113,45 +89,49 @@ Return JSON in this format:
 
       const content = response.completion_message?.content;
       if (!content) {
-        throw new Error('No content returned from Llama API');
+        throw new Error("No content returned from Llama API");
       }
 
       // Handle content type - it could be a string or an object with text property
-      const textContent = typeof content === 'string' 
-        ? content 
-        : (content as any).text || content;
+      const textContent =
+        typeof content === "string"
+          ? content
+          : (content as any).text || content;
       if (!textContent) {
-        throw new Error('No text content found in response');
+        throw new Error("No text content found in response");
       }
 
       // Clean the response - remove markdown code blocks if present
       let cleanedContent = textContent.trim();
-      
+
       // Remove ```json and ``` if present
-      if (cleanedContent.startsWith('```json')) {
+      if (cleanedContent.startsWith("```json")) {
         cleanedContent = cleanedContent.slice(7); // Remove ```json
-      } else if (cleanedContent.startsWith('```')) {
+      } else if (cleanedContent.startsWith("```")) {
         cleanedContent = cleanedContent.slice(3); // Remove ```
       }
-      
-      if (cleanedContent.endsWith('```')) {
+
+      if (cleanedContent.endsWith("```")) {
         cleanedContent = cleanedContent.slice(0, -3); // Remove trailing ```
       }
-      
+
       cleanedContent = cleanedContent.trim();
 
       // Parse the JSON response
-      const eventData: EventData = JSON.parse(cleanedContent);
+      const eventData: EventType = JSON.parse(cleanedContent);
       return eventData;
     } catch (error) {
-      console.error('Llama API error:', error);
-      throw new Error('Failed to get structured event data from Llama API');
+      console.error("Llama API error:", error);
+      throw new Error("Failed to get structured event data from Llama API");
     }
   }
 }
 
 // Export the main function for backward compatibility
-export async function getStructuredEvent(rawText: string, llamaApiKey?: string): Promise<EventData> {
+export async function getStructuredEvent(
+  rawText: string,
+  llamaApiKey?: string
+): Promise<EventType> {
   const converter = new EventConverter();
   return converter.convertToStructuredEvent(rawText);
 }
