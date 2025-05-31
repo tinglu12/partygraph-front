@@ -1,8 +1,28 @@
+import { searchEvent } from "@/server/LamService";
+import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 
 const client = new LlamaAPIClient({
   apiKey: process.env["LLAMA_API_KEY"], // This is the default and can be omitted
 });
+
+async function searchEventTest() {
+  const filter: string = "launch party";
+  const events: EventType[] = [
+    {
+      name: "launch party",
+      description:
+        "We are launching a new product and we want to celebrate with a party.",
+    },
+    {
+      name: "restaurant dinner",
+      description: "a nice dinner at a restaurant",
+    },
+  ];
+  const result = await searchEvent(filter, events);
+  console.log("searchEvent result", { filter, result });
+  return result;
+}
 
 async function main() {
   const model = "Llama-4-Maverick-17B-128E-Instruct-FP8";
@@ -42,5 +62,5 @@ async function main() {
 }
 
 (async () => {
-  await main();
+  await searchEventTest();
 })();

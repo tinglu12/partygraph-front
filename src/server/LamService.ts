@@ -16,6 +16,41 @@ class LamService {
     this.model = "Llama-4-Maverick-17B-128E-Instruct-FP8";
   }
 
+  async searchEvent(filter: string, events: EventType[]) {
+    const eventString = events
+      .map((event) => `- ${event.name} ${event.description}`)
+      .join("\n");
+
+    const prompt = `
+    You are a helpful assistant.
+    Find the closest matching event for the following filter in a list of events.
+    Return just the name of the event.
+
+    Filter:${filter}
+
+    Events:
+    ${eventString}
+
+    `;
+
+    const createChatCompletionResponse =
+      await this.client.chat.completions.create({
+        messages: [{ content: prompt, role: "user" }],
+        model: this.model,
+      });
+    const content = createChatCompletionResponse.completion_message?.content;
+    console.log(content);
+
+    // @ts-ignore
+    const event = content?.text.trim();
+    return event;
+  }
+
+  async classifyImage(imagePath: string): Promise<string[]> {
+    // TODO
+    return ["party", "event", "other"];
+  }
+
   async getCategory(event: string) {
     const prompt = `
     You are a helpful assistant.
@@ -55,4 +90,18 @@ export async function getCategory(event: EventType) {
   const category = await lam.getCategory(eventString);
   console.log("got category", { event, category });
   return category;
+}
+
+export async function searchEvent(filter: string, events: EventType[]) {
+  const lam = new LamService();
+  const result = await lam.searchEvent(filter, events);
+  console.log("searchEvent result", { filter, result });
+  return result;
+}
+
+export async function classifyImage(imagePath: string) {
+  const lam = new LamService();
+  const result = await lam.classifyImage(imagePath);
+  console.log("classifyImage result", { imagePath, result });
+  return result;
 }
