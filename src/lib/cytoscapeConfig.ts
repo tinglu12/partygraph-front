@@ -1,4 +1,4 @@
-import cytoscape from 'cytoscape';
+import cytoscape, { NodeSingular } from 'cytoscape';
 
 interface Event {
   id: string;
@@ -101,7 +101,7 @@ export const initializeCytoscape = (
   });
 
   // Add edge creation on node drag
-  let sourceNode: any = null;
+  let sourceNode: NodeSingular | null = null;
   
   cy.on('dragstart', 'node', (evt) => {
     sourceNode = evt.target;
@@ -113,8 +113,8 @@ export const initializeCytoscape = (
     if (sourceNode && targetNode && sourceNode.id() !== targetNode.id()) {
       // Check if edge already exists
       const existingEdge = cy.edges().filter(edge => 
-        (edge.source().id() === sourceNode.id() && edge.target().id() === targetNode.id()) ||
-        (edge.source().id() === targetNode.id() && edge.target().id() === sourceNode.id())
+        (edge.source().id() === sourceNode!.id() && edge.target().id() === targetNode.id()) ||
+        (edge.source().id() === targetNode.id() && edge.target().id() === sourceNode!.id())
       );
 
       if (existingEdge.length === 0) {
@@ -122,7 +122,7 @@ export const initializeCytoscape = (
         cy.add({
           group: 'edges',
           data: {
-            source: sourceNode.id(),
+            source: sourceNode!.id(),
             target: targetNode.id(),
             label: 'Related'
           }
