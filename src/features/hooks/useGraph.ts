@@ -22,6 +22,7 @@ interface UseGraphReturn {
   handleSearch: (query: string) => void;
   handleCategoryChange: (category: string) => void;
   setSelectedEvent: (event: EventNode | null) => void;
+  resetView: () => void;
 }
 
 export const useGraph = ({ 
@@ -344,6 +345,11 @@ export const useGraph = ({
     ));
   };
 
+  const resetView = () => {
+    if (!cyRef.current) return;
+    cyRef.current.fit();
+  };
+
   return {
     containerRef,
     selectedEvent,
@@ -352,6 +358,7 @@ export const useGraph = ({
     allTags,
     handleSearch,
     handleCategoryChange,
-    setSelectedEvent
+    setSelectedEvent,
+    resetView
   };
 }; 
