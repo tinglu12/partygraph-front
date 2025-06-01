@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { TagCenteredGraphData, TagCenteredNode, EventNode } from '@/lib/sampleData';
 import { Sparkles, Link, Eye, Brain, Zap } from 'lucide-react';
 
+import { EventNode, TagCenteredNode } from '@/types/EventGraph';
+import { TagCenteredGraphData } from '@/types/EventGraph';
 interface TagCenteredGraphProps {
   graphData: TagCenteredGraphData;
   className?: string;
@@ -72,10 +73,10 @@ const FallbackVisualization = ({ graphData }: { graphData: TagCenteredGraphData 
                   <div className="font-bold text-base md:text-lg mb-3 leading-tight group-hover:text-green-100 transition-colors">
                     {event.title}
                   </div>
-                  <div className="text-xs text-green-200 opacity-90 mb-3 flex items-center justify-center gap-2">
+                  {/* <div className="text-xs text-green-200 opacity-90 mb-3 flex items-center justify-center gap-2">
                     <Sparkles className="w-3 h-3" />
                     {event.date}
-                  </div>
+                  </div> */}
                   {event.category && (
                     <div className="mt-3 text-xs bg-white/20 px-3 py-1 rounded-full inline-block border border-white/30 font-semibold">
                       {event.category}
@@ -83,7 +84,7 @@ const FallbackVisualization = ({ graphData }: { graphData: TagCenteredGraphData 
                   )}
                   {event.tags && event.tags.length > 0 && (
                     <div className="mt-3 flex flex-wrap justify-center gap-1">
-                      {event.tags.slice(0, 3).map((tag) => (
+                      {event.tags.slice(0, 3).map((tag: string) => (
                         <span key={tag} className="text-xs bg-green-500/30 text-green-100 px-2 py-1 rounded-full border border-green-400/30">
                           #{tag}
                         </span>
