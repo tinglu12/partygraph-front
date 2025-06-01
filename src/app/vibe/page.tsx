@@ -203,11 +203,10 @@ export default function VibePage() {
             isLoading={isLoading}
           />
 
-          {/* Rotating example searches panel */}
+          {/* Rotating example searches panel - moved back above graph */}
           {!hasSearched && (
             <div className="max-w-5xl mx-auto px-6 mt-6">
               <div className="text-center">
-                {/* Rotating example searches */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <TrendingUp className="w-5 h-5 text-purple-400" />
@@ -241,22 +240,6 @@ export default function VibePage() {
               </div>
             </div>
           )}
-
-          {/* Upload toggle section */}
-          <div className="max-w-5xl mx-auto px-6 mt-4">
-            <div className="text-center">
-              <p className="text-gray-300 mb-4">
-                Can't find what you're looking for? Add your own event!
-              </p>
-              <button
-                onClick={() => setShowUpload(!showUpload)}
-                className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
-              >
-                <Upload className="w-5 h-5" />
-                Upload Event Flyer
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Enhanced results section */}
@@ -446,24 +429,45 @@ export default function VibePage() {
 
         {/* Enhanced initial state */}
         {!hasSearched && (
-          <div className="px-6 pb-8">
+          <div className="pb-8">
             {/* Enhanced initial content */}
             <div className="space-y-12 h-full">
-              <div className="max-w-7xl mx-auto h-full">
-                <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 h-full">
-                  <h3 className="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center gap-3">
-                    <Sparkles className="w-6 h-6 text-purple-400" />
-                    Event Network Overview
-                    <Sparkles className="w-6 h-6 text-blue-400" />
-                  </h3>
+              {/* Full width graph container - no max-width constraint */}
+              <div className="w-full h-full">
+                <div className="bg-white/5 backdrop-blur-sm border-b border-white/10 h-full">
+                  {/* Header with padding */}
+                  <div className="p-8 pb-6">
+                    <h3 className="text-2xl font-bold text-white mb-0 text-center flex items-center justify-center gap-3">
+                      <Sparkles className="w-6 h-6 text-purple-400" />
+                      Event Network Overview
+                      <Sparkles className="w-6 h-6 text-blue-400" />
+                    </h3>
+                  </div>
 
-                  <div className="h-[700px]">
+                  {/* Graph container spanning full browser width */}
+                  <div className="h-[700px] pb-8">
                     <Graph onEventSelect={handleEventSelect} />
                   </div>
                 </div>
               </div>
 
-              <div className="max-w-7xl mx-auto">
+              {/* Upload toggle section - moved below graph */}
+              <div className="max-w-5xl mx-auto px-6">
+                <div className="text-center">
+                  <p className="text-gray-300 mb-4">
+                    Can't find what you're looking for? Add your own event!
+                  </p>
+                  <button
+                    onClick={() => setShowUpload(!showUpload)}
+                    className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                  >
+                    <Upload className="w-5 h-5" />
+                    Upload Event Flyer
+                  </button>
+                </div>
+              </div>
+
+              <div className="max-w-7xl mx-auto px-6">
                 {/* <EventsList
                   events={sampleEvents}
                   title="All Available Events"
