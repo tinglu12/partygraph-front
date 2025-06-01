@@ -135,33 +135,35 @@ export const VibeSearch = ({
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
-                  className="w-[var(--radix-dropdown-menu-trigger-width)] max-h-60 overflow-y-auto bg-white/15 backdrop-blur-md border border-white/30 rounded-2xl shadow-xl"
+                  className="w-[var(--radix-dropdown-menu-trigger-width)] max-h-60 overflow-hidden bg-white/15 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl"
                   align="end"
                 >
-                  {selectedTag && (
-                    <DropdownMenuItem
-                      onClick={handleClearSelection}
-                      className="text-gray-300 hover:bg-white/10 focus:bg-white/10 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 border-b border-white/20 mb-1"
-                    >
-                      <X className="w-4 h-4 mr-2 text-gray-400" />
-                      Clear selection
-                    </DropdownMenuItem>
-                  )}
-                  {availableTags.map(tag => (
-                    <DropdownMenuItem
-                      key={tag}
-                      onClick={() => handleTagClick(tag)}
-                      className={`text-white hover:bg-white/20 focus:bg-white/20 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 ${
-                        selectedTag === tag ? 'bg-white/15 border border-purple-400/50' : ''
-                      }`}
-                    >
-                      <Tag className="w-4 h-4 mr-2 text-purple-400" />
-                      {tag}
-                      {selectedTag === tag && (
-                        <div className="ml-auto w-2 h-2 bg-purple-400 rounded-full"></div>
-                      )}
-                    </DropdownMenuItem>
-                  ))}
+                  <div className="max-h-60 overflow-y-auto pr-1 py-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:mr-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:mt-2 [&::-webkit-scrollbar-track]:mb-3 [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent">
+                    {selectedTag && (
+                      <DropdownMenuItem
+                        onClick={handleClearSelection}
+                        className="text-gray-300 hover:bg-white/10 focus:bg-white/10 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 border-b border-white/20 mb-1"
+                      >
+                        <X className="w-4 h-4 mr-2 text-gray-400" />
+                        Clear selection
+                      </DropdownMenuItem>
+                    )}
+                    {availableTags.map(tag => (
+                      <DropdownMenuItem
+                        key={tag}
+                        onClick={() => handleTagClick(tag)}
+                        className={`text-white hover:bg-white/20 focus:bg-white/20 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 ${
+                          selectedTag === tag ? 'bg-white/15 border border-purple-400/50' : ''
+                        }`}
+                      >
+                        <Tag className="w-4 h-4 mr-2 text-purple-400" />
+                        {tag}
+                        {selectedTag === tag && (
+                          <div className="ml-auto w-2 h-2 bg-purple-400 rounded-full"></div>
+                        )}
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
