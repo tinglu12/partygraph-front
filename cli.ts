@@ -1,5 +1,5 @@
 import { searchEvent } from "@/server/LamService";
-import { plexSearchEvent } from "@/server/PerplxService";
+import { plexSearchEvent, plexSearchMany } from "@/server/PerplxService";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 
@@ -12,6 +12,9 @@ async function main() {
   switch (cmd) {
     case "plex":
       await plexTest();
+      break;
+    case "plex-many":
+      await plexManyTest();
       break;
     case "search":
   }
@@ -28,6 +31,12 @@ async function plexTest() {
   ];
   const result = await plexSearchEvent(filter);
   console.log("searchEvent result", { filter, result });
+  return result;
+}
+
+async function plexManyTest() {
+  const result = await plexSearchMany();
+  console.log("plexManyTest result", { result });
   return result;
 }
 

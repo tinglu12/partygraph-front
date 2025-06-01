@@ -83,3 +83,11 @@ export async function plexSearchEvent(query: string) {
   console.log("Perplexity searchEvent result", { filter: query, result });
   return result;
 }
+
+export async function plexSearchMany() {
+  const tags = ["book launch", "music concert"];
+  const results = await Promise.all(tags.map((tag) => plexSearchEvent(tag)));
+  console.log("Perplexity searchMany result", { tags, results });
+  // TODO fs.writeFileSync("plex-results.json", JSON.stringify(results, null, 2));
+  return results;
+}
