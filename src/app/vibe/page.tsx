@@ -20,6 +20,7 @@ import {
   Cpu,
   Upload,
   TrendingUp,
+  X,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { sampleEvents } from "@/constants/sampleEvents";
@@ -61,6 +62,20 @@ export default function VibePage() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showUpload) {
+        setShowUpload(false);
+      }
+    };
+
+    if (showUpload) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [showUpload]);
 
   // Handle semantic vibe search using AI
   const handleVibeSearch = async (query: string) => {
@@ -216,24 +231,10 @@ export default function VibePage() {
                 className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
               >
                 <Upload className="w-5 h-5" />
-                {showUpload ? "Hide Upload" : "Upload Event Flyer"}
+                Upload Event Flyer
               </button>
             </div>
           </div>
-
-          {/* Flyer upload section */}
-          {showUpload && (
-            <div className="max-w-5xl mx-auto px-6 mt-8">
-              <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
-                <h3 className="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center gap-3">
-                  <Brain className="w-6 h-6 text-purple-400" />
-                  AI Flyer Analysis
-                  <Upload className="w-6 h-6 text-green-400" />
-                </h3>
-                <FlyerUpload onEventExtracted={handleEventExtracted} />
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Enhanced results section */}
@@ -442,6 +443,39 @@ export default function VibePage() {
           </div>
         )}
       </div>
+
+      {/* Upload Modal Overlay */}
+      {showUpload && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300"
+          onClick={() => setShowUpload(false)}
+        >
+          <div 
+            className="bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-slate-900/95 backdrop-blur-md rounded-3xl border border-white/20 shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-white/10">
+              <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                <Brain className="w-6 h-6 text-purple-400" />
+                AI Flyer Analysis
+                <Upload className="w-6 h-6 text-green-400" />
+              </h3>
+              <button
+                onClick={() => setShowUpload(false)}
+                className="p-2 hover:bg-white/10 rounded-xl transition-colors duration-200"
+              >
+                <X className="w-6 h-6 text-gray-400 hover:text-white" />
+              </button>
+            </div>
+            
+            {/* Modal Content */}
+            <div className="p-6">
+              <FlyerUpload onEventExtracted={handleEventExtracted} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
