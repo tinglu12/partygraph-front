@@ -1,6 +1,4 @@
-import { sampleEvents } from "@/lib/sampleData";
-import { getCategory } from "@/server/LamService";
-import { EventType } from "@/types/EventType";
+import { testEvents } from "@/constants/testEvents";
 import { NextRequest, NextResponse } from "next/server";
 
 export function GET(request: NextRequest) {
@@ -11,7 +9,7 @@ export function GET(request: NextRequest) {
     return NextResponse.json({ error: "No query provided" }, { status: 400 });
   }
 
-  const found = sampleEvents.filter((e) => e.tags?.includes(query));
+  const found = testEvents.filter((e) => e.tags?.includes(query));
   console.log("event found", { query, found });
   return NextResponse.json([found]);
 }
