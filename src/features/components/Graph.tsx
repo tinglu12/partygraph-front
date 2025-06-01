@@ -1,11 +1,15 @@
 "use client";
-import { useState } from 'react';
-import { EventNode, GraphData, sampleEvents, generateEdgesFromConnections } from '@/lib/sampleData';
-import { EventDetails } from './EventDetails';
-import { FilterBar } from './FilterBar';
-import { useGraph } from '../hooks/useGraph';
-import { X, Pin } from 'lucide-react';
+import { useState } from "react";
+import { generateEdgesFromConnections } from "@/lib/sampleData";
+import { sampleEvents } from "@/constants/sampleEvents";
+import { EventDetails } from "./EventDetails";
+import { FilterBar } from "./FilterBar";
+import { useGraph } from "../hooks/useGraph";
+import { X, Pin } from "lucide-react";
+import { safeName } from "@/lib/utils";
+import { GraphData } from "@/types/EventGraph";
 
+import { EventNode } from "@/types/EventGraph";
 interface GraphProps {
   data?: GraphData;
   events?: EventNode[];
@@ -16,11 +20,18 @@ interface GraphProps {
   }>;
 }
 
-export const Graph = ({ 
+export const Graph = ({
   data,
-  events = sampleEvents, 
-  edges = generateEdgesFromConnections(sampleEvents)
-}: GraphProps) => {
+}: // events = sampleEvents,
+// edges = generateEdgesFromConnections(sampleEvents),
+GraphProps) => {
+  const events: EventNode[] = sampleEvents.map((event) => ({
+    ...event,
+    id: event.id || safeName(event.title),
+  }));
+
+  const edges = generateEdgesFromConnections(events);
+
   const {
     containerRef,
     selectedEvent,
@@ -29,49 +40,53 @@ export const Graph = ({
     allTags,
     handleSearch,
     handleCategoryChange,
-    setSelectedEvent
-  } = useGraph({ data, events, edges });
+    setSelectedEvent,
+  } = useGraph({ data, events: events, edges });
 
   const [pinnedEvents, setPinnedEvents] = useState<EventNode[]>([]);
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
   // Handle pinning an event
   const handlePinEvent = (event: EventNode) => {
-    if (!pinnedEvents.find(e => e.id === event.id)) {
-      setPinnedEvents(prev => [...prev, event]);
+    if (!pinnedEvents.find((e) => e.id === event.id)) {
+      setPinnedEvents((prev) => [...prev, event]);
       setActiveTab(event.id);
     }
   };
 
   // Handle unpinning an event
   const handleUnpinEvent = (eventId: string) => {
-    setPinnedEvents(prev => prev.filter(e => e.id !== eventId));
+    setPinnedEvents((prev) => prev.filter((e) => e.id !== eventId));
     if (activeTab === eventId) {
-      const remaining = pinnedEvents.filter(e => e.id !== eventId);
-      setActiveTab(remaining.length > 0 ? remaining[remaining.length - 1].id : null);
+      const remaining = pinnedEvents.filter((e) => e.id !== eventId);
+      setActiveTab(
+        remaining.length > 0 ? remaining[remaining.length - 1].id : null
+      );
     }
   };
 
   // Get the currently displayed event (either selected or active pinned)
-  const displayedEvent = activeTab 
-    ? pinnedEvents.find(e => e.id === activeTab) 
+  const displayedEvent = activeTab
+    ? pinnedEvents.find((e) => e.id === activeTab)
     : selectedEvent;
 
-  const isPinned = displayedEvent ? pinnedEvents.some(e => e.id === displayedEvent.id) : false;
+  const isPinned = displayedEvent
+    ? pinnedEvents.some((e) => e.id === displayedEvent.id)
+    : false;
 
   return (
     <div className="flex flex-col h-full">
-      <FilterBar 
+      <FilterBar
         events={events}
         onSearch={handleSearch}
         onCategoryChange={handleCategoryChange}
       />
       <div className="flex-1 relative h-[calc(100%-48px)]">
-        <div 
-          ref={containerRef} 
+        <div
+          ref={containerRef}
           className="absolute inset-0 rounded-lg border bg-card h-full w-full"
         />
-        
+
         {/* Tab Navigation for Pinned Events */}
         {pinnedEvents.length > 0 && (
           <div className="absolute top-0 left-0 w-[400px] z-40 bg-gradient-to-r from-slate-900/90 via-purple-900/80 to-slate-900/90 backdrop-blur-xl border-r border-white/20">
@@ -86,11 +101,13 @@ export const Graph = ({
                     onClick={() => setActiveTab(event.id)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 whitespace-nowrap ${
                       activeTab === event.id
-                        ? 'bg-purple-600/40 text-white border border-purple-400/50'
-                        : 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white border border-white/20'
+                        ? "bg-purple-600/40 text-white border border-purple-400/50"
+                        : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white border border-white/20"
                     }`}
                   >
-                    {event.title.length > 20 ? `${event.title.slice(0, 20)}...` : event.title}
+                    {event.title.length > 20
+                      ? `${event.title.slice(0, 20)}...`
+                      : event.title}
                   </button>
                   <button
                     onClick={() => handleUnpinEvent(event.id)}
@@ -106,8 +123,12 @@ export const Graph = ({
 
         {/* Event Details Panel */}
         {(selectedEvent || activeTab) && displayedEvent && (
-          <div className={`absolute left-0 h-full w-[400px] z-50 ${pinnedEvents.length > 0 ? 'top-[2.875rem]' : 'top-0'}`}>
-            <EventDetails 
+          <div
+            className={`absolute left-0 h-full w-[400px] z-50 ${
+              pinnedEvents.length > 0 ? "top-[2.875rem]" : "top-0"
+            }`}
+          >
+            <EventDetails
               event={displayedEvent}
               onClose={() => {
                 if (activeTab) {

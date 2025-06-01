@@ -1,2022 +1,3081 @@
-export const sampleEvents = [
+import { EventNode } from "@/types/EventGraph";
+
+export const sampleEvents: EventNode[] = [
   {
     title: "Bloc Party, Metric, Blonde Redhead, joan",
     description: "Indie rock concert at Forest Hills Stadium",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "bloc-party,-metric,-blonde-redhead,-joan",
-  }, {
+  },
+  {
     title: "The Unlikely Candidates, Anaïs & The Hoops",
     description: "Indie rock concert at The Wood Shop",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "the-unlikely-candidates,-anaïs-&-the-hoops",
-  }, {
+  },
+  {
     title: "Florist, Allegra Krieger",
     description: "Indie rock concert at Bowery Ballroom",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "florist,-allegra-krieger",
-  }, {
-    title: "Kate Stephenson, Eliza & the Delusionals, Annie Blackman, Grace Gardner",
+  },
+  {
+    title:
+      "Kate Stephenson, Eliza & the Delusionals, Annie Blackman, Grace Gardner",
     description: "Indie rock concert at The Sultan Room",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "kate-stephenson,-eliza-&-the-delusionals,-annie-blackman,-grace-gardner",
-  }, {
+  },
+  {
     title: "Sinkane, Ghost Funk Orchestra",
     description: "Indie rock concert at Brooklyn Bowl",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "sinkane,-ghost-funk-orchestra",
-  }, {
+  },
+  {
     title: "Alex Orange Drink, Gymshorts",
     description: "Indie rock concert at Mercury Lounge",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "alex-orange-drink,-gymshorts",
-  }, {
+  },
+  {
     title: "HNTR, Helang",
     description: "Indie rock concert at SILO Brooklyn",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "hntr,-helang",
-  }, {
+  },
+  {
     title: "The Kooks, lovelytheband",
     description: "Indie rock concert at The Rooftop at Pier 17",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "the-kooks,-lovelytheband",
-  }, {
+  },
+  {
     title: "Art d'Ecco, Darky Ramone, Gargoyle",
     description: "Indie rock concert at The Sultan Room",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "art-d'ecco,-darky-ramone,-gargoyle",
-  }, {
+  },
+  {
     title: "The Backseat Lovers, Palmyra",
     description: "Indie rock concert at Warsaw",
-    tags: [ "indie", "rock" ],
+    tags: ["indie", "rock"],
     category: "concert",
-    keywords: [ "indie rock", "live music", "New York City" ],
+    keywords: ["indie rock", "live music", "New York City"],
     id: "the-backseat-lovers,-palmyra",
-  }, {
+  },
+  {
     title: "Wycliffe Gordon Concert",
-    description: "Jazz concert by Wycliffe Gordon at Birdland Theater in New York City from June 6 to June 13, 2025.",
-    tags: [ "jazz", "concert", "live", "birdland theater", "new york city", "jazz concert" ],
+    description:
+      "Jazz concert by Wycliffe Gordon at Birdland Theater in New York City from June 6 to June 13, 2025.",
+    tags: [
+      "jazz",
+      "concert",
+      "live",
+      "birdland theater",
+      "new york city",
+      "jazz concert",
+    ],
     category: "music",
-    keywords: [ "Wycliffe Gordon", "Birdland Theater", "June 6-13 2025" ],
+    keywords: ["Wycliffe Gordon", "Birdland Theater", "June 6-13 2025"],
     id: "wycliffe-gordon-concert",
-  }, {
+  },
+  {
     title: "Maria Schneider Jazz Concert",
-    description: "Live jazz performance by Maria Schneider at Birdland in New York City.",
-    tags: [ "jazz", "concert", "live", "birdland", "new york city", "jazz concert" ],
+    description:
+      "Live jazz performance by Maria Schneider at Birdland in New York City.",
+    tags: [
+      "jazz",
+      "concert",
+      "live",
+      "birdland",
+      "new york city",
+      "jazz concert",
+    ],
     category: "music",
-    keywords: [ "Maria Schneider", "Birdland" ],
+    keywords: ["Maria Schneider", "Birdland"],
     id: "maria-schneider-jazz-concert",
-  }, {
+  },
+  {
     title: "The Budos Band Jazz Concert",
-    description: "Jazz concert by The Budos Band at Baby's All Right in Brooklyn, NY.",
-    tags: [ "jazz", "concert", "live", "brooklyn", "babys all right", "jazz concert" ],
+    description:
+      "Jazz concert by The Budos Band at Baby's All Right in Brooklyn, NY.",
+    tags: [
+      "jazz",
+      "concert",
+      "live",
+      "brooklyn",
+      "babys all right",
+      "jazz concert",
+    ],
     category: "music",
-    keywords: [ "The Budos Band", "Baby's All Right", "Brooklyn" ],
+    keywords: ["The Budos Band", "Baby's All Right", "Brooklyn"],
     id: "the-budos-band-jazz-concert",
-  }, {
+  },
+  {
     title: "Vijay Iyer, Henry Threadgill, and Dafnis Prieto Jazz Concert",
-    description: "Jazz concert featuring Vijay Iyer, Henry Threadgill, and Dafnis Prieto at Jazz Gallery in New York City.",
-    tags: [ "jazz", "concert", "live", "jazz gallery", "new york city", "jazz concert" ],
+    description:
+      "Jazz concert featuring Vijay Iyer, Henry Threadgill, and Dafnis Prieto at Jazz Gallery in New York City.",
+    tags: [
+      "jazz",
+      "concert",
+      "live",
+      "jazz gallery",
+      "new york city",
+      "jazz concert",
+    ],
     category: "music",
-    keywords: [ "Vijay Iyer", "Henry Threadgill", "Dafnis Prieto", "Jazz Gallery" ],
+    keywords: [
+      "Vijay Iyer",
+      "Henry Threadgill",
+      "Dafnis Prieto",
+      "Jazz Gallery",
+    ],
     id: "vijay-iyer,-henry-threadgill,-and-dafnis-prieto-jazz-concert",
-  }, {
+  },
+  {
     title: "Ethan Iverson Jazz Concert",
-    description: "Jazz concert by Ethan Iverson at Birdland Theater in New York City.",
-    tags: [ "jazz", "concert", "live", "birdland theater", "new york city", "jazz concert" ],
+    description:
+      "Jazz concert by Ethan Iverson at Birdland Theater in New York City.",
+    tags: [
+      "jazz",
+      "concert",
+      "live",
+      "birdland theater",
+      "new york city",
+      "jazz concert",
+    ],
     category: "music",
-    keywords: [ "Ethan Iverson", "Birdland Theater" ],
+    keywords: ["Ethan Iverson", "Birdland Theater"],
     id: "ethan-iverson-jazz-concert",
-  }, {
+  },
+  {
     title: "Jay Leonhart and Alan Broadbent Jazz Concert",
-    description: "Jazz concert featuring Jay Leonhart and Alan Broadbent in New York City.",
-    tags: [ "jazz", "concert", "live", "new york city", "jazz concert" ],
+    description:
+      "Jazz concert featuring Jay Leonhart and Alan Broadbent in New York City.",
+    tags: ["jazz", "concert", "live", "new york city", "jazz concert"],
     category: "music",
-    keywords: [ "Jay Leonhart", "Alan Broadbent" ],
+    keywords: ["Jay Leonhart", "Alan Broadbent"],
     id: "jay-leonhart-and-alan-broadbent-jazz-concert",
-  }, {
+  },
+  {
     title: "Vince Giordano & The Nighthawks Jazz Concert",
-    description: "Jazz concert by Vince Giordano & The Nighthawks in New York City.",
-    tags: [ "jazz", "concert", "live", "new york city", "jazz concert" ],
+    description:
+      "Jazz concert by Vince Giordano & The Nighthawks in New York City.",
+    tags: ["jazz", "concert", "live", "new york city", "jazz concert"],
     category: "music",
-    keywords: [ "Vince Giordano", "The Nighthawks" ],
+    keywords: ["Vince Giordano", "The Nighthawks"],
     id: "vince-giordano-&-the-nighthawks-jazz-concert",
-  }, {
+  },
+  {
     title: "Stacey Kent Jazz Concert",
     description: "Jazz concert by Stacey Kent in New York City.",
-    tags: [ "jazz", "concert", "live", "new york city", "jazz concert" ],
+    tags: ["jazz", "concert", "live", "new york city", "jazz concert"],
     category: "music",
-    keywords: [ "Stacey Kent" ],
+    keywords: ["Stacey Kent"],
     id: "stacey-kent-jazz-concert",
-  }, {
-    title: "Marcus Miller, Tank and the Bangas, and The Soul Rebels Jazz Concert",
-    description: "Jazz concert featuring Marcus Miller, Tank and the Bangas, and The Soul Rebels at SummerStage, Central Park in New York City.",
-    tags: [ "jazz", "concert", "live", "summerstage", "central park", "new york city", "jazz concert" ],
+  },
+  {
+    title:
+      "Marcus Miller, Tank and the Bangas, and The Soul Rebels Jazz Concert",
+    description:
+      "Jazz concert featuring Marcus Miller, Tank and the Bangas, and The Soul Rebels at SummerStage, Central Park in New York City.",
+    tags: [
+      "jazz",
+      "concert",
+      "live",
+      "summerstage",
+      "central park",
+      "new york city",
+      "jazz concert",
+    ],
     category: "music",
-    keywords: [ "Marcus Miller", "Tank and the Bangas", "The Soul Rebels", "SummerStage",
-      "Central Park"
+    keywords: [
+      "Marcus Miller",
+      "Tank and the Bangas",
+      "The Soul Rebels",
+      "SummerStage",
+      "Central Park",
     ],
     id: "marcus-miller,-tank-and-the-bangas,-and-the-soul-rebels-jazz-concert",
-  }, {
+  },
+  {
     title: "Emily King Jazz Concert",
-    description: "Jazz concert by Emily King at Blue Note Jazz Club in New York City.",
-    tags: [ "jazz", "concert", "live", "blue note jazz club", "new york city", "jazz concert" ],
+    description:
+      "Jazz concert by Emily King at Blue Note Jazz Club in New York City.",
+    tags: [
+      "jazz",
+      "concert",
+      "live",
+      "blue note jazz club",
+      "new york city",
+      "jazz concert",
+    ],
     category: "music",
-    keywords: [ "Emily King", "Blue Note Jazz Club" ],
+    keywords: ["Emily King", "Blue Note Jazz Club"],
     id: "emily-king-jazz-concert",
-  }, {
+  },
+  {
     title: "Hauser",
-    description: "Award-winning cellist performing classical and crossover repertoire.",
-    tags: [ "cello", "classical", "pop", "classical music concert" ],
+    description:
+      "Award-winning cellist performing classical and crossover repertoire.",
+    tags: ["cello", "classical", "pop", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "Hauser", "Radio City Music Hall", "cello concert",
-      "classical pop fusion", "tickets available June 24, 2025"
+    keywords: [
+      "Hauser",
+      "Radio City Music Hall",
+      "cello concert",
+      "classical pop fusion",
+      "tickets available June 24, 2025",
     ],
     id: "hauser",
-  }, {
+  },
+  {
     title: "The Met Orchestra in Concert",
-    description: "The Met Orchestra with soprano Angel Blue, conducted by Yannick Nézet-Séguin.",
-    tags: [ "orchestra", "opera", "classical", "classical music concert" ],
+    description:
+      "The Met Orchestra with soprano Angel Blue, conducted by Yannick Nézet-Séguin.",
+    tags: ["orchestra", "opera", "classical", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "The Met Orchestra", "Angel Blue", "Carnegie Hall",
-      "June 18, 2025"
+    keywords: [
+      "The Met Orchestra",
+      "Angel Blue",
+      "Carnegie Hall",
+      "June 18, 2025",
     ],
     id: "the-met-orchestra-in-concert",
-  }, {
+  },
+  {
     title: "New York Philharmonic at David Geffen Hall",
     description: "New York Philharmonic concert series.",
-    tags: [ "orchestra", "classical", "classical music concert" ],
+    tags: ["orchestra", "classical", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "New York Philharmonic", "David Geffen Hall",
-      "Lincoln Center", "2025"
+    keywords: [
+      "New York Philharmonic",
+      "David Geffen Hall",
+      "Lincoln Center",
+      "2025",
     ],
     id: "new-york-philharmonic-at-david-geffen-hall",
-  }, {
+  },
+  {
     title: "Evgeny Kissin at Stern Auditorium, Carnegie Hall",
     description: "Pianist Evgeny Kissin in recital.",
-    tags: [ "piano", "classical", "classical music concert" ],
+    tags: ["piano", "classical", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "Evgeny Kissin", "Carnegie Hall", "Stern Auditorium",
-      "2025"
-    ],
+    keywords: ["Evgeny Kissin", "Carnegie Hall", "Stern Auditorium", "2025"],
     id: "evgeny-kissin-at-stern-auditorium,-carnegie-hall",
-  }, {
+  },
+  {
     title: "The Knights",
     description: "Chamber orchestra performing works including Vivaldi.",
-    tags: [ "chamber", "orchestra", "classical", "classical music concert" ],
+    tags: ["chamber", "orchestra", "classical", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "The Knights", "Naumburg Orchestral Concerts",
-      "June 10, 2025"
-    ],
+    keywords: ["The Knights", "Naumburg Orchestral Concerts", "June 10, 2025"],
     id: "the-knights",
-  }, {
+  },
+  {
     title: "A Far Cry",
     description: "Chamber orchestra concert.",
-    tags: [ "chamber", "orchestra", "classical", "classical music concert" ],
+    tags: ["chamber", "orchestra", "classical", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "A Far Cry", "Naumburg Orchestral Concerts",
-      "June 24, 2025"
-    ],
+    keywords: ["A Far Cry", "Naumburg Orchestral Concerts", "June 24, 2025"],
     id: "a-far-cry",
-  }, {
+  },
+  {
     title: "Mark Peskanov and Olga Vinokur at Green-Wood Cemetery",
     description: "Beethoven and Schubert works for violin and piano.",
-    tags: [ "violin", "piano", "classical", "classical music concert" ],
+    tags: ["violin", "piano", "classical", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "Mark Peskanov", "Olga Vinokur", "Green-Wood Cemetery",
-      "June 28, 2025", "Beethoven", "Schubert"
+    keywords: [
+      "Mark Peskanov",
+      "Olga Vinokur",
+      "Green-Wood Cemetery",
+      "June 28, 2025",
+      "Beethoven",
+      "Schubert",
     ],
     id: "mark-peskanov-and-olga-vinokur-at-green-wood-cemetery",
-  }, {
+  },
+  {
     title: "Mark Peskanov and Olga Vinokur at Bargemusic",
     description: "Beethoven and Schubert works for violin and piano.",
-    tags: [ "violin", "piano", "classical", "classical music concert" ],
+    tags: ["violin", "piano", "classical", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "Mark Peskanov", "Olga Vinokur", "Bargemusic",
-      "June 28, 2025", "Beethoven", "Schubert"
+    keywords: [
+      "Mark Peskanov",
+      "Olga Vinokur",
+      "Bargemusic",
+      "June 28, 2025",
+      "Beethoven",
+      "Schubert",
     ],
     id: "mark-peskanov-and-olga-vinokur-at-bargemusic",
-  }, {
+  },
+  {
     title: "Death of Classical: Ghost Quartet",
     description: "Performance of Dave Malloy's Ghost Quartet.",
-    tags: [ "quartet", "classical", "contemporary", "classical music concert" ],
+    tags: ["quartet", "classical", "contemporary", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "Death of Classical", "Ghost Quartet",
-      "Green-Wood Cemetery", "June 28, 2025"
+    keywords: [
+      "Death of Classical",
+      "Ghost Quartet",
+      "Green-Wood Cemetery",
+      "June 28, 2025",
     ],
     id: "death-of-classical:-ghost-quartet",
-  }, {
+  },
+  {
     title: "RenChorNY: Monteverdi's L’Orfeo",
     description: "Performance of Monteverdi's opera L’Orfeo.",
-    tags: [ "opera", "classical", "Monteverdi", "classical music concert" ],
+    tags: ["opera", "classical", "Monteverdi", "classical music concert"],
     category: "classical music concert",
-    keywords: [ "RenChorNY", "L’Orfeo", "Trinity Lutheran Church",
-      "June 28, 2025"
+    keywords: [
+      "RenChorNY",
+      "L’Orfeo",
+      "Trinity Lutheran Church",
+      "June 28, 2025",
     ],
     id: "renchorny:-monteverdi's-l’orfeo",
-  }, {
+  },
+  {
     title: "Smino & Samara Cyn",
     description: "Hip Hop concert at Terminal 5",
-    tags: [ "hip hop", "live music", "hip hop concert" ],
+    tags: ["hip hop", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Smino", "Samara Cyn", "Terminal 5", "New York City" ],
+    keywords: ["Smino", "Samara Cyn", "Terminal 5", "New York City"],
     id: "smino-&-samara-cyn",
-  }, {
+  },
+  {
     title: "Dabin, William Black, Blanke, Jason Ross",
     description: "Under the K Bridge",
-    tags: [ "hip hop", "electronic", "live music", "hip hop concert" ],
+    tags: ["hip hop", "electronic", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Dabin", "William Black", "Blanke", "Jason Ross", "Under the K Bridge", "New York City" ],
+    keywords: [
+      "Dabin",
+      "William Black",
+      "Blanke",
+      "Jason Ross",
+      "Under the K Bridge",
+      "New York City",
+    ],
     id: "dabin,-william-black,-blanke,-jason-ross",
-  }, {
+  },
+  {
     title: "DD Osama & Sugarhill Ddot",
     description: "House Of Independents",
-    tags: [ "hip hop", "live music", "hip hop concert" ],
+    tags: ["hip hop", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "DD Osama", "Sugarhill Ddot", "House Of Independents", "New York City area" ],
+    keywords: [
+      "DD Osama",
+      "Sugarhill Ddot",
+      "House Of Independents",
+      "New York City area",
+    ],
     id: "dd-osama-&-sugarhill-ddot",
-  }, {
+  },
+  {
     title: "Post Malone, Jelly Roll, Chandler Walters, Wyatt Flores",
     description: "Citi Field",
-    tags: [ "hip hop", "rap", "live music", "hip hop concert" ],
+    tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Post Malone", "Jelly Roll", "Citi Field", "New York City" ],
+    keywords: ["Post Malone", "Jelly Roll", "Citi Field", "New York City"],
     id: "post-malone,-jelly-roll,-chandler-walters,-wyatt-flores",
-  }, {
+  },
+  {
     title: "Lights & KiNG MALA",
     description: "Bowery Ballroom",
-    tags: [ "hip hop", "rap", "live music", "hip hop concert" ],
+    tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Lights", "KiNG MALA", "Bowery Ballroom", "New York City" ],
+    keywords: ["Lights", "KiNG MALA", "Bowery Ballroom", "New York City"],
     id: "lights-&-king-mala",
-  }, {
-    title: "Governors Ball: Tyler, the Creator, Olivia Rodrigo, Hozier, and more",
+  },
+  {
+    title:
+      "Governors Ball: Tyler, the Creator, Olivia Rodrigo, Hozier, and more",
     description: "Governors Ball Music Festival",
-    tags: [ "hip hop", "rap", "festival", "live music", "hip hop concert" ],
+    tags: ["hip hop", "rap", "festival", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Tyler, the Creator", "Governors Ball", "New York City" ],
+    keywords: ["Tyler, the Creator", "Governors Ball", "New York City"],
     id: "governors-ball:-tyler,-the-creator,-olivia-rodrigo,-hozier,-and-more",
-  }, {
+  },
+  {
     title: "Lil Wayne 'Tha Carter VI' Release Party",
     description: "Madison Square Garden",
-    tags: [ "hip hop", "rap", "live music", "hip hop concert" ],
+    tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Lil Wayne", "Madison Square Garden", "New York City" ],
+    keywords: ["Lil Wayne", "Madison Square Garden", "New York City"],
     id: "lil-wayne-'tha-carter-vi'-release-party",
-  }, {
+  },
+  {
     title: "Master P, The Lox, Bone Thugs-N-Harmony",
     description: "New Jersey Performing Arts Center (near NYC)",
-    tags: [ "hip hop", "rap", "live music", "hip hop concert" ],
+    tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Master P", "The Lox", "Bone Thugs-N-Harmony", "New Jersey Performing Arts Center",
-      "New York City area"
+    keywords: [
+      "Master P",
+      "The Lox",
+      "Bone Thugs-N-Harmony",
+      "New Jersey Performing Arts Center",
+      "New York City area",
     ],
     id: "master-p,-the-lox,-bone-thugs-n-harmony",
-  }, {
+  },
+  {
     title: "Grandmaster Flash, DJ Jazzy Jeff, Skratch Bastid",
     description: "The Rooftop at Pier 17",
-    tags: [ "hip hop", "rap", "DJ", "live music", "hip hop concert" ],
+    tags: ["hip hop", "rap", "DJ", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Grandmaster Flash", "DJ Jazzy Jeff", "Skratch Bastid", "The Rooftop at Pier 17",
-      "New York City"
+    keywords: [
+      "Grandmaster Flash",
+      "DJ Jazzy Jeff",
+      "Skratch Bastid",
+      "The Rooftop at Pier 17",
+      "New York City",
     ],
     id: "grandmaster-flash,-dj-jazzy-jeff,-skratch-bastid",
-  }, {
+  },
+  {
     title: "Eem Triplin & DC the Don",
     description: "Irving Plaza",
-    tags: [ "hip hop", "rap", "live music", "hip hop concert" ],
+    tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
-    keywords: [ "Eem Triplin", "DC the Don", "Irving Plaza", "New York City" ],
+    keywords: ["Eem Triplin", "DC the Don", "Irving Plaza", "New York City"],
     id: "eem-triplin-&-dc-the-don",
-  }, {
+  },
+  {
     title: "Feels So Close (18+) | an EDM Golden Era Party",
-    description: "An EDM party celebrating the golden era of electronic dance music, held at 17 Meadow St, New York City.",
-    tags: [ "edm", "party", "rave", "new york city", "edm rave" ],
+    description:
+      "An EDM party celebrating the golden era of electronic dance music, held at 17 Meadow St, New York City.",
+    tags: ["edm", "party", "rave", "new york city", "edm rave"],
     category: "party",
-    keywords: [ "golden era", "edm party", "17 Meadow St" ],
+    keywords: ["golden era", "edm party", "17 Meadow St"],
     id: "feels-so-close-(18+)-|-an-edm-golden-era-party",
-  }, {
+  },
+  {
     title: "The #1 EDM Boat Party NYC - House Music Yacht Cruise",
-    description: "A house music yacht cruise featuring top EDM tracks, taking place at Pier 36 NYC.",
-    tags: [ "edm", "boat party", "house music", "new york city",
-      "edm rave"
-    ],
+    description:
+      "A house music yacht cruise featuring top EDM tracks, taking place at Pier 36 NYC.",
+    tags: ["edm", "boat party", "house music", "new york city", "edm rave"],
     category: "party",
-    keywords: [ "house music", "yacht cruise", "Pier 36" ],
+    keywords: ["house music", "yacht cruise", "Pier 36"],
     id: "the-#1-edm-boat-party-nyc---house-music-yacht-cruise",
-  }, {
+  },
+  {
     title: "Kitty’s RAVE (18+)",
-    description: "An 18+ rave event featuring electronic dance music at The Brooklyn Monarch.",
-    tags: [ "edm", "rave", "party", "new york city", "edm rave" ],
+    description:
+      "An 18+ rave event featuring electronic dance music at The Brooklyn Monarch.",
+    tags: ["edm", "rave", "party", "new york city", "edm rave"],
     category: "party",
-    keywords: [ "rave", "18+", "The Brooklyn Monarch" ],
+    keywords: ["rave", "18+", "The Brooklyn Monarch"],
     id: "kitty’s-rave-(18+)",
-  }, {
-    title: "SOUNDWAVE BOAT PARTY 2025 | Hip-Hop • Latin • EDM (Open Bar Available!)",
-    description: "A boat party featuring Hip-Hop, Latin, and EDM music with an open bar, held at Skyport Marina.",
-    tags: [ "edm", "boat party", "hip-hop", "latin", "new york city", "edm rave" ],
+  },
+  {
+    title:
+      "SOUNDWAVE BOAT PARTY 2025 | Hip-Hop • Latin • EDM (Open Bar Available!)",
+    description:
+      "A boat party featuring Hip-Hop, Latin, and EDM music with an open bar, held at Skyport Marina.",
+    tags: [
+      "edm",
+      "boat party",
+      "hip-hop",
+      "latin",
+      "new york city",
+      "edm rave",
+    ],
     category: "party",
-    keywords: [ "open bar", "Skyport Marina", "boat party" ],
+    keywords: ["open bar", "Skyport Marina", "boat party"],
     id: "soundwave-boat-party-2025-|-hip-hop-•-latin-•-edm-(open-bar-available!)",
-  }, {
+  },
+  {
     title: "LEVELS 'N' STUFF [EDM FESTIVAL CLASSICS] EARLY PARTY",
-    description: "An early party event featuring classic EDM festival tracks at DROM in New York City.",
-    tags: [ "edm", "party", "festival classics", "new york city",
-      "edm rave"
-    ],
+    description:
+      "An early party event featuring classic EDM festival tracks at DROM in New York City.",
+    tags: ["edm", "party", "festival classics", "new york city", "edm rave"],
     category: "party",
-    keywords: [ "festival classics", "DROM", "early party" ],
+    keywords: ["festival classics", "DROM", "early party"],
     id: "levels-'n'-stuff-[edm-festival-classics]-early-party",
-  }, {
+  },
+  {
     title: "LadyLand Festival",
-    description: "A two-day EDM music festival featuring artists like Cardi B, A$AP Rocky, and Pabllo Vittar in Brooklyn, NY.",
-    tags: [ "edm", "festival", "music", "brooklyn", "edm rave" ],
+    description:
+      "A two-day EDM music festival featuring artists like Cardi B, A$AP Rocky, and Pabllo Vittar in Brooklyn, NY.",
+    tags: ["edm", "festival", "music", "brooklyn", "edm rave"],
     category: "music",
-    keywords: [ "Cardi B", "Pabllo Vittar", "Brooklyn" ],
+    keywords: ["Cardi B", "Pabllo Vittar", "Brooklyn"],
     id: "ladyland-festival",
-  }, {
+  },
+  {
     title: "S2O New York Music Festival",
-    description: "An EDM festival featuring artists such as SLANDER, Major Lazer, and Dillon Francis in New York City.",
-    tags: [ "edm", "festival", "music", "new york city", "edm rave" ],
+    description:
+      "An EDM festival featuring artists such as SLANDER, Major Lazer, and Dillon Francis in New York City.",
+    tags: ["edm", "festival", "music", "new york city", "edm rave"],
     category: "music",
-    keywords: [ "SLANDER", "Major Lazer", "Dillon Francis" ],
+    keywords: ["SLANDER", "Major Lazer", "Dillon Francis"],
     id: "s2o-new-york-music-festival",
-  }, {
+  },
+  {
     title: "Fire Lights",
-    description: "An EDM festival with artists like G Jones and The Glitch Mob, held in New York City.",
-    tags: [ "edm", "festival", "music", "new york city", "edm rave" ],
+    description:
+      "An EDM festival with artists like G Jones and The Glitch Mob, held in New York City.",
+    tags: ["edm", "festival", "music", "new york city", "edm rave"],
     category: "music",
-    keywords: [ "G Jones", "The Glitch Mob", "festival" ],
+    keywords: ["G Jones", "The Glitch Mob", "festival"],
     id: "fire-lights",
-  }, {
+  },
+  {
     title: "Evolutions Festival",
-    description: "An EDM festival featuring Alison Wonderland and Of The Trees in New York City.",
-    tags: [ "edm", "festival", "music", "new york city", "edm rave" ],
+    description:
+      "An EDM festival featuring Alison Wonderland and Of The Trees in New York City.",
+    tags: ["edm", "festival", "music", "new york city", "edm rave"],
     category: "music",
-    keywords: [ "Alison Wonderland", "Of The Trees",
-      "festival"
-    ],
+    keywords: ["Alison Wonderland", "Of The Trees", "festival"],
     id: "evolutions-festival",
-  }, {
+  },
+  {
     title: "LadyLand Festival (Repeat Entry)",
-    description: "A major EDM festival in Brooklyn, NY with a lineup including Cardi B and Pabllo Vittar.",
-    tags: [ "edm", "festival", "music", "brooklyn", "edm rave" ],
+    description:
+      "A major EDM festival in Brooklyn, NY with a lineup including Cardi B and Pabllo Vittar.",
+    tags: ["edm", "festival", "music", "brooklyn", "edm rave"],
     category: "music",
-    keywords: [ "Cardi B", "Pabllo Vittar", "Brooklyn" ],
+    keywords: ["Cardi B", "Pabllo Vittar", "Brooklyn"],
     id: "ladyland-festival-(repeat-entry)",
-  }, {
+  },
+  {
     title: "BRESH - The Most Beautiful Party in the World",
-    description: "BRESH returns to The Rooftop at Pier 17 for a legendary party with music, dancing, and skyline views.",
-    tags: [ "rooftop", "music", "18+", "rooftop party" ],
+    description:
+      "BRESH returns to The Rooftop at Pier 17 for a legendary party with music, dancing, and skyline views.",
+    tags: ["rooftop", "music", "18+", "rooftop party"],
     category: "rooftop party",
     keywords: [
-      "BRESH", "Pier 17", "NYC rooftop party", "music event",
-      "outdoor event", "standing room only", "rain or shine",
-      "non-refundable", "no re-entry", "June 21, 2025",
-      "doors 4:00PM", "show starts 4:00PM", "concludes by 10:00PM"
+      "BRESH",
+      "Pier 17",
+      "NYC rooftop party",
+      "music event",
+      "outdoor event",
+      "standing room only",
+      "rain or shine",
+      "non-refundable",
+      "no re-entry",
+      "June 21, 2025",
+      "doors 4:00PM",
+      "show starts 4:00PM",
+      "concludes by 10:00PM",
     ],
     id: "bresh---the-most-beautiful-party-in-the-world",
-  }, {
+  },
+  {
     title: "NYC Rooftop Party Saturday",
-    description: "INTO THE NIGHT presents a Latin-themed rooftop party at Lost in Paradise Rooftop, Queens.",
-    tags: [ "rooftop", "Latin music", "21+", "rooftop party" ],
+    description:
+      "INTO THE NIGHT presents a Latin-themed rooftop party at Lost in Paradise Rooftop, Queens.",
+    tags: ["rooftop", "Latin music", "21+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "Lost in Paradise Rooftop", "Queens", "Latin music",
-      "dancing", "VIP bottle service", "June 7, 2025",
-      "doors 10:30PM", "ends 4:00AM", "trendy dress code"
+    keywords: [
+      "Lost in Paradise Rooftop",
+      "Queens",
+      "Latin music",
+      "dancing",
+      "VIP bottle service",
+      "June 7, 2025",
+      "doors 10:30PM",
+      "ends 4:00AM",
+      "trendy dress code",
     ],
     id: "nyc-rooftop-party-saturday",
-  }, {
+  },
+  {
     title: "Lyra Rooftop Party 6.07",
-    description: "Rose Gold presents a rooftop party at Magic Hour Rooftop Bar & Lounge, featuring music and city views.",
-    tags: [ "rooftop", "music", "21+", "rooftop party" ],
+    description:
+      "Rose Gold presents a rooftop party at Magic Hour Rooftop Bar & Lounge, featuring music and city views.",
+    tags: ["rooftop", "music", "21+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "Magic Hour Rooftop Bar & Lounge",
-      "Rose Gold", "June 7, 2025", "rooftop event", "city views"
+    keywords: [
+      "Magic Hour Rooftop Bar & Lounge",
+      "Rose Gold",
+      "June 7, 2025",
+      "rooftop event",
+      "city views",
     ],
     id: "lyra-rooftop-party-6.07",
-  }, {
+  },
+  {
     title: "Above it All: A PHD Rooftop Party",
-    description: "Lifted Events x Tao Group present a house music rooftop day party at PHD Rooftop Lounge.",
-    tags: [ "rooftop", "house music", "21+", "rooftop party" ],
+    description:
+      "Lifted Events x Tao Group present a house music rooftop day party at PHD Rooftop Lounge.",
+    tags: ["rooftop", "house music", "21+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "PHD Rooftop Lounge", "Dream Midtown",
-      "house music", "June 14, 2025", "2:00PM–8:00PM",
-      "day party", "bottle service"
+    keywords: [
+      "PHD Rooftop Lounge",
+      "Dream Midtown",
+      "house music",
+      "June 14, 2025",
+      "2:00PM–8:00PM",
+      "day party",
+      "bottle service",
     ],
     id: "above-it-all:-a-phd-rooftop-party",
-  }, {
+  },
+  {
     title: "Summer Rooftop Series at 230 Fifth",
-    description: "Enjoy cocktails and panoramic views at NYC’s largest rooftop bar, 230 Fifth.",
-    tags: [ "rooftop", "cocktails", "21+", "rooftop party" ],
+    description:
+      "Enjoy cocktails and panoramic views at NYC’s largest rooftop bar, 230 Fifth.",
+    tags: ["rooftop", "cocktails", "21+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "230 Fifth", "rooftop bar", "panoramic views",
-      "summer series", "cocktails", "Manhattan"
+    keywords: [
+      "230 Fifth",
+      "rooftop bar",
+      "panoramic views",
+      "summer series",
+      "cocktails",
+      "Manhattan",
     ],
     id: "summer-rooftop-series-at-230-fifth",
-  }, {
+  },
+  {
     title: "Rooftop at Pier 17 Concert Series",
-    description: "Seasonal rooftop concerts at The Rooftop at Pier 17, featuring live music and skyline views.",
-    tags: [ "rooftop", "live music", "18+", "rooftop party" ],
+    description:
+      "Seasonal rooftop concerts at The Rooftop at Pier 17, featuring live music and skyline views.",
+    tags: ["rooftop", "live music", "18+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "Pier 17", "concert series", "live music", "skyline views",
-      "summer events", "outdoor venue"
+    keywords: [
+      "Pier 17",
+      "concert series",
+      "live music",
+      "skyline views",
+      "summer events",
+      "outdoor venue",
     ],
     id: "rooftop-at-pier-17-concert-series",
-  }, {
+  },
+  {
     title: "Rooftop at The Press Lounge",
-    description: "Chic rooftop lounge with craft cocktails and stunning city views.",
-    tags: [ "rooftop", "cocktails", "21+", "rooftop party" ],
+    description:
+      "Chic rooftop lounge with craft cocktails and stunning city views.",
+    tags: ["rooftop", "cocktails", "21+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "The Press Lounge", "craft cocktails",
-      "city views", "rooftop lounge", "Manhattan"
+    keywords: [
+      "The Press Lounge",
+      "craft cocktails",
+      "city views",
+      "rooftop lounge",
+      "Manhattan",
     ],
     id: "rooftop-at-the-press-lounge",
-  }, {
+  },
+  {
     title: "Westlight Rooftop Bar Events",
-    description: "Signature rooftop bar at The William Vale with curated events and skyline views.",
-    tags: [ "rooftop", "bar", "21+", "rooftop party" ],
+    description:
+      "Signature rooftop bar at The William Vale with curated events and skyline views.",
+    tags: ["rooftop", "bar", "21+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "Westlight", "The William Vale", "rooftop bar",
-      "signature cocktails", "Brooklyn", "curated events"
+    keywords: [
+      "Westlight",
+      "The William Vale",
+      "rooftop bar",
+      "signature cocktails",
+      "Brooklyn",
+      "curated events",
     ],
     id: "westlight-rooftop-bar-events",
-  }, {
+  },
+  {
     title: "Le Bain Rooftop Party",
-    description: "Trendy rooftop club at The Standard, High Line, featuring DJs and city views.",
-    tags: [ "rooftop", "club", "21+", "rooftop party" ],
+    description:
+      "Trendy rooftop club at The Standard, High Line, featuring DJs and city views.",
+    tags: ["rooftop", "club", "21+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "Le Bain", "The Standard", "High Line", "DJs", "rooftop club",
-      "Manhattan"
+    keywords: [
+      "Le Bain",
+      "The Standard",
+      "High Line",
+      "DJs",
+      "rooftop club",
+      "Manhattan",
     ],
     id: "le-bain-rooftop-party",
-  }, {
+  },
+  {
     title: "The Crown Rooftop Bar Events",
-    description: "Rooftop bar at Hotel 50 Bowery with themed parties and cityscape views.",
-    tags: [ "rooftop", "bar", "21+", "rooftop party" ],
+    description:
+      "Rooftop bar at Hotel 50 Bowery with themed parties and cityscape views.",
+    tags: ["rooftop", "bar", "21+", "rooftop party"],
     category: "rooftop party",
-    keywords: [ "The Crown", "Hotel 50 Bowery", "rooftop bar",
-      "themed parties", "cityscape views", "Chinatown"
+    keywords: [
+      "The Crown",
+      "Hotel 50 Bowery",
+      "rooftop bar",
+      "themed parties",
+      "cityscape views",
+      "Chinatown",
     ],
     id: "the-crown-rooftop-bar-events",
-  }, {
+  },
+  {
     title: "Open Mic Saturdays",
     description: "Open mic event at Medallion Bistro",
     category: "General Open Mic",
-    keywords: [ "music", "poetry", "comedy" ],
+    keywords: ["music", "poetry", "comedy"],
     id: "open-mic-saturdays",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "Open Mic hosted by Brian Acosta Arya",
     description: "Open mic at Loisaida Center",
     category: "General Open Mic",
-    keywords: [ "music", "poetry", "comedy" ],
+    keywords: ["music", "poetry", "comedy"],
     id: "open-mic-hosted-by-brian-acosta-arya",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "Gaia Open Mic",
     description: "Open mic at Arts On Site NYC",
     category: "General Open Mic",
-    keywords: [ "music", "poetry", "comedy" ],
+    keywords: ["music", "poetry", "comedy"],
     id: "gaia-open-mic",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "Open Mic Night - Astoria, NY",
     description: "Open mic at Sissy McGinty's",
     category: "General Open Mic",
-    keywords: [ "music", "poetry", "comedy" ],
+    keywords: ["music", "poetry", "comedy"],
     id: "open-mic-night---astoria,-ny",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "Taillor Open Mic",
     description: "Open mic at Madame X",
     category: "General Open Mic",
-    keywords: [ "music", "poetry", "comedy" ],
+    keywords: ["music", "poetry", "comedy"],
     id: "taillor-open-mic",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "Awaken Jersey City Open Mic",
     description: "Open mic at VIP Diner",
     category: "General Open Mic",
-    keywords: [ "music", "poetry", "comedy" ],
+    keywords: ["music", "poetry", "comedy"],
     id: "awaken-jersey-city-open-mic",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "House of Khaos | Writing Workshop + Open Mic",
     description: "Writing workshop and open mic at Nook",
     category: "Writing and Open Mic",
-    keywords: [ "writing", "poetry", "comedy" ],
+    keywords: ["writing", "poetry", "comedy"],
     id: "house-of-khaos-|-writing-workshop-+-open-mic",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "Open Mic Night",
     description: "Open mic at Neir's Tavern",
     category: "General Open Mic",
-    keywords: [ "music", "poetry", "comedy" ],
+    keywords: ["music", "poetry", "comedy"],
     id: "open-mic-night",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "The Industry Room. New York’s Best Open Mic Show",
     description: "Comedy open mic at Broadway Comedy Club",
     category: "Comedy Open Mic",
-    keywords: [ "comedy", "stand-up" ],
+    keywords: ["comedy", "stand-up"],
     id: "the-industry-room.-new-york’s-best-open-mic-show",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "The Open Mic Downstairs @ Frigid New York",
     description: "Variety open mic at Frigid New York",
     category: "Variety Open Mic",
-    keywords: [ "music", "comedy", "storytelling" ],
+    keywords: ["music", "comedy", "storytelling"],
     id: "the-open-mic-downstairs-@-frigid-new-york",
-    tags: [ "open mic night" ],
-  }, {
+    tags: ["open mic night"],
+  },
+  {
     title: "Party After Dark: Museum of Moving Image Silent Disco Take-Over",
-    description: "Silent disco at the Museum of Moving Image, featuring multiple DJs.",
-    tags: [ "music", "dance", "museum", "silent disco party" ],
+    description:
+      "Silent disco at the Museum of Moving Image, featuring multiple DJs.",
+    tags: ["music", "dance", "museum", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "museum", "New York City", "DJs", "party after dark" ],
+    keywords: [
+      "silent disco",
+      "museum",
+      "New York City",
+      "DJs",
+      "party after dark",
+    ],
     id: "party-after-dark:-museum-of-moving-image-silent-disco-take-over",
-  }, {
+  },
+  {
     title: "Silent Disco - Riverside Park Conservancy",
-    description: "Quiet Clubbing event with three live DJs spinning different genres on the pier.",
-    tags: [ "music", "dance", "outdoor", "silent disco party" ],
+    description:
+      "Quiet Clubbing event with three live DJs spinning different genres on the pier.",
+    tags: ["music", "dance", "outdoor", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "Riverside Park", "DJs", "outdoor", "New York City" ],
+    keywords: [
+      "silent disco",
+      "Riverside Park",
+      "DJs",
+      "outdoor",
+      "New York City",
+    ],
     id: "silent-disco---riverside-park-conservancy",
-  }, {
+  },
+  {
     title: "Library Silent Disco: Decades Party 1965-2025",
-    description: "Celebration of the Library for the Performing Arts' 60th anniversary with music from each decade.",
-    tags: [ "music", "library", "anniversary", "silent disco party" ],
+    description:
+      "Celebration of the Library for the Performing Arts' 60th anniversary with music from each decade.",
+    tags: ["music", "library", "anniversary", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "library", "Lincoln Center", "New York City", "anniversary" ],
+    keywords: [
+      "silent disco",
+      "library",
+      "Lincoln Center",
+      "New York City",
+      "anniversary",
+    ],
     id: "library-silent-disco:-decades-party-1965-2025",
-  }, {
+  },
+  {
     title: "Silent Disco Fun! - NYC Parks",
-    description: "Free, all-ages silent disco party in Commodore Barry Park, Brooklyn.",
-    tags: [ "music", "dance", "free", "silent disco party" ],
+    description:
+      "Free, all-ages silent disco party in Commodore Barry Park, Brooklyn.",
+    tags: ["music", "dance", "free", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "NYC Parks", "Brooklyn", "free", "all ages" ],
+    keywords: ["silent disco", "NYC Parks", "Brooklyn", "free", "all ages"],
     id: "silent-disco-fun!---nyc-parks",
-  }, {
+  },
+  {
     title: "All-Ages Silent Disco Brunch Bash",
     description: "Silent disco brunch event at Katch Astoria.",
-    tags: [ "music", "brunch", "all ages", "silent disco party" ],
+    tags: ["music", "brunch", "all ages", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "Astoria", "brunch", "all ages", "New York City" ],
+    keywords: [
+      "silent disco",
+      "Astoria",
+      "brunch",
+      "all ages",
+      "New York City",
+    ],
     id: "all-ages-silent-disco-brunch-bash",
-  }, {
+  },
+  {
     title: "Astoria Silent Disco: Beer Garden Bash with 3 Live DJs",
-    description: "Silent disco party at a beer garden in Astoria with three DJs.",
-    tags: [ "music", "beer garden", "DJs", "silent disco party" ],
+    description:
+      "Silent disco party at a beer garden in Astoria with three DJs.",
+    tags: ["music", "beer garden", "DJs", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "Astoria", "beer garden", "DJs", "New York City" ],
+    keywords: [
+      "silent disco",
+      "Astoria",
+      "beer garden",
+      "DJs",
+      "New York City",
+    ],
     id: "astoria-silent-disco:-beer-garden-bash-with-3-live-djs",
-  }, {
+  },
+  {
     title: "Silent Scream Silent Disco Halloween Party",
     description: "Halloween-themed silent disco party at Bohemian Beer Garden.",
-    tags: [ "music", "Halloween", "beer garden", "silent disco party" ],
+    tags: ["music", "Halloween", "beer garden", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "Halloween", "Bohemian Beer Garden", "New York City" ],
+    keywords: [
+      "silent disco",
+      "Halloween",
+      "Bohemian Beer Garden",
+      "New York City",
+    ],
     id: "silent-scream-silent-disco-halloween-party",
-  }, {
+  },
+  {
     title: "End of Summer Silent Disco I 3 Live DJs I 21 & Over",
-    description: "End of summer silent disco party at 230 FIFTH Avenue Empire Penthouse.",
-    tags: [ "music", "summer", "21+", "DJs", "silent disco party" ],
+    description:
+      "End of summer silent disco party at 230 FIFTH Avenue Empire Penthouse.",
+    tags: ["music", "summer", "21+", "DJs", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "Empire Penthouse", "summer", "21+", "New York City" ],
+    keywords: [
+      "silent disco",
+      "Empire Penthouse",
+      "summer",
+      "21+",
+      "New York City",
+    ],
     id: "end-of-summer-silent-disco-i-3-live-djs-i-21-&-over",
-  }, {
+  },
+  {
     title: "Silent Disco Party at Central Park",
-    description: "Silent disco event in Central Park (hypothetical, based on typical recurring events; not listed in current results but common in NYC).",
-    tags: [ "music", "outdoor", "Central Park", "silent disco party" ],
+    description:
+      "Silent disco event in Central Park (hypothetical, based on typical recurring events; not listed in current results but common in NYC).",
+    tags: ["music", "outdoor", "Central Park", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "Central Park", "outdoor", "New York City" ],
+    keywords: ["silent disco", "Central Park", "outdoor", "New York City"],
     id: "silent-disco-party-at-central-park",
-  }, {
+  },
+  {
     title: "Silent Disco Party at Brooklyn Bridge Park",
-    description: "Silent disco event at Brooklyn Bridge Park (hypothetical, based on typical recurring events; not listed in current results but common in NYC).",
-    tags: [ "music", "outdoor", "Brooklyn", "silent disco party" ],
+    description:
+      "Silent disco event at Brooklyn Bridge Park (hypothetical, based on typical recurring events; not listed in current results but common in NYC).",
+    tags: ["music", "outdoor", "Brooklyn", "silent disco party"],
     category: "silent disco party",
-    keywords: [ "silent disco", "Brooklyn Bridge Park", "outdoor", "New York City" ],
+    keywords: [
+      "silent disco",
+      "Brooklyn Bridge Park",
+      "outdoor",
+      "New York City",
+    ],
     id: "silent-disco-party-at-brooklyn-bridge-park",
-  }, {
+  },
+  {
     title: "Raphael Griswold: LOADING DOCK",
     description: "Solo exhibition by Raphael Griswold",
-    tags: [ "gallery opening", "gallery opening" ],
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "Chozick Family Art Gallery",
-      "Broadway", "contemporary art", "exhibition", "opening", "Raphael Griswold",
-      "LOADING DOCK", "May 26 - June 21, 2025",
-      "Tue-Sat 11am-6pm"
+    keywords: [
+      "New York",
+      "Chozick Family Art Gallery",
+      "Broadway",
+      "contemporary art",
+      "exhibition",
+      "opening",
+      "Raphael Griswold",
+      "LOADING DOCK",
+      "May 26 - June 21, 2025",
+      "Tue-Sat 11am-6pm",
     ],
     id: "raphael-griswold:-loading-dock",
-  }, {
+  },
+  {
     title: "Antelman: First Exhibition with Gallery",
     description: "Unique approach to photography with sculptural sensibility",
-    tags: [ "gallery opening", "gallery opening" ],
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "Antelman", "photography", "sculpture", "exhibition",
-      "opening", "May 29 - July 3, 2025", "Tue-Sat 10am-6pm"
+    keywords: [
+      "New York",
+      "Antelman",
+      "photography",
+      "sculpture",
+      "exhibition",
+      "opening",
+      "May 29 - July 3, 2025",
+      "Tue-Sat 10am-6pm",
     ],
     id: "antelman:-first-exhibition-with-gallery",
-  }, {
+  },
+  {
     title: "Carlo Bella & Historical Artworks",
-    description: "Joint exhibition of African, Native American, Old Master, and Greco-Roman artworks",
-    tags: [ "gallery opening", "gallery opening" ],
+    description:
+      "Joint exhibition of African, Native American, Old Master, and Greco-Roman artworks",
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "Carlo Bella", "African art", "Native American art",
-      "Old Master", "Greco-Roman", "exhibition", "opening", "May 27 - June 6, 2025",
-      "Mon-Fri 10am-6pm by appointment"
+    keywords: [
+      "New York",
+      "Carlo Bella",
+      "African art",
+      "Native American art",
+      "Old Master",
+      "Greco-Roman",
+      "exhibition",
+      "opening",
+      "May 27 - June 6, 2025",
+      "Mon-Fri 10am-6pm by appointment",
     ],
     id: "carlo-bella-&-historical-artworks",
-  }, {
+  },
+  {
     title: "ZERO Movement Co-founder Solo Exhibition",
-    description: "First solo exhibition with the gallery of the co-founder of ZERO movement",
-    tags: [ "gallery opening", "gallery opening" ],
+    description:
+      "First solo exhibition with the gallery of the co-founder of ZERO movement",
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "ZERO movement", "co-founder", "solo exhibition",
-      "exhibition", "opening", "May 9 - June 14, 2025", "Tue-Sat 10am-6pm"
+    keywords: [
+      "New York",
+      "ZERO movement",
+      "co-founder",
+      "solo exhibition",
+      "exhibition",
+      "opening",
+      "May 9 - June 14, 2025",
+      "Tue-Sat 10am-6pm",
     ],
     id: "zero-movement-co-founder-solo-exhibition",
-  }, {
+  },
+  {
     title: "Juan Uslé: New Paintings",
     description: "Monumental canvases and new paintings advancing abstraction",
-    tags: [ "gallery opening", "gallery opening" ],
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "Juan Uslé", "abstraction", "painting", "exhibition",
-      "opening", "May 15 - June 21, 2025", "Tue-Sat 10am-6pm"
+    keywords: [
+      "New York",
+      "Juan Uslé",
+      "abstraction",
+      "painting",
+      "exhibition",
+      "opening",
+      "May 15 - June 21, 2025",
+      "Tue-Sat 10am-6pm",
     ],
     id: "juan-uslé:-new-paintings",
-  }, {
+  },
+  {
     title: "Summer in the City",
     description: "Summer group exhibition",
-    tags: [ "gallery opening", "gallery opening" ],
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "Louis K. Meisel Gallery", "group show",
-      "exhibition", "opening", "June 7, 2025"
+    keywords: [
+      "New York",
+      "Louis K. Meisel Gallery",
+      "group show",
+      "exhibition",
+      "opening",
+      "June 7, 2025",
     ],
     id: "summer-in-the-city",
-  }, {
+  },
+  {
     title: "Summer Selections",
     description: "Summer group exhibition",
-    tags: [ "gallery opening", "gallery opening" ],
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "Westwood Gallery", "group show", "exhibition",
-      "opening", "June 19, 2025"
+    keywords: [
+      "New York",
+      "Westwood Gallery",
+      "group show",
+      "exhibition",
+      "opening",
+      "June 19, 2025",
     ],
     id: "summer-selections",
-  }, {
+  },
+  {
     title: "Charles Hinman: Cast Paper",
     description: "Solo exhibition by Charles Hinman",
-    tags: [ "gallery opening", "gallery opening" ],
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "Charles Hinman", "cast paper", "sculpture",
-      "exhibition", "opening", "June 20, 2025"
+    keywords: [
+      "New York",
+      "Charles Hinman",
+      "cast paper",
+      "sculpture",
+      "exhibition",
+      "opening",
+      "June 20, 2025",
     ],
     id: "charles-hinman:-cast-paper",
-  }, {
+  },
+  {
     title: "Coco Young: L’Autre Rive",
     description: "Solo exhibition by Coco Young",
-    tags: [ "gallery opening", "gallery opening" ],
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "Coco Young", "L’Autre Rive", "CLEARING", "exhibition",
-      "opening", "May 7 - June 21, 2025"
+    keywords: [
+      "New York",
+      "Coco Young",
+      "L’Autre Rive",
+      "CLEARING",
+      "exhibition",
+      "opening",
+      "May 7 - June 21, 2025",
     ],
     id: "coco-young:-l’autre-rive",
-  }, {
+  },
+  {
     title: "NXTHVN Cohort 6: The Things Left Unsaid",
     description: "Group exhibition curated by Rigoberto Luna",
-    tags: [ "gallery opening", "gallery opening" ],
+    tags: ["gallery opening", "gallery opening"],
     category: "art",
-    keywords: [ "New York", "NXTHVN Cohort 6", "Rigoberto Luna",
-      "James Cohan", "group show", "exhibition", "opening", "May 8 - June 21, 2025"
+    keywords: [
+      "New York",
+      "NXTHVN Cohort 6",
+      "Rigoberto Luna",
+      "James Cohan",
+      "group show",
+      "exhibition",
+      "opening",
+      "May 8 - June 21, 2025",
     ],
     id: "nxthvn-cohort-6:-the-things-left-unsaid",
-  }, {
+  },
+  {
     title: "Hiba Schahbaz: Magical Creatures",
     description: "Exhibition at Adler Beatty featuring works by Hiba Schahbaz.",
-    tags: [ "painting", "art shows" ],
+    tags: ["painting", "art shows"],
     category: "art show",
-    keywords: [ "contemporary", "figurative art", "New York City" ],
+    keywords: ["contemporary", "figurative art", "New York City"],
     id: "hiba-schahbaz:-magical-creatures",
-  }, {
+  },
+  {
     title: "Ching Ho Cheng: Tracing Infinity",
-    description: "Exhibition at Bank gallery featuring archival photographs and gouache windows works by Ching Ho Cheng.",
-    tags: [ "photography", "painting", "art shows" ],
+    description:
+      "Exhibition at Bank gallery featuring archival photographs and gouache windows works by Ching Ho Cheng.",
+    tags: ["photography", "painting", "art shows"],
     category: "art show",
-    keywords: [ "Chelsea Hotel", "downtown scene", "New York City" ],
+    keywords: ["Chelsea Hotel", "downtown scene", "New York City"],
     id: "ching-ho-cheng:-tracing-infinity",
-  }, {
+  },
+  {
     title: "Teruko Yokoi: Noh Theater",
-    description: "Exhibition at Hollis Taggart featuring 20 works by Teruko Yokoi, inspired by traditional Japanese Noh theater.",
-    tags: [ "painting", "abstract expressionism", "art shows" ],
+    description:
+      "Exhibition at Hollis Taggart featuring 20 works by Teruko Yokoi, inspired by traditional Japanese Noh theater.",
+    tags: ["painting", "abstract expressionism", "art shows"],
     category: "art show",
-    keywords: [ "Japanese art", "Chelsea Hotel", "New York City" ],
+    keywords: ["Japanese art", "Chelsea Hotel", "New York City"],
     id: "teruko-yokoi:-noh-theater",
-  }, {
+  },
+  {
     title: "Antelman: First Exhibition with the Gallery",
-    description: "Antelman’s first exhibition with the gallery, showcasing a unique approach to photography and montage.",
-    tags: [ "photography", "sculpture", "art shows" ],
+    description:
+      "Antelman’s first exhibition with the gallery, showcasing a unique approach to photography and montage.",
+    tags: ["photography", "sculpture", "art shows"],
     category: "art show",
-    keywords: [ "experimental", "lyrical", "New York City" ],
+    keywords: ["experimental", "lyrical", "New York City"],
     id: "antelman:-first-exhibition-with-the-gallery",
-  }, {
+  },
+  {
     title: "Joint Exhibition: African, Native American, Old Master Paintings",
-    description: "Joint exhibition featuring historical African and Native American artworks alongside Old Master Paintings and Greco-Roman Antiquity.",
-    tags: [ "historical", "painting", "sculpture", "art shows" ],
+    description:
+      "Joint exhibition featuring historical African and Native American artworks alongside Old Master Paintings and Greco-Roman Antiquity.",
+    tags: ["historical", "painting", "sculpture", "art shows"],
     category: "art show",
-    keywords: [ "museum-quality", "New York City" ],
+    keywords: ["museum-quality", "New York City"],
     id: "joint-exhibition:-african,-native-american,-old-master-paintings",
-  }, {
+  },
+  {
     title: "First Solo Exhibition: ZERO Movement Co-founder",
-    description: "First solo exhibition with the gallery of the co-founder of the renowned ZERO movement.",
-    tags: [ "painting", "sculpture", "art shows" ],
+    description:
+      "First solo exhibition with the gallery of the co-founder of the renowned ZERO movement.",
+    tags: ["painting", "sculpture", "art shows"],
     category: "art show",
-    keywords: [ "ZERO movement", "New York City" ],
+    keywords: ["ZERO movement", "New York City"],
     id: "first-solo-exhibition:-zero-movement-co-founder",
-  }, {
+  },
+  {
     title: "Uslé: Monumental Canvases",
-    description: "Exhibition featuring monumental canvases and new paintings by Uslé, advancing his exploration of abstraction.",
-    tags: [ "painting", "art shows" ],
+    description:
+      "Exhibition featuring monumental canvases and new paintings by Uslé, advancing his exploration of abstraction.",
+    tags: ["painting", "art shows"],
     category: "art show",
-    keywords: [ "abstract", "rhythmic brushstrokes", "New York City" ],
+    keywords: ["abstract", "rhythmic brushstrokes", "New York City"],
     id: "uslé:-monumental-canvases",
-  }, {
+  },
+  {
     title: "SVA June 2025 Exhibitions",
-    description: "Various exhibitions and events at the School of Visual Arts during June 2025.",
-    tags: [ "mixed media", "student work", "art shows" ],
+    description:
+      "Various exhibitions and events at the School of Visual Arts during June 2025.",
+    tags: ["mixed media", "student work", "art shows"],
     category: "art show",
-    keywords: [ "SVA", "New York City" ],
+    keywords: ["SVA", "New York City"],
     id: "sva-june-2025-exhibitions",
-  }, {
+  },
+  {
     title: "Whitney Museum Spring Exhibitions",
-    description: "Spring exhibitions at the Whitney Museum, featuring contemporary and modern art.",
-    tags: [ "contemporary", "modern", "art shows" ],
+    description:
+      "Spring exhibitions at the Whitney Museum, featuring contemporary and modern art.",
+    tags: ["contemporary", "modern", "art shows"],
     category: "art show",
-    keywords: [ "Whitney Museum", "New York City" ],
+    keywords: ["Whitney Museum", "New York City"],
     id: "whitney-museum-spring-exhibitions",
-  }, {
+  },
+  {
     title: "General NYC Art Gallery Exhibitions",
-    description: "Ongoing exhibitions at leading New York City art galleries and museums.",
-    tags: [ "mixed media", "art shows" ],
+    description:
+      "Ongoing exhibitions at leading New York City art galleries and museums.",
+    tags: ["mixed media", "art shows"],
     category: "art show",
-    keywords: [ "galleries", "museums", "New York City" ],
+    keywords: ["galleries", "museums", "New York City"],
     id: "general-nyc-art-gallery-exhibitions",
-  }, {
+  },
+  {
     title: "Hamilton",
     description: "A musical about American founding father Alexander Hamilton",
     id: "hamilton",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "Chicago",
     description: "A classic musical about fame, murder, and scandal",
     id: "chicago",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "Wicked",
     description: "A prequel to The Wizard of Oz, exploring the witches' story",
     id: "wicked",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "Harry Potter and the Cursed Child",
     description: "A two-part play continuing the Harry Potter series",
     id: "harry-potter-and-the-cursed-child",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "The Lion King",
     description: "A musical adaptation of the Disney film",
     id: "the-lion-king",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "Aladdin",
     description: "A musical adaptation of the Disney film",
     id: "aladdin",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "Just In Time",
     description: "A jukebox musical about Bobby Darin's life",
     id: "just-in-time",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "Good Night, and Good Luck",
     description: "A historical drama about 1950s television news",
     id: "good-night,-and-good-luck",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "The Last Five Years",
     description: "A musical about a couple falling in and out of love",
     id: "the-last-five-years",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "John Proctor is the Villain",
     description: "A comedy flipping the script on The Crucible",
     id: "john-proctor-is-the-villain",
-    tags: [ "broadway show" ],
-  }, {
+    tags: ["broadway show"],
+  },
+  {
     title: "HA HA HA HA HA HA HA",
-    description: "An improvised Off-Broadway show heavily based on audience participation, performed at The Public Theater/Anspacher Theater.",
-    tags: [ "off-broadway", "improvisation", "audience participation", "off-broadway show" ],
+    description:
+      "An improvised Off-Broadway show heavily based on audience participation, performed at The Public Theater/Anspacher Theater.",
+    tags: [
+      "off-broadway",
+      "improvisation",
+      "audience participation",
+      "off-broadway show",
+    ],
     category: "art",
-    keywords: [ "improvised", "audience participation", "Julia Masli" ],
+    keywords: ["improvised", "audience participation", "Julia Masli"],
     id: "ha-ha-ha-ha-ha-ha-ha",
-  }, {
+  },
+  {
     title: "EURYDICE",
-    description: "A reimagining of Sarah Ruhl's play about Eurydice who falls to the underworld on her wedding day, performed at Pershing Square Signature Center/Romulus Linney Courtyard Theatre.",
-    tags: [ "off-broadway", "drama", "mythology", "off-broadway show" ],
+    description:
+      "A reimagining of Sarah Ruhl's play about Eurydice who falls to the underworld on her wedding day, performed at Pershing Square Signature Center/Romulus Linney Courtyard Theatre.",
+    tags: ["off-broadway", "drama", "mythology", "off-broadway show"],
     category: "art",
-    keywords: [ "Sarah Ruhl", "Eurydice", "underworld", "myth" ],
+    keywords: ["Sarah Ruhl", "Eurydice", "underworld", "myth"],
     id: "eurydice",
-  }, {
+  },
+  {
     title: "Just In Time",
-    description: "A jukebox biographical musical celebrating the life and music of Bobby Darin, directed by Alex Timbers, performed at Circle in the Square Theatre.",
-    tags: [ "off-broadway", "musical", "biographical", "off-broadway show" ],
+    description:
+      "A jukebox biographical musical celebrating the life and music of Bobby Darin, directed by Alex Timbers, performed at Circle in the Square Theatre.",
+    tags: ["off-broadway", "musical", "biographical", "off-broadway show"],
     category: "music",
-    keywords: [ "Bobby Darin", "jukebox musical", "Jonathan Groff" ],
+    keywords: ["Bobby Darin", "jukebox musical", "Jonathan Groff"],
     id: "just-in-time",
-  }, {
+  },
+  {
     title: "Heathers",
-    description: "A new life for the musical 'Heathers' on New York Off-Broadway stages featuring familiar Broadway faces.",
-    tags: [ "off-broadway", "musical", "revival", "off-broadway show" ],
+    description:
+      "A new life for the musical 'Heathers' on New York Off-Broadway stages featuring familiar Broadway faces.",
+    tags: ["off-broadway", "musical", "revival", "off-broadway show"],
     category: "music",
-    keywords: [ "Heathers", "musical revival", "Broadway faces" ],
+    keywords: ["Heathers", "musical revival", "Broadway faces"],
     id: "heathers",
-  }, {
+  },
+  {
     title: "Grease",
-    description: "An Off-Broadway production of 'Grease' with an entirely indigenous cast.",
-    tags: [ "off-broadway", "musical", "revival", "off-broadway show" ],
+    description:
+      "An Off-Broadway production of 'Grease' with an entirely indigenous cast.",
+    tags: ["off-broadway", "musical", "revival", "off-broadway show"],
     category: "music",
-    keywords: [ "Grease", "indigenous cast", "musical revival" ],
+    keywords: ["Grease", "indigenous cast", "musical revival"],
     id: "grease",
-  }, {
+  },
+  {
     title: "Maybe Happy Ending",
     description: "An Off-Broadway show in June 2025 in New York City.",
-    tags: [ "off-broadway", "musical", "off-broadway show" ],
+    tags: ["off-broadway", "musical", "off-broadway show"],
     category: "music",
-    keywords: [ "Maybe Happy Ending" ],
+    keywords: ["Maybe Happy Ending"],
     id: "maybe-happy-ending",
-  }, {
+  },
+  {
     title: "John Proctor is the Villain",
     description: "An Off-Broadway show running in June 2025 in New York City.",
-    tags: [ "off-broadway", "play", "off-broadway show" ],
+    tags: ["off-broadway", "play", "off-broadway show"],
     category: "art",
-    keywords: [ "John Proctor is the Villain" ],
+    keywords: ["John Proctor is the Villain"],
     id: "john-proctor-is-the-villain",
-  }, {
+  },
+  {
     title: "The Picture of Dorian Gray",
     description: "An Off-Broadway show in June 2025 in New York City.",
-    tags: [ "off-broadway", "play", "off-broadway show" ],
+    tags: ["off-broadway", "play", "off-broadway show"],
     category: "art",
-    keywords: [ "The Picture of Dorian Gray" ],
+    keywords: ["The Picture of Dorian Gray"],
     id: "the-picture-of-dorian-gray",
-  }, {
+  },
+  {
     title: "Good Night, and Good Luck",
     description: "An Off-Broadway show running in June 2025 in New York City.",
-    tags: [ "off-broadway", "play", "off-broadway show" ],
+    tags: ["off-broadway", "play", "off-broadway show"],
     category: "art",
-    keywords: [ "Good Night, and Good Luck" ],
+    keywords: ["Good Night, and Good Luck"],
     id: "good-night,-and-good-luck",
-  }, {
+  },
+  {
     title: "Death Becomes Her",
     description: "An Off-Broadway show in June 2025 in New York City.",
-    tags: [ "off-broadway", "play", "off-broadway show" ],
+    tags: ["off-broadway", "play", "off-broadway show"],
     category: "art",
-    keywords: [ "Death Becomes Her" ],
+    keywords: ["Death Becomes Her"],
     id: "death-becomes-her",
-  }, {
+  },
+  {
     title: "Werq the World 2025",
-    description: "Drag Race royalty including Derrick Barry as Britney Spears, Jaida Essence Hall as Beyonce, Naomi Smalls as Mariah Carey, Marina Summers as Ariana Grande, Morphine as Shakira, plus guest appearances from some of season 17's top contenders!",
-    tags: [ "RuPaul's Drag Race", "Werq the World", "drag show" ],
+    description:
+      "Drag Race royalty including Derrick Barry as Britney Spears, Jaida Essence Hall as Beyonce, Naomi Smalls as Mariah Carey, Marina Summers as Ariana Grande, Morphine as Shakira, plus guest appearances from some of season 17's top contenders!",
+    tags: ["RuPaul's Drag Race", "Werq the World", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "RuPaul", "performance", "iconic impersonations", "The Rooftop at Pier 17",
-      "New York City", "2025", "August 28"
+    keywords: [
+      "drag",
+      "RuPaul",
+      "performance",
+      "iconic impersonations",
+      "The Rooftop at Pier 17",
+      "New York City",
+      "2025",
+      "August 28",
     ],
     id: "werq-the-world-2025",
-  }, {
+  },
+  {
     title: "Sasha Colby Stripped Tour",
-    description: "Drag Race 2023 winner Sasha Colby performs at Town Hall Theater as part of her North America tour.",
-    tags: [ "Sasha Colby", "Drag Race", "Stripped Tour", "drag show" ],
+    description:
+      "Drag Race 2023 winner Sasha Colby performs at Town Hall Theater as part of her North America tour.",
+    tags: ["Sasha Colby", "Drag Race", "Stripped Tour", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "Sasha Colby", "Town Hall Theater", "New York City", "2025", "October 28" ],
+    keywords: [
+      "drag",
+      "Sasha Colby",
+      "Town Hall Theater",
+      "New York City",
+      "2025",
+      "October 28",
+    ],
     id: "sasha-colby-stripped-tour",
-  }, {
+  },
+  {
     title: "Chappell Roan Drag Brunch",
-    description: "Drag brunch featuring Chappell Roan and other drag performers.",
-    tags: [ "drag brunch", "Chappell Roan", "drag show" ],
+    description:
+      "Drag brunch featuring Chappell Roan and other drag performers.",
+    tags: ["drag brunch", "Chappell Roan", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "brunch", "New York City", "June 1, 2025", "12:00PM & 2:30PM" ],
+    keywords: [
+      "drag",
+      "brunch",
+      "New York City",
+      "June 1, 2025",
+      "12:00PM & 2:30PM",
+    ],
     id: "chappell-roan-drag-brunch",
-  }, {
+  },
+  {
     title: "Bad Bunny Drag Brunch",
-    description: "Drag brunch inspired by Bad Bunny, featuring drag performances.",
-    tags: [ "drag brunch", "Bad Bunny", "drag show" ],
+    description:
+      "Drag brunch inspired by Bad Bunny, featuring drag performances.",
+    tags: ["drag brunch", "Bad Bunny", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "brunch", "New York City", "June 8, 2025", "12:00PM & 2:30PM" ],
+    keywords: [
+      "drag",
+      "brunch",
+      "New York City",
+      "June 8, 2025",
+      "12:00PM & 2:30PM",
+    ],
     id: "bad-bunny-drag-brunch",
-  }, {
+  },
+  {
     title: "Broadway Drag Brunch",
-    description: "Broadway-themed drag brunch with performances by NYC drag queens.",
-    tags: [ "drag brunch", "Broadway", "drag show" ],
+    description:
+      "Broadway-themed drag brunch with performances by NYC drag queens.",
+    tags: ["drag brunch", "Broadway", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "brunch", "Broadway", "New York City", "June 15, 2025", "12:00PM" ],
+    keywords: [
+      "drag",
+      "brunch",
+      "Broadway",
+      "New York City",
+      "June 15, 2025",
+      "12:00PM",
+    ],
     id: "broadway-drag-brunch",
-  }, {
+  },
+  {
     title: "Gaga Pride Drag Brunch",
-    description: "Lady Gaga-inspired drag brunch for Pride, featuring drag performances.",
-    tags: [ "drag brunch", "Lady Gaga", "Pride", "drag show" ],
+    description:
+      "Lady Gaga-inspired drag brunch for Pride, featuring drag performances.",
+    tags: ["drag brunch", "Lady Gaga", "Pride", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "brunch", "Pride", "New York City", "June 22, 2025", "12:00PM & 2:30PM" ],
+    keywords: [
+      "drag",
+      "brunch",
+      "Pride",
+      "New York City",
+      "June 22, 2025",
+      "12:00PM & 2:30PM",
+    ],
     id: "gaga-pride-drag-brunch",
-  }, {
+  },
+  {
     title: "Beyoncé Drag Brunch",
-    description: "Drag brunch celebrating Beyoncé, featuring drag performances.",
-    tags: [ "drag brunch", "Beyoncé", "drag show" ],
+    description:
+      "Drag brunch celebrating Beyoncé, featuring drag performances.",
+    tags: ["drag brunch", "Beyoncé", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "brunch", "Beyoncé", "New York City", "May 25, 2025", "12:00PM" ],
+    keywords: [
+      "drag",
+      "brunch",
+      "Beyoncé",
+      "New York City",
+      "May 25, 2025",
+      "12:00PM",
+    ],
     id: "beyoncé-drag-brunch",
-  }, {
+  },
+  {
     title: "Werkin Girls Drag Queen Show NYC",
-    description: "Evening drag show featuring NYC's top drag queens, with lip-syncs, dance routines, and runway struts.",
-    tags: [ "Werkin Girls", "drag show", "NYC", "drag show" ],
+    description:
+      "Evening drag show featuring NYC's top drag queens, with lip-syncs, dance routines, and runway struts.",
+    tags: ["Werkin Girls", "drag show", "NYC", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "Werkin Girls", "New York City", "July 5, 2025", "evening show" ],
+    keywords: [
+      "drag",
+      "Werkin Girls",
+      "New York City",
+      "July 5, 2025",
+      "evening show",
+    ],
     id: "werkin-girls-drag-queen-show-nyc",
-  }, {
+  },
+  {
     title: "Dungeons & Drag Queens",
-    description: "Drag queens perform in a Dungeons & Dragons-inspired show at Caveat.",
-    tags: [ "drag show", "Dungeons & Dragons", "Caveat", "drag show" ],
+    description:
+      "Drag queens perform in a Dungeons & Dragons-inspired show at Caveat.",
+    tags: ["drag show", "Dungeons & Dragons", "Caveat", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "Dungeons & Dragons", "New York City", "February 14, 2025", "Caveat" ],
+    keywords: [
+      "drag",
+      "Dungeons & Dragons",
+      "New York City",
+      "February 14, 2025",
+      "Caveat",
+    ],
     id: "dungeons-&-drag-queens",
-  }, {
+  },
+  {
     title: "NYC Drag Brunch (General)",
-    description: "Regular drag brunch events featuring rotating drag performers in NYC.",
-    tags: [ "drag brunch", "NYC", "drag show" ],
+    description:
+      "Regular drag brunch events featuring rotating drag performers in NYC.",
+    tags: ["drag brunch", "NYC", "drag show"],
     category: "drag show",
-    keywords: [ "drag", "brunch", "New York City", "2025", "various dates" ],
+    keywords: ["drag", "brunch", "New York City", "2025", "various dates"],
     id: "nyc-drag-brunch-(general)",
-  }, {
+  },
+  {
     title: "New York Fashion Week Fall/Winter 2025",
-    description: "A major fashion event showcasing Fall/Winter 2025 collections by top designers in New York City, held February 6-11, 2025.",
-    tags: [ "fashion show", "new york city", "fall winter 2025", "nyfw", "fashion show" ],
+    description:
+      "A major fashion event showcasing Fall/Winter 2025 collections by top designers in New York City, held February 6-11, 2025.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "fall winter 2025",
+      "nyfw",
+      "fashion show",
+    ],
     category: "fashion show",
-    keywords: [ "fall/winter 2025", "new york", "fashion week", "runway", "designers" ],
+    keywords: [
+      "fall/winter 2025",
+      "new york",
+      "fashion week",
+      "runway",
+      "designers",
+    ],
     id: "new-york-fashion-week-fall/winter-2025",
-  }, {
+  },
+  {
     title: "New York Fashion Week Spring/Summer 2026",
-    description: "The premier fashion event of the year featuring Spring/Summer 2026 collections, taking place September 11-16, 2025 at various venues in New York City.",
-    tags: [ "fashion show", "new york city", "spring summer 2026", "nyfw", "fashion show" ],
+    description:
+      "The premier fashion event of the year featuring Spring/Summer 2026 collections, taking place September 11-16, 2025 at various venues in New York City.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "spring summer 2026",
+      "nyfw",
+      "fashion show",
+    ],
     category: "fashion show",
-    keywords: [ "spring/summer 2026", "new york", "fashion week", "runway", "designers" ],
+    keywords: [
+      "spring/summer 2026",
+      "new york",
+      "fashion week",
+      "runway",
+      "designers",
+    ],
     id: "new-york-fashion-week-spring/summer-2026",
-  }, {
-    title: "New York Fashion Week September 2025 at Historic West Edge at The Highline",
-    description: "An immersive fashion experience from September 11-14, 2025, featuring runway shows, panel discussions, product demos, and social events at the Historic West Edge at The Highline.",
-    tags: [ "fashion show", "new york city", "september 2025", "nyfw", "highline", "fashion show" ],
+  },
+  {
+    title:
+      "New York Fashion Week September 2025 at Historic West Edge at The Highline",
+    description:
+      "An immersive fashion experience from September 11-14, 2025, featuring runway shows, panel discussions, product demos, and social events at the Historic West Edge at The Highline.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "september 2025",
+      "nyfw",
+      "highline",
+      "fashion show",
+    ],
     category: "fashion show",
-    keywords: [ "historic west edge", "highline", "fashion village", "runway", "panel discussions" ],
+    keywords: [
+      "historic west edge",
+      "highline",
+      "fashion village",
+      "runway",
+      "panel discussions",
+    ],
     id: "new-york-fashion-week-september-2025-at-historic-west-edge-at-the-highline",
   },
   {
     title: "NYFW: The Shows - Iconic Designers and Runway Shows",
-    description: "Experience the pinnacle of fashion with iconic designers and runway shows defining New York Fashion Week, showcasing the latest trends in NYC.",
-    tags: [ "fashion show", "new york city", "nyfw", "runway", "designers", "fashion show" ],
-    category: "fashion show",
-    keywords: [ "iconic designers", "runway shows", "latest trends", "new york fashion week" ],
-    id: "nyfw:-the-shows---iconic-designers-and-runway-shows",
-  }, {
-    title: "New York Fashion Week Spring/Summer 2026 - September 11-16, 2025",
-    description: "A key event in the fashion calendar presenting Spring/Summer 2026 collections with over 36,000 sq ft of space and a fashion village in New York City.",
-    tags: [ "fashion show", "new york city", "spring summer 2026", "nyfw", "fashion show" ],
-    category: "fashion show",
-    keywords: [ "spring/summer 2026", "fashion village", "runway", "new york fashion week" ],
-    id: "new-york-fashion-week-spring/summer-2026---september-11-16,-2025",
-  }, {
-    title: "New York Fashion Week - Industry Mixers and After Parties",
-    description: "Social events during New York Fashion Week including industry mixers, after parties, and lifestyle events such as yoga + mimosas, enhancing the fashion experience.",
-    tags: [ "fashion show", "new york city", "nyfw", "social events", "after parties", "fashion show" ],
-    category: "fashion show",
-    keywords: [ "industry mixers", "after parties", "lifestyle events", "yoga", "mimosas" ],
-    id: "new-york-fashion-week---industry-mixers-and-after-parties",
-  }, {
-    title: "New York Fashion Week - Panel Discussions and Product Demonstrations",
-    description: "Engage with fashion industry professionals through panel discussions and product demonstrations held during New York Fashion Week in New York City.",
-    tags: [ "fashion show", "new york city", "nyfw", "panel discussions", "product demos",
-      "fashion show"
+    description:
+      "Experience the pinnacle of fashion with iconic designers and runway shows defining New York Fashion Week, showcasing the latest trends in NYC.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "nyfw",
+      "runway",
+      "designers",
+      "fashion show",
     ],
     category: "fashion show",
-    keywords: [ "panel discussions", "product demonstrations", "fashion industry", "new york fashion week" ],
+    keywords: [
+      "iconic designers",
+      "runway shows",
+      "latest trends",
+      "new york fashion week",
+    ],
+    id: "nyfw:-the-shows---iconic-designers-and-runway-shows",
+  },
+  {
+    title: "New York Fashion Week Spring/Summer 2026 - September 11-16, 2025",
+    description:
+      "A key event in the fashion calendar presenting Spring/Summer 2026 collections with over 36,000 sq ft of space and a fashion village in New York City.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "spring summer 2026",
+      "nyfw",
+      "fashion show",
+    ],
+    category: "fashion show",
+    keywords: [
+      "spring/summer 2026",
+      "fashion village",
+      "runway",
+      "new york fashion week",
+    ],
+    id: "new-york-fashion-week-spring/summer-2026---september-11-16,-2025",
+  },
+  {
+    title: "New York Fashion Week - Industry Mixers and After Parties",
+    description:
+      "Social events during New York Fashion Week including industry mixers, after parties, and lifestyle events such as yoga + mimosas, enhancing the fashion experience.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "nyfw",
+      "social events",
+      "after parties",
+      "fashion show",
+    ],
+    category: "fashion show",
+    keywords: [
+      "industry mixers",
+      "after parties",
+      "lifestyle events",
+      "yoga",
+      "mimosas",
+    ],
+    id: "new-york-fashion-week---industry-mixers-and-after-parties",
+  },
+  {
+    title:
+      "New York Fashion Week - Panel Discussions and Product Demonstrations",
+    description:
+      "Engage with fashion industry professionals through panel discussions and product demonstrations held during New York Fashion Week in New York City.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "nyfw",
+      "panel discussions",
+      "product demos",
+      "fashion show",
+    ],
+    category: "fashion show",
+    keywords: [
+      "panel discussions",
+      "product demonstrations",
+      "fashion industry",
+      "new york fashion week",
+    ],
     id: "new-york-fashion-week---panel-discussions-and-product-demonstrations",
-  }, {
+  },
+  {
     title: "New York Fashion Week - Exclusive On-site Hospitality",
-    description: "Exclusive hospitality and insider access for guests attending New York Fashion Week, providing a coveted invitation to the fashion industry's transformation.",
-    tags: [ "fashion show", "new york city", "nyfw", "hospitality", "exclusive", "fashion show" ],
+    description:
+      "Exclusive hospitality and insider access for guests attending New York Fashion Week, providing a coveted invitation to the fashion industry's transformation.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "nyfw",
+      "hospitality",
+      "exclusive",
+      "fashion show",
+    ],
     category: "fashion show",
-    keywords: [ "exclusive hospitality", "insider access", "fashion industry", "new york fashion week" ],
+    keywords: [
+      "exclusive hospitality",
+      "insider access",
+      "fashion industry",
+      "new york fashion week",
+    ],
     id: "new-york-fashion-week---exclusive-on-site-hospitality",
-  }, {
+  },
+  {
     title: "New York Fashion Week - Fashion Village Experience",
-    description: "A vibrant fashion village at New York Fashion Week offering a range of exciting events, showcasing the latest fashion trends and designers in NYC.",
-    tags: [ "fashion show", "new york city", "nyfw", "fashion village", "events", "fashion show" ],
+    description:
+      "A vibrant fashion village at New York Fashion Week offering a range of exciting events, showcasing the latest fashion trends and designers in NYC.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "nyfw",
+      "fashion village",
+      "events",
+      "fashion show",
+    ],
     category: "fashion show",
-    keywords: [ "fashion village", "latest trends", "designers", "new york fashion week" ],
+    keywords: [
+      "fashion village",
+      "latest trends",
+      "designers",
+      "new york fashion week",
+    ],
     id: "new-york-fashion-week---fashion-village-experience",
-  }, {
+  },
+  {
     title: "New York Fashion Week - September 11-14, 2025",
-    description: "Join the premier fashion event of the year at New York Fashion Week, September 11-14, 2025, featuring top designers, models, and industry professionals in NYC.",
-    tags: [ "fashion show", "new york city", "nyfw", "september 2025", "designers", "fashion show" ],
+    description:
+      "Join the premier fashion event of the year at New York Fashion Week, September 11-14, 2025, featuring top designers, models, and industry professionals in NYC.",
+    tags: [
+      "fashion show",
+      "new york city",
+      "nyfw",
+      "september 2025",
+      "designers",
+      "fashion show",
+    ],
     category: "fashion show",
-    keywords: [ "premier fashion event", "top designers", "models", "industry professionals",
-      "new york"
+    keywords: [
+      "premier fashion event",
+      "top designers",
+      "models",
+      "industry professionals",
+      "new york",
     ],
     id: "new-york-fashion-week---september-11-14,-2025",
-  }, {
+  },
+  {
     title: "Yes Chef Food Fest",
-    description: "A collection of the best restaurants and culinary experiences on earth coming together for a weekend of food, giveaways, and more.",
-    tags: [ "food festival", "Brooklyn", "food festival" ],
+    description:
+      "A collection of the best restaurants and culinary experiences on earth coming together for a weekend of food, giveaways, and more.",
+    tags: ["food festival", "Brooklyn", "food festival"],
     category: "food festival",
-    keywords: [ "restaurants", "culinary experiences", "giveaways" ],
+    keywords: ["restaurants", "culinary experiences", "giveaways"],
     id: "yes-chef-food-fest",
-  }, {
+  },
+  {
     title: "Grand Central Food Festival Series Fair",
-    description: "Midtown food festival along 45th Street between Lexington Avenue & 3rd Ave.",
-    tags: [ "food festival", "Midtown Manhattan", "food festival" ],
+    description:
+      "Midtown food festival along 45th Street between Lexington Avenue & 3rd Ave.",
+    tags: ["food festival", "Midtown Manhattan", "food festival"],
     category: "food festival",
-    keywords: [ "local vendors", "street fair" ],
+    keywords: ["local vendors", "street fair"],
     id: "grand-central-food-festival-series-fair",
-  }, {
+  },
+  {
     title: "Grand Central Food Block Party",
-    description: "Midtown food festival along 41st Street between Lexington Avenue & 3rd Ave.",
-    tags: [ "food festival", "Midtown Manhattan", "food festival" ],
+    description:
+      "Midtown food festival along 41st Street between Lexington Avenue & 3rd Ave.",
+    tags: ["food festival", "Midtown Manhattan", "food festival"],
     category: "food festival",
-    keywords: [ "block party", "local vendors" ],
+    keywords: ["block party", "local vendors"],
     id: "grand-central-food-block-party",
-  }, {
+  },
+  {
     title: "Uptown Night Market",
-    description: "Monthly food market/festival featuring more than 80 local vendors in West Harlem/Washington Heights.",
-    tags: [ "food festival", "Harlem", "Washington Heights", "food festival" ],
+    description:
+      "Monthly food market/festival featuring more than 80 local vendors in West Harlem/Washington Heights.",
+    tags: ["food festival", "Harlem", "Washington Heights", "food festival"],
     category: "food festival",
-    keywords: [ "night market", "local vendors" ],
+    keywords: ["night market", "local vendors"],
     id: "uptown-night-market",
-  }, {
+  },
+  {
     title: "Smorgasburg",
-    description: "America's largest weekly open-air food market, attracting tens of thousands of visitors each weekend.",
-    tags: [ "food festival", "Brooklyn", "Manhattan", "food festival" ],
+    description:
+      "America's largest weekly open-air food market, attracting tens of thousands of visitors each weekend.",
+    tags: ["food festival", "Brooklyn", "Manhattan", "food festival"],
     category: "food festival",
-    keywords: [ "open-air market", "local vendors", "diverse cuisines" ],
+    keywords: ["open-air market", "local vendors", "diverse cuisines"],
     id: "smorgasburg",
-  }, {
+  },
+  {
     title: "Queens Night Market",
-    description: "Weekly night market in Queens featuring diverse international foods and local vendors.",
-    tags: [ "food festival", "Queens", "food festival" ],
+    description:
+      "Weekly night market in Queens featuring diverse international foods and local vendors.",
+    tags: ["food festival", "Queens", "food festival"],
     category: "food festival",
-    keywords: [ "night market", "international food", "local vendors" ],
+    keywords: ["night market", "international food", "local vendors"],
     id: "queens-night-market",
-  }, {
+  },
+  {
     title: "NYC Multicultural Festival",
-    description: "Celebration of diverse cultures through food, music, and performances.",
-    tags: [ "food festival", "multicultural", "food festival" ],
+    description:
+      "Celebration of diverse cultures through food, music, and performances.",
+    tags: ["food festival", "multicultural", "food festival"],
     category: "food festival",
-    keywords: [ "cultural celebration", "food", "music" ],
+    keywords: ["cultural celebration", "food", "music"],
     id: "nyc-multicultural-festival",
-  }, {
+  },
+  {
     title: "New York Latin Food Fest",
     description: "Festival celebrating Latin American cuisine and culture.",
-    tags: [ "food festival", "Latin American", "food festival" ],
+    tags: ["food festival", "Latin American", "food festival"],
     category: "food festival",
-    keywords: [ "Latin food", "culture", "music" ],
+    keywords: ["Latin food", "culture", "music"],
     id: "new-york-latin-food-fest",
-  }, {
+  },
+  {
     title: "Vegandale Festival",
     description: "Festival dedicated to vegan food and lifestyle.",
-    tags: [ "food festival", "vegan", "food festival" ],
+    tags: ["food festival", "vegan", "food festival"],
     category: "food festival",
-    keywords: [ "vegan food", "lifestyle", "plant-based" ],
+    keywords: ["vegan food", "lifestyle", "plant-based"],
     id: "vegandale-festival",
-  }, {
+  },
+  {
     title: "Food Network New York City Wine & Food Festival",
-    description: "Premier wine & food festival featuring world-class chefs and unforgettable culinary experiences.",
-    tags: [ "food festival", "wine", "Manhattan", "food festival" ],
+    description:
+      "Premier wine & food festival featuring world-class chefs and unforgettable culinary experiences.",
+    tags: ["food festival", "wine", "Manhattan", "food festival"],
     category: "food festival",
-    keywords: [ "wine", "chefs", "culinary experiences" ],
+    keywords: ["wine", "chefs", "culinary experiences"],
     id: "food-network-new-york-city-wine-&-food-festival",
-  }, {
+  },
+  {
     title: "Bar Tizio Meatpacking District",
-    description: "Wine bar sibling to chef Jonathan Waxman’s Barbuto, offering casual dining with dishes like tuna tartare, agnolotti, and steak with romesco. Features 30 wines by the glass.",
-    tags: [ "wine bar", "casual", "Meatpacking District", "restaurant opening" ],
+    description:
+      "Wine bar sibling to chef Jonathan Waxman’s Barbuto, offering casual dining with dishes like tuna tartare, agnolotti, and steak with romesco. Features 30 wines by the glass.",
+    tags: ["wine bar", "casual", "Meatpacking District", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "Jonathan Waxman", "Barbuto", "wine" ],
+    keywords: ["Jonathan Waxman", "Barbuto", "wine"],
     id: "bar-tizio-meatpacking-district",
-  }, {
+  },
+  {
     title: "Maison Passerelle",
-    description: "Chef Gregory Gourdet’s new spot in the Financial District, blending New York and French colonial flavors. Menu includes dry-aged NY strip steak with Haitian coffee rubs and West African stews.",
-    tags: [ "French", "colonial", "Financial District", "restaurant opening" ],
+    description:
+      "Chef Gregory Gourdet’s new spot in the Financial District, blending New York and French colonial flavors. Menu includes dry-aged NY strip steak with Haitian coffee rubs and West African stews.",
+    tags: ["French", "colonial", "Financial District", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "Gregory Gourdet", "Top Chef", "James Beard" ],
+    keywords: ["Gregory Gourdet", "Top Chef", "James Beard"],
     id: "maison-passerelle",
-  }, {
+  },
+  {
     title: "Oyamel",
-    description: "José Andrés Group’s Mexican restaurant in Hudson Yards, featuring tacos, ceviches, and margaritas in a vibrant, butterfly-adorned space.",
-    tags: [ "Mexican", "Hudson Yards", "José Andrés", "restaurant opening" ],
+    description:
+      "José Andrés Group’s Mexican restaurant in Hudson Yards, featuring tacos, ceviches, and margaritas in a vibrant, butterfly-adorned space.",
+    tags: ["Mexican", "Hudson Yards", "José Andrés", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "tacos", "ceviche", "margaritas" ],
+    keywords: ["tacos", "ceviche", "margaritas"],
     id: "oyamel",
-  }, {
+  },
+  {
     title: "Yamada",
-    description: "Chef Isao Yamada’s kaiseki restaurant in Chinatown, offering a 10-course tasting menu with dishes like king crab chawanmushi and sakura-aged wagyu.",
-    tags: [ "Japanese", "kaiseki", "Chinatown", "restaurant opening" ],
+    description:
+      "Chef Isao Yamada’s kaiseki restaurant in Chinatown, offering a 10-course tasting menu with dishes like king crab chawanmushi and sakura-aged wagyu.",
+    tags: ["Japanese", "kaiseki", "Chinatown", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "Isao Yamada", "tasting menu", "seasonal" ],
+    keywords: ["Isao Yamada", "tasting menu", "seasonal"],
     id: "yamada",
-  }, {
+  },
+  {
     title: "Le Chêne",
     description: "New restaurant in the West Village, details to be announced.",
-    tags: [ "West Village", "new", "restaurant", "restaurant opening" ],
+    tags: ["West Village", "new", "restaurant", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "West Village", "new" ],
+    keywords: ["West Village", "new"],
     id: "le-chêne",
-  }, {
+  },
+  {
     title: "I Cavallini",
     description: "New restaurant in New York City, details to be announced.",
-    tags: [ "new", "restaurant", "NYC", "restaurant opening" ],
+    tags: ["new", "restaurant", "NYC", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "new", "restaurant" ],
+    keywords: ["new", "restaurant"],
     id: "i-cavallini",
-  }, {
+  },
+  {
     title: "Chateau Royale",
-    description: "French restaurant opening in spring 2025 from Cody Pruitt, owner of Libertine in the West Village.",
-    tags: [ "French", "West Village", "Cody Pruitt", "restaurant opening" ],
+    description:
+      "French restaurant opening in spring 2025 from Cody Pruitt, owner of Libertine in the West Village.",
+    tags: ["French", "West Village", "Cody Pruitt", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "Libertine", "spring 2025", "French cuisine" ],
+    keywords: ["Libertine", "spring 2025", "French cuisine"],
     id: "chateau-royale",
-  }, {
+  },
+  {
     title: "Shifka",
-    description: "Pita shop in NoHo from the team behind Sami & Susu, featuring pita sandwiches, dips, bowls, and soft serve ice cream. Opens summer 2025.",
-    tags: [ "pita", "NoHo", "Sami & Susu", "restaurant opening" ],
+    description:
+      "Pita shop in NoHo from the team behind Sami & Susu, featuring pita sandwiches, dips, bowls, and soft serve ice cream. Opens summer 2025.",
+    tags: ["pita", "NoHo", "Sami & Susu", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "pita sandwiches", "soft serve", "Amir Nathan",
-      "Jordan Anderson"
+    keywords: [
+      "pita sandwiches",
+      "soft serve",
+      "Amir Nathan",
+      "Jordan Anderson",
     ],
     id: "shifka",
-  }, {
+  },
+  {
     title: "Haymarket",
     description: "New restaurant opening in Chelsea in spring 2025.",
-    tags: [ "Chelsea", "spring 2025", "restaurant", "restaurant opening" ],
+    tags: ["Chelsea", "spring 2025", "restaurant", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "Chelsea", "spring 2025" ],
+    keywords: ["Chelsea", "spring 2025"],
     id: "haymarket",
-  }, {
+  },
+  {
     title: "Canal Arcade (Yamada)",
-    description: "Yamada restaurant is located inside Canal Arcade, Chinatown, offering a unique Japanese kaiseki experience.",
-    tags: [ "Chinatown", "kaiseki", "Japanese", "restaurant opening" ],
+    description:
+      "Yamada restaurant is located inside Canal Arcade, Chinatown, offering a unique Japanese kaiseki experience.",
+    tags: ["Chinatown", "kaiseki", "Japanese", "restaurant opening"],
     category: "restaurant opening",
-    keywords: [ "Canal Arcade", "Isao Yamada", "tasting menu" ],
+    keywords: ["Canal Arcade", "Isao Yamada", "tasting menu"],
     id: "canal-arcade-(yamada)",
-  }, {
+  },
+  {
     title: "Tech Gather NYC June Meetup",
-    description: "A monthly tech meetup held at The Irish American Pub in New York, NY, focusing on networking and discussions around technology.",
-    tags: [ "tech", "meetup", "networking", "tech meetup" ],
+    description:
+      "A monthly tech meetup held at The Irish American Pub in New York, NY, focusing on networking and discussions around technology.",
+    tags: ["tech", "meetup", "networking", "tech meetup"],
     category: "tech meetup",
-    keywords: [ "Tech Gather NYC", "Irish American Pub",
-      "networking", "technology"
+    keywords: [
+      "Tech Gather NYC",
+      "Irish American Pub",
+      "networking",
+      "technology",
     ],
     id: "tech-gather-nyc-june-meetup",
-  }, {
+  },
+  {
     title: "NY Tech Meetup - June 2, 2025",
-    description: "A special June meetup hosted by NY Tech Alliance and NY Robotics Network at Civic Hall, featuring demos and presentations on Physical & Embodied AI, robotics, and interactive devices.",
-    tags: [ "tech", "meetup", "AI", "robotics", "tech meetup" ],
+    description:
+      "A special June meetup hosted by NY Tech Alliance and NY Robotics Network at Civic Hall, featuring demos and presentations on Physical & Embodied AI, robotics, and interactive devices.",
+    tags: ["tech", "meetup", "AI", "robotics", "tech meetup"],
     category: "tech meetup",
-    keywords: [ "NY Tech Meetup", "Civic Hall", "Physical AI",
-      "Embodied AI", "robotics", "interactive devices"
+    keywords: [
+      "NY Tech Meetup",
+      "Civic Hall",
+      "Physical AI",
+      "Embodied AI",
+      "robotics",
+      "interactive devices",
     ],
     id: "ny-tech-meetup---june-2,-2025",
-  }, {
+  },
+  {
     title: "Annual BROOKLYN TECH EXPO - June 3, 2025",
-    description: "Brooklyn’s largest tech conference focusing on AI and emerging technologies, featuring seminars, networking, and exhibitor floor access, part of NY Tech Week.",
-    tags: [ "tech", "expo", "conference", "networking", "AI", "tech meetup" ],
+    description:
+      "Brooklyn’s largest tech conference focusing on AI and emerging technologies, featuring seminars, networking, and exhibitor floor access, part of NY Tech Week.",
+    tags: ["tech", "expo", "conference", "networking", "AI", "tech meetup"],
     category: "tech meetup",
-    keywords: [ "Brooklyn Tech Expo", "AI", "seminars", "networking",
-      "NY Tech Week"
+    keywords: [
+      "Brooklyn Tech Expo",
+      "AI",
+      "seminars",
+      "networking",
+      "NY Tech Week",
     ],
     id: "annual-brooklyn-tech-expo---june-3,-2025",
   },
   {
     title: "Tech Pizza Party NYC - June 1, 2025",
-    description: "A casual tech meetup event featuring pizza and networking opportunities for tech enthusiasts in NYC, part of NYC Tech Week.",
-    tags: [ "tech", "meetup", "networking", "pizza", "tech meetup" ],
+    description:
+      "A casual tech meetup event featuring pizza and networking opportunities for tech enthusiasts in NYC, part of NYC Tech Week.",
+    tags: ["tech", "meetup", "networking", "pizza", "tech meetup"],
     category: "tech meetup",
-    keywords: [ "Tech Pizza Party NYC", "networking", "NYC Tech Week" ],
+    keywords: ["Tech Pizza Party NYC", "networking", "NYC Tech Week"],
     id: "tech-pizza-party-nyc---june-1,-2025",
   },
   {
     title: "Tech Week Founder & Funder Power Walk - June 1, 2025",
-    description: "An event for founders and funders to network and connect during NYC Tech Week, featuring a power walk and discussions.",
-    tags: [ "tech", "meetup", "founders", "funders", "networking", "tech meetup" ],
+    description:
+      "An event for founders and funders to network and connect during NYC Tech Week, featuring a power walk and discussions.",
+    tags: [
+      "tech",
+      "meetup",
+      "founders",
+      "funders",
+      "networking",
+      "tech meetup",
+    ],
     category: "tech meetup",
-    keywords: [ "Tech Week", "Founder & Funder Power Walk",
-      "networking", "NYC Tech Week"
+    keywords: [
+      "Tech Week",
+      "Founder & Funder Power Walk",
+      "networking",
+      "NYC Tech Week",
     ],
     id: "tech-week-founder-&-funder-power-walk---june-1,-2025",
   },
   {
     title: "Coffee & Cofounders - June 2, 2025",
-    description: "A morning meetup for cofounders and entrepreneurs to connect over coffee during NYC Tech Week.",
-    tags: [ "tech", "meetup", "entrepreneurs", "networking", "coffee", "tech meetup" ],
+    description:
+      "A morning meetup for cofounders and entrepreneurs to connect over coffee during NYC Tech Week.",
+    tags: [
+      "tech",
+      "meetup",
+      "entrepreneurs",
+      "networking",
+      "coffee",
+      "tech meetup",
+    ],
     category: "tech meetup",
-    keywords: [ "Coffee & Cofounders", "entrepreneurs",
-      "networking", "NYC Tech Week"
+    keywords: [
+      "Coffee & Cofounders",
+      "entrepreneurs",
+      "networking",
+      "NYC Tech Week",
     ],
     id: "coffee-&-cofounders---june-2,-2025",
   },
   {
     title: "NY Tech Meetup - Physical & Embodied AI Theme",
-    description: "A meetup focusing on how AI takes physical form in robotics and interactive devices, featuring demos and presentations from leading innovators.",
-    tags: [ "tech", "meetup", "AI", "robotics", "interactive devices",
-      "tech meetup"
+    description:
+      "A meetup focusing on how AI takes physical form in robotics and interactive devices, featuring demos and presentations from leading innovators.",
+    tags: [
+      "tech",
+      "meetup",
+      "AI",
+      "robotics",
+      "interactive devices",
+      "tech meetup",
     ],
     category: "tech meetup",
-    keywords: [ "Physical AI", "Embodied AI", "robotics", "interactive devices",
-      "demos"
+    keywords: [
+      "Physical AI",
+      "Embodied AI",
+      "robotics",
+      "interactive devices",
+      "demos",
     ],
     id: "ny-tech-meetup---physical-&-embodied-ai-theme",
   },
   {
     title: "NY Tech Meetup - Robotics Network Collaboration",
-    description: "A collaborative event between NY Tech Alliance and NY Robotics Network highlighting robotics innovations and AI applications.",
-    tags: [ "tech", "meetup", "robotics", "AI", "collaboration", "tech meetup" ],
+    description:
+      "A collaborative event between NY Tech Alliance and NY Robotics Network highlighting robotics innovations and AI applications.",
+    tags: ["tech", "meetup", "robotics", "AI", "collaboration", "tech meetup"],
     category: "tech meetup",
-    keywords: [ "NY Tech Alliance", "NY Robotics Network",
-      "robotics", "AI", "collaboration"
+    keywords: [
+      "NY Tech Alliance",
+      "NY Robotics Network",
+      "robotics",
+      "AI",
+      "collaboration",
     ],
     id: "ny-tech-meetup---robotics-network-collaboration",
   },
   {
     title: "Brooklyn Tech Expo - Seminars & Networking",
-    description: "An all-day event with seminars on AI and emerging tech, networking opportunities, and free professional headshots for attendees.",
-    tags: [ "tech", "expo", "seminars", "networking", "AI", "tech meetup" ],
+    description:
+      "An all-day event with seminars on AI and emerging tech, networking opportunities, and free professional headshots for attendees.",
+    tags: ["tech", "expo", "seminars", "networking", "AI", "tech meetup"],
     category: "tech meetup",
-    keywords: [ "seminars", "networking", "AI", "professional headshots" ],
+    keywords: ["seminars", "networking", "AI", "professional headshots"],
     id: "brooklyn-tech-expo---seminars-&-networking",
   },
   {
     title: "NY Tech Meetup - June Event at Civic Hall",
-    description: "A June meetup event at Civic Hall featuring a curated lineup of tech demos and presentations, part of NY Tech Week celebrations.",
-    tags: [ "tech", "meetup", "Civic Hall", "demos", "NY Tech Week", "tech meetup" ],
+    description:
+      "A June meetup event at Civic Hall featuring a curated lineup of tech demos and presentations, part of NY Tech Week celebrations.",
+    tags: [
+      "tech",
+      "meetup",
+      "Civic Hall",
+      "demos",
+      "NY Tech Week",
+      "tech meetup",
+    ],
     category: "tech meetup",
-    keywords: [ "Civic Hall", "tech demos", "NY Tech Week", "June event" ],
+    keywords: ["Civic Hall", "tech demos", "NY Tech Week", "June event"],
     id: "ny-tech-meetup---june-event-at-civic-hall",
-  }, {
+  },
+  {
     title: "NY Tech Week",
-    description: "A16z presents Tech Week 2025, bringing together top founders, funds, and companies globally.",
+    description:
+      "A16z presents Tech Week 2025, bringing together top founders, funds, and companies globally.",
     category: "Tech Conference",
-    keywords: [ "Founders", "Funds", "Companies", "Global Networking" ],
+    keywords: ["Founders", "Funds", "Companies", "Global Networking"],
     id: "ny-tech-week",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "AI + BLOCKCHAIN: Innovation + Investment",
-    description: "Tech conference focusing on AI and Blockchain innovation and investment in New York.",
+    description:
+      "Tech conference focusing on AI and Blockchain innovation and investment in New York.",
     category: "Tech Conference",
-    keywords: [ "AI", "Blockchain", "Investment" ],
+    keywords: ["AI", "Blockchain", "Investment"],
     id: "ai-+-blockchain:-innovation-+-investment",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "TECHSPO New York 2025",
-    description: "Technology Expo featuring Internet, Mobile, AdTech, MarTech, and SaaS innovations.",
+    description:
+      "Technology Expo featuring Internet, Mobile, AdTech, MarTech, and SaaS innovations.",
     category: "Tech Conference",
-    keywords: [ "Technology Expo", "Internet", "Mobile", "AdTech", "MarTech",
-      "SaaS"
+    keywords: [
+      "Technology Expo",
+      "Internet",
+      "Mobile",
+      "AdTech",
+      "MarTech",
+      "SaaS",
     ],
     id: "techspo-new-york-2025",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "LeadDev New York",
-    description: "Premier conference for engineering leaders focusing on technical leadership and product development.",
+    description:
+      "Premier conference for engineering leaders focusing on technical leadership and product development.",
     category: "Tech Conference",
-    keywords: [ "Engineering Leaders", "Technical Leadership",
-      "Product Development"
+    keywords: [
+      "Engineering Leaders",
+      "Technical Leadership",
+      "Product Development",
     ],
     id: "leaddev-new-york",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "Brooklyn Tech Expo - Pulse NYC",
-    description: "Spotlights AI and emerging technology, uniting Brooklyn’s top tech and business leaders.",
+    description:
+      "Spotlights AI and emerging technology, uniting Brooklyn’s top tech and business leaders.",
     category: "Tech Conference",
-    keywords: [ "AI", "Emerging Technology", "Networking" ],
+    keywords: ["AI", "Emerging Technology", "Networking"],
     id: "brooklyn-tech-expo---pulse-nyc",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "Chief AI Officer Summit",
-    description: "Gathering AI executives to optimize AI adoption strategies across industries.",
+    description:
+      "Gathering AI executives to optimize AI adoption strategies across industries.",
     category: "Tech Conference",
-    keywords: [ "AI Adoption", "Strategies", "Executives" ],
+    keywords: ["AI Adoption", "Strategies", "Executives"],
     id: "chief-ai-officer-summit",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "Auto.AI Summit",
     description: "Focuses on AI applications in the automotive industry.",
     category: "Tech Conference",
-    keywords: [ "AI", "Automotive", "Innovation" ],
+    keywords: ["AI", "Automotive", "Innovation"],
     id: "auto.ai-summit",
-    tags: [ "tech conference" ],
-  }, {
-    title: "DigiMarCon East Digital Marketing, Media and Advertising Conference",
-    description: "Conference alongside TECHSPO, focusing on digital marketing strategies.",
+    tags: ["tech conference"],
+  },
+  {
+    title:
+      "DigiMarCon East Digital Marketing, Media and Advertising Conference",
+    description:
+      "Conference alongside TECHSPO, focusing on digital marketing strategies.",
     category: "Tech Conference",
-    keywords: [ "Digital Marketing", "Media", "Advertising" ],
+    keywords: ["Digital Marketing", "Media", "Advertising"],
     id: "digimarcon-east-digital-marketing,-media-and-advertising-conference",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "AI + Blockchain Innovation Summit",
-    description: "Exploring the intersection of AI and Blockchain technologies.",
+    description:
+      "Exploring the intersection of AI and Blockchain technologies.",
     category: "Tech Conference",
-    keywords: [ "AI", "Blockchain", "Innovation" ],
+    keywords: ["AI", "Blockchain", "Innovation"],
     id: "ai-+-blockchain-innovation-summit",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "New York AI Summit",
-    description: "Not explicitly listed but typically involves AI innovation and networking.",
+    description:
+      "Not explicitly listed but typically involves AI innovation and networking.",
     category: "Tech Conference",
-    keywords: [ "AI", "Innovation", "Networking" ],
+    keywords: ["AI", "Innovation", "Networking"],
     id: "new-york-ai-summit",
-    tags: [ "tech conference" ],
-  }, {
+    tags: ["tech conference"],
+  },
+  {
     title: "Brooklyn Org Nonprofit Happy Hour - June 2025",
-    description: "Happy Hour at Somethin' Else inside Dekalb Market, Brooklyn, open to Brooklyn-serving nonprofits and grantees of Brooklyn Org. Networking event with first round of drinks on Brooklyn Org.",
-    tags: [ "happy hour", "networking", "nonprofit", "brooklyn", "happy hour" ],
+    description:
+      "Happy Hour at Somethin' Else inside Dekalb Market, Brooklyn, open to Brooklyn-serving nonprofits and grantees of Brooklyn Org. Networking event with first round of drinks on Brooklyn Org.",
+    tags: ["happy hour", "networking", "nonprofit", "brooklyn", "happy hour"],
     category: "party",
-    keywords: [ "nonprofit", "networking", "Brooklyn", "Somethin' Else", "Dekalb Market" ],
+    keywords: [
+      "nonprofit",
+      "networking",
+      "Brooklyn",
+      "Somethin' Else",
+      "Dekalb Market",
+    ],
     id: "brooklyn-org-nonprofit-happy-hour---june-2025",
-  }, {
+  },
+  {
     title: "Happy Hour for More Homes: A Summer Kickoff with Open New York!",
-    description: "Celebrate housing advocacy with Open New York at Cobble Fish on Pier 16, Manhattan. Event includes food, drinks, and housing policy conversation.",
-    tags: [ "happy hour", "housing", "advocacy", "manhattan", "happy hour" ],
+    description:
+      "Celebrate housing advocacy with Open New York at Cobble Fish on Pier 16, Manhattan. Event includes food, drinks, and housing policy conversation.",
+    tags: ["happy hour", "housing", "advocacy", "manhattan", "happy hour"],
     category: "party",
-    keywords: [ "housing", "advocacy", "Open New York", "Cobble Fish", "Pier 16" ],
+    keywords: [
+      "housing",
+      "advocacy",
+      "Open New York",
+      "Cobble Fish",
+      "Pier 16",
+    ],
     id: "happy-hour-for-more-homes:-a-summer-kickoff-with-open-new-york!",
-  }, {
+  },
+  {
     title: "Happy Hour, June 2025 | The New York Society Library",
-    description: "Social event happy hour for members and guests at The New York Society Library.",
-    tags: [ "happy hour", "social event", "library", "happy hour" ],
+    description:
+      "Social event happy hour for members and guests at The New York Society Library.",
+    tags: ["happy hour", "social event", "library", "happy hour"],
     category: "party",
-    keywords: [ "New York Society Library", "social event", "members", "guests" ],
+    keywords: ["New York Society Library", "social event", "members", "guests"],
     id: "happy-hour,-june-2025-|-the-new-york-society-library",
-  }, {
+  },
+  {
     title: "Singles Happy Hour in NYC!",
-    description: "Singles Happy Hour at Kobano, a Japanese-Brazilian fusion restaurant in NYC's Bowery. Social evening to meet new friends or romantic interests with curated cocktails and cuisine.",
-    tags: [ "happy hour", "singles", "social", "dating", "happy hour" ],
+    description:
+      "Singles Happy Hour at Kobano, a Japanese-Brazilian fusion restaurant in NYC's Bowery. Social evening to meet new friends or romantic interests with curated cocktails and cuisine.",
+    tags: ["happy hour", "singles", "social", "dating", "happy hour"],
     category: "party",
-    keywords: [ "singles", "Kobano", "Japanese-Brazilian fusion", "Bowery", "cocktails" ],
+    keywords: [
+      "singles",
+      "Kobano",
+      "Japanese-Brazilian fusion",
+      "Bowery",
+      "cocktails",
+    ],
     id: "singles-happy-hour-in-nyc!",
-  }, {
+  },
+  {
     title: "FBI AIA Networking Happy Hour - June 2025 in NYC",
-    description: "Networking happy hour for current and former FBI Intelligence Analysts in New York City.",
-    tags: [ "happy hour", "networking", "FBI", "intelligence analysts", "happy hour" ],
+    description:
+      "Networking happy hour for current and former FBI Intelligence Analysts in New York City.",
+    tags: [
+      "happy hour",
+      "networking",
+      "FBI",
+      "intelligence analysts",
+      "happy hour",
+    ],
     category: "party",
-    keywords: [ "FBI", "AIA", "networking", "intelligence analysts", "New York City" ],
+    keywords: [
+      "FBI",
+      "AIA",
+      "networking",
+      "intelligence analysts",
+      "New York City",
+    ],
     id: "fbi-aia-networking-happy-hour---june-2025-in-nyc",
-  }, {
+  },
+  {
     title: "Happy Hour at Somethin' Else, Brooklyn",
-    description: "Networking event for Brooklyn nonprofits at Somethin' Else inside Dekalb Market with drinks and socializing.",
-    tags: [ "happy hour", "networking", "nonprofit", "brooklyn", "happy hour" ],
+    description:
+      "Networking event for Brooklyn nonprofits at Somethin' Else inside Dekalb Market with drinks and socializing.",
+    tags: ["happy hour", "networking", "nonprofit", "brooklyn", "happy hour"],
     category: "party",
-    keywords: [ "nonprofit", "Brooklyn", "Somethin' Else", "Dekalb Market", "networking" ],
+    keywords: [
+      "nonprofit",
+      "Brooklyn",
+      "Somethin' Else",
+      "Dekalb Market",
+      "networking",
+    ],
     id: "happy-hour-at-somethin'-else,-brooklyn",
-  }, {
+  },
+  {
     title: "Open New York Summer Kickoff Happy Hour",
-    description: "Celebrate the summer and housing advocacy with Open New York at Cobble Fish, Manhattan, including food and drinks.",
-    tags: [ "happy hour", "housing", "advocacy", "manhattan", "happy hour" ],
+    description:
+      "Celebrate the summer and housing advocacy with Open New York at Cobble Fish, Manhattan, including food and drinks.",
+    tags: ["happy hour", "housing", "advocacy", "manhattan", "happy hour"],
     category: "party",
-    keywords: [ "Open New York", "housing advocacy", "Cobble Fish", "Pier 16", "summer kickoff" ],
+    keywords: [
+      "Open New York",
+      "housing advocacy",
+      "Cobble Fish",
+      "Pier 16",
+      "summer kickoff",
+    ],
     id: "open-new-york-summer-kickoff-happy-hour",
-  }, {
+  },
+  {
     title: "NY Society Library June Happy Hour",
-    description: "Social happy hour event at The New York Society Library for members and guests.",
-    tags: [ "happy hour", "social event", "library", "happy hour" ],
+    description:
+      "Social happy hour event at The New York Society Library for members and guests.",
+    tags: ["happy hour", "social event", "library", "happy hour"],
     category: "party",
-    keywords: [ "New York Society Library", "social event", "members", "guests" ],
+    keywords: ["New York Society Library", "social event", "members", "guests"],
     id: "ny-society-library-june-happy-hour",
-  }, {
+  },
+  {
     title: "Singles Social Happy Hour at Kobano",
-    description: "Singles social event with cocktails and fusion cuisine at Kobano in NYC's Bowery neighborhood.",
-    tags: [ "happy hour", "singles", "social", "dating", "happy hour" ],
+    description:
+      "Singles social event with cocktails and fusion cuisine at Kobano in NYC's Bowery neighborhood.",
+    tags: ["happy hour", "singles", "social", "dating", "happy hour"],
     category: "party",
-    keywords: [ "singles", "Kobano", "fusion cuisine", "Bowery", "cocktails" ],
+    keywords: ["singles", "Kobano", "fusion cuisine", "Bowery", "cocktails"],
     id: "singles-social-happy-hour-at-kobano",
-  }, {
+  },
+  {
     title: "FBI Intelligence Analysts Networking Happy Hour",
-    description: "Networking happy hour for FBI Intelligence Analysts hosted by FBI AIA in New York City.",
-    tags: [ "happy hour", "networking", "FBI", "intelligence analysts", "happy hour" ],
+    description:
+      "Networking happy hour for FBI Intelligence Analysts hosted by FBI AIA in New York City.",
+    tags: [
+      "happy hour",
+      "networking",
+      "FBI",
+      "intelligence analysts",
+      "happy hour",
+    ],
     category: "party",
-    keywords: [ "FBI", "AIA", "networking", "intelligence analysts", "New York City" ],
+    keywords: [
+      "FBI",
+      "AIA",
+      "networking",
+      "intelligence analysts",
+      "New York City",
+    ],
     id: "fbi-intelligence-analysts-networking-happy-hour",
-  }, {
+  },
+  {
     title: "Startup CPG Founder Dinner @ Summer Fancy Food 2025",
-    description: "A founders-only dinner at a chic private social club in Tribeca to connect, share insights, and have a good time.",
-    tags: [ "founder dinner", "startup", "networking", "tribeca", "founder dinner" ],
+    description:
+      "A founders-only dinner at a chic private social club in Tribeca to connect, share insights, and have a good time.",
+    tags: [
+      "founder dinner",
+      "startup",
+      "networking",
+      "tribeca",
+      "founder dinner",
+    ],
     category: "founder dinner",
-    keywords: [ "founders-only", "private social club",
-      "tribeca", "startup cpg", "summer fancy food"
+    keywords: [
+      "founders-only",
+      "private social club",
+      "tribeca",
+      "startup cpg",
+      "summer fancy food",
     ],
     id: "startup-cpg-founder-dinner-@-summer-fancy-food-2025",
   },
   {
     title: "2025 Founder's Dinner - SSP NYC",
-    description: "26th Annual Founder's Dinner at Gotham Hall in New York City celebrating students and alumni with a theme focused on transforming lives and communities.",
-    tags: [ "founder dinner", "annual event", "education",
-      "community", "founder dinner"
+    description:
+      "26th Annual Founder's Dinner at Gotham Hall in New York City celebrating students and alumni with a theme focused on transforming lives and communities.",
+    tags: [
+      "founder dinner",
+      "annual event",
+      "education",
+      "community",
+      "founder dinner",
     ],
     category: "founder dinner",
-    keywords: [ "sspnyc", "gotham hall", "students", "alumni", "transforming lives" ],
+    keywords: [
+      "sspnyc",
+      "gotham hall",
+      "students",
+      "alumni",
+      "transforming lives",
+    ],
     id: "2025-founder's-dinner---ssp-nyc",
-  }, {
+  },
+  {
     title: "Founder's Dinner - Fordham University",
-    description: "The 2025 Fordham Founder's Dinner and Campaign Close Celebration with a reception and dinner honoring notable individuals, supporting scholarships.",
-    tags: [ "founder dinner", "university event",
-      "scholarship", "celebration", "founder dinner"
+    description:
+      "The 2025 Fordham Founder's Dinner and Campaign Close Celebration with a reception and dinner honoring notable individuals, supporting scholarships.",
+    tags: [
+      "founder dinner",
+      "university event",
+      "scholarship",
+      "celebration",
+      "founder dinner",
     ],
     category: "founder dinner",
-    keywords: [ "fordham university", "campaign close",
-      "honoring", "scholarship fund", "black tie"
+    keywords: [
+      "fordham university",
+      "campaign close",
+      "honoring",
+      "scholarship fund",
+      "black tie",
     ],
     id: "founder's-dinner---fordham-university",
   },
   {
     title: "Startup CPG Founder Dinner – New York City",
-    description: "An event by Startup CPG Community Events held at Fatousha restaurant in New York City for founders to network and share experiences.",
-    tags: [ "founder dinner", "startup", "networking", "nyc", "founder dinner" ],
+    description:
+      "An event by Startup CPG Community Events held at Fatousha restaurant in New York City for founders to network and share experiences.",
+    tags: ["founder dinner", "startup", "networking", "nyc", "founder dinner"],
     category: "founder dinner",
-    keywords: [ "startup cpg", "fatousha restaurant",
-      "founders", "community events"
+    keywords: [
+      "startup cpg",
+      "fatousha restaurant",
+      "founders",
+      "community events",
     ],
     id: "startup-cpg-founder-dinner-–-new-york-city",
   },
   {
     title: "Junto Founder Dinner (Hosted by Andrew & friends)",
-    description: "Intimate private dinner for 24 handpicked early-stage founders and CEOs to share, grow, and connect over a 3-course meal at a private dinner club in NYC.",
-    tags: [ "founder dinner", "private dinner", "networking",
-      "startup founders", "founder dinner"
+    description:
+      "Intimate private dinner for 24 handpicked early-stage founders and CEOs to share, grow, and connect over a 3-course meal at a private dinner club in NYC.",
+    tags: [
+      "founder dinner",
+      "private dinner",
+      "networking",
+      "startup founders",
+      "founder dinner",
     ],
     category: "founder dinner",
-    keywords: [ "junto", "private dinner club", "early-stage founders",
-      "ceos", "3-course meal"
+    keywords: [
+      "junto",
+      "private dinner club",
+      "early-stage founders",
+      "ceos",
+      "3-course meal",
     ],
     id: "junto-founder-dinner-(hosted-by-andrew-&-friends)",
-  }, {
+  },
+  {
     title: "Hot Yoga at Sui Yoga SoHo",
     description: "Hot yoga classes in New York City's SoHo District.",
-    tags: [ "hot yoga", "SoHo", "hot yoga" ],
+    tags: ["hot yoga", "SoHo", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "SoHo", "schedule" ],
+    keywords: ["hot yoga", "SoHo", "schedule"],
     id: "hot-yoga-at-sui-yoga-soho",
-  }, {
+  },
+  {
     title: "Hot Vinyasa at Spirit Lab",
     description: "Hot Vinyasa yoga classes offered at Spirit Lab in NYC.",
-    tags: [ "hot yoga", "Vinyasa", "Spirit Lab", "hot yoga" ],
+    tags: ["hot yoga", "Vinyasa", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "Vinyasa", "Spirit Lab" ],
+    keywords: ["hot yoga", "Vinyasa", "Spirit Lab"],
     id: "hot-vinyasa-at-spirit-lab",
-  }, {
+  },
+  {
     title: "Traditional Hot Yoga (Bikram) at Spirit Lab",
     description: "Traditional Bikram hot yoga classes at Spirit Lab.",
-    tags: [ "hot yoga", "Bikram", "Spirit Lab", "hot yoga" ],
+    tags: ["hot yoga", "Bikram", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "Bikram", "Spirit Lab" ],
+    keywords: ["hot yoga", "Bikram", "Spirit Lab"],
     id: "traditional-hot-yoga-(bikram)-at-spirit-lab",
-  }, {
+  },
+  {
     title: "Hot Yin at Spirit Lab",
     description: "Hot Yin yoga classes at Spirit Lab in NYC.",
-    tags: [ "hot yoga", "Yin", "Spirit Lab", "hot yoga" ],
+    tags: ["hot yoga", "Yin", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "Yin", "Spirit Lab" ],
+    keywords: ["hot yoga", "Yin", "Spirit Lab"],
     id: "hot-yin-at-spirit-lab",
-  }, {
+  },
+  {
     title: "Rocket Vinyasa Master Class at Spirit Lab",
     description: "Rocket Vinyasa hot yoga master class at Spirit Lab.",
-    tags: [ "hot yoga", "Rocket Vinyasa", "Spirit Lab", "hot yoga" ],
+    tags: ["hot yoga", "Rocket Vinyasa", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "Rocket Vinyasa", "Spirit Lab" ],
+    keywords: ["hot yoga", "Rocket Vinyasa", "Spirit Lab"],
     id: "rocket-vinyasa-master-class-at-spirit-lab",
-  }, {
+  },
+  {
     title: "Hot Yoga Community Class at Spirit Lab",
     description: "$12 community hot yoga classes at Spirit Lab.",
-    tags: [ "hot yoga", "community", "Spirit Lab", "hot yoga" ],
+    tags: ["hot yoga", "community", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "community", "Spirit Lab" ],
+    keywords: ["hot yoga", "community", "Spirit Lab"],
     id: "hot-yoga-community-class-at-spirit-lab",
-  }, {
+  },
+  {
     title: "Hot Yoga at Fierce Grace NYC LES",
     description: "Hot yoga classes at Fierce Grace Lower East Side studio.",
-    tags: [ "hot yoga", "Fierce Grace", "Lower East Side", "hot yoga" ],
+    tags: ["hot yoga", "Fierce Grace", "Lower East Side", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "Fierce Grace", "Lower East Side" ],
+    keywords: ["hot yoga", "Fierce Grace", "Lower East Side"],
     id: "hot-yoga-at-fierce-grace-nyc-les",
-  }, {
+  },
+  {
     title: "Hot Yoga at Sui Yoga SoHo (Evening)",
     description: "Evening hot yoga sessions at Sui Yoga SoHo.",
-    tags: [ "hot yoga", "SoHo", "evening", "hot yoga" ],
+    tags: ["hot yoga", "SoHo", "evening", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "SoHo", "evening" ],
+    keywords: ["hot yoga", "SoHo", "evening"],
     id: "hot-yoga-at-sui-yoga-soho-(evening)",
-  }, {
+  },
+  {
     title: "Hot Yoga at Sui Yoga SoHo (Weekend)",
     description: "Weekend hot yoga classes at Sui Yoga SoHo.",
-    tags: [ "hot yoga", "SoHo", "weekend", "hot yoga" ],
+    tags: ["hot yoga", "SoHo", "weekend", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "SoHo", "weekend" ],
+    keywords: ["hot yoga", "SoHo", "weekend"],
     id: "hot-yoga-at-sui-yoga-soho-(weekend)",
-  }, {
+  },
+  {
     title: "Hot Yoga at Sui Yoga SoHo (Morning)",
     description: "Morning hot yoga classes at Sui Yoga SoHo.",
-    tags: [ "hot yoga", "SoHo", "morning", "hot yoga" ],
+    tags: ["hot yoga", "SoHo", "morning", "hot yoga"],
     category: "hot yoga",
-    keywords: [ "hot yoga", "SoHo", "morning" ],
+    keywords: ["hot yoga", "SoHo", "morning"],
     id: "hot-yoga-at-sui-yoga-soho-(morning)",
-  }, {
+  },
+  {
     title: "Manhattan Monday Easy Run - Evening - Central Park",
-    description: "Weekly easy run with Dashing Whippets Running Team in Central Park",
-    tags: [ "running club", "group run", "Central Park", "running club" ],
+    description:
+      "Weekly easy run with Dashing Whippets Running Team in Central Park",
+    tags: ["running club", "group run", "Central Park", "running club"],
     category: "running club",
-    keywords: [ "Dashing Whippets", "Manhattan", "Monday" ],
+    keywords: ["Dashing Whippets", "Manhattan", "Monday"],
     id: "manhattan-monday-easy-run---evening---central-park",
-  }, {
+  },
+  {
     title: "Brooklyn Tuesday Workout",
-    description: "Weekly workout with Dashing Whippets Running Team in Brooklyn",
-    tags: [ "running club", "group run", "Brooklyn", "running club" ],
+    description:
+      "Weekly workout with Dashing Whippets Running Team in Brooklyn",
+    tags: ["running club", "group run", "Brooklyn", "running club"],
     category: "running club",
-    keywords: [ "Dashing Whippets", "Brooklyn", "Tuesday" ],
+    keywords: ["Dashing Whippets", "Brooklyn", "Tuesday"],
     id: "brooklyn-tuesday-workout",
-  }, {
+  },
+  {
     title: "JP Morgan Corporate Challenge Volunteer Event",
     description: "Volunteer and run event with Dashing Whippets Running Team",
-    tags: [ "running club", "volunteer", "group run", "running club" ],
+    tags: ["running club", "volunteer", "group run", "running club"],
     category: "running club",
-    keywords: [ "Dashing Whippets", "volunteer", "corporate" ],
+    keywords: ["Dashing Whippets", "volunteer", "corporate"],
     id: "jp-morgan-corporate-challenge-volunteer-event",
-  }, {
+  },
+  {
     title: "run + brunch (bRUNch) in Union Square",
-    description: "Social run and brunch with The Most Informal Running Club Ever (TMIRCE):NYC",
-    tags: [ "running club", "social run", "Union Square", "running club" ],
+    description:
+      "Social run and brunch with The Most Informal Running Club Ever (TMIRCE):NYC",
+    tags: ["running club", "social run", "Union Square", "running club"],
     category: "running club",
-    keywords: [ "TMIRCE", "Union Square", "brunch" ],
+    keywords: ["TMIRCE", "Union Square", "brunch"],
     id: "run-+-brunch-(brunch)-in-union-square",
-  }, {
+  },
+  {
     title: "RSRC Thursday Night Speed Workout",
     description: "Speed workout with Running Souls Run Club in Brooklyn",
-    tags: [ "running club", "speed workout", "Brooklyn", "running club" ],
+    tags: ["running club", "speed workout", "Brooklyn", "running club"],
     category: "running club",
-    keywords: [ "Running Souls", "Brooklyn", "Thursday" ],
+    keywords: ["Running Souls", "Brooklyn", "Thursday"],
     id: "rsrc-thursday-night-speed-workout",
-  }, {
+  },
+  {
     title: "New York Flyers Weekly Group Run",
-    description: "Weekly group run with New York Flyers, NYC's oldest and largest running club",
-    tags: [ "running club", "group run", "New York City", "running club" ],
+    description:
+      "Weekly group run with New York Flyers, NYC's oldest and largest running club",
+    tags: ["running club", "group run", "New York City", "running club"],
     category: "running club",
-    keywords: [ "New York Flyers", "weekly", "group run" ],
+    keywords: ["New York Flyers", "weekly", "group run"],
     id: "new-york-flyers-weekly-group-run",
-  }, {
+  },
+  {
     title: "IronStrength Downtown Morning Workout for Global Running Day",
     description: "Special morning workout with ASICS for Global Running Day",
-    tags: [ "running club", "special event", "ASICS", "running club" ],
+    tags: ["running club", "special event", "ASICS", "running club"],
     category: "running club",
-    keywords: [ "IronStrength", "ASICS", "Global Running Day" ],
+    keywords: ["IronStrength", "ASICS", "Global Running Day"],
     id: "ironstrength-downtown-morning-workout-for-global-running-day",
-  }, {
+  },
+  {
     title: "NYRR Virtual Global Running Day 5K",
-    description: "Virtual 5K event hosted by New York Road Runners for Global Running Day",
-    tags: [ "running club", "virtual run", "5K", "running club" ],
+    description:
+      "Virtual 5K event hosted by New York Road Runners for Global Running Day",
+    tags: ["running club", "virtual run", "5K", "running club"],
     category: "running club",
-    keywords: [ "NYRR", "virtual", "Global Running Day" ],
+    keywords: ["NYRR", "virtual", "Global Running Day"],
     id: "nyrr-virtual-global-running-day-5k",
-  }, {
+  },
+  {
     title: "NYRR Club Points Races",
     description: "Competitive races for local running clubs organized by NYRR",
-    tags: [ "running club", "race", "competition", "running club" ],
+    tags: ["running club", "race", "competition", "running club"],
     category: "running club",
-    keywords: [ "NYRR", "club points", "race" ],
+    keywords: ["NYRR", "club points", "race"],
     id: "nyrr-club-points-races",
-  }, {
+  },
+  {
     title: "NYRR Local Running Club Meetups",
     description: "Regular meetups for local running clubs listed by NYRR",
-    tags: [ "running club", "meetup", "New York City", "running club" ],
+    tags: ["running club", "meetup", "New York City", "running club"],
     category: "running club",
-    keywords: [ "NYRR", "meetup", "local clubs" ],
+    keywords: ["NYRR", "meetup", "local clubs"],
     id: "nyrr-local-running-club-meetups",
-  }, {
+  },
+  {
     title: "EMERGE125 NYC Season 2025",
     description: "Unforgettable evening of dance at El Museo del Barrio",
-    tags: [ "performance", "dance", "dance class" ],
+    tags: ["performance", "dance", "dance class"],
     category: "dance event",
-    keywords: [ "Emerge125", "NYC", "El Museo del Barrio" ],
+    keywords: ["Emerge125", "NYC", "El Museo del Barrio"],
     id: "emerge125-nyc-season-2025",
-  }, {
+  },
+  {
     title: "Broadway Dance Center Summer Training Program",
     description: "4-week multi-disciplinary summer dance program",
-    tags: [ "training", "multi-disciplinary", "dance class" ],
+    tags: ["training", "multi-disciplinary", "dance class"],
     category: "dance class",
-    keywords: [ "Broadway Dance Center", "summer", "training" ],
+    keywords: ["Broadway Dance Center", "summer", "training"],
     id: "broadway-dance-center-summer-training-program",
-  }, {
+  },
+  {
     title: "Int POP BALLET",
     description: "Intermediate pop ballet class at Broadway Dance Center",
-    tags: [ "ballet", "pop", "dance class" ],
+    tags: ["ballet", "pop", "dance class"],
     category: "dance class",
-    keywords: [ "Broadway Dance Center", "ballet", "pop" ],
+    keywords: ["Broadway Dance Center", "ballet", "pop"],
     id: "int-pop-ballet",
-  }, {
+  },
+  {
     title: "Beg BALLET",
     description: "Beginner ballet class at Broadway Dance Center",
-    tags: [ "ballet", "beginner", "dance class" ],
+    tags: ["ballet", "beginner", "dance class"],
     category: "dance class",
-    keywords: [ "Broadway Dance Center", "ballet", "beginner" ],
+    keywords: ["Broadway Dance Center", "ballet", "beginner"],
     id: "beg-ballet",
-  }, {
+  },
+  {
     title: "Adv Beg BALLET",
     description: "Advanced beginner ballet class at Broadway Dance Center",
-    tags: [ "ballet", "advanced beginner", "dance class" ],
+    tags: ["ballet", "advanced beginner", "dance class"],
     category: "dance class",
-    keywords: [ "Broadway Dance Center", "ballet", "advanced beginner" ],
+    keywords: ["Broadway Dance Center", "ballet", "advanced beginner"],
     id: "adv-beg-ballet",
-  }, {
+  },
+  {
     title: "Basic BALLET",
     description: "Basic ballet class at Broadway Dance Center",
-    tags: [ "ballet", "basic", "dance class" ],
+    tags: ["ballet", "basic", "dance class"],
     category: "dance class",
-    keywords: [ "Broadway Dance Center", "ballet", "basic" ],
+    keywords: ["Broadway Dance Center", "ballet", "basic"],
     id: "basic-ballet",
-  }, {
+  },
+  {
     title: "All Levels YOGA: MOVING MEDITATION",
-    description: "Yoga and movement class for all levels at Broadway Dance Center",
-    tags: [ "yoga", "movement", "dance class" ],
+    description:
+      "Yoga and movement class for all levels at Broadway Dance Center",
+    tags: ["yoga", "movement", "dance class"],
     category: "dance class",
-    keywords: [ "Broadway Dance Center", "yoga", "movement" ],
+    keywords: ["Broadway Dance Center", "yoga", "movement"],
     id: "all-levels-yoga:-moving-meditation",
-  }, {
+  },
+  {
     title: "Int THEATER",
     description: "Intermediate theater dance class at Broadway Dance Center",
-    tags: [ "theater", "intermediate", "dance class" ],
+    tags: ["theater", "intermediate", "dance class"],
     category: "dance class",
-    keywords: [ "Broadway Dance Center", "theater", "intermediate" ],
+    keywords: ["Broadway Dance Center", "theater", "intermediate"],
     id: "int-theater",
-  }, {
+  },
+  {
     title: "Intro to Ballet I",
-    description: "6-week intro series for absolute beginners at Mark Morris Dance Group",
-    tags: [ "ballet", "beginner", "dance class" ],
+    description:
+      "6-week intro series for absolute beginners at Mark Morris Dance Group",
+    tags: ["ballet", "beginner", "dance class"],
     category: "dance class",
-    keywords: [ "Mark Morris Dance Group", "ballet", "beginner" ],
+    keywords: ["Mark Morris Dance Group", "ballet", "beginner"],
     id: "intro-to-ballet-i",
-  }, {
+  },
+  {
     title: "Intro to Contemporary I",
-    description: "6-week intro series for absolute beginners at Mark Morris Dance Group",
-    tags: [ "contemporary", "beginner", "dance class" ],
+    description:
+      "6-week intro series for absolute beginners at Mark Morris Dance Group",
+    tags: ["contemporary", "beginner", "dance class"],
     category: "dance class",
-    keywords: [ "Mark Morris Dance Group", "contemporary", "beginner" ],
+    keywords: ["Mark Morris Dance Group", "contemporary", "beginner"],
     id: "intro-to-contemporary-i",
-  }, {
+  },
+  {
     title: "Manhattan Theatre Club Spring Gala 2025",
-    description: "Annual event featuring a cocktail reception, elegant seated dinner, and Broadway performances.",
-    tags: [ "theatre", "Broadway", "gala" ],
+    description:
+      "Annual event featuring a cocktail reception, elegant seated dinner, and Broadway performances.",
+    tags: ["theatre", "Broadway", "gala"],
     category: "gala",
-    keywords: [ "Manhattan Theatre Club", "Spring Gala", "Cipriani 42nd Street", "Broadway",
-      "cocktail reception", "seated dinner", "show", "social season", "New York City", "May 19, 2025"
+    keywords: [
+      "Manhattan Theatre Club",
+      "Spring Gala",
+      "Cipriani 42nd Street",
+      "Broadway",
+      "cocktail reception",
+      "seated dinner",
+      "show",
+      "social season",
+      "New York City",
+      "May 19, 2025",
     ],
     id: "manhattan-theatre-club-spring-gala-2025",
-  }, {
+  },
+  {
     title: "Times Square Alliance 2025 Gala",
     description: "Annual gala event supporting Times Square Alliance.",
-    tags: [ "Times Square", "community", "gala" ],
+    tags: ["Times Square", "community", "gala"],
     category: "gala",
-    keywords: [ "Times Square Alliance", "gala", "Broadway Ballroom", "New York Marriott",
-      "March 31, 2025", "New York City"
+    keywords: [
+      "Times Square Alliance",
+      "gala",
+      "Broadway Ballroom",
+      "New York Marriott",
+      "March 31, 2025",
+      "New York City",
     ],
     id: "times-square-alliance-2025-gala",
-  }, {
+  },
+  {
     title: "YoungArts New York Gala 2025",
     description: "Gala supporting YoungArts at The Metropolitan Museum of Art.",
-    tags: [ "arts", "philanthropy", "gala" ],
+    tags: ["arts", "philanthropy", "gala"],
     category: "gala",
-    keywords: [ "YoungArts", "New York Gala", "Metropolitan Museum of Art", "Temple of Dendur",
-      "April 7, 2025", "New York City"
+    keywords: [
+      "YoungArts",
+      "New York Gala",
+      "Metropolitan Museum of Art",
+      "Temple of Dendur",
+      "April 7, 2025",
+      "New York City",
     ],
     id: "youngarts-new-york-gala-2025",
-  }, {
+  },
+  {
     title: "NBCC 2025 New York Gala",
     description: "Annual gala supporting the National Breast Cancer Coalition.",
-    tags: [ "health", "charity", "gala" ],
+    tags: ["health", "charity", "gala"],
     category: "gala",
-    keywords: [ "NBCC", "New York Gala", "Metropolitan Club", "April 29, 2025", "breast cancer",
-      "New York City"
+    keywords: [
+      "NBCC",
+      "New York Gala",
+      "Metropolitan Club",
+      "April 29, 2025",
+      "breast cancer",
+      "New York City",
     ],
     id: "nbcc-2025-new-york-gala",
-  }, {
+  },
+  {
     title: "UNICEF Gala",
-    description: "Annual gala supporting UNICEF, featuring celebrity hosts and musical performances.",
-    tags: [ "charity", "music", "gala" ],
+    description:
+      "Annual gala supporting UNICEF, featuring celebrity hosts and musical performances.",
+    tags: ["charity", "music", "gala"],
     category: "gala",
-    keywords: [ "UNICEF", "gala", "Cipriani Wall Street", "December 3, 2024", "New York City" ],
+    keywords: [
+      "UNICEF",
+      "gala",
+      "Cipriani Wall Street",
+      "December 3, 2024",
+      "New York City",
+    ],
     id: "unicef-gala",
-  }, {
+  },
+  {
     title: "Concern Global Gala Event Series",
-    description: "Nonprofit gala series to fight global hunger, featuring stories and musical performances.",
-    tags: [ "hunger", "charity", "gala" ],
+    description:
+      "Nonprofit gala series to fight global hunger, featuring stories and musical performances.",
+    tags: ["hunger", "charity", "gala"],
     category: "gala",
-    keywords: [ "Concern", "Global Gala", "Cipriani Wall Street", "December 6, 2024", "New York City" ],
+    keywords: [
+      "Concern",
+      "Global Gala",
+      "Cipriani Wall Street",
+      "December 6, 2024",
+      "New York City",
+    ],
     id: "concern-global-gala-event-series",
-  }, {
+  },
+  {
     title: "The Center for Fiction Annual Awards Benefit",
-    description: "Annual gala celebrating literary achievements and supporting The Center for Fiction.",
-    tags: [ "literature", "awards", "gala" ],
+    description:
+      "Annual gala celebrating literary achievements and supporting The Center for Fiction.",
+    tags: ["literature", "awards", "gala"],
     category: "gala",
-    keywords: [ "Center for Fiction", "Annual Awards Benefit", "gala", "New York City" ],
+    keywords: [
+      "Center for Fiction",
+      "Annual Awards Benefit",
+      "gala",
+      "New York City",
+    ],
     id: "the-center-for-fiction-annual-awards-benefit",
-  }, {
+  },
+  {
     title: "New York Public Library Gala",
     description: "Annual fundraising gala for the New York Public Library.",
-    tags: [ "library", "education", "gala" ],
+    tags: ["library", "education", "gala"],
     category: "gala",
-    keywords: [ "New York Public Library", "gala", "fundraising", "New York City" ],
+    keywords: [
+      "New York Public Library",
+      "gala",
+      "fundraising",
+      "New York City",
+    ],
     id: "new-york-public-library-gala",
-  }, {
+  },
+  {
     title: "Lincoln Center Gala",
-    description: "Annual gala supporting Lincoln Center for the Performing Arts.",
-    tags: [ "performing arts", "music", "gala" ],
+    description:
+      "Annual gala supporting Lincoln Center for the Performing Arts.",
+    tags: ["performing arts", "music", "gala"],
     category: "gala",
-    keywords: [ "Lincoln Center", "gala", "fundraising", "New York City" ],
+    keywords: ["Lincoln Center", "gala", "fundraising", "New York City"],
     id: "lincoln-center-gala",
-  }, {
+  },
+  {
     title: "Metropolitan Museum of Art Costume Institute Gala (The Met Gala)",
-    description: "Famous annual gala celebrating the opening of the Costume Institute's annual fashion exhibit.",
-    tags: [ "fashion", "art", "gala" ],
+    description:
+      "Famous annual gala celebrating the opening of the Costume Institute's annual fashion exhibit.",
+    tags: ["fashion", "art", "gala"],
     category: "gala",
-    keywords: [ "Met Gala", "Metropolitan Museum of Art", "Costume Institute", "fashion",
-      "New York City"
+    keywords: [
+      "Met Gala",
+      "Metropolitan Museum of Art",
+      "Costume Institute",
+      "fashion",
+      "New York City",
     ],
     id: "metropolitan-museum-of-art-costume-institute-gala-(the-met-gala)",
-  }, {
+  },
+  {
     title: "Rendez-Vous with French Cinema 2025",
-    description: "A showcase of contemporary French films at Film at Lincoln Center.",
+    description:
+      "A showcase of contemporary French films at Film at Lincoln Center.",
     category: "Film Screening",
-    keywords: [ "French Cinema", "Lincoln Center" ],
+    keywords: ["French Cinema", "Lincoln Center"],
     id: "rendez-vous-with-french-cinema-2025",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "Tribeca Film Festival 2025",
     description: "A festival featuring diverse films and programming.",
     category: "Film Screening",
-    keywords: [ "Tribeca", "Film Festival" ],
+    keywords: ["Tribeca", "Film Festival"],
     id: "tribeca-film-festival-2025",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "Mad Max: Fury Road Screening",
     description: "A screening of *Mad Max: Fury Road* at Analog Film NYC.",
     category: "Film Screening",
-    keywords: [ "Mad Max", "Analog Film NYC" ],
+    keywords: ["Mad Max", "Analog Film NYC"],
     id: "mad-max:-fury-road-screening",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "Sinners Screening",
     description: "A screening of *Sinners* in 70mm at Roxy Cinema New York.",
     category: "Film Screening",
-    keywords: [ "Sinners", "Roxy Cinema" ],
+    keywords: ["Sinners", "Roxy Cinema"],
     id: "sinners-screening",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "Shall We Dance Screening",
     description: "A screening of *Shall We Dance* at Village East by Angelika.",
     category: "Film Screening",
-    keywords: [ "Shall We Dance", "Village East" ],
+    keywords: ["Shall We Dance", "Village East"],
     id: "shall-we-dance-screening",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "Unbreakable Screening",
     description: "A screening of *Unbreakable* at Nitehawk Cinema.",
     category: "Film Screening",
-    keywords: [ "Unbreakable", "Nitehawk Cinema" ],
+    keywords: ["Unbreakable", "Nitehawk Cinema"],
     id: "unbreakable-screening",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "Batman Begins Screening",
     description: "A screening of *Batman Begins* at Nitehawk Cinema.",
     category: "Film Screening",
-    keywords: [ "Batman Begins", "Nitehawk Cinema" ],
+    keywords: ["Batman Begins", "Nitehawk Cinema"],
     id: "batman-begins-screening",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "The French Lieutenant’s Woman Screening",
-    description: "A screening of *The French Lieutenant’s Woman* at Nitehawk Cinema.",
+    description:
+      "A screening of *The French Lieutenant’s Woman* at Nitehawk Cinema.",
     category: "Film Screening",
-    keywords: [ "The French Lieutenant’s Woman", "Nitehawk Cinema" ],
+    keywords: ["The French Lieutenant’s Woman", "Nitehawk Cinema"],
     id: "the-french-lieutenant’s-woman-screening",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "Paramount+ Movie Nights",
     description: "Free outdoor movie screenings at Bryant Park.",
     category: "Film Screening",
-    keywords: [ "Paramount+", "Bryant Park" ],
+    keywords: ["Paramount+", "Bryant Park"],
     id: "paramount+-movie-nights",
-    tags: [ "film screening" ],
-  }, {
+    tags: ["film screening"],
+  },
+  {
     title: "Free Friday Movie Night on the Intrepid",
-    description: "A free outdoor screening of *Pirates of the Caribbean: Dead Man’s Chest* at the Intrepid Museum.",
+    description:
+      "A free outdoor screening of *Pirates of the Caribbean: Dead Man’s Chest* at the Intrepid Museum.",
     category: "Film Screening",
-    keywords: [ "Intrepid Museum", "Pirates of the Caribbean" ],
+    keywords: ["Intrepid Museum", "Pirates of the Caribbean"],
     id: "free-friday-movie-night-on-the-intrepid",
-    tags: [ "film screening" ],
-  }, 
+    tags: ["film screening"],
+  },
   {
     title: "Bryant Park Christmas Market",
-    description: "Holiday market in Bank of America Winter Village at Bryant Park, Upper and Lower Terraces",
-    tags: [ "holiday market", "shopping", "food", "holiday market" ],
+    description:
+      "Holiday market in Bank of America Winter Village at Bryant Park, Upper and Lower Terraces",
+    tags: ["holiday market", "shopping", "food", "holiday market"],
     category: "holiday market",
-    keywords: [ "Bryant Park", "Winter Village", "Christmas" ],
+    keywords: ["Bryant Park", "Winter Village", "Christmas"],
     id: "bryant-park-christmas-market",
-  }, {
+  },
+  {
     title: "Grand Central Terminal Holiday Fair",
     description: "Holiday market inside Grand Central Terminal",
-    tags: [ "holiday market", "shopping", "crafts", "holiday market" ],
+    tags: ["holiday market", "shopping", "crafts", "holiday market"],
     category: "holiday market",
-    keywords: [ "Grand Central", "Terminal", "Holiday Fair" ],
+    keywords: ["Grand Central", "Terminal", "Holiday Fair"],
     id: "grand-central-terminal-holiday-fair",
-  }, {
+  },
+  {
     title: "Columbus Circle Holiday Market",
-    description: "Large holiday market at Columbus Circle, southwest corner of Central Park",
-    tags: [ "holiday market", "shopping", "food", "holiday market" ],
+    description:
+      "Large holiday market at Columbus Circle, southwest corner of Central Park",
+    tags: ["holiday market", "shopping", "food", "holiday market"],
     category: "holiday market",
-    keywords: [ "Columbus Circle", "Central Park", "Christmas" ],
+    keywords: ["Columbus Circle", "Central Park", "Christmas"],
     id: "columbus-circle-holiday-market",
-  }, {
+  },
+  {
     title: "Union Square Holiday Market",
     description: "Popular holiday market in Union Square",
-    tags: [ "holiday market", "shopping", "crafts", "holiday market" ],
+    tags: ["holiday market", "shopping", "crafts", "holiday market"],
     category: "holiday market",
-    keywords: [ "Union Square", "Christmas", "shopping" ],
+    keywords: ["Union Square", "Christmas", "shopping"],
     id: "union-square-holiday-market",
-  }, {
+  },
+  {
     title: "Brooklyn Holiday Market",
-    description: "Holiday market in Brooklyn, featuring local vendors and crafts",
-    tags: [ "holiday market", "shopping", "local", "holiday market" ],
+    description:
+      "Holiday market in Brooklyn, featuring local vendors and crafts",
+    tags: ["holiday market", "shopping", "local", "holiday market"],
     category: "holiday market",
-    keywords: [ "Brooklyn", "crafts", "holiday" ],
+    keywords: ["Brooklyn", "crafts", "holiday"],
     id: "brooklyn-holiday-market",
-  }, {
+  },
+  {
     title: "Queens Holiday Market",
     description: "Holiday market in Queens, showcasing diverse vendors",
-    tags: [ "holiday market", "shopping", "diverse", "holiday market" ],
+    tags: ["holiday market", "shopping", "diverse", "holiday market"],
     category: "holiday market",
-    keywords: [ "Queens", "holiday", "market" ],
+    keywords: ["Queens", "holiday", "market"],
     id: "queens-holiday-market",
-  }, {
+  },
+  {
     title: "Holiday Market at South Street Seaport",
     description: "Holiday market at South Street Seaport with waterfront views",
-    tags: [ "holiday market", "shopping", "waterfront", "holiday market" ],
+    tags: ["holiday market", "shopping", "waterfront", "holiday market"],
     category: "holiday market",
-    keywords: [ "South Street Seaport", "holiday", "market" ],
+    keywords: ["South Street Seaport", "holiday", "market"],
     id: "holiday-market-at-south-street-seaport",
-  }, {
+  },
+  {
     title: "Holiday Market at Industry City",
     description: "Holiday market in Brooklyn's Industry City",
-    tags: [ "holiday market", "shopping", "crafts", "holiday market" ],
+    tags: ["holiday market", "shopping", "crafts", "holiday market"],
     category: "holiday market",
-    keywords: [ "Industry City", "Brooklyn", "holiday" ],
+    keywords: ["Industry City", "Brooklyn", "holiday"],
     id: "holiday-market-at-industry-city",
-  }, {
+  },
+  {
     title: "Holiday Market at Chelsea Market",
     description: "Holiday market inside Chelsea Market",
-    tags: [ "holiday market", "shopping", "food", "holiday market" ],
+    tags: ["holiday market", "shopping", "food", "holiday market"],
     category: "holiday market",
-    keywords: [ "Chelsea Market", "holiday", "shopping" ],
+    keywords: ["Chelsea Market", "holiday", "shopping"],
     id: "holiday-market-at-chelsea-market",
-  }, {
+  },
+  {
     title: "Holiday Market at The Oculus",
     description: "Holiday market at The Oculus, World Trade Center",
-    tags: [ "holiday market", "shopping", "crafts", "holiday market" ],
+    tags: ["holiday market", "shopping", "crafts", "holiday market"],
     category: "holiday market",
-    keywords: [ "Oculus", "World Trade Center", "holiday" ],
+    keywords: ["Oculus", "World Trade Center", "holiday"],
     id: "holiday-market-at-the-oculus",
-  }, {
+  },
+  {
     title: "Mixtape Bingo!",
     description: "Trivia Night",
     category: "Trivia",
-    keywords: [ "Mixtape Bingo", "Pine Box Rock Shop",
-      "Bushwick", "8pm"
-    ],
+    keywords: ["Mixtape Bingo", "Pine Box Rock Shop", "Bushwick", "8pm"],
     id: "mixtape-bingo!",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Mixtape Bingo!",
     description: "Trivia Night",
     category: "Trivia",
-    keywords: [ "Mixtape Bingo", "SingleCut Queens",
-      "Astoria", "7:30pm"
-    ],
+    keywords: ["Mixtape Bingo", "SingleCut Queens", "Astoria", "7:30pm"],
     id: "mixtape-bingo!",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Trivia Night",
     description: "General Trivia",
     category: "Trivia",
-    keywords: [ "Blondie’s Sports", "Upper West Side",
-      "8pm"
-    ],
+    keywords: ["Blondie’s Sports", "Upper West Side", "8pm"],
     id: "trivia-night",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Trivia Night",
     description: "General Trivia",
     category: "Trivia",
-    keywords: [ "Sanger Hall", "Sunnyside", "8pm" ],
+    keywords: ["Sanger Hall", "Sunnyside", "8pm"],
     id: "trivia-night",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Trivia Night",
     description: "General Trivia",
     category: "Trivia",
-    keywords: [ "SingleCut Beersmiths", "Astoria", "8pm" ],
+    keywords: ["SingleCut Beersmiths", "Astoria", "8pm"],
     id: "trivia-night",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Trivia Night",
     description: "General Trivia",
     category: "Trivia",
-    keywords: [ "T-Squared Social", "Midtown East",
-      "7pm"
-    ],
+    keywords: ["T-Squared Social", "Midtown East", "7pm"],
     id: "trivia-night",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "General Trivia Night",
     description: "General Trivia",
     category: "Trivia",
-    keywords: [ "The Chelsea Bell", "Tuesday, June 3, 2025" ],
+    keywords: ["The Chelsea Bell", "Tuesday, June 3, 2025"],
     id: "general-trivia-night",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Trivia Night",
     description: "General Trivia",
     category: "Trivia",
-    keywords: [ "Bird In Hand", "Hamilton Heights",
-      "7:30pm"
-    ],
+    keywords: ["Bird In Hand", "Hamilton Heights", "7:30pm"],
     id: "trivia-night",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Trivia Night",
     description: "General Trivia",
     category: "Trivia",
-    keywords: [ "The Alvin Public House", "Upper East Side",
-      "6pm"
-    ],
+    keywords: ["The Alvin Public House", "Upper East Side", "6pm"],
     id: "trivia-night",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Trivia Night",
     description: "General Trivia",
     category: "Trivia",
-    keywords: [ "Riverside Park Conservancy", "July 11, 2025" ],
+    keywords: ["Riverside Park Conservancy", "July 11, 2025"],
     id: "trivia-night",
-    tags: [ "trivia night" ],
-  }, {
+    tags: ["trivia night"],
+  },
+  {
     title: "Family Game Night Marathon",
-    description: "Join us at Highbridge Recreation Center for our Game Night Marathon featuring jumbo games, corn hole, Jenga, table tennis, and more for three Fridays in June.",
-    tags: [ "family", "game night", "recreation", "nyc parks", "game night" ],
+    description:
+      "Join us at Highbridge Recreation Center for our Game Night Marathon featuring jumbo games, corn hole, Jenga, table tennis, and more for three Fridays in June.",
+    tags: ["family", "game night", "recreation", "nyc parks", "game night"],
     category: "game night",
-    keywords: [ "Highbridge Recreation Center", "jumbo games", "corn hole", "Jenga", "table tennis" ],
+    keywords: [
+      "Highbridge Recreation Center",
+      "jumbo games",
+      "corn hole",
+      "Jenga",
+      "table tennis",
+    ],
     id: "family-game-night-marathon",
-  }, {
+  },
+  {
     title: "Game Night on the Pier",
-    description: "Enjoy bingo, quiz shows, and other games with friends at Game Night on the Pier in New York City on June 13, 2025.",
-    tags: [ "game night", "bingo", "quiz", "party", "game night" ],
+    description:
+      "Enjoy bingo, quiz shows, and other games with friends at Game Night on the Pier in New York City on June 13, 2025.",
+    tags: ["game night", "bingo", "quiz", "party", "game night"],
     category: "game night",
-    keywords: [ "pier", "bingo", "quiz shows", "friends" ],
+    keywords: ["pier", "bingo", "quiz shows", "friends"],
     id: "game-night-on-the-pier",
-  }, {
+  },
+  {
     title: "NYC Singles Dating and Play Speed Game Night",
-    description: "A social event for singles featuring speed game play and dating opportunities at The Westbury in New York on June 28, 2025.",
-    tags: [ "singles", "dating", "game night", "social event", "game night" ],
+    description:
+      "A social event for singles featuring speed game play and dating opportunities at The Westbury in New York on June 28, 2025.",
+    tags: ["singles", "dating", "game night", "social event", "game night"],
     category: "game night",
-    keywords: [ "singles", "speed game", "The Westbury", "dating" ],
+    keywords: ["singles", "speed game", "The Westbury", "dating"],
     id: "nyc-singles-dating-and-play-speed-game-night",
-  }, {
+  },
+  {
     title: "T(w)een Game Night",
-    description: "A game night event for tweens hosted by The New York Public Library at Battery Park City Library on June 9, 2025.",
-    tags: [ "tween", "game night", "library", "nypl", "game night" ],
+    description:
+      "A game night event for tweens hosted by The New York Public Library at Battery Park City Library on June 9, 2025.",
+    tags: ["tween", "game night", "library", "nypl", "game night"],
     category: "game night",
-    keywords: [ "Battery Park City Library", "tween", "game night", "NYPL" ],
+    keywords: ["Battery Park City Library", "tween", "game night", "NYPL"],
     id: "t(w)een-game-night",
-  }
+  },
 ];
