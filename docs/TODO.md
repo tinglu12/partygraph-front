@@ -16,7 +16,8 @@
 - [ ] events > tags > events
 - [ ] remove old events when moving on graph
 
-## People
+## DC
+People
 - [ ] people chatbar - chatting about the event
 - [ ] chat bubbles over people
 
