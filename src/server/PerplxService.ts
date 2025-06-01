@@ -163,22 +163,12 @@ export async function plexSearchEvent(tag: string, count = 5) {
   return events;
 }
 
-export async function plexSearchMany() {
-  // const tags = [
-  //   "book launch",
-  //   "music concert",
-  //   "gallery opening",
-  //   "hackathon",
-  //   "launch party",
-  //   "open mic night",
-  //   "comedy show",
-  //   "food festival",
-  //   "networking event",
-  //   "tech meetup",
-  // ];
-
+export async function plexSearchMany(maxCats?: number, eventCount?: number) {
+  eventCount = eventCount ?? 2;
   const tags = [
+    "book launch",
     "indie rock concert",
+    "networking event",
     "jazz concert",
     "classical music concert",
     "hip hop concert",
@@ -194,22 +184,19 @@ export async function plexSearchMany() {
     "restaurant opening",
     "tech meetup",
     "hackathon",
-    // "hot yoga",
-    // "running club",
-    // "dance class",
     "gala",
     "film festival",
-    "film screening",
     "holiday market",
-    // "trivia night",
   ];
+
+  const activeTags = maxCats ? tags.slice(0, maxCats) : tags;
 
   // const promises = tags.map((tag) => plexSearchEvent(tag));
 
   // const results = await Promise.all(promises);
   let results: any[] = [];
-  for (const tag of tags) {
-    const catResults: any[] = await plexSearchEvent(tag, 2);
+  for (const tag of activeTags) {
+    const catResults: any[] = await plexSearchEvent(tag, eventCount);
     console.log("Perplexity searchMany result =>", { tag, catResults });
 
     results.push(...catResults);
