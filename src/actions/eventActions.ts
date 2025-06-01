@@ -1,9 +1,7 @@
 "use server";
 
 import { EventNode } from "@/types/EventGraph";
-import { sampleEvents } from "@/constants/sampleEvents-v1";
-import { writeFile } from "fs/promises";
-import path from "path";
+import { sampleEvents } from "@/constants/sampleEvents-v2";
 
 /**
  * Add a new event to the system
