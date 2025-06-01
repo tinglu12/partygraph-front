@@ -3,7 +3,6 @@ export interface EventNode {
   title: string;
   description: string;
   date?: string;
-  url?: string;
   category?: string;
   tags?: string[];
   keywords?: string[];
