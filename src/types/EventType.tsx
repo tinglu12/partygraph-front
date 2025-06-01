@@ -11,20 +11,7 @@ export type EventType = {
   price?: string;
   accessibility?: string;
   link?: string;
-
-  tags?: {
-    type?: string[];
-    goal?: string[];
-    vibe?: string[];
-    genre?: string[];
-    audience?: string[];
-    venue_type?: string[];
-    borough?: string[];
-    neighborhood?: string[];
-    timeofday?: string[];
-    language?: string[];
-    keywords?: string[];
-  };
+  tags?: string[];
   keywords?: string[];
   people?: EventPerson[];
 };
