@@ -26,7 +26,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
-import { sampleEvents } from "@/constants/sampleEvents";
+import { sampleEvents } from "@/constants/sampleEvents-v2";
 
 /**
  * Enhanced AI-powered vibe discovery page with semantic search capabilities
