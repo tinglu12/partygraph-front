@@ -5,6 +5,7 @@ import { EventPerson } from "@/types/EventPerson";
 import { EventPeopleSchema } from "@/types/EventPersonSchema";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
+import fs from "fs/promises";
 
 class LamService {
   private client: LlamaAPIClient;
@@ -49,9 +50,57 @@ class LamService {
     return event;
   }
 
-  async classifyImage(imagePath: string): Promise<string[]> {
-    // TODO
-    return ["party", "event", "other"];
+  async classifyImage(imagePath: string): Promise<any> {
+    // Read and encode the image as base64
+    const imageBuffer = await fs.readFile(imagePath);
+    const imageBase64 = imageBuffer.toString("base64");
+
+    const promptText = `
+You are an event flyer analysis assistant. Given an image of an event flyer or poster, use OCR to extract the text and then parse the following information. Return your response as JSON only, with no extra text.
+
+Return JSON in this format:
+{
+  "title": "...",
+  "tags": [ "..." ],
+}
+`;
+
+    const response = await this.client.chat.completions.create({
+      model: this.model,
+      messages: [
+        {
+          role: "user",
+          content: [
+            { type: "text", text: promptText },
+            {
+              type: "image_url",
+              image_url: {
+                url: `data:image/jpeg;base64,${imageBase64}`,
+              },
+            },
+          ],
+        },
+      ],
+      temperature: 0.3,
+    });
+
+    const content = response.completion_message?.content;
+    console.log("Llama classifyImage raw content:", content);
+
+    let text = typeof content === "string" ? content : content?.text;
+    if (!text) throw new Error("No text content in Llama API response");
+
+    // Try to extract JSON from a code block
+    const match = text.match(/```json\s*([\s\S]*?)```/i) || text.match(/```([\s\S]*?)```/i);
+    const jsonString = match ? match[1] : text;
+
+    let result;
+    try {
+      result = JSON.parse(jsonString);
+    } catch (e) {
+      throw new Error("Failed to parse Llama API response as JSON");
+    }
+    return result;
   }
 
   async getPeople(event: EventType): Promise<EventPerson[]> {

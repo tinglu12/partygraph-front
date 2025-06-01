@@ -1782,6 +1782,13 @@ export const sampleEvents = [
     id: "tribeca-film-festival-2025",
     tags: [ "film screening" ],
   }, {
+    title: "15th New York Film Festival",
+    description: "Presented by the Film Society of Lincoln Center, September 23 - October 9, 1977, Alice Tully Hall. The 15th New York Film Festival is presented with the support of the New York State Council on the Arts.",
+    category: "Film Screening",
+    keywords: [ "New York", "Film Festival" ],
+    id: "15th-newyork-film-festival",
+    tags: [ "film", "festival", "new york" ],
+  }, {
     title: "Mad Max: Fury Road Screening",
     description: "A screening of *Mad Max: Fury Road* at Analog Film NYC.",
     category: "Film Screening",
