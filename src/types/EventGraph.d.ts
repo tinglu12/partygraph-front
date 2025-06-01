@@ -7,6 +7,7 @@ export interface EventNode {
   tags?: string[];
   keywords?: string[];
   venue?: string;
+  address?: string;
   neighborhood?: string;
   url?: string;
   connections?: string[]; // IDs of connected nodes
@@ -38,7 +39,7 @@ export interface TagCenteredGraphData {
   }>;
 }
 
-export interface Tag{
+export interface Tag {
   id: string;
   name: string;
   type: string;

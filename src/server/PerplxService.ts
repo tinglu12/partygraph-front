@@ -71,11 +71,16 @@ class PerplexityService {
               },
               venue: {
                 type: "string",
-                description: "the venue of the event",
+                description: "the name of the venue of the event",
+              },
+              address: {
+                type: "string",
+                description: "the address of the event",
               },
               neighborhood: {
                 type: "string",
-                description: "which small neighborhood of the city",
+                description:
+                  "the neighborhood of the city for the event, eg SoHo, Williamsburg, East Village, LES etc.",
               },
               // category: {
               //   type: "string",
