@@ -3,6 +3,7 @@ import { plexSearchEvent, plexSearchMany } from "@/server/PerplxService";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 import fs from "fs";
+import { techWeekEvents } from "./data/tech-week";
 
 const client = new LlamaAPIClient({
   apiKey: process.env["LLAMA_API_KEY"], // This is the default and can be omitted
@@ -16,6 +17,9 @@ async function main() {
       break;
     case "plex-many":
       await plexManyTest();
+      break;
+    case "tech-week":
+      await techWeekTest();
       break;
     case "classify-image":
       // Pass the image path from the command line
@@ -54,6 +58,29 @@ async function plexManyTest() {
   );
 
   return result;
+}
+
+async function techWeekTest() {
+  const raw = await techWeekEvents;
+  const out = raw.map((event) => {
+    const item = {
+      ...event,
+      title: event.title,
+      description: event.description,
+      tags: event.tags,
+      url: event.url,
+      date: event.date,
+    };
+    return item;
+  });
+  console.log("techWeekTest result", { out });
+
+  fs.writeFileSync(
+    "./public/scraped/tech-week.json",
+    JSON.stringify(out, null, 2)
+  );
+
+  return out;
 }
 
 async function searchEventTest() {
