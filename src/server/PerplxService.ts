@@ -21,33 +21,38 @@ class PerplexityService {
   async searchEvent(query: string): Promise<any[]> {
     const count = 2;
     const prompt = `
-    Help me find book launches in New York City.
-    You are a helpful assistant. Given a filter and a list of events,
-    return the ${count} best-matching events as ${count} separate JSON objects, all following the same ontology.
-    Return an array of JSON objects in this format:
-
-    {
-      "title": "...",
-      "date": "...",
-      "time": "...",
-      "location": "...",
-      "neighborhood": "...",
-      "price": "...",
-      "accessibility": "...",
-      "link": "...",
-      "description": "...",
-      "tags": string[],
-      "keywords": string[],
-    }
+    Help me find ${query} events in New York City.
+    return ${count} best-matching events as a JSON array of objects.
 
     DO not add any other text to the response.
     Do not add backticks or \`\`\` json to the response.
     `;
 
+    const schema = {
+      type: "object",
+      properties: {
+        title: { type: "string" },
+        date: { type: "string" },
+        time: { type: "string" },
+        location: { type: "string" },
+        neighborhood: { type: "string" },
+        price: { type: "string" },
+        accessibility: { type: "string" },
+        link: { type: "string" },
+        description: { type: "string" },
+        tags: { type: "array", items: { type: "string" } },
+        keywords: { type: "array", items: { type: "string" } },
+      },
+    };
+
     const response = await axios.post(
       this.apiUrl,
       {
         model: this.model,
+        response_format: {
+          type: "json_schema",
+          json_schema: { schema: schema },
+        },
         messages: [
           {
             role: "user",
