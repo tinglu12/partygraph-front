@@ -4,6 +4,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Bloc Party, Metric, Blonde Redhead, joan",
     description: "Indie rock concert at Forest Hills Stadium",
+    date: "07-25-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -12,6 +13,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "The Unlikely Candidates, Anaïs & The Hoops",
     description: "Indie rock concert at The Wood Shop",
+    date: "06-22-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -20,6 +22,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Florist, Allegra Krieger",
     description: "Indie rock concert at Bowery Ballroom",
+    date: "08-05-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -29,6 +32,7 @@ export const sampleEvents: EventNode[] = [
     title:
       "Kate Stephenson, Eliza & the Delusionals, Annie Blackman, Grace Gardner",
     description: "Indie rock concert at The Sultan Room",
+    date: "07-15-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -37,6 +41,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Sinkane, Ghost Funk Orchestra",
     description: "Indie rock concert at Brooklyn Bowl",
+    date: "06-30-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -45,6 +50,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Alex Orange Drink, Gymshorts",
     description: "Indie rock concert at Mercury Lounge",
+    date: "08-12-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -53,6 +59,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "HNTR, Helang",
     description: "Indie rock concert at SILO Brooklyn",
+    date: "06-25-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -61,6 +68,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "The Kooks, lovelytheband",
     description: "Indie rock concert at The Rooftop at Pier 17",
+    date: "07-02-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -69,6 +77,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Art d'Ecco, Darky Ramone, Gargoyle",
     description: "Indie rock concert at The Sultan Room",
+    date: "08-19-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -77,6 +86,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "The Backseat Lovers, Palmyra",
     description: "Indie rock concert at Warsaw",
+    date: "07-28-2025",
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
@@ -86,6 +96,7 @@ export const sampleEvents: EventNode[] = [
     title: "Wycliffe Gordon Concert",
     description:
       "Jazz concert by Wycliffe Gordon at Birdland Theater in New York City from June 6 to June 13, 2025.",
+    date: "07-07-2025",
     tags: [
       "jazz",
       "concert",
@@ -102,6 +113,7 @@ export const sampleEvents: EventNode[] = [
     title: "Maria Schneider Jazz Concert",
     description:
       "Live jazz performance by Maria Schneider at Birdland in New York City.",
+    date: "08-01-2025",
     tags: [
       "jazz",
       "concert",
@@ -118,6 +130,7 @@ export const sampleEvents: EventNode[] = [
     title: "The Budos Band Jazz Concert",
     description:
       "Jazz concert by The Budos Band at Baby's All Right in Brooklyn, NY.",
+    date: "07-10-2025",
     tags: [
       "jazz",
       "concert",
@@ -134,6 +147,7 @@ export const sampleEvents: EventNode[] = [
     title: "Vijay Iyer, Henry Threadgill, and Dafnis Prieto Jazz Concert",
     description:
       "Jazz concert featuring Vijay Iyer, Henry Threadgill, and Dafnis Prieto at Jazz Gallery in New York City.",
+    date: "06-28-2025",
     tags: [
       "jazz",
       "concert",
@@ -155,6 +169,7 @@ export const sampleEvents: EventNode[] = [
     title: "Ethan Iverson Jazz Concert",
     description:
       "Jazz concert by Ethan Iverson at Birdland Theater in New York City.",
+    date: "06-29-2025",
     tags: [
       "jazz",
       "concert",
@@ -171,6 +186,7 @@ export const sampleEvents: EventNode[] = [
     title: "Jay Leonhart and Alan Broadbent Jazz Concert",
     description:
       "Jazz concert featuring Jay Leonhart and Alan Broadbent in New York City.",
+    date: "07-22-2025",
     tags: ["jazz", "concert", "live", "new york city", "jazz concert"],
     category: "music",
     keywords: ["Jay Leonhart", "Alan Broadbent"],
@@ -180,6 +196,7 @@ export const sampleEvents: EventNode[] = [
     title: "Vince Giordano & The Nighthawks Jazz Concert",
     description:
       "Jazz concert by Vince Giordano & The Nighthawks in New York City.",
+    date: "08-08-2025",
     tags: ["jazz", "concert", "live", "new york city", "jazz concert"],
     category: "music",
     keywords: ["Vince Giordano", "The Nighthawks"],
@@ -188,6 +205,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Stacey Kent Jazz Concert",
     description: "Jazz concert by Stacey Kent in New York City.",
+    date: "07-04-2025",
     tags: ["jazz", "concert", "live", "new york city", "jazz concert"],
     category: "music",
     keywords: ["Stacey Kent"],
@@ -198,6 +216,7 @@ export const sampleEvents: EventNode[] = [
       "Marcus Miller, Tank and the Bangas, and The Soul Rebels Jazz Concert",
     description:
       "Jazz concert featuring Marcus Miller, Tank and the Bangas, and The Soul Rebels at SummerStage, Central Park in New York City.",
+    date: "08-16-2025",
     tags: [
       "jazz",
       "concert",
@@ -221,6 +240,7 @@ export const sampleEvents: EventNode[] = [
     title: "Emily King Jazz Concert",
     description:
       "Jazz concert by Emily King at Blue Note Jazz Club in New York City.",
+    date: "06-27-2025",
     tags: [
       "jazz",
       "concert",
@@ -237,6 +257,7 @@ export const sampleEvents: EventNode[] = [
     title: "Hauser",
     description:
       "Award-winning cellist performing classical and crossover repertoire.",
+    date: "07-23-2025",
     tags: ["cello", "classical", "pop", "classical music concert"],
     category: "classical music concert",
     keywords: [
@@ -252,6 +273,7 @@ export const sampleEvents: EventNode[] = [
     title: "The Met Orchestra in Concert",
     description:
       "The Met Orchestra with soprano Angel Blue, conducted by Yannick Nézet-Séguin.",
+    date: "07-08-2025",
     tags: ["orchestra", "opera", "classical", "classical music concert"],
     category: "classical music concert",
     keywords: [
@@ -265,6 +287,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "New York Philharmonic at David Geffen Hall",
     description: "New York Philharmonic concert series.",
+    date: "06-26-2025",
     tags: ["orchestra", "classical", "classical music concert"],
     category: "classical music concert",
     keywords: [
@@ -278,6 +301,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Evgeny Kissin at Stern Auditorium, Carnegie Hall",
     description: "Pianist Evgeny Kissin in recital.",
+    date: "06-21-2025",
     tags: ["piano", "classical", "classical music concert"],
     category: "classical music concert",
     keywords: ["Evgeny Kissin", "Carnegie Hall", "Stern Auditorium", "2025"],
@@ -286,6 +310,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "The Knights",
     description: "Chamber orchestra performing works including Vivaldi.",
+    date: "06-23-2025",
     tags: ["chamber", "orchestra", "classical", "classical music concert"],
     category: "classical music concert",
     keywords: ["The Knights", "Naumburg Orchestral Concerts", "June 10, 2025"],
@@ -294,6 +319,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "A Far Cry",
     description: "Chamber orchestra concert.",
+    date: "06-24-2025",
     tags: ["chamber", "orchestra", "classical", "classical music concert"],
     category: "classical music concert",
     keywords: ["A Far Cry", "Naumburg Orchestral Concerts", "June 24, 2025"],
@@ -302,6 +328,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Mark Peskanov and Olga Vinokur at Green-Wood Cemetery",
     description: "Beethoven and Schubert works for violin and piano.",
+    date: "07-18-2025",
     tags: ["violin", "piano", "classical", "classical music concert"],
     category: "classical music concert",
     keywords: [
@@ -317,6 +344,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Mark Peskanov and Olga Vinokur at Bargemusic",
     description: "Beethoven and Schubert works for violin and piano.",
+    date: "07-19-2025",
     tags: ["violin", "piano", "classical", "classical music concert"],
     category: "classical music concert",
     keywords: [
@@ -332,6 +360,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Death of Classical: Ghost Quartet",
     description: "Performance of Dave Malloy's Ghost Quartet.",
+    date: "07-20-2025",
     tags: ["quartet", "classical", "contemporary", "classical music concert"],
     category: "classical music concert",
     keywords: [
@@ -345,6 +374,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "RenChorNY: Monteverdi's L’Orfeo",
     description: "Performance of Monteverdi's opera L’Orfeo.",
+    date: "07-21-2025",
     tags: ["opera", "classical", "Monteverdi", "classical music concert"],
     category: "classical music concert",
     keywords: [
@@ -358,6 +388,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Smino & Samara Cyn",
     description: "Hip Hop concert at Terminal 5",
+    date: "06-29-2025",
     tags: ["hip hop", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Smino", "Samara Cyn", "Terminal 5", "New York City"],
@@ -366,6 +397,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Dabin, William Black, Blanke, Jason Ross",
     description: "Under the K Bridge",
+    date: "08-03-2025",
     tags: ["hip hop", "electronic", "live music", "hip hop concert"],
     category: "music",
     keywords: [
@@ -381,6 +413,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "DD Osama & Sugarhill Ddot",
     description: "House Of Independents",
+    date: "07-11-2025",
     tags: ["hip hop", "live music", "hip hop concert"],
     category: "music",
     keywords: [
@@ -394,6 +427,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Post Malone, Jelly Roll, Chandler Walters, Wyatt Flores",
     description: "Citi Field",
+    date: "06-21-2025",
     tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Post Malone", "Jelly Roll", "Citi Field", "New York City"],
@@ -402,6 +436,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Lights & KiNG MALA",
     description: "Bowery Ballroom",
+    date: "08-25-2025",
     tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Lights", "KiNG MALA", "Bowery Ballroom", "New York City"],
@@ -411,6 +446,7 @@ export const sampleEvents: EventNode[] = [
     title:
       "Governors Ball: Tyler, the Creator, Olivia Rodrigo, Hozier, and more",
     description: "Governors Ball Music Festival",
+    date: "06-27-2025",
     tags: ["hip hop", "rap", "festival", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Tyler, the Creator", "Governors Ball", "New York City"],
@@ -419,6 +455,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Lil Wayne 'Tha Carter VI' Release Party",
     description: "Madison Square Garden",
+    date: "07-07-2025",
     tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Lil Wayne", "Madison Square Garden", "New York City"],
@@ -427,6 +464,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Master P, The Lox, Bone Thugs-N-Harmony",
     description: "New Jersey Performing Arts Center (near NYC)",
+    date: "08-07-2025",
     tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
     keywords: [
@@ -441,6 +479,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Grandmaster Flash, DJ Jazzy Jeff, Skratch Bastid",
     description: "The Rooftop at Pier 17",
+    date: "07-17-2025",
     tags: ["hip hop", "rap", "DJ", "live music", "hip hop concert"],
     category: "music",
     keywords: [
@@ -455,6 +494,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Eem Triplin & DC the Don",
     description: "Irving Plaza",
+    date: "06-24-2025",
     tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Eem Triplin", "DC the Don", "Irving Plaza", "New York City"],
@@ -464,6 +504,7 @@ export const sampleEvents: EventNode[] = [
     title: "Feels So Close (18+) | an EDM Golden Era Party",
     description:
       "An EDM party celebrating the golden era of electronic dance music, held at 17 Meadow St, New York City.",
+    date: "07-13-2025",
     tags: ["edm", "party", "rave", "new york city", "edm rave"],
     category: "party",
     keywords: ["golden era", "edm party", "17 Meadow St"],
@@ -473,6 +514,7 @@ export const sampleEvents: EventNode[] = [
     title: "The #1 EDM Boat Party NYC - House Music Yacht Cruise",
     description:
       "A house music yacht cruise featuring top EDM tracks, taking place at Pier 36 NYC.",
+    date: "06-22-2025",
     tags: ["edm", "boat party", "house music", "new york city", "edm rave"],
     category: "party",
     keywords: ["house music", "yacht cruise", "Pier 36"],
@@ -482,6 +524,7 @@ export const sampleEvents: EventNode[] = [
     title: "Kitty’s RAVE (18+)",
     description:
       "An 18+ rave event featuring electronic dance music at The Brooklyn Monarch.",
+    date: "08-28-2025",
     tags: ["edm", "rave", "party", "new york city", "edm rave"],
     category: "party",
     keywords: ["rave", "18+", "The Brooklyn Monarch"],
@@ -492,6 +535,7 @@ export const sampleEvents: EventNode[] = [
       "SOUNDWAVE BOAT PARTY 2025 | Hip-Hop • Latin • EDM (Open Bar Available!)",
     description:
       "A boat party featuring Hip-Hop, Latin, and EDM music with an open bar, held at Skyport Marina.",
+    date: "07-26-2025",
     tags: [
       "edm",
       "boat party",
@@ -508,6 +552,7 @@ export const sampleEvents: EventNode[] = [
     title: "LEVELS 'N' STUFF [EDM FESTIVAL CLASSICS] EARLY PARTY",
     description:
       "An early party event featuring classic EDM festival tracks at DROM in New York City.",
+    date: "06-30-2025",
     tags: ["edm", "party", "festival classics", "new york city", "edm rave"],
     category: "party",
     keywords: ["festival classics", "DROM", "early party"],
@@ -517,6 +562,7 @@ export const sampleEvents: EventNode[] = [
     title: "LadyLand Festival",
     description:
       "A two-day EDM music festival featuring artists like Cardi B, A$AP Rocky, and Pabllo Vittar in Brooklyn, NY.",
+    date: "08-09-2025",
     tags: ["edm", "festival", "music", "brooklyn", "edm rave"],
     category: "music",
     keywords: ["Cardi B", "Pabllo Vittar", "Brooklyn"],
@@ -526,6 +572,7 @@ export const sampleEvents: EventNode[] = [
     title: "S2O New York Music Festival",
     description:
       "An EDM festival featuring artists such as SLANDER, Major Lazer, and Dillon Francis in New York City.",
+    date: "07-03-2025",
     tags: ["edm", "festival", "music", "new york city", "edm rave"],
     category: "music",
     keywords: ["SLANDER", "Major Lazer", "Dillon Francis"],
@@ -535,6 +582,7 @@ export const sampleEvents: EventNode[] = [
     title: "Fire Lights",
     description:
       "An EDM festival with artists like G Jones and The Glitch Mob, held in New York City.",
+    date: "07-29-2025",
     tags: ["edm", "festival", "music", "new york city", "edm rave"],
     category: "music",
     keywords: ["G Jones", "The Glitch Mob", "festival"],
@@ -544,6 +592,7 @@ export const sampleEvents: EventNode[] = [
     title: "Evolutions Festival",
     description:
       "An EDM festival featuring Alison Wonderland and Of The Trees in New York City.",
+    date: "08-06-2025",
     tags: ["edm", "festival", "music", "new york city", "edm rave"],
     category: "music",
     keywords: ["Alison Wonderland", "Of The Trees", "festival"],
@@ -553,6 +602,7 @@ export const sampleEvents: EventNode[] = [
     title: "LadyLand Festival (Repeat Entry)",
     description:
       "A major EDM festival in Brooklyn, NY with a lineup including Cardi B and Pabllo Vittar.",
+    date: "08-23-2025",
     tags: ["edm", "festival", "music", "brooklyn", "edm rave"],
     category: "music",
     keywords: ["Cardi B", "Pabllo Vittar", "Brooklyn"],
@@ -562,6 +612,7 @@ export const sampleEvents: EventNode[] = [
     title: "BRESH - The Most Beautiful Party in the World",
     description:
       "BRESH returns to The Rooftop at Pier 17 for a legendary party with music, dancing, and skyline views.",
+    date: "07-11-2025",
     tags: ["rooftop", "music", "18+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -585,6 +636,7 @@ export const sampleEvents: EventNode[] = [
     title: "NYC Rooftop Party Saturday",
     description:
       "INTO THE NIGHT presents a Latin-themed rooftop party at Lost in Paradise Rooftop, Queens.",
+    date: "06-25-2025",
     tags: ["rooftop", "Latin music", "21+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -604,6 +656,7 @@ export const sampleEvents: EventNode[] = [
     title: "Lyra Rooftop Party 6.07",
     description:
       "Rose Gold presents a rooftop party at Magic Hour Rooftop Bar & Lounge, featuring music and city views.",
+    date: "06-27-2025",
     tags: ["rooftop", "music", "21+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -619,6 +672,7 @@ export const sampleEvents: EventNode[] = [
     title: "Above it All: A PHD Rooftop Party",
     description:
       "Lifted Events x Tao Group present a house music rooftop day party at PHD Rooftop Lounge.",
+    date: "06-28-2025",
     tags: ["rooftop", "house music", "21+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -636,6 +690,7 @@ export const sampleEvents: EventNode[] = [
     title: "Summer Rooftop Series at 230 Fifth",
     description:
       "Enjoy cocktails and panoramic views at NYC’s largest rooftop bar, 230 Fifth.",
+    date: "07-01-2025",
     tags: ["rooftop", "cocktails", "21+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -652,6 +707,7 @@ export const sampleEvents: EventNode[] = [
     title: "Rooftop at Pier 17 Concert Series",
     description:
       "Seasonal rooftop concerts at The Rooftop at Pier 17, featuring live music and skyline views.",
+    date: "08-21-2025",
     tags: ["rooftop", "live music", "18+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -668,6 +724,7 @@ export const sampleEvents: EventNode[] = [
     title: "Rooftop at The Press Lounge",
     description:
       "Chic rooftop lounge with craft cocktails and stunning city views.",
+    date: "07-18-2025",
     tags: ["rooftop", "cocktails", "21+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -683,6 +740,7 @@ export const sampleEvents: EventNode[] = [
     title: "Westlight Rooftop Bar Events",
     description:
       "Signature rooftop bar at The William Vale with curated events and skyline views.",
+    date: "06-23-2025",
     tags: ["rooftop", "bar", "21+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -699,6 +757,7 @@ export const sampleEvents: EventNode[] = [
     title: "Le Bain Rooftop Party",
     description:
       "Trendy rooftop club at The Standard, High Line, featuring DJs and city views.",
+    date: "08-10-2025",
     tags: ["rooftop", "club", "21+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -715,6 +774,7 @@ export const sampleEvents: EventNode[] = [
     title: "The Crown Rooftop Bar Events",
     description:
       "Rooftop bar at Hotel 50 Bowery with themed parties and cityscape views.",
+    date: "07-12-2025",
     tags: ["rooftop", "bar", "21+", "rooftop party"],
     category: "rooftop party",
     keywords: [
@@ -730,6 +790,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Open Mic Saturdays",
     description: "Open mic event at Medallion Bistro",
+    date: "07-09-2025",
     category: "General Open Mic",
     keywords: ["music", "poetry", "comedy"],
     id: "open-mic-saturdays",
@@ -738,6 +799,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Open Mic hosted by Brian Acosta Arya",
     description: "Open mic at Loisaida Center",
+    date: "08-14-2025",
     category: "General Open Mic",
     keywords: ["music", "poetry", "comedy"],
     id: "open-mic-hosted-by-brian-acosta-arya",
@@ -746,6 +808,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Gaia Open Mic",
     description: "Open mic at Arts On Site NYC",
+    date: "06-29-2025",
     category: "General Open Mic",
     keywords: ["music", "poetry", "comedy"],
     id: "gaia-open-mic",
@@ -754,6 +817,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Open Mic Night - Astoria, NY",
     description: "Open mic at Sissy McGinty's",
+    date: "07-27-2025",
     category: "General Open Mic",
     keywords: ["music", "poetry", "comedy"],
     id: "open-mic-night---astoria,-ny",
@@ -762,6 +826,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Taillor Open Mic",
     description: "Open mic at Madame X",
+    date: "08-02-2025",
     category: "General Open Mic",
     keywords: ["music", "poetry", "comedy"],
     id: "taillor-open-mic",
@@ -770,6 +835,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Awaken Jersey City Open Mic",
     description: "Open mic at VIP Diner",
+    date: "06-24-2025",
     category: "General Open Mic",
     keywords: ["music", "poetry", "comedy"],
     id: "awaken-jersey-city-open-mic",
@@ -778,6 +844,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "House of Khaos | Writing Workshop + Open Mic",
     description: "Writing workshop and open mic at Nook",
+    date: "07-19-2025",
     category: "Writing and Open Mic",
     keywords: ["writing", "poetry", "comedy"],
     id: "house-of-khaos-|-writing-workshop-+-open-mic",
@@ -786,6 +853,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Open Mic Night",
     description: "Open mic at Neir's Tavern",
+    date: "08-07-2025",
     category: "General Open Mic",
     keywords: ["music", "poetry", "comedy"],
     id: "open-mic-night",
@@ -794,6 +862,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "The Industry Room. New York’s Best Open Mic Show",
     description: "Comedy open mic at Broadway Comedy Club",
+    date: "06-23-2025",
     category: "Comedy Open Mic",
     keywords: ["comedy", "stand-up"],
     id: "the-industry-room.-new-york’s-best-open-mic-show",
@@ -802,6 +871,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "The Open Mic Downstairs @ Frigid New York",
     description: "Variety open mic at Frigid New York",
+    date: "07-17-2025",
     category: "Variety Open Mic",
     keywords: ["music", "comedy", "storytelling"],
     id: "the-open-mic-downstairs-@-frigid-new-york",
@@ -811,6 +881,7 @@ export const sampleEvents: EventNode[] = [
     title: "Party After Dark: Museum of Moving Image Silent Disco Take-Over",
     description:
       "Silent disco at the Museum of Moving Image, featuring multiple DJs.",
+    date: "08-20-2025",
     tags: ["music", "dance", "museum", "silent disco party"],
     category: "silent disco party",
     keywords: [
@@ -826,6 +897,7 @@ export const sampleEvents: EventNode[] = [
     title: "Silent Disco - Riverside Park Conservancy",
     description:
       "Quiet Clubbing event with three live DJs spinning different genres on the pier.",
+    date: "06-26-2025",
     tags: ["music", "dance", "outdoor", "silent disco party"],
     category: "silent disco party",
     keywords: [
@@ -841,6 +913,7 @@ export const sampleEvents: EventNode[] = [
     title: "Library Silent Disco: Decades Party 1965-2025",
     description:
       "Celebration of the Library for the Performing Arts' 60th anniversary with music from each decade.",
+    date: "07-30-2025",
     tags: ["music", "library", "anniversary", "silent disco party"],
     category: "silent disco party",
     keywords: [
@@ -856,6 +929,7 @@ export const sampleEvents: EventNode[] = [
     title: "Silent Disco Fun! - NYC Parks",
     description:
       "Free, all-ages silent disco party in Commodore Barry Park, Brooklyn.",
+    date: "07-06-2025",
     tags: ["music", "dance", "free", "silent disco party"],
     category: "silent disco party",
     keywords: ["silent disco", "NYC Parks", "Brooklyn", "free", "all ages"],
@@ -864,6 +938,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "All-Ages Silent Disco Brunch Bash",
     description: "Silent disco brunch event at Katch Astoria.",
+    date: "08-09-2025",
     tags: ["music", "brunch", "all ages", "silent disco party"],
     category: "silent disco party",
     keywords: [
@@ -879,6 +954,7 @@ export const sampleEvents: EventNode[] = [
     title: "Astoria Silent Disco: Beer Garden Bash with 3 Live DJs",
     description:
       "Silent disco party at a beer garden in Astoria with three DJs.",
+    date: "06-24-2025",
     tags: ["music", "beer garden", "DJs", "silent disco party"],
     category: "silent disco party",
     keywords: [
@@ -893,6 +969,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Silent Scream Silent Disco Halloween Party",
     description: "Halloween-themed silent disco party at Bohemian Beer Garden.",
+    date: "08-31-2025",
     tags: ["music", "Halloween", "beer garden", "silent disco party"],
     category: "silent disco party",
     keywords: [
@@ -907,6 +984,7 @@ export const sampleEvents: EventNode[] = [
     title: "End of Summer Silent Disco I 3 Live DJs I 21 & Over",
     description:
       "End of summer silent disco party at 230 FIFTH Avenue Empire Penthouse.",
+    date: "08-29-2025",
     tags: ["music", "summer", "21+", "DJs", "silent disco party"],
     category: "silent disco party",
     keywords: [
@@ -922,6 +1000,7 @@ export const sampleEvents: EventNode[] = [
     title: "Silent Disco Party at Central Park",
     description:
       "Silent disco event in Central Park (hypothetical, based on typical recurring events; not listed in current results but common in NYC).",
+    date: "07-24-2025",
     tags: ["music", "outdoor", "Central Park", "silent disco party"],
     category: "silent disco party",
     keywords: ["silent disco", "Central Park", "outdoor", "New York City"],
@@ -931,6 +1010,7 @@ export const sampleEvents: EventNode[] = [
     title: "Silent Disco Party at Brooklyn Bridge Park",
     description:
       "Silent disco event at Brooklyn Bridge Park (hypothetical, based on typical recurring events; not listed in current results but common in NYC).",
+    date: "06-27-2025",
     tags: ["music", "outdoor", "Brooklyn", "silent disco party"],
     category: "silent disco party",
     keywords: [
@@ -944,6 +1024,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Raphael Griswold: LOADING DOCK",
     description: "Solo exhibition by Raphael Griswold",
+    date: "07-08-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -963,6 +1044,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Antelman: First Exhibition with Gallery",
     description: "Unique approach to photography with sculptural sensibility",
+    date: "07-14-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -981,6 +1063,7 @@ export const sampleEvents: EventNode[] = [
     title: "Carlo Bella & Historical Artworks",
     description:
       "Joint exhibition of African, Native American, Old Master, and Greco-Roman artworks",
+    date: "07-11-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -1001,6 +1084,7 @@ export const sampleEvents: EventNode[] = [
     title: "ZERO Movement Co-founder Solo Exhibition",
     description:
       "First solo exhibition with the gallery of the co-founder of ZERO movement",
+    date: "07-05-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -1018,6 +1102,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Juan Uslé: New Paintings",
     description: "Monumental canvases and new paintings advancing abstraction",
+    date: "07-09-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -1035,6 +1120,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Summer in the City",
     description: "Summer group exhibition",
+    date: "06-22-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -1050,6 +1136,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Summer Selections",
     description: "Summer group exhibition",
+    date: "07-02-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -1065,6 +1152,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Charles Hinman: Cast Paper",
     description: "Solo exhibition by Charles Hinman",
+    date: "07-12-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -1081,6 +1169,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Coco Young: L’Autre Rive",
     description: "Solo exhibition by Coco Young",
+    date: "07-01-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -1097,6 +1186,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "NXTHVN Cohort 6: The Things Left Unsaid",
     description: "Group exhibition curated by Rigoberto Luna",
+    date: "07-16-2025",
     tags: ["gallery opening", "gallery opening"],
     category: "art",
     keywords: [
@@ -1114,6 +1204,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hiba Schahbaz: Magical Creatures",
     description: "Exhibition at Adler Beatty featuring works by Hiba Schahbaz.",
+    date: "07-26-2025",
     tags: ["painting", "art shows"],
     category: "art show",
     keywords: ["contemporary", "figurative art", "New York City"],
@@ -1123,6 +1214,7 @@ export const sampleEvents: EventNode[] = [
     title: "Ching Ho Cheng: Tracing Infinity",
     description:
       "Exhibition at Bank gallery featuring archival photographs and gouache windows works by Ching Ho Cheng.",
+    date: "06-28-2025",
     tags: ["photography", "painting", "art shows"],
     category: "art show",
     keywords: ["Chelsea Hotel", "downtown scene", "New York City"],
@@ -1132,6 +1224,7 @@ export const sampleEvents: EventNode[] = [
     title: "Teruko Yokoi: Noh Theater",
     description:
       "Exhibition at Hollis Taggart featuring 20 works by Teruko Yokoi, inspired by traditional Japanese Noh theater.",
+    date: "07-05-2025",
     tags: ["painting", "abstract expressionism", "art shows"],
     category: "art show",
     keywords: ["Japanese art", "Chelsea Hotel", "New York City"],
@@ -1141,6 +1234,7 @@ export const sampleEvents: EventNode[] = [
     title: "Antelman: First Exhibition with the Gallery",
     description:
       "Antelman’s first exhibition with the gallery, showcasing a unique approach to photography and montage.",
+    date: "07-21-2025",
     tags: ["photography", "sculpture", "art shows"],
     category: "art show",
     keywords: ["experimental", "lyrical", "New York City"],
@@ -1150,6 +1244,7 @@ export const sampleEvents: EventNode[] = [
     title: "Joint Exhibition: African, Native American, Old Master Paintings",
     description:
       "Joint exhibition featuring historical African and Native American artworks alongside Old Master Paintings and Greco-Roman Antiquity.",
+    date: "07-18-2025",
     tags: ["historical", "painting", "sculpture", "art shows"],
     category: "art show",
     keywords: ["museum-quality", "New York City"],
@@ -1159,6 +1254,7 @@ export const sampleEvents: EventNode[] = [
     title: "First Solo Exhibition: ZERO Movement Co-founder",
     description:
       "First solo exhibition with the gallery of the co-founder of the renowned ZERO movement.",
+    date: "07-22-2025",
     tags: ["painting", "sculpture", "art shows"],
     category: "art show",
     keywords: ["ZERO movement", "New York City"],
@@ -1168,6 +1264,7 @@ export const sampleEvents: EventNode[] = [
     title: "Uslé: Monumental Canvases",
     description:
       "Exhibition featuring monumental canvases and new paintings by Uslé, advancing his exploration of abstraction.",
+    date: "08-01-2025",
     tags: ["painting", "art shows"],
     category: "art show",
     keywords: ["abstract", "rhythmic brushstrokes", "New York City"],
@@ -1177,6 +1274,7 @@ export const sampleEvents: EventNode[] = [
     title: "SVA June 2025 Exhibitions",
     description:
       "Various exhibitions and events at the School of Visual Arts during June 2025.",
+    date: "06-25-2025",
     tags: ["mixed media", "student work", "art shows"],
     category: "art show",
     keywords: ["SVA", "New York City"],
@@ -1186,6 +1284,7 @@ export const sampleEvents: EventNode[] = [
     title: "Whitney Museum Spring Exhibitions",
     description:
       "Spring exhibitions at the Whitney Museum, featuring contemporary and modern art.",
+    date: "06-29-2025",
     tags: ["contemporary", "modern", "art shows"],
     category: "art show",
     keywords: ["Whitney Museum", "New York City"],
@@ -1195,6 +1294,7 @@ export const sampleEvents: EventNode[] = [
     title: "General NYC Art Gallery Exhibitions",
     description:
       "Ongoing exhibitions at leading New York City art galleries and museums.",
+    date: "07-03-2025",
     tags: ["mixed media", "art shows"],
     category: "art show",
     keywords: ["galleries", "museums", "New York City"],
@@ -1203,60 +1303,70 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hamilton",
     description: "A musical about American founding father Alexander Hamilton",
+    date: "08-14-2025",
     id: "hamilton",
     tags: ["broadway show"],
   },
   {
     title: "Chicago",
     description: "A classic musical about fame, murder, and scandal",
+    date: "07-16-2025",
     id: "chicago",
     tags: ["broadway show"],
   },
   {
     title: "Wicked",
     description: "A prequel to The Wizard of Oz, exploring the witches' story",
+    date: "06-22-2025",
     id: "wicked",
     tags: ["broadway show"],
   },
   {
     title: "Harry Potter and the Cursed Child",
     description: "A two-part play continuing the Harry Potter series",
+    date: "08-20-2025",
     id: "harry-potter-and-the-cursed-child",
     tags: ["broadway show"],
   },
   {
     title: "The Lion King",
     description: "A musical adaptation of the Disney film",
+    date: "07-01-2025",
     id: "the-lion-king",
     tags: ["broadway show"],
   },
   {
     title: "Aladdin",
     description: "A musical adaptation of the Disney film",
+    date: "06-29-2025",
     id: "aladdin",
     tags: ["broadway show"],
   },
   {
     title: "Just In Time",
     description: "A jukebox musical about Bobby Darin's life",
+    date: "07-18-2025",
     id: "just-in-time",
     tags: ["broadway show"],
   },
   {
     title: "Good Night, and Good Luck",
     description: "A historical drama about 1950s television news",
+    date: "08-02-2025",
     id: "good-night,-and-good-luck",
     tags: ["broadway show"],
   },
   {
     title: "The Last Five Years",
     description: "A musical about a couple falling in and out of love",
+    date: "06-30-2025",
     id: "the-last-five-years",
     tags: ["broadway show"],
   },
   {
     title: "John Proctor is the Villain",
     description: "A comedy flipping the script on The Crucible",
+    date: "07-31-2025",
     id: "john-proctor-is-the-villain",
     tags: ["broadway show"],
   },
@@ -1264,6 +1374,7 @@ export const sampleEvents: EventNode[] = [
     title: "HA HA HA HA HA HA HA",
     description:
       "An improvised Off-Broadway show heavily based on audience participation, performed at The Public Theater/Anspacher Theater.",
+    date: "06-24-2025",
     tags: [
       "off-broadway",
       "improvisation",
@@ -1278,6 +1389,7 @@ export const sampleEvents: EventNode[] = [
     title: "EURYDICE",
     description:
       "A reimagining of Sarah Ruhl's play about Eurydice who falls to the underworld on her wedding day, performed at Pershing Square Signature Center/Romulus Linney Courtyard Theatre.",
+    date: "07-04-2025",
     tags: ["off-broadway", "drama", "mythology", "off-broadway show"],
     category: "art",
     keywords: ["Sarah Ruhl", "Eurydice", "underworld", "myth"],
@@ -1287,6 +1399,7 @@ export const sampleEvents: EventNode[] = [
     title: "Just In Time",
     description:
       "A jukebox biographical musical celebrating the life and music of Bobby Darin, directed by Alex Timbers, performed at Circle in the Square Theatre.",
+    date: "06-27-2025",
     tags: ["off-broadway", "musical", "biographical", "off-broadway show"],
     category: "music",
     keywords: ["Bobby Darin", "jukebox musical", "Jonathan Groff"],
@@ -1296,6 +1409,7 @@ export const sampleEvents: EventNode[] = [
     title: "Heathers",
     description:
       "A new life for the musical 'Heathers' on New York Off-Broadway stages featuring familiar Broadway faces.",
+    date: "08-07-2025",
     tags: ["off-broadway", "musical", "revival", "off-broadway show"],
     category: "music",
     keywords: ["Heathers", "musical revival", "Broadway faces"],
@@ -1305,6 +1419,7 @@ export const sampleEvents: EventNode[] = [
     title: "Grease",
     description:
       "An Off-Broadway production of 'Grease' with an entirely indigenous cast.",
+    date: "07-13-2025",
     tags: ["off-broadway", "musical", "revival", "off-broadway show"],
     category: "music",
     keywords: ["Grease", "indigenous cast", "musical revival"],
@@ -1313,6 +1428,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Maybe Happy Ending",
     description: "An Off-Broadway show in June 2025 in New York City.",
+    date: "06-28-2025",
     tags: ["off-broadway", "musical", "off-broadway show"],
     category: "music",
     keywords: ["Maybe Happy Ending"],
@@ -1321,6 +1437,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "John Proctor is the Villain",
     description: "An Off-Broadway show running in June 2025 in New York City.",
+    date: "06-23-2025",
     tags: ["off-broadway", "play", "off-broadway show"],
     category: "art",
     keywords: ["John Proctor is the Villain"],
@@ -1329,6 +1446,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "The Picture of Dorian Gray",
     description: "An Off-Broadway show in June 2025 in New York City.",
+    date: "06-24-2025",
     tags: ["off-broadway", "play", "off-broadway show"],
     category: "art",
     keywords: ["The Picture of Dorian Gray"],
@@ -1337,6 +1455,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Good Night, and Good Luck",
     description: "An Off-Broadway show running in June 2025 in New York City.",
+    date: "06-25-2025",
     tags: ["off-broadway", "play", "off-broadway show"],
     category: "art",
     keywords: ["Good Night, and Good Luck"],
@@ -1345,6 +1464,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Death Becomes Her",
     description: "An Off-Broadway show in June 2025 in New York City.",
+    date: "06-26-2025",
     tags: ["off-broadway", "play", "off-broadway show"],
     category: "art",
     keywords: ["Death Becomes Her"],
@@ -1354,6 +1474,7 @@ export const sampleEvents: EventNode[] = [
     title: "Werq the World 2025",
     description:
       "Drag Race royalty including Derrick Barry as Britney Spears, Jaida Essence Hall as Beyonce, Naomi Smalls as Mariah Carey, Marina Summers as Ariana Grande, Morphine as Shakira, plus guest appearances from some of season 17's top contenders!",
+    date: "08-28-2025",
     tags: ["RuPaul's Drag Race", "Werq the World", "drag show"],
     category: "drag show",
     keywords: [
@@ -1372,6 +1493,7 @@ export const sampleEvents: EventNode[] = [
     title: "Sasha Colby Stripped Tour",
     description:
       "Drag Race 2023 winner Sasha Colby performs at Town Hall Theater as part of her North America tour.",
+    date: "08-05-2025",
     tags: ["Sasha Colby", "Drag Race", "Stripped Tour", "drag show"],
     category: "drag show",
     keywords: [
@@ -1388,6 +1510,7 @@ export const sampleEvents: EventNode[] = [
     title: "Chappell Roan Drag Brunch",
     description:
       "Drag brunch featuring Chappell Roan and other drag performers.",
+    date: "07-01-2025",
     tags: ["drag brunch", "Chappell Roan", "drag show"],
     category: "drag show",
     keywords: [
@@ -1403,6 +1526,7 @@ export const sampleEvents: EventNode[] = [
     title: "Bad Bunny Drag Brunch",
     description:
       "Drag brunch inspired by Bad Bunny, featuring drag performances.",
+    date: "07-08-2025",
     tags: ["drag brunch", "Bad Bunny", "drag show"],
     category: "drag show",
     keywords: [
@@ -1418,6 +1542,7 @@ export const sampleEvents: EventNode[] = [
     title: "Broadway Drag Brunch",
     description:
       "Broadway-themed drag brunch with performances by NYC drag queens.",
+    date: "07-15-2025",
     tags: ["drag brunch", "Broadway", "drag show"],
     category: "drag show",
     keywords: [
@@ -1434,6 +1559,7 @@ export const sampleEvents: EventNode[] = [
     title: "Gaga Pride Drag Brunch",
     description:
       "Lady Gaga-inspired drag brunch for Pride, featuring drag performances.",
+    date: "07-22-2025",
     tags: ["drag brunch", "Lady Gaga", "Pride", "drag show"],
     category: "drag show",
     keywords: [
@@ -1450,6 +1576,7 @@ export const sampleEvents: EventNode[] = [
     title: "Beyoncé Drag Brunch",
     description:
       "Drag brunch celebrating Beyoncé, featuring drag performances.",
+    date: "07-05-2025",
     tags: ["drag brunch", "Beyoncé", "drag show"],
     category: "drag show",
     keywords: [
@@ -1466,6 +1593,7 @@ export const sampleEvents: EventNode[] = [
     title: "Werkin Girls Drag Queen Show NYC",
     description:
       "Evening drag show featuring NYC's top drag queens, with lip-syncs, dance routines, and runway struts.",
+    date: "07-05-2025",
     tags: ["Werkin Girls", "drag show", "NYC", "drag show"],
     category: "drag show",
     keywords: [
@@ -1481,6 +1609,7 @@ export const sampleEvents: EventNode[] = [
     title: "Dungeons & Drag Queens",
     description:
       "Drag queens perform in a Dungeons & Dragons-inspired show at Caveat.",
+    date: "07-12-2025",
     tags: ["drag show", "Dungeons & Dragons", "Caveat", "drag show"],
     category: "drag show",
     keywords: [
@@ -1496,6 +1625,7 @@ export const sampleEvents: EventNode[] = [
     title: "NYC Drag Brunch (General)",
     description:
       "Regular drag brunch events featuring rotating drag performers in NYC.",
+    date: "07-14-2025",
     tags: ["drag brunch", "NYC", "drag show"],
     category: "drag show",
     keywords: ["drag", "brunch", "New York City", "2025", "various dates"],
@@ -1505,6 +1635,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York Fashion Week Fall/Winter 2025",
     description:
       "A major fashion event showcasing Fall/Winter 2025 collections by top designers in New York City, held February 6-11, 2025.",
+    date: "08-04-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1526,6 +1657,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York Fashion Week Spring/Summer 2026",
     description:
       "The premier fashion event of the year featuring Spring/Summer 2026 collections, taking place September 11-16, 2025 at various venues in New York City.",
+    date: "08-07-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1548,6 +1680,7 @@ export const sampleEvents: EventNode[] = [
       "New York Fashion Week September 2025 at Historic West Edge at The Highline",
     description:
       "An immersive fashion experience from September 11-14, 2025, featuring runway shows, panel discussions, product demos, and social events at the Historic West Edge at The Highline.",
+    date: "08-09-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1570,6 +1703,7 @@ export const sampleEvents: EventNode[] = [
     title: "NYFW: The Shows - Iconic Designers and Runway Shows",
     description:
       "Experience the pinnacle of fashion with iconic designers and runway shows defining New York Fashion Week, showcasing the latest trends in NYC.",
+    date: "07-28-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1591,6 +1725,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York Fashion Week Spring/Summer 2026 - September 11-16, 2025",
     description:
       "A key event in the fashion calendar presenting Spring/Summer 2026 collections with over 36,000 sq ft of space and a fashion village in New York City.",
+    date: "08-18-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1611,6 +1746,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York Fashion Week - Industry Mixers and After Parties",
     description:
       "Social events during New York Fashion Week including industry mixers, after parties, and lifestyle events such as yoga + mimosas, enhancing the fashion experience.",
+    date: "07-20-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1634,6 +1770,7 @@ export const sampleEvents: EventNode[] = [
       "New York Fashion Week - Panel Discussions and Product Demonstrations",
     description:
       "Engage with fashion industry professionals through panel discussions and product demonstrations held during New York Fashion Week in New York City.",
+    date: "08-02-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1655,6 +1792,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York Fashion Week - Exclusive On-site Hospitality",
     description:
       "Exclusive hospitality and insider access for guests attending New York Fashion Week, providing a coveted invitation to the fashion industry's transformation.",
+    date: "07-19-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1676,6 +1814,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York Fashion Week - Fashion Village Experience",
     description:
       "A vibrant fashion village at New York Fashion Week offering a range of exciting events, showcasing the latest fashion trends and designers in NYC.",
+    date: "07-24-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1697,6 +1836,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York Fashion Week - September 11-14, 2025",
     description:
       "Join the premier fashion event of the year at New York Fashion Week, September 11-14, 2025, featuring top designers, models, and industry professionals in NYC.",
+    date: "08-12-2025",
     tags: [
       "fashion show",
       "new york city",
@@ -1719,6 +1859,7 @@ export const sampleEvents: EventNode[] = [
     title: "Yes Chef Food Fest",
     description:
       "A collection of the best restaurants and culinary experiences on earth coming together for a weekend of food, giveaways, and more.",
+    date: "07-11-2025",
     tags: ["food festival", "Brooklyn", "food festival"],
     category: "food festival",
     keywords: ["restaurants", "culinary experiences", "giveaways"],
@@ -1728,6 +1869,7 @@ export const sampleEvents: EventNode[] = [
     title: "Grand Central Food Festival Series Fair",
     description:
       "Midtown food festival along 45th Street between Lexington Avenue & 3rd Ave.",
+    date: "08-19-2025",
     tags: ["food festival", "Midtown Manhattan", "food festival"],
     category: "food festival",
     keywords: ["local vendors", "street fair"],
@@ -1737,6 +1879,7 @@ export const sampleEvents: EventNode[] = [
     title: "Grand Central Food Block Party",
     description:
       "Midtown food festival along 41st Street between Lexington Avenue & 3rd Ave.",
+    date: "07-13-2025",
     tags: ["food festival", "Midtown Manhattan", "food festival"],
     category: "food festival",
     keywords: ["block party", "local vendors"],
@@ -1746,6 +1889,7 @@ export const sampleEvents: EventNode[] = [
     title: "Uptown Night Market",
     description:
       "Monthly food market/festival featuring more than 80 local vendors in West Harlem/Washington Heights.",
+    date: "06-22-2025",
     tags: ["food festival", "Harlem", "Washington Heights", "food festival"],
     category: "food festival",
     keywords: ["night market", "local vendors"],
@@ -1755,6 +1899,7 @@ export const sampleEvents: EventNode[] = [
     title: "Smorgasburg",
     description:
       "America's largest weekly open-air food market, attracting tens of thousands of visitors each weekend.",
+    date: "07-07-2025",
     tags: ["food festival", "Brooklyn", "Manhattan", "food festival"],
     category: "food festival",
     keywords: ["open-air market", "local vendors", "diverse cuisines"],
@@ -1764,6 +1909,7 @@ export const sampleEvents: EventNode[] = [
     title: "Queens Night Market",
     description:
       "Weekly night market in Queens featuring diverse international foods and local vendors.",
+    date: "08-14-2025",
     tags: ["food festival", "Queens", "food festival"],
     category: "food festival",
     keywords: ["night market", "international food", "local vendors"],
@@ -1773,6 +1919,7 @@ export const sampleEvents: EventNode[] = [
     title: "NYC Multicultural Festival",
     description:
       "Celebration of diverse cultures through food, music, and performances.",
+    date: "07-21-2025",
     tags: ["food festival", "multicultural", "food festival"],
     category: "food festival",
     keywords: ["cultural celebration", "food", "music"],
@@ -1781,6 +1928,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "New York Latin Food Fest",
     description: "Festival celebrating Latin American cuisine and culture.",
+    date: "07-05-2025",
     tags: ["food festival", "Latin American", "food festival"],
     category: "food festival",
     keywords: ["Latin food", "culture", "music"],
@@ -1789,6 +1937,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Vegandale Festival",
     description: "Festival dedicated to vegan food and lifestyle.",
+    date: "06-21-2025",
     tags: ["food festival", "vegan", "food festival"],
     category: "food festival",
     keywords: ["vegan food", "lifestyle", "plant-based"],
@@ -1798,6 +1947,7 @@ export const sampleEvents: EventNode[] = [
     title: "Food Network New York City Wine & Food Festival",
     description:
       "Premier wine & food festival featuring world-class chefs and unforgettable culinary experiences.",
+    date: "08-29-2025",
     tags: ["food festival", "wine", "Manhattan", "food festival"],
     category: "food festival",
     keywords: ["wine", "chefs", "culinary experiences"],
@@ -1807,6 +1957,7 @@ export const sampleEvents: EventNode[] = [
     title: "Bar Tizio Meatpacking District",
     description:
       "Wine bar sibling to chef Jonathan Waxman’s Barbuto, offering casual dining with dishes like tuna tartare, agnolotti, and steak with romesco. Features 30 wines by the glass.",
+    date: "08-06-2025",
     tags: ["wine bar", "casual", "Meatpacking District", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["Jonathan Waxman", "Barbuto", "wine"],
@@ -1816,6 +1967,7 @@ export const sampleEvents: EventNode[] = [
     title: "Maison Passerelle",
     description:
       "Chef Gregory Gourdet’s new spot in the Financial District, blending New York and French colonial flavors. Menu includes dry-aged NY strip steak with Haitian coffee rubs and West African stews.",
+    date: "07-14-2025",
     tags: ["French", "colonial", "Financial District", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["Gregory Gourdet", "Top Chef", "James Beard"],
@@ -1825,6 +1977,7 @@ export const sampleEvents: EventNode[] = [
     title: "Oyamel",
     description:
       "José Andrés Group’s Mexican restaurant in Hudson Yards, featuring tacos, ceviches, and margaritas in a vibrant, butterfly-adorned space.",
+    date: "08-15-2025",
     tags: ["Mexican", "Hudson Yards", "José Andrés", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["tacos", "ceviche", "margaritas"],
@@ -1834,6 +1987,7 @@ export const sampleEvents: EventNode[] = [
     title: "Yamada",
     description:
       "Chef Isao Yamada’s kaiseki restaurant in Chinatown, offering a 10-course tasting menu with dishes like king crab chawanmushi and sakura-aged wagyu.",
+    date: "07-25-2025",
     tags: ["Japanese", "kaiseki", "Chinatown", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["Isao Yamada", "tasting menu", "seasonal"],
@@ -1842,6 +1996,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Le Chêne",
     description: "New restaurant in the West Village, details to be announced.",
+    date: "07-17-2025",
     tags: ["West Village", "new", "restaurant", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["West Village", "new"],
@@ -1850,6 +2005,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "I Cavallini",
     description: "New restaurant in New York City, details to be announced.",
+    date: "08-09-2025",
     tags: ["new", "restaurant", "NYC", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["new", "restaurant"],
@@ -1859,6 +2015,7 @@ export const sampleEvents: EventNode[] = [
     title: "Chateau Royale",
     description:
       "French restaurant opening in spring 2025 from Cody Pruitt, owner of Libertine in the West Village.",
+    date: "07-23-2025",
     tags: ["French", "West Village", "Cody Pruitt", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["Libertine", "spring 2025", "French cuisine"],
@@ -1868,6 +2025,7 @@ export const sampleEvents: EventNode[] = [
     title: "Shifka",
     description:
       "Pita shop in NoHo from the team behind Sami & Susu, featuring pita sandwiches, dips, bowls, and soft serve ice cream. Opens summer 2025.",
+    date: "07-09-2025",
     tags: ["pita", "NoHo", "Sami & Susu", "restaurant opening"],
     category: "restaurant opening",
     keywords: [
@@ -1881,6 +2039,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Haymarket",
     description: "New restaurant opening in Chelsea in spring 2025.",
+    date: "06-22-2025",
     tags: ["Chelsea", "spring 2025", "restaurant", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["Chelsea", "spring 2025"],
@@ -1890,6 +2049,7 @@ export const sampleEvents: EventNode[] = [
     title: "Canal Arcade (Yamada)",
     description:
       "Yamada restaurant is located inside Canal Arcade, Chinatown, offering a unique Japanese kaiseki experience.",
+    date: "07-12-2025",
     tags: ["Chinatown", "kaiseki", "Japanese", "restaurant opening"],
     category: "restaurant opening",
     keywords: ["Canal Arcade", "Isao Yamada", "tasting menu"],
@@ -1899,6 +2059,7 @@ export const sampleEvents: EventNode[] = [
     title: "Tech Gather NYC June Meetup",
     description:
       "A monthly tech meetup held at The Irish American Pub in New York, NY, focusing on networking and discussions around technology.",
+    date: "07-11-2025",
     tags: ["tech", "meetup", "networking", "tech meetup"],
     category: "tech meetup",
     keywords: [
@@ -1913,6 +2074,7 @@ export const sampleEvents: EventNode[] = [
     title: "NY Tech Meetup - June 2, 2025",
     description:
       "A special June meetup hosted by NY Tech Alliance and NY Robotics Network at Civic Hall, featuring demos and presentations on Physical & Embodied AI, robotics, and interactive devices.",
+    date: "07-02-2025",
     tags: ["tech", "meetup", "AI", "robotics", "tech meetup"],
     category: "tech meetup",
     keywords: [
@@ -1929,6 +2091,7 @@ export const sampleEvents: EventNode[] = [
     title: "Annual BROOKLYN TECH EXPO - June 3, 2025",
     description:
       "Brooklyn’s largest tech conference focusing on AI and emerging technologies, featuring seminars, networking, and exhibitor floor access, part of NY Tech Week.",
+    date: "07-03-2025",
     tags: ["tech", "expo", "conference", "networking", "AI", "tech meetup"],
     category: "tech meetup",
     keywords: [
@@ -1944,6 +2107,7 @@ export const sampleEvents: EventNode[] = [
     title: "Tech Pizza Party NYC - June 1, 2025",
     description:
       "A casual tech meetup event featuring pizza and networking opportunities for tech enthusiasts in NYC, part of NYC Tech Week.",
+    date: "07-01-2025",
     tags: ["tech", "meetup", "networking", "pizza", "tech meetup"],
     category: "tech meetup",
     keywords: ["Tech Pizza Party NYC", "networking", "NYC Tech Week"],
@@ -1953,6 +2117,7 @@ export const sampleEvents: EventNode[] = [
     title: "Tech Week Founder & Funder Power Walk - June 1, 2025",
     description:
       "An event for founders and funders to network and connect during NYC Tech Week, featuring a power walk and discussions.",
+    date: "07-01-2025",
     tags: [
       "tech",
       "meetup",
@@ -1974,6 +2139,7 @@ export const sampleEvents: EventNode[] = [
     title: "Coffee & Cofounders - June 2, 2025",
     description:
       "A morning meetup for cofounders and entrepreneurs to connect over coffee during NYC Tech Week.",
+    date: "07-02-2025",
     tags: [
       "tech",
       "meetup",
@@ -1995,6 +2161,7 @@ export const sampleEvents: EventNode[] = [
     title: "NY Tech Meetup - Physical & Embodied AI Theme",
     description:
       "A meetup focusing on how AI takes physical form in robotics and interactive devices, featuring demos and presentations from leading innovators.",
+    date: "07-12-2025",
     tags: [
       "tech",
       "meetup",
@@ -2017,6 +2184,7 @@ export const sampleEvents: EventNode[] = [
     title: "NY Tech Meetup - Robotics Network Collaboration",
     description:
       "A collaborative event between NY Tech Alliance and NY Robotics Network highlighting robotics innovations and AI applications.",
+    date: "07-19-2025",
     tags: ["tech", "meetup", "robotics", "AI", "collaboration", "tech meetup"],
     category: "tech meetup",
     keywords: [
@@ -2032,6 +2200,7 @@ export const sampleEvents: EventNode[] = [
     title: "Brooklyn Tech Expo - Seminars & Networking",
     description:
       "An all-day event with seminars on AI and emerging tech, networking opportunities, and free professional headshots for attendees.",
+    date: "06-27-2025",
     tags: ["tech", "expo", "seminars", "networking", "AI", "tech meetup"],
     category: "tech meetup",
     keywords: ["seminars", "networking", "AI", "professional headshots"],
@@ -2041,6 +2210,7 @@ export const sampleEvents: EventNode[] = [
     title: "NY Tech Meetup - June Event at Civic Hall",
     description:
       "A June meetup event at Civic Hall featuring a curated lineup of tech demos and presentations, part of NY Tech Week celebrations.",
+    date: "07-10-2025",
     tags: [
       "tech",
       "meetup",
@@ -2057,6 +2227,7 @@ export const sampleEvents: EventNode[] = [
     title: "NY Tech Week",
     description:
       "A16z presents Tech Week 2025, bringing together top founders, funds, and companies globally.",
+    date: "06-25-2025",
     category: "Tech Conference",
     keywords: ["Founders", "Funds", "Companies", "Global Networking"],
     id: "ny-tech-week",
@@ -2066,6 +2237,7 @@ export const sampleEvents: EventNode[] = [
     title: "AI + BLOCKCHAIN: Innovation + Investment",
     description:
       "Tech conference focusing on AI and Blockchain innovation and investment in New York.",
+    date: "07-02-2025",
     category: "Tech Conference",
     keywords: ["AI", "Blockchain", "Investment"],
     id: "ai-+-blockchain:-innovation-+-investment",
@@ -2075,6 +2247,7 @@ export const sampleEvents: EventNode[] = [
     title: "TECHSPO New York 2025",
     description:
       "Technology Expo featuring Internet, Mobile, AdTech, MarTech, and SaaS innovations.",
+    date: "08-11-2025",
     category: "Tech Conference",
     keywords: [
       "Technology Expo",
@@ -2091,6 +2264,7 @@ export const sampleEvents: EventNode[] = [
     title: "LeadDev New York",
     description:
       "Premier conference for engineering leaders focusing on technical leadership and product development.",
+    date: "07-19-2025",
     category: "Tech Conference",
     keywords: [
       "Engineering Leaders",
@@ -2104,6 +2278,7 @@ export const sampleEvents: EventNode[] = [
     title: "Brooklyn Tech Expo - Pulse NYC",
     description:
       "Spotlights AI and emerging technology, uniting Brooklyn’s top tech and business leaders.",
+    date: "07-28-2025",
     category: "Tech Conference",
     keywords: ["AI", "Emerging Technology", "Networking"],
     id: "brooklyn-tech-expo---pulse-nyc",
@@ -2113,6 +2288,7 @@ export const sampleEvents: EventNode[] = [
     title: "Chief AI Officer Summit",
     description:
       "Gathering AI executives to optimize AI adoption strategies across industries.",
+    date: "07-27-2025",
     category: "Tech Conference",
     keywords: ["AI Adoption", "Strategies", "Executives"],
     id: "chief-ai-officer-summit",
@@ -2121,6 +2297,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Auto.AI Summit",
     description: "Focuses on AI applications in the automotive industry.",
+    date: "07-20-2025",
     category: "Tech Conference",
     keywords: ["AI", "Automotive", "Innovation"],
     id: "auto.ai-summit",
@@ -2131,6 +2308,7 @@ export const sampleEvents: EventNode[] = [
       "DigiMarCon East Digital Marketing, Media and Advertising Conference",
     description:
       "Conference alongside TECHSPO, focusing on digital marketing strategies.",
+    date: "07-14-2025",
     category: "Tech Conference",
     keywords: ["Digital Marketing", "Media", "Advertising"],
     id: "digimarcon-east-digital-marketing,-media-and-advertising-conference",
@@ -2140,6 +2318,7 @@ export const sampleEvents: EventNode[] = [
     title: "AI + Blockchain Innovation Summit",
     description:
       "Exploring the intersection of AI and Blockchain technologies.",
+    date: "07-26-2025",
     category: "Tech Conference",
     keywords: ["AI", "Blockchain", "Innovation"],
     id: "ai-+-blockchain-innovation-summit",
@@ -2149,6 +2328,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York AI Summit",
     description:
       "Not explicitly listed but typically involves AI innovation and networking.",
+    date: "07-25-2025",
     category: "Tech Conference",
     keywords: ["AI", "Innovation", "Networking"],
     id: "new-york-ai-summit",
@@ -2158,6 +2338,7 @@ export const sampleEvents: EventNode[] = [
     title: "Brooklyn Org Nonprofit Happy Hour - June 2025",
     description:
       "Happy Hour at Somethin' Else inside Dekalb Market, Brooklyn, open to Brooklyn-serving nonprofits and grantees of Brooklyn Org. Networking event with first round of drinks on Brooklyn Org.",
+    date: "07-17-2025",
     tags: ["happy hour", "networking", "nonprofit", "brooklyn", "happy hour"],
     category: "party",
     keywords: [
@@ -2173,6 +2354,7 @@ export const sampleEvents: EventNode[] = [
     title: "Happy Hour for More Homes: A Summer Kickoff with Open New York!",
     description:
       "Celebrate housing advocacy with Open New York at Cobble Fish on Pier 16, Manhattan. Event includes food, drinks, and housing policy conversation.",
+    date: "07-09-2025",
     tags: ["happy hour", "housing", "advocacy", "manhattan", "happy hour"],
     category: "party",
     keywords: [
@@ -2188,6 +2370,7 @@ export const sampleEvents: EventNode[] = [
     title: "Happy Hour, June 2025 | The New York Society Library",
     description:
       "Social event happy hour for members and guests at The New York Society Library.",
+    date: "06-28-2025",
     tags: ["happy hour", "social event", "library", "happy hour"],
     category: "party",
     keywords: ["New York Society Library", "social event", "members", "guests"],
@@ -2197,6 +2380,7 @@ export const sampleEvents: EventNode[] = [
     title: "Singles Happy Hour in NYC!",
     description:
       "Singles Happy Hour at Kobano, a Japanese-Brazilian fusion restaurant in NYC's Bowery. Social evening to meet new friends or romantic interests with curated cocktails and cuisine.",
+    date: "07-21-2025",
     tags: ["happy hour", "singles", "social", "dating", "happy hour"],
     category: "party",
     keywords: [
@@ -2212,6 +2396,7 @@ export const sampleEvents: EventNode[] = [
     title: "FBI AIA Networking Happy Hour - June 2025 in NYC",
     description:
       "Networking happy hour for current and former FBI Intelligence Analysts in New York City.",
+    date: "07-11-2025",
     tags: [
       "happy hour",
       "networking",
@@ -2233,6 +2418,7 @@ export const sampleEvents: EventNode[] = [
     title: "Happy Hour at Somethin' Else, Brooklyn",
     description:
       "Networking event for Brooklyn nonprofits at Somethin' Else inside Dekalb Market with drinks and socializing.",
+    date: "07-03-2025",
     tags: ["happy hour", "networking", "nonprofit", "brooklyn", "happy hour"],
     category: "party",
     keywords: [
@@ -2248,6 +2434,7 @@ export const sampleEvents: EventNode[] = [
     title: "Open New York Summer Kickoff Happy Hour",
     description:
       "Celebrate the summer and housing advocacy with Open New York at Cobble Fish, Manhattan, including food and drinks.",
+    date: "07-14-2025",
     tags: ["happy hour", "housing", "advocacy", "manhattan", "happy hour"],
     category: "party",
     keywords: [
@@ -2263,6 +2450,7 @@ export const sampleEvents: EventNode[] = [
     title: "NY Society Library June Happy Hour",
     description:
       "Social happy hour event at The New York Society Library for members and guests.",
+    date: "07-08-2025",
     tags: ["happy hour", "social event", "library", "happy hour"],
     category: "party",
     keywords: ["New York Society Library", "social event", "members", "guests"],
@@ -2272,6 +2460,7 @@ export const sampleEvents: EventNode[] = [
     title: "Singles Social Happy Hour at Kobano",
     description:
       "Singles social event with cocktails and fusion cuisine at Kobano in NYC's Bowery neighborhood.",
+    date: "07-19-2025",
     tags: ["happy hour", "singles", "social", "dating", "happy hour"],
     category: "party",
     keywords: ["singles", "Kobano", "fusion cuisine", "Bowery", "cocktails"],
@@ -2281,6 +2470,7 @@ export const sampleEvents: EventNode[] = [
     title: "FBI Intelligence Analysts Networking Happy Hour",
     description:
       "Networking happy hour for FBI Intelligence Analysts hosted by FBI AIA in New York City.",
+    date: "07-02-2025",
     tags: [
       "happy hour",
       "networking",
@@ -2302,6 +2492,7 @@ export const sampleEvents: EventNode[] = [
     title: "Startup CPG Founder Dinner @ Summer Fancy Food 2025",
     description:
       "A founders-only dinner at a chic private social club in Tribeca to connect, share insights, and have a good time.",
+    date: "07-25-2025",
     tags: [
       "founder dinner",
       "startup",
@@ -2323,6 +2514,7 @@ export const sampleEvents: EventNode[] = [
     title: "2025 Founder's Dinner - SSP NYC",
     description:
       "26th Annual Founder's Dinner at Gotham Hall in New York City celebrating students and alumni with a theme focused on transforming lives and communities.",
+    date: "06-24-2025",
     tags: [
       "founder dinner",
       "annual event",
@@ -2344,6 +2536,7 @@ export const sampleEvents: EventNode[] = [
     title: "Founder's Dinner - Fordham University",
     description:
       "The 2025 Fordham Founder's Dinner and Campaign Close Celebration with a reception and dinner honoring notable individuals, supporting scholarships.",
+    date: "06-23-2025",
     tags: [
       "founder dinner",
       "university event",
@@ -2365,6 +2558,7 @@ export const sampleEvents: EventNode[] = [
     title: "Startup CPG Founder Dinner – New York City",
     description:
       "An event by Startup CPG Community Events held at Fatousha restaurant in New York City for founders to network and share experiences.",
+    date: "07-20-2025",
     tags: ["founder dinner", "startup", "networking", "nyc", "founder dinner"],
     category: "founder dinner",
     keywords: [
@@ -2379,6 +2573,7 @@ export const sampleEvents: EventNode[] = [
     title: "Junto Founder Dinner (Hosted by Andrew & friends)",
     description:
       "Intimate private dinner for 24 handpicked early-stage founders and CEOs to share, grow, and connect over a 3-course meal at a private dinner club in NYC.",
+    date: "08-09-2025",
     tags: [
       "founder dinner",
       "private dinner",
@@ -2399,6 +2594,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hot Yoga at Sui Yoga SoHo",
     description: "Hot yoga classes in New York City's SoHo District.",
+    date: "07-09-2025",
     tags: ["hot yoga", "SoHo", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "SoHo", "schedule"],
@@ -2407,6 +2603,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hot Vinyasa at Spirit Lab",
     description: "Hot Vinyasa yoga classes offered at Spirit Lab in NYC.",
+    date: "06-22-2025",
     tags: ["hot yoga", "Vinyasa", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "Vinyasa", "Spirit Lab"],
@@ -2415,6 +2612,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Traditional Hot Yoga (Bikram) at Spirit Lab",
     description: "Traditional Bikram hot yoga classes at Spirit Lab.",
+    date: "07-01-2025",
     tags: ["hot yoga", "Bikram", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "Bikram", "Spirit Lab"],
@@ -2423,6 +2621,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hot Yin at Spirit Lab",
     description: "Hot Yin yoga classes at Spirit Lab in NYC.",
+    date: "06-30-2025",
     tags: ["hot yoga", "Yin", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "Yin", "Spirit Lab"],
@@ -2431,6 +2630,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Rocket Vinyasa Master Class at Spirit Lab",
     description: "Rocket Vinyasa hot yoga master class at Spirit Lab.",
+    date: "07-17-2025",
     tags: ["hot yoga", "Rocket Vinyasa", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "Rocket Vinyasa", "Spirit Lab"],
@@ -2439,6 +2639,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hot Yoga Community Class at Spirit Lab",
     description: "$12 community hot yoga classes at Spirit Lab.",
+    date: "07-03-2025",
     tags: ["hot yoga", "community", "Spirit Lab", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "community", "Spirit Lab"],
@@ -2447,6 +2648,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hot Yoga at Fierce Grace NYC LES",
     description: "Hot yoga classes at Fierce Grace Lower East Side studio.",
+    date: "08-01-2025",
     tags: ["hot yoga", "Fierce Grace", "Lower East Side", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "Fierce Grace", "Lower East Side"],
@@ -2455,6 +2657,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hot Yoga at Sui Yoga SoHo (Evening)",
     description: "Evening hot yoga sessions at Sui Yoga SoHo.",
+    date: "06-24-2025",
     tags: ["hot yoga", "SoHo", "evening", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "SoHo", "evening"],
@@ -2463,6 +2666,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hot Yoga at Sui Yoga SoHo (Weekend)",
     description: "Weekend hot yoga classes at Sui Yoga SoHo.",
+    date: "07-05-2025",
     tags: ["hot yoga", "SoHo", "weekend", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "SoHo", "weekend"],
@@ -2471,6 +2675,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Hot Yoga at Sui Yoga SoHo (Morning)",
     description: "Morning hot yoga classes at Sui Yoga SoHo.",
+    date: "06-21-2025",
     tags: ["hot yoga", "SoHo", "morning", "hot yoga"],
     category: "hot yoga",
     keywords: ["hot yoga", "SoHo", "morning"],
@@ -2480,6 +2685,7 @@ export const sampleEvents: EventNode[] = [
     title: "Manhattan Monday Easy Run - Evening - Central Park",
     description:
       "Weekly easy run with Dashing Whippets Running Team in Central Park",
+    date: "06-23-2025",
     tags: ["running club", "group run", "Central Park", "running club"],
     category: "running club",
     keywords: ["Dashing Whippets", "Manhattan", "Monday"],
@@ -2489,6 +2695,7 @@ export const sampleEvents: EventNode[] = [
     title: "Brooklyn Tuesday Workout",
     description:
       "Weekly workout with Dashing Whippets Running Team in Brooklyn",
+    date: "07-15-2025",
     tags: ["running club", "group run", "Brooklyn", "running club"],
     category: "running club",
     keywords: ["Dashing Whippets", "Brooklyn", "Tuesday"],
@@ -2497,6 +2704,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "JP Morgan Corporate Challenge Volunteer Event",
     description: "Volunteer and run event with Dashing Whippets Running Team",
+    date: "07-17-2025",
     tags: ["running club", "volunteer", "group run", "running club"],
     category: "running club",
     keywords: ["Dashing Whippets", "volunteer", "corporate"],
@@ -2506,6 +2714,7 @@ export const sampleEvents: EventNode[] = [
     title: "run + brunch (bRUNch) in Union Square",
     description:
       "Social run and brunch with The Most Informal Running Club Ever (TMIRCE):NYC",
+    date: "08-14-2025",
     tags: ["running club", "social run", "Union Square", "running club"],
     category: "running club",
     keywords: ["TMIRCE", "Union Square", "brunch"],
@@ -2514,6 +2723,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "RSRC Thursday Night Speed Workout",
     description: "Speed workout with Running Souls Run Club in Brooklyn",
+    date: "07-09-2025",
     tags: ["running club", "speed workout", "Brooklyn", "running club"],
     category: "running club",
     keywords: ["Running Souls", "Brooklyn", "Thursday"],
@@ -2523,6 +2733,7 @@ export const sampleEvents: EventNode[] = [
     title: "New York Flyers Weekly Group Run",
     description:
       "Weekly group run with New York Flyers, NYC's oldest and largest running club",
+    date: "07-25-2025",
     tags: ["running club", "group run", "New York City", "running club"],
     category: "running club",
     keywords: ["New York Flyers", "weekly", "group run"],
@@ -2531,6 +2742,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "IronStrength Downtown Morning Workout for Global Running Day",
     description: "Special morning workout with ASICS for Global Running Day",
+    date: "08-04-2025",
     tags: ["running club", "special event", "ASICS", "running club"],
     category: "running club",
     keywords: ["IronStrength", "ASICS", "Global Running Day"],
@@ -2540,6 +2752,7 @@ export const sampleEvents: EventNode[] = [
     title: "NYRR Virtual Global Running Day 5K",
     description:
       "Virtual 5K event hosted by New York Road Runners for Global Running Day",
+    date: "06-21-2025",
     tags: ["running club", "virtual run", "5K", "running club"],
     category: "running club",
     keywords: ["NYRR", "virtual", "Global Running Day"],
@@ -2548,6 +2761,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "NYRR Club Points Races",
     description: "Competitive races for local running clubs organized by NYRR",
+    date: "07-07-2025",
     tags: ["running club", "race", "competition", "running club"],
     category: "running club",
     keywords: ["NYRR", "club points", "race"],
@@ -2556,6 +2770,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "NYRR Local Running Club Meetups",
     description: "Regular meetups for local running clubs listed by NYRR",
+    date: "07-02-2025",
     tags: ["running club", "meetup", "New York City", "running club"],
     category: "running club",
     keywords: ["NYRR", "meetup", "local clubs"],
@@ -2564,6 +2779,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "EMERGE125 NYC Season 2025",
     description: "Unforgettable evening of dance at El Museo del Barrio",
+    date: "07-14-2025",
     tags: ["performance", "dance", "dance class"],
     category: "dance event",
     keywords: ["Emerge125", "NYC", "El Museo del Barrio"],
@@ -2572,6 +2788,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Broadway Dance Center Summer Training Program",
     description: "4-week multi-disciplinary summer dance program",
+    date: "06-24-2025",
     tags: ["training", "multi-disciplinary", "dance class"],
     category: "dance class",
     keywords: ["Broadway Dance Center", "summer", "training"],
@@ -2580,6 +2797,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Int POP BALLET",
     description: "Intermediate pop ballet class at Broadway Dance Center",
+    date: "06-28-2025",
     tags: ["ballet", "pop", "dance class"],
     category: "dance class",
     keywords: ["Broadway Dance Center", "ballet", "pop"],
@@ -2588,6 +2806,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Beg BALLET",
     description: "Beginner ballet class at Broadway Dance Center",
+    date: "07-08-2025",
     tags: ["ballet", "beginner", "dance class"],
     category: "dance class",
     keywords: ["Broadway Dance Center", "ballet", "beginner"],
@@ -2596,6 +2815,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Adv Beg BALLET",
     description: "Advanced beginner ballet class at Broadway Dance Center",
+    date: "06-29-2025",
     tags: ["ballet", "advanced beginner", "dance class"],
     category: "dance class",
     keywords: ["Broadway Dance Center", "ballet", "advanced beginner"],
@@ -2604,6 +2824,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Basic BALLET",
     description: "Basic ballet class at Broadway Dance Center",
+    date: "07-07-2025",
     tags: ["ballet", "basic", "dance class"],
     category: "dance class",
     keywords: ["Broadway Dance Center", "ballet", "basic"],
@@ -2613,6 +2834,7 @@ export const sampleEvents: EventNode[] = [
     title: "All Levels YOGA: MOVING MEDITATION",
     description:
       "Yoga and movement class for all levels at Broadway Dance Center",
+    date: "07-12-2025",
     tags: ["yoga", "movement", "dance class"],
     category: "dance class",
     keywords: ["Broadway Dance Center", "yoga", "movement"],
@@ -2621,6 +2843,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Int THEATER",
     description: "Intermediate theater dance class at Broadway Dance Center",
+    date: "07-09-2025",
     tags: ["theater", "intermediate", "dance class"],
     category: "dance class",
     keywords: ["Broadway Dance Center", "theater", "intermediate"],
@@ -2630,6 +2853,7 @@ export const sampleEvents: EventNode[] = [
     title: "Intro to Ballet I",
     description:
       "6-week intro series for absolute beginners at Mark Morris Dance Group",
+    date: "06-21-2025",
     tags: ["ballet", "beginner", "dance class"],
     category: "dance class",
     keywords: ["Mark Morris Dance Group", "ballet", "beginner"],
@@ -2639,6 +2863,7 @@ export const sampleEvents: EventNode[] = [
     title: "Intro to Contemporary I",
     description:
       "6-week intro series for absolute beginners at Mark Morris Dance Group",
+    date: "06-23-2025",
     tags: ["contemporary", "beginner", "dance class"],
     category: "dance class",
     keywords: ["Mark Morris Dance Group", "contemporary", "beginner"],
@@ -2648,6 +2873,7 @@ export const sampleEvents: EventNode[] = [
     title: "Manhattan Theatre Club Spring Gala 2025",
     description:
       "Annual event featuring a cocktail reception, elegant seated dinner, and Broadway performances.",
+    date: "06-27-2025",
     tags: ["theatre", "Broadway", "gala"],
     category: "gala",
     keywords: [
@@ -2667,6 +2893,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Times Square Alliance 2025 Gala",
     description: "Annual gala event supporting Times Square Alliance.",
+    date: "06-28-2025",
     tags: ["Times Square", "community", "gala"],
     category: "gala",
     keywords: [
@@ -2682,6 +2909,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "YoungArts New York Gala 2025",
     description: "Gala supporting YoungArts at The Metropolitan Museum of Art.",
+    date: "06-29-2025",
     tags: ["arts", "philanthropy", "gala"],
     category: "gala",
     keywords: [
@@ -2697,6 +2925,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "NBCC 2025 New York Gala",
     description: "Annual gala supporting the National Breast Cancer Coalition.",
+    date: "06-26-2025",
     tags: ["health", "charity", "gala"],
     category: "gala",
     keywords: [
@@ -2713,6 +2942,7 @@ export const sampleEvents: EventNode[] = [
     title: "UNICEF Gala",
     description:
       "Annual gala supporting UNICEF, featuring celebrity hosts and musical performances.",
+    date: "06-21-2025",
     tags: ["charity", "music", "gala"],
     category: "gala",
     keywords: [
@@ -2728,6 +2958,7 @@ export const sampleEvents: EventNode[] = [
     title: "Concern Global Gala Event Series",
     description:
       "Nonprofit gala series to fight global hunger, featuring stories and musical performances.",
+    date: "06-22-2025",
     tags: ["hunger", "charity", "gala"],
     category: "gala",
     keywords: [
@@ -2743,6 +2974,7 @@ export const sampleEvents: EventNode[] = [
     title: "The Center for Fiction Annual Awards Benefit",
     description:
       "Annual gala celebrating literary achievements and supporting The Center for Fiction.",
+    date: "07-01-2025",
     tags: ["literature", "awards", "gala"],
     category: "gala",
     keywords: [
@@ -2756,6 +2988,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "New York Public Library Gala",
     description: "Annual fundraising gala for the New York Public Library.",
+    date: "07-02-2025",
     tags: ["library", "education", "gala"],
     category: "gala",
     keywords: [
@@ -2770,6 +3003,7 @@ export const sampleEvents: EventNode[] = [
     title: "Lincoln Center Gala",
     description:
       "Annual gala supporting Lincoln Center for the Performing Arts.",
+    date: "07-01-2025",
     tags: ["performing arts", "music", "gala"],
     category: "gala",
     keywords: ["Lincoln Center", "gala", "fundraising", "New York City"],
@@ -2779,6 +3013,7 @@ export const sampleEvents: EventNode[] = [
     title: "Metropolitan Museum of Art Costume Institute Gala (The Met Gala)",
     description:
       "Famous annual gala celebrating the opening of the Costume Institute's annual fashion exhibit.",
+    date: "06-22-2025",
     tags: ["fashion", "art", "gala"],
     category: "gala",
     keywords: [
@@ -2794,6 +3029,7 @@ export const sampleEvents: EventNode[] = [
     title: "Rendez-Vous with French Cinema 2025",
     description:
       "A showcase of contemporary French films at Film at Lincoln Center.",
+    date: "07-11-2025",
     category: "Film Screening",
     keywords: ["French Cinema", "Lincoln Center"],
     id: "rendez-vous-with-french-cinema-2025",
@@ -2802,6 +3038,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Tribeca Film Festival 2025",
     description: "A festival featuring diverse films and programming.",
+    date: "07-19-2025",
     category: "Film Screening",
     keywords: ["Tribeca", "Film Festival"],
     id: "tribeca-film-festival-2025",
@@ -2811,6 +3048,7 @@ export const sampleEvents: EventNode[] = [
     title: "15th New York Film Festival",
     description:
       "Presented by the Film Society of Lincoln Center, September 23 - October 9, 1977, Alice Tully Hall. The 15th New York Film Festival is presented with the support of the New York State Council on the Arts.",
+    date: "07-02-2025",
     category: "Film Screening",
     keywords: ["New York", "Film Festival"],
     id: "15th-newyork-film-festival",
@@ -2819,6 +3057,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Mad Max: Fury Road Screening",
     description: "A screening of *Mad Max: Fury Road* at Analog Film NYC.",
+    date: "08-07-2025",
     category: "Film Screening",
     keywords: ["Mad Max", "Analog Film NYC"],
     id: "mad-max:-fury-road-screening",
@@ -2827,6 +3066,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Sinners Screening",
     description: "A screening of *Sinners* in 70mm at Roxy Cinema New York.",
+    date: "07-07-2025",
     category: "Film Screening",
     keywords: ["Sinners", "Roxy Cinema"],
     id: "sinners-screening",
@@ -2835,6 +3075,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Shall We Dance Screening",
     description: "A screening of *Shall We Dance* at Village East by Angelika.",
+    date: "07-14-2025",
     category: "Film Screening",
     keywords: ["Shall We Dance", "Village East"],
     id: "shall-we-dance-screening",
@@ -2843,6 +3084,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Unbreakable Screening",
     description: "A screening of *Unbreakable* at Nitehawk Cinema.",
+    date: "07-19-2025",
     category: "Film Screening",
     keywords: ["Unbreakable", "Nitehawk Cinema"],
     id: "unbreakable-screening",
@@ -2851,6 +3093,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Batman Begins Screening",
     description: "A screening of *Batman Begins* at Nitehawk Cinema.",
+    date: "07-03-2025",
     category: "Film Screening",
     keywords: ["Batman Begins", "Nitehawk Cinema"],
     id: "batman-begins-screening",
@@ -2860,6 +3103,7 @@ export const sampleEvents: EventNode[] = [
     title: "The French Lieutenant’s Woman Screening",
     description:
       "A screening of *The French Lieutenant’s Woman* at Nitehawk Cinema.",
+    date: "07-02-2025",
     category: "Film Screening",
     keywords: ["The French Lieutenant’s Woman", "Nitehawk Cinema"],
     id: "the-french-lieutenant’s-woman-screening",
@@ -2868,6 +3112,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Paramount+ Movie Nights",
     description: "Free outdoor movie screenings at Bryant Park.",
+    date: "07-01-2025",
     category: "Film Screening",
     keywords: ["Paramount+", "Bryant Park"],
     id: "paramount+-movie-nights",
@@ -2877,6 +3122,7 @@ export const sampleEvents: EventNode[] = [
     title: "Free Friday Movie Night on the Intrepid",
     description:
       "A free outdoor screening of *Pirates of the Caribbean: Dead Man’s Chest* at the Intrepid Museum.",
+    date: "06-22-2025",
     category: "Film Screening",
     keywords: ["Intrepid Museum", "Pirates of the Caribbean"],
     id: "free-friday-movie-night-on-the-intrepid",
@@ -2886,6 +3132,7 @@ export const sampleEvents: EventNode[] = [
     title: "Bryant Park Christmas Market",
     description:
       "Holiday market in Bank of America Winter Village at Bryant Park, Upper and Lower Terraces",
+    date: "07-25-2025",
     tags: ["holiday market", "shopping", "food", "holiday market"],
     category: "holiday market",
     keywords: ["Bryant Park", "Winter Village", "Christmas"],
@@ -2894,6 +3141,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Grand Central Terminal Holiday Fair",
     description: "Holiday market inside Grand Central Terminal",
+    date: "08-01-2025",
     tags: ["holiday market", "shopping", "crafts", "holiday market"],
     category: "holiday market",
     keywords: ["Grand Central", "Terminal", "Holiday Fair"],
@@ -2903,6 +3151,7 @@ export const sampleEvents: EventNode[] = [
     title: "Columbus Circle Holiday Market",
     description:
       "Large holiday market at Columbus Circle, southwest corner of Central Park",
+    date: "07-02-2025",
     tags: ["holiday market", "shopping", "food", "holiday market"],
     category: "holiday market",
     keywords: ["Columbus Circle", "Central Park", "Christmas"],
@@ -2911,6 +3160,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Union Square Holiday Market",
     description: "Popular holiday market in Union Square",
+    date: "07-01-2025",
     tags: ["holiday market", "shopping", "crafts", "holiday market"],
     category: "holiday market",
     keywords: ["Union Square", "Christmas", "shopping"],
@@ -2920,6 +3170,7 @@ export const sampleEvents: EventNode[] = [
     title: "Brooklyn Holiday Market",
     description:
       "Holiday market in Brooklyn, featuring local vendors and crafts",
+    date: "07-19-2025",
     tags: ["holiday market", "shopping", "local", "holiday market"],
     category: "holiday market",
     keywords: ["Brooklyn", "crafts", "holiday"],
@@ -2928,6 +3179,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Queens Holiday Market",
     description: "Holiday market in Queens, showcasing diverse vendors",
+    date: "07-26-2025",
     tags: ["holiday market", "shopping", "diverse", "holiday market"],
     category: "holiday market",
     keywords: ["Queens", "holiday", "market"],
@@ -2936,6 +3188,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Holiday Market at South Street Seaport",
     description: "Holiday market at South Street Seaport with waterfront views",
+    date: "07-07-2025",
     tags: ["holiday market", "shopping", "waterfront", "holiday market"],
     category: "holiday market",
     keywords: ["South Street Seaport", "holiday", "market"],
@@ -2944,6 +3197,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Holiday Market at Industry City",
     description: "Holiday market in Brooklyn's Industry City",
+    date: "07-17-2025",
     tags: ["holiday market", "shopping", "crafts", "holiday market"],
     category: "holiday market",
     keywords: ["Industry City", "Brooklyn", "holiday"],
@@ -2952,6 +3206,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Holiday Market at Chelsea Market",
     description: "Holiday market inside Chelsea Market",
+    date: "07-23-2025",
     tags: ["holiday market", "shopping", "food", "holiday market"],
     category: "holiday market",
     keywords: ["Chelsea Market", "holiday", "shopping"],
@@ -2960,6 +3215,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Holiday Market at The Oculus",
     description: "Holiday market at The Oculus, World Trade Center",
+    date: "07-15-2025",
     tags: ["holiday market", "shopping", "crafts", "holiday market"],
     category: "holiday market",
     keywords: ["Oculus", "World Trade Center", "holiday"],
@@ -2968,6 +3224,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Mixtape Bingo!",
     description: "Trivia Night",
+    date: "08-05-2025",
     category: "Trivia",
     keywords: ["Mixtape Bingo", "Pine Box Rock Shop", "Bushwick", "8pm"],
     id: "mixtape-bingo!",
@@ -2976,6 +3233,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Mixtape Bingo!",
     description: "Trivia Night",
+    date: "06-29-2025",
     category: "Trivia",
     keywords: ["Mixtape Bingo", "SingleCut Queens", "Astoria", "7:30pm"],
     id: "mixtape-bingo!",
@@ -2984,6 +3242,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Trivia Night",
     description: "General Trivia",
+    date: "07-15-2025",
     category: "Trivia",
     keywords: ["Blondie’s Sports", "Upper West Side", "8pm"],
     id: "trivia-night",
@@ -2992,6 +3251,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Trivia Night",
     description: "General Trivia",
+    date: "07-02-2025",
     category: "Trivia",
     keywords: ["Sanger Hall", "Sunnyside", "8pm"],
     id: "trivia-night",
@@ -3000,6 +3260,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Trivia Night",
     description: "General Trivia",
+    date: "07-11-2025",
     category: "Trivia",
     keywords: ["SingleCut Beersmiths", "Astoria", "8pm"],
     id: "trivia-night",
@@ -3008,6 +3269,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Trivia Night",
     description: "General Trivia",
+    date: "08-11-2025",
     category: "Trivia",
     keywords: ["T-Squared Social", "Midtown East", "7pm"],
     id: "trivia-night",
@@ -3016,6 +3278,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "General Trivia Night",
     description: "General Trivia",
+    date: "06-22-2025",
     category: "Trivia",
     keywords: ["The Chelsea Bell", "Tuesday, June 3, 2025"],
     id: "general-trivia-night",
@@ -3024,6 +3287,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Trivia Night",
     description: "General Trivia",
+    date: "07-11-2025",
     category: "Trivia",
     keywords: ["Bird In Hand", "Hamilton Heights", "7:30pm"],
     id: "trivia-night",
@@ -3032,6 +3296,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Trivia Night",
     description: "General Trivia",
+    date: "08-14-2025",
     category: "Trivia",
     keywords: ["The Alvin Public House", "Upper East Side", "6pm"],
     id: "trivia-night",
@@ -3040,6 +3305,7 @@ export const sampleEvents: EventNode[] = [
   {
     title: "Trivia Night",
     description: "General Trivia",
+    date: "07-11-2025",
     category: "Trivia",
     keywords: ["Riverside Park Conservancy", "July 11, 2025"],
     id: "trivia-night",
@@ -3049,6 +3315,7 @@ export const sampleEvents: EventNode[] = [
     title: "Family Game Night Marathon",
     description:
       "Join us at Highbridge Recreation Center for our Game Night Marathon featuring jumbo games, corn hole, Jenga, table tennis, and more for three Fridays in June.",
+    date: "06-21-2025",
     tags: ["family", "game night", "recreation", "nyc parks", "game night"],
     category: "game night",
     keywords: [
@@ -3064,6 +3331,7 @@ export const sampleEvents: EventNode[] = [
     title: "Game Night on the Pier",
     description:
       "Enjoy bingo, quiz shows, and other games with friends at Game Night on the Pier in New York City on June 13, 2025.",
+    date: "06-22-2025",
     tags: ["game night", "bingo", "quiz", "party", "game night"],
     category: "game night",
     keywords: ["pier", "bingo", "quiz shows", "friends"],
@@ -3073,6 +3341,7 @@ export const sampleEvents: EventNode[] = [
     title: "NYC Singles Dating and Play Speed Game Night",
     description:
       "A social event for singles featuring speed game play and dating opportunities at The Westbury in New York on June 28, 2025.",
+    date: "06-28-2025",
     tags: ["singles", "dating", "game night", "social event", "game night"],
     category: "game night",
     keywords: ["singles", "speed game", "The Westbury", "dating"],
@@ -3082,6 +3351,7 @@ export const sampleEvents: EventNode[] = [
     title: "T(w)een Game Night",
     description:
       "A game night event for tweens hosted by The New York Public Library at Battery Park City Library on June 9, 2025.",
+    date: "06-23-2025",
     tags: ["tween", "game night", "library", "nypl", "game night"],
     category: "game night",
     keywords: ["Battery Park City Library", "tween", "game night", "NYPL"],
