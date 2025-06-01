@@ -18,30 +18,58 @@ class PerplexityService {
     }
   }
 
-  async searchEvent(query: string): Promise<any[]> {
-    const count = 2;
+  async searchEvent(query: string, count = 2): Promise<any[]> {
     const prompt = `
-    Help me find ${query} events in New York City.
-    return ${count} best-matching events as a JSON array of objects.
+    Find ${count} events of type: ${query} in New York City.
+    return ${count} items as a JSON array of objects.
 
     DO not add any other text to the response.
     Do not add backticks or \`\`\` json to the response.
     `;
 
+    const categories = [
+      "music",
+      "art",
+      "food",
+      "drink",
+      "party",
+      "launch party",
+    ];
+    const categoriesString = categories.join(", ");
+
     const schema = {
       type: "object",
       properties: {
-        title: { type: "string" },
-        date: { type: "string" },
-        time: { type: "string" },
-        location: { type: "string" },
-        neighborhood: { type: "string" },
-        price: { type: "string" },
-        accessibility: { type: "string" },
-        link: { type: "string" },
-        description: { type: "string" },
-        tags: { type: "array", items: { type: "string" } },
-        keywords: { type: "array", items: { type: "string" } },
+        items: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              title: { type: "string" },
+              description: { type: "string" },
+              tags: {
+                type: "array",
+                items: {
+                  type: "string",
+                  description:
+                    "a list of common tags associated with the event",
+                },
+              },
+              category: {
+                type: "string",
+                description: `the category of the event, one of ${categoriesString} `,
+              },
+              keywords: {
+                type: "array",
+                items: {
+                  type: "string",
+                  description:
+                    "a list of unique keywords from the event description",
+                },
+              },
+            },
+          },
+        },
       },
     };
 
@@ -78,21 +106,42 @@ class PerplexityService {
     } catch (e) {
       throw new Error("Failed to parse Perplexity API response as JSON array");
     }
-    return result;
+    return result.items;
   }
 }
 
 export async function plexSearchEvent(query: string) {
+  console.log("Perplexity searchEvent", { query });
   const perplx = new PerplexityService();
   const result = await perplx.searchEvent(query);
-  console.log("Perplexity searchEvent result", { filter: query, result });
+  console.log("Perplexity searchEvent result", result);
   return result;
 }
 
 export async function plexSearchMany() {
   const tags = ["book launch", "music concert"];
-  const results = await Promise.all(tags.map((tag) => plexSearchEvent(tag)));
-  console.log("Perplexity searchMany result", { tags, results });
+
+  // const promises = tags.map((tag) => plexSearchEvent(tag));
+
+  // const results = await Promise.all(promises);
+  let results: any[] = [];
+  for (const tag of tags) {
+    const catResults: any[] = await plexSearchEvent(tag);
+    console.log("Perplexity searchMany result", catResults);
+
+    const enrichedResults = catResults?.map((result) => {
+      // inject original tag into the tags array
+      const tags = [...(result?.tags ?? []), tag];
+      const item = {
+        ...result,
+        tags,
+      };
+      return item;
+    });
+    results.push(...enrichedResults);
+  }
+  // console.log("Perplexity searchMany result", { tags, results });
+
   // TODO fs.writeFileSync("plex-results.json", JSON.stringify(results, null, 2));
   return results;
 }
