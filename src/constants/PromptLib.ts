@@ -11,7 +11,7 @@ const promptLib = {
 export async function getPrompt(key: keyof typeof promptLib, data: any) {
   const template = promptLib[key];
   let prompt = template;
-  for (let [k, v] of Object.entries(data)) {
+  for (const [k, v] of Object.entries(data)) {
     prompt = prompt.replace(`{{${k}}}`, v as string);
   }
   if (!prompt) {

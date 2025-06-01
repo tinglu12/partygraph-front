@@ -37,3 +37,9 @@ export interface TagCenteredGraphData {
     label: string;
   }>;
 }
+
+export interface Tag{
+  id: string;
+  name: string;
+  type: string;
+}

@@ -35,7 +35,8 @@ GraphProps) => {
     handleCategoryChange,
     setSelectedEvent,
     resetView,
-  } = useGraph({ data });
+  } = useGraph({data});
+
 
   const [pinnedEvents, setPinnedEvents] = useState<EventNode[]>([]);
   const [activeTab, setActiveTab] = useState<string | null>(null);
