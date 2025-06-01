@@ -11,5 +11,5 @@ export function GET(request: NextRequest) {
 
   const found = testEvents.filter((e) => e.tags?.includes(query));
   console.log("event found", { query, found });
-  return NextResponse.json([found]);
+  return NextResponse.json(found);
 }
