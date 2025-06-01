@@ -179,9 +179,11 @@ export default function VibePage() {
   };
 
   // Handle event selection for chat context
-  const handleEventSelect = (event: EventNode) => {
+  const handleEventSelect = (event: EventNode | null) => {
     setSelectedEvent(event);
-    setShowChat(true);
+    if (event) {
+      setShowChat(true);
+    }
   };
 
   return (
@@ -445,7 +447,7 @@ export default function VibePage() {
                   </h3>
 
                   <div className="h-[700px]">
-                    <Graph />
+                    <Graph onEventSelect={handleEventSelect} />
                   </div>
                 </div>
               </div>

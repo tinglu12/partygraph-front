@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import cytoscape from 'cytoscape';
 import { initializeCytoscape } from '@/lib/cytoscapeConfig';
-import { EventNode } from '@/types/EventGraph';
-import { GraphData } from '@/types/EventGraph';
+import { EventNode, GraphData } from '@/types/EventGraph';
 import { calculateNodePosition } from '@/lib/nodePositioning';
 
 interface UseGraphProps {
@@ -13,6 +12,7 @@ interface UseGraphProps {
     target: string;
     label: string;
   }>;
+  onEventSelect?: (event: EventNode | null) => void;
 }
 
 interface UseGraphReturn {
@@ -30,7 +30,8 @@ interface UseGraphReturn {
 export const useGraph = ({ 
   data,
   events = [],
-  edges = []
+  edges = [],
+  onEventSelect
 }: UseGraphProps): UseGraphReturn => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
@@ -40,6 +41,12 @@ export const useGraph = ({
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
   const [graphEvents, setGraphEvents] = useState<EventNode[]>([]);
   const graphEventsRef = useRef<EventNode[]>([]);
+
+  // Custom setSelectedEvent that also calls the callback
+  const handleSetSelectedEvent = (event: EventNode | null) => {
+    setSelectedEvent(event);
+    onEventSelect?.(event);
+  };
 
   // Memoize the tags to prevent unnecessary recalculations
   const allTags = useMemo(() => 
@@ -271,7 +278,7 @@ export const useGraph = ({
         const eventData = graphEventsRef.current.find((e: EventNode) => e.id === node.id());
         console.log('eventData', eventData);
         if (eventData) {
-          setSelectedEvent(eventData);
+          handleSetSelectedEvent(eventData);
           expandEventNode(node.id());
         }
       } else if (nodeType === 'tag') {
@@ -281,7 +288,7 @@ export const useGraph = ({
 
     cy.on('tap', (evt) => {
       if (evt.target === cy) {
-        setSelectedEvent(null);
+        handleSetSelectedEvent(null);
       }
     });
 
@@ -379,7 +386,7 @@ export const useGraph = ({
     allTags,
     handleSearch,
     handleCategoryChange,
-    setSelectedEvent,
+    setSelectedEvent: handleSetSelectedEvent,
     resetView
   };
 }; 

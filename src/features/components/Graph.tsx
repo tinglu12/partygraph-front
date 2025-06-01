@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { generateEdgesFromConnections } from "@/lib/sampleData";
-import { sampleEvents } from "@/constants/sampleEvents";
+import { sampleEvents } from "@/constants/sampleEvents-v2";
 import { EventDetails } from "./EventDetails";
 import { FilterBar } from "./FilterBar";
 import { useGraph } from "../hooks/useGraph";
@@ -18,10 +18,12 @@ interface GraphProps {
     target: string;
     label: string;
   }>;
+  onEventSelect?: (event: EventNode | null) => void;
 }
 
 export const Graph = ({
   data,
+  onEventSelect,
 }: // events = sampleEvents,
 // edges = generateEdgesFromConnections(sampleEvents),
 GraphProps) => {
@@ -35,7 +37,7 @@ GraphProps) => {
     handleCategoryChange,
     setSelectedEvent,
     resetView,
-  } = useGraph({ data });
+  } = useGraph({ data, onEventSelect });
 
   const [pinnedEvents, setPinnedEvents] = useState<EventNode[]>([]);
   const [activeTab, setActiveTab] = useState<string | null>(null);

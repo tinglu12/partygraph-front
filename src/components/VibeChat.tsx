@@ -39,20 +39,20 @@ export const VibeChat = ({ selectedEvent, onClose }: VibeChatProps) => {
     inputRef.current?.focus();
   }, []);
 
-  // Initialize with welcome message
+  // Initialize with welcome message that references selected event
   useEffect(() => {
     const welcomeMessage: Message = {
       id: 'welcome',
       text: selectedEvent 
-        ? `Hi! I'm your AI vibe assistant. I can help you understand the vibe and atmosphere of "${selectedEvent.title}". What would you like to know about this event?`
-        : "Hi! I'm your AI vibe assistant. I can help you discover events that match your perfect vibe, analyze event atmospheres, and suggest similar experiences. How can I help you today?",
+        ? `Hey! I'm here to help you explore "${selectedEvent.title}". I can tell you about the vibe, suggest similar events, or answer any questions about what to expect. What would you like to know?`
+        : "Hi there! I'm your AI assistant for discovering events in NYC. I can help you find events that match your vibe, learn about what's happening, or explore what different events are like. What can I help you with?",
       isUser: false,
       timestamp: new Date()
     };
     setMessages([welcomeMessage]);
   }, [selectedEvent]);
 
-  // Handle sending messages
+  // Handle sending messages using the new API
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
@@ -68,19 +68,33 @@ export const VibeChat = ({ selectedEvent, onClose }: VibeChatProps) => {
     setIsLoading(true);
 
     try {
-      // Simulate AI response (replace with actual AI integration)
-      const aiResponse = await generateAIResponse(inputValue, selectedEvent);
+      const response = await fetch('/api/chat/vibe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: inputValue.trim(),
+          selectedEvent: selectedEvent,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
       
       const botMessage: Message = {
         id: `bot-${Date.now()}`,
-        text: aiResponse,
+        text: data.response || data.error || "Sorry, I couldn't process that. Try asking something else!",
         isUser: false,
         timestamp: new Date()
       };
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
-      console.error('Error generating AI response:', error);
+      console.error('Error calling vibe chat API:', error);
       const errorMessage: Message = {
         id: `error-${Date.now()}`,
         text: "I'm having trouble connecting right now. Please try again in a moment!",
@@ -111,9 +125,9 @@ export const VibeChat = ({ selectedEvent, onClose }: VibeChatProps) => {
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full"></div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white">AI Vibe Assistant</h3>
+            <h3 className="text-lg font-semibold text-white">AI Event Assistant</h3>
             <p className="text-sm text-gray-400">
-              {selectedEvent ? `Discussing: ${selectedEvent.title}` : 'Ready to help with vibes'}
+              {selectedEvent ? `Exploring: ${selectedEvent.title}` : 'Ready to help you discover events'}
             </p>
           </div>
         </div>
@@ -205,7 +219,7 @@ export const VibeChat = ({ selectedEvent, onClose }: VibeChatProps) => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder={selectedEvent ? "Ask about this event's vibe..." : "Ask me about vibes, events, or atmospheres..."}
+            placeholder={selectedEvent ? `Ask about ${selectedEvent.title}...` : "Ask about events, vibes, or what's happening..."}
             disabled={isLoading}
             className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:bg-white/15 focus:border-purple-400/60"
           />
@@ -218,86 +232,9 @@ export const VibeChat = ({ selectedEvent, onClose }: VibeChatProps) => {
           </Button>
         </div>
         <p className="text-xs text-gray-400 mt-2 text-center">
-          AI assistant powered by LLaMA • Press Enter to send
+          Powered by LLaMA • Press Enter to send
         </p>
       </div>
     </div>
   );
-};
-
-// Simulate AI response generation (replace with actual AI integration)
-async function generateAIResponse(userMessage: string, selectedEvent?: EventNode | null): Promise<string> {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
-
-  const lowerMessage = userMessage.toLowerCase();
-
-  // Context-aware responses based on selected event
-  if (selectedEvent) {
-    if (lowerMessage.includes('vibe') || lowerMessage.includes('atmosphere')) {
-      const tags = selectedEvent.tags?.join(', ') || 'general';
-      return `Based on "${selectedEvent.title}", this event has a ${tags} vibe. The atmosphere would likely be ${getVibeDescription(selectedEvent)}. What specific aspect of the vibe interests you most?`;
-    }
-    
-    if (lowerMessage.includes('similar') || lowerMessage.includes('recommend')) {
-      return `For events similar to "${selectedEvent.title}", I'd recommend looking for events with these tags: ${selectedEvent.tags?.slice(0, 3).join(', ')}. The vibe you're looking for seems to be ${getVibeDescription(selectedEvent)}. Would you like me to help you search for similar events?`;
-    }
-
-    if (lowerMessage.includes('crowd') || lowerMessage.includes('people')) {
-      return `"${selectedEvent.title}" would likely attract ${getCrowdDescription(selectedEvent)}. The social energy would be ${getEnergyLevel(selectedEvent)}. Are you looking for advice on what to expect or how to enjoy the event?`;
-    }
-  }
-
-  // General vibe-related responses
-  if (lowerMessage.includes('vibe') && (lowerMessage.includes('find') || lowerMessage.includes('discover'))) {
-    return "I'd love to help you find events that match your vibe! Can you describe what kind of atmosphere you're looking for? For example: energetic and social, calm and artistic, or maybe something adventurous?";
-  }
-
-  if (lowerMessage.includes('music') || lowerMessage.includes('concert')) {
-    return "Music events have such diverse vibes! Are you looking for something intimate like a jazz club, high-energy like electronic dance music, or maybe something in between? I can help you find the perfect musical atmosphere.";
-  }
-
-  // Default responses
-  const responses = [
-    "That's an interesting question about vibes! Can you tell me more about what specific atmosphere or feeling you're looking for?",
-    "I'm here to help you understand and discover great vibes! What kind of event experience are you hoping to find?",
-    "Vibes are so personal and unique! Let me know what draws you to certain events and I can help you find similar experiences.",
-    "Every event has its own special energy. What elements make an event feel right for you?"
-  ];
-
-  return responses[Math.floor(Math.random() * responses.length)];
-}
-
-// Helper functions for generating contextual responses
-function getVibeDescription(event: EventNode): string {
-  const tags = event.tags || [];
-  
-  if (tags.includes('party') || tags.includes('dance')) return 'energetic and social';
-  if (tags.includes('art') || tags.includes('gallery')) return 'sophisticated and contemplative';
-  if (tags.includes('music') || tags.includes('concert')) return 'immersive and rhythmic';
-  if (tags.includes('food') || tags.includes('festival')) return 'communal and celebratory';
-  if (tags.includes('outdoor')) return 'relaxed and natural';
-  
-  return 'unique and engaging';
-}
-
-function getCrowdDescription(event: EventNode): string {
-  const tags = event.tags || [];
-  
-  if (tags.includes('party')) return 'young, energetic people looking to dance and socialize';
-  if (tags.includes('art')) return 'creative individuals and art enthusiasts';
-  if (tags.includes('music')) return 'music lovers and fans of the genre';
-  if (tags.includes('food')) return 'food enthusiasts and social groups';
-  
-  return 'a diverse mix of people interested in the event\'s theme';
-}
-
-function getEnergyLevel(event: EventNode): string {
-  const tags = event.tags || [];
-  
-  if (tags.includes('party') || tags.includes('dance')) return 'high-energy and dynamic';
-  if (tags.includes('jazz') || tags.includes('classical')) return 'relaxed and focused';
-  if (tags.includes('festival')) return 'vibrant and communal';
-  
-  return 'engaging and positive';
-} 
+}; 
