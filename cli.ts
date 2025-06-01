@@ -1,10 +1,35 @@
 import { searchEvent } from "@/server/LamService";
+import { plexSearchEvent } from "@/server/PerplxService";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 
 const client = new LlamaAPIClient({
   apiKey: process.env["LLAMA_API_KEY"], // This is the default and can be omitted
 });
+
+async function main() {
+  const cmd = process.argv[2];
+  switch (cmd) {
+    case "plex":
+      await plexTest();
+      break;
+    case "search":
+  }
+}
+
+async function plexTest() {
+  const filter: string = "launch party";
+  const events: EventType[] = [
+    {
+      title: "launch party",
+      description:
+        "We are launching a new product and we want to celebrate with a party.",
+    },
+  ];
+  const result = await plexSearchEvent(filter);
+  console.log("searchEvent result", { filter, result });
+  return result;
+}
 
 async function searchEventTest() {
   const filter: string = "launch party";
@@ -24,7 +49,7 @@ async function searchEventTest() {
   return result;
 }
 
-async function main() {
+async function lamTest() {
   const model = "Llama-4-Maverick-17B-128E-Instruct-FP8";
 
   const event = `

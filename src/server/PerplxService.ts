@@ -10,52 +10,38 @@ class PerplexityService {
 
   constructor() {
     this.apiKey = process.env["PERPLEXITY_API_KEY"] ?? "";
-    this.model = "pplx-70b-online";
-    this.apiUrl = "https://api.perplexity.ai/v1/chat/completions";
+    // this.model = "pplx-70b-online";
+    this.model = "sonar";
+    this.apiUrl = "https://api.perplexity.ai/chat/completions";
     if (!this.apiKey) {
       throw new Error("PERPLEXITY_API_KEY not set in environment");
     }
   }
 
-  async searchEvent(filter: string, events: EventType[]): Promise<any[]> {
-    const eventString = events
-      .map((event, i) => `Event ${i + 1}: ${event.title} - ${event.description}`)
-      .join("\n");
-
+  async searchEvent(query: string): Promise<any[]> {
+    const count = 2;
     const prompt = `
     Help me find book launches in New York City.
-    You are a helpful assistant. Given a filter and a list of events, 
-    return the 10 best-matching events as 10 separate JSON objects, each all following the same ontology.
-    Return "unknown" if the data is missing. Return your response as JSON only.
-    
-    \n\nReturn 10 JSON objects, one for each best-matching event, in an array.
-    
-    ---
-    Return JSON in this format:
+    You are a helpful assistant. Given a filter and a list of events,
+    return the ${count} best-matching events as ${count} separate JSON objects, all following the same ontology.
+    Return an array of JSON objects in this format:
+
     {
-    "title": "...",
-    "date": "...",
-    "time": "...",
-    "location": "...",
-    "neighborhood": "...",
-    "price": "...",
-    "accessibility": "...",
-    "link": "...",
-    "description": "...",
-    "tags": {
-        "type": [...],
-        "goal": [...],
-        "vibe": [...],
-        "genre": [...],
-        "audience": [...],
-        "venueType": [...],
-        "borough": [...],
-        "neighborhood": [...],
-        "timeOfDay": [...],
-        "language": [...],
-        "keywords": [...]
+      "title": "...",
+      "date": "...",
+      "time": "...",
+      "location": "...",
+      "neighborhood": "...",
+      "price": "...",
+      "accessibility": "...",
+      "link": "...",
+      "description": "...",
+      "tags": string[],
+      "keywords": string[],
     }
-    }
+
+    DO not add any other text to the response.
+    Do not add backticks or \`\`\` json to the response.
     `;
 
     const response = await axios.post(
@@ -91,9 +77,9 @@ class PerplexityService {
   }
 }
 
-export async function searchEvent(filter: string, events: EventType[]) {
+export async function plexSearchEvent(query: string) {
   const perplx = new PerplexityService();
-  const result = await perplx.searchEvent(filter, events);
-  console.log("Perplexity searchEvent result", { filter, result });
+  const result = await perplx.searchEvent(query);
+  console.log("Perplexity searchEvent result", { filter: query, result });
   return result;
 }
