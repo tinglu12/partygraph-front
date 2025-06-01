@@ -1,4 +1,4 @@
-import { sampleEvents } from "@/constants/sampleEvents-v2";
+import { sampleEvents } from "@/constants/sampleEvents";
 import { NextResponse } from "next/server";
 
 export function GET() {
