@@ -2,6 +2,7 @@ import { searchEvent, classifyImage } from "@/server/LamService";
 import { plexSearchEvent, plexSearchMany } from "@/server/PerplxService";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
+import fs from "fs";
 
 const client = new LlamaAPIClient({
   apiKey: process.env["LLAMA_API_KEY"], // This is the default and can be omitted
@@ -47,7 +48,11 @@ async function plexTest() {
 async function plexManyTest() {
   const result = await plexSearchMany();
   console.log("plexManyTest result", { result });
-  
+  fs.writeFileSync(
+    "./public/scraped/plex-many.json",
+    JSON.stringify(result, null, 2)
+  );
+
   return result;
 }
 
@@ -108,7 +113,9 @@ async function lamTest() {
     if (!text) throw new Error("No text content in Llama API response");
 
     // Try to extract JSON from a code block
-    const match = text.match(/```json\\s*([\\s\\S]*?)```/i) || text.match(/```([\\s\\S]*?)```/i);
+    const match =
+      text.match(/```json\\s*([\\s\\S]*?)```/i) ||
+      text.match(/```([\\s\\S]*?)```/i);
     const jsonString = match ? match[1] : text;
 
     result = JSON.parse(jsonString);

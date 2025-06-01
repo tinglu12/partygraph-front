@@ -1,4 +1,4 @@
-import { sampleEvents } from "@/constants/sampleEvents";
+import { sampleEvents } from "@/constants/sampleEvents-v2";
 import { NextResponse } from "next/server";
 
 export function GET() {
@@ -15,4 +15,4 @@ export function GET() {
 
   console.log("Random tags selected:", randomTags);
   return NextResponse.json(randomTags);
-} 
+}
