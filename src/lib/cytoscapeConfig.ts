@@ -9,6 +9,12 @@ interface Event {
   title: string;
   date: string;
   description: string;
+  tags?: string[];
+}
+
+interface Tag {
+  id: string;
+  name: string;
 }
 
 interface Edge {
@@ -68,16 +74,31 @@ export const initializeCytoscape = (
     container,
     style: [
       {
-        selector: 'node',
+        selector: 'node[type="event"]',
         style: {
           'background-color': '#4CAF50',
           'label': 'data(title)',
+          'text-valign': 'bottom',
+          'text-halign': 'center',
+          'text-wrap': 'wrap',
+          'text-max-width': '100px',
+          'width': 40,
+          'height': 40,
+          'shape': 'ellipse'
+        }
+      },
+      {
+        selector: 'node[type="tag"]',
+        style: {
+          'background-color': '#8B5CF6',
+          'label': 'data(name)',
           'text-valign': 'center',
           'text-halign': 'center',
           'text-wrap': 'wrap',
           'text-max-width': '100px',
-          'padding': '10px',
-          'shape': 'roundrectangle'
+          'width': 40,
+          'height': 40,
+          'shape': 'rectangle'
         }
       },
       {
@@ -96,14 +117,6 @@ export const initializeCytoscape = (
           'curve-style': 'bezier',
           'label': 'data(label)',
           'text-rotation': 'autorotate'
-        }
-      },
-      {
-        selector: '.grouped',
-        style: {
-          'background-color': '#8B5CF6',
-          'border-width': 2,
-          'border-color': '#6D28D9'
         }
       },
       {
@@ -136,7 +149,8 @@ export const initializeCytoscape = (
       id: event.id,
       title: event.title,
       date: event.date,
-      description: event.description
+      description: event.description,
+      type: 'event'
     }
   })));
 

@@ -1,0 +1,20 @@
+const promptLib = {
+  getPeople: `
+  You are a helpful assistant.
+  Given the following event description, write up a list of people that would be likely to attend.
+
+  Event: {{event}}
+  `,
+};
+
+export async function getPrompt(key: keyof typeof promptLib, data: any) {
+  const template = promptLib[key];
+  let prompt = template;
+  for (let [k, v] of Object.entries(data)) {
+    prompt = prompt.replace(`{{${k}}}`, v as string);
+  }
+  if (!prompt) {
+    throw new Error(`Prompt ${key} not found`);
+  }
+  return prompt;
+}
