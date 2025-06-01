@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { VibeSearch } from "@/components/VibeSearch";
 import { FlyerUpload } from "@/components/FlyerUpload";
 import { Graph } from "@/features/components/Graph";
@@ -19,6 +19,7 @@ import {
   Zap,
   Cpu,
   Upload,
+  TrendingUp,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { sampleEvents } from "@/constants/sampleEvents";
@@ -39,6 +40,27 @@ export default function VibePage() {
   const [searchMode, setSearchMode] = useState<"semantic" | "tag">("semantic");
   const [showUpload, setShowUpload] = useState(false);
   const [recentlyAddedEvent, setRecentlyAddedEvent] = useState<EventNode | null>(null);
+  const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
+
+  // Example searches that rotate
+  const exampleSearches = [
+    "energetic music with dancing and live bands",
+    "chill art gallery opening with wine",
+    "outdoor food festival with local vendors",
+    "late night techno party with great vibes",
+    "cozy jazz club performance",
+    "rooftop party with city views",
+    "indie rock concert with emerging artists",
+    "wine tasting event with friends"
+  ];
+
+  // Rotate example searches every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentExampleIndex((prev) => (prev + 1) % exampleSearches.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Handle semantic vibe search using AI
   const handleVibeSearch = async (query: string) => {
@@ -148,8 +170,43 @@ export default function VibePage() {
             isLoading={isLoading}
           />
           
+          {/* Rotating example searches panel */}
+          {!hasSearched && (
+            <div className="max-w-5xl mx-auto px-6 mt-6">
+              <div className="text-center">
+                {/* Rotating example searches */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <TrendingUp className="w-5 h-5 text-purple-400" />
+                    <span className="text-white font-semibold">Try searching for:</span>
+                  </div>
+                  <div className="relative h-8 overflow-hidden">
+                    <div 
+                      className="absolute inset-0 transition-transform duration-500 ease-in-out"
+                      style={{ transform: `translateY(-${currentExampleIndex * 32}px)` }}
+                    >
+                      {exampleSearches.map((example, index) => (
+                        <div 
+                          key={index}
+                          className="h-8 flex items-center justify-center"
+                        >
+                          <button
+                            onClick={() => handleVibeSearch(example)}
+                            className="text-purple-200 hover:text-white transition-colors duration-200 font-medium"
+                          >
+                            "{example}"
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
           {/* Upload toggle section */}
-          <div className="max-w-5xl mx-auto px-6 mt-8">
+          <div className="max-w-5xl mx-auto px-6 mt-4">
             <div className="text-center">
               <p className="text-gray-300 mb-4">
                 Can't find what you're looking for? Add your own event!
