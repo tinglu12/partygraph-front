@@ -110,14 +110,14 @@ export const EventsList = ({
                 </div>
               )}
 
-              {/* Event category badge */}
+              {/* Event category badge
               {event.category && (
                 <div className="absolute top-6 right-6">
                   <span className="bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30 backdrop-blur-sm">
                     {event.category}
                   </span>
                 </div>
-              )}
+              )} */}
 
               {/* Event title with enhanced typography */}
               <div className="mb-4">

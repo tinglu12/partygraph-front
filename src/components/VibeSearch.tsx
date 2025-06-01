@@ -10,10 +10,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 
 interface VibeSearchProps {
   onSearch: (query: string) => void;
   onTagSelect?: (tag: string) => void;
+  onClearSearch?: () => void;
   isLoading?: boolean;
   placeholder?: string;
 }
@@ -25,6 +27,7 @@ interface VibeSearchProps {
 export const VibeSearch = ({ 
   onSearch, 
   onTagSelect,
+  onClearSearch,
   isLoading = false,
   placeholder = "Describe your perfect vibe..." 
 }: VibeSearchProps) => {
@@ -83,17 +86,23 @@ export const VibeSearch = ({
   // Handle clearing selection
   const handleClearSelection = () => {
     setSelectedTag('');
+    setQuery('');
+    if (onClearSearch) {
+      onClearSearch();
+    }
   };
 
   return (
     <div className="w-full max-w-5xl mx-auto px-6 py-8">
       {/* Enhanced main heading with AI branding */}
       <div className="text-center mb-10">
-        <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="flex items-center justify-center gap-3 mb-6 w-full h-full">
           <Brain className="w-8 h-8 text-purple-400" />
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-[1.1]">
-            Party Graph
-          </h1>
+          <Link href="/vibe" className="hover:opacity-80 transition-opacity" onClick={handleClearSelection}>
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-[1.2] py-1">
+              Party Graph
+            </h1>
+          </Link>
           <Zap className="w-8 h-8 text-blue-400" />
         </div>
         <p className="text-gray-300 text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed mb-8">

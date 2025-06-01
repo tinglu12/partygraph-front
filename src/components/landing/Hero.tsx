@@ -1,8 +1,10 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Network } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const Hero = () => {
+  const router = useRouter();
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6">
       {/* Animated background elements */}
@@ -34,18 +36,12 @@ export const Hero = () => {
           <Button 
             size="lg" 
             className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            onClick={() => router.push('/vibe')}
           >
             Explore Events
             <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
           
-          <Button 
-            variant="outline" 
-            size="lg"
-            className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full backdrop-blur-sm transition-all duration-300"
-          >
-            Watch Demo
-          </Button>
         </div>
         
         <div className="mt-12 text-sm text-gray-400">
