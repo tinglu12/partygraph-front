@@ -79,7 +79,7 @@ Return JSON in this format:
     "neighborhood": [...],
     "timeofday": [...],
     "language": [...],
-    "flexible_tags": [...]
+    "keywords": [...]
   }
 }
 `;
