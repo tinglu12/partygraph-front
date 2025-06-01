@@ -99,7 +99,16 @@ class PerplexityService {
               // "neighborhood",
               // ],
             },
-            required: ["title", "tags", "description", "url"],
+            required: [
+              "title",
+              "tags",
+              "description",
+              "url",
+              "date",
+              "venue",
+              "neighborhood",
+              "keywords",
+            ],
           },
         },
       },
@@ -130,7 +139,7 @@ class PerplexityService {
     );
 
     const content = response.data.choices?.[0]?.message?.content;
-    console.log("Perplexity raw content:", content);
+    // console.log("Perplexity raw content:", content);
     // Try to parse the array of JSON objects from the response
     let result;
     try {
@@ -142,11 +151,25 @@ class PerplexityService {
   }
 }
 
-export async function plexSearchEvent(tag: string, count = 5) {
+export async function plexSearchEvent(tag: string, count = 5, retry = 0) {
   const perplx = new PerplexityService();
 
   console.log("Perplexity searchEvent", { query: tag, count });
   let events = await perplx.searchEvent(tag, count);
+
+  // sometimes the response is empty, so we retry
+  if (events.length === 0) {
+    if (retry < 3) {
+      console.log("Perplexity searchEvent failed, retrying", {
+        query: tag,
+        count,
+        retry,
+      });
+      return plexSearchEvent(tag, count, retry + 1);
+    }
+    console.error("failed on event");
+  }
+
   events = events.map((event) => {
     // const itemTags = [...(event?.tags ?? []), tag];
     const finalTags = cleanTags([...(event?.tags ?? [])], tag);

@@ -1,285 +1,303 @@
 [
   {
-    "title": "Bloc Party",
-    "description": "Indie rock concert",
+    "title": "Book Launch: 'Recto / Verso: Art Publishing in Practice'",
+    "description": "Launch event for the publication 'Recto / Verso: Art Publishing in Practice' featuring contributions from the series' participants, held at the NY Art Book Fair.",
     "tags": [
-      "indie rock concert",
-      "indie rock"
+      "book launch",
+      "art publishing",
+      "ny art book fair"
     ],
-    "date": "May 31, 2025",
-    "venue": "Forest Hills Stadium",
-    "neighborhood": "Queens, NYC",
-    "category": "indie rock concert",
-    "id": "bloc-party"
+    "url": "https://www.hauserwirth.com/events/22266-book-launch-recto-verso-art-publishing-practice/",
+    "date": "2025-06-01",
+    "venue": "NY Art Book Fair",
+    "neighborhood": "New York City",
+    "keywords": [
+      "recto verso",
+      "art publishing",
+      "book launch"
+    ],
+    "category": "book launch",
+    "id": "book-launch-recto--verso-art-publishing-in-practice"
   },
   {
-    "title": "Halsey",
-    "description": "Indie pop concert",
+    "title": "\"Coin Chronicles\" Book Launch & Author Lisa Jane Celestine - Book Signing",
+    "description": "Book launch and signing event for 'Coin Chronicles' with author Lisa Jane Celestine at Evalyn's Tap House.",
     "tags": [
-      "indie rock concert",
-      "indie pop"
+      "book launch",
+      "book signing",
+      "author event"
     ],
-    "date": "June 1, 2025",
-    "venue": "Northwell Health at Jones Beach Theater",
-    "neighborhood": "Wantagh, NY",
-    "category": "indie rock concert",
-    "id": "halsey"
+    "url": "https://www.eventbrite.com/d/ny--new-york/book-signing/",
+    "date": "2025-06-21",
+    "venue": "Evalyn's Tap House",
+    "neighborhood": "New York City",
+    "keywords": [
+      "coin chronicles",
+      "lisa jane celestine",
+      "book launch"
+    ],
+    "category": "book launch",
+    "id": "coin-chronicles-book-launch--author-lisa-jane-celestine---book-signing"
   },
   {
-    "title": "Tennis",
-    "description": "Indie rock concert",
+    "title": "Signing with Ambassador Carol Moseley Braun @ B&N 5th Ave, NYC",
+    "description": "Book signing event featuring Ambassador Carol Moseley Braun at Barnes & Noble on 5th Avenue.",
     "tags": [
-      "indie rock concert",
-      "indie rock"
+      "book launch",
+      "book signing",
+      "author event"
     ],
-    "date": "June 1, 2025",
-    "venue": "The Rooftop at Pier 17",
-    "neighborhood": "New York (NYC)",
-    "category": "indie rock concert",
-    "id": "tennis"
+    "url": "https://www.eventbrite.com/d/ny--new-york/book-signing/",
+    "date": "2025-06-25",
+    "venue": "Barnes & Noble - 5th Ave",
+    "neighborhood": "New York City",
+    "keywords": [
+      "carol moseley braun",
+      "book signing",
+      "barnes & noble"
+    ],
+    "category": "book launch",
+    "id": "signing-with-ambassador-carol-moseley-braun--bn-5th-ave-nyc"
   },
   {
-    "title": "The Kooks",
-    "description": "Indie rock concert",
+    "title": "Join Isabel Allende for Book Launch of \"My Name Is Emilia del Valle\"",
+    "description": "Isabel Allende launches her latest historical novel 'My Name Is Emilia del Valle' at Symphony Space.",
     "tags": [
-      "indie rock concert",
-      "indie rock"
+      "book launch",
+      "author event",
+      "historical novel"
     ],
-    "date": "June 3, 2025",
-    "venue": "The Rooftop at Pier 17",
-    "neighborhood": "New York (NYC)",
-    "category": "indie rock concert",
-    "id": "the-kooks"
+    "url": "https://www.booksigningcentral.com/category/location/new-york/",
+    "date": "2025-05-06",
+    "venue": "Symphony Space Upper Level, 2537 Broadway",
+    "neighborhood": "New York City",
+    "keywords": [
+      "isabel allende",
+      "my name is emilia del valle",
+      "book launch"
+    ],
+    "category": "book launch",
+    "id": "join-isabel-allende-for-book-launch-of-my-name-is-emilia-del-valle"
   },
   {
-    "title": "Craig Finn",
-    "description": "Indie rock concert",
+    "title": "Join Sloan Harlow for Book Release of \"All We Lost Was Everything\"",
+    "description": "Book release event for Sloan Harlow's 'All We Lost Was Everything' at B&N Atlantic Avenue.",
     "tags": [
-      "indie rock concert",
-      "indie rock"
+      "book launch",
+      "book release",
+      "author event"
     ],
-    "date": "TBD",
-    "venue": "Rough Trade Below",
-    "neighborhood": "New York (NYC)",
-    "category": "indie rock concert",
-    "id": "craig-finn"
+    "url": "https://www.booksigningcentral.com/category/location/new-york/",
+    "date": "2025-05-06",
+    "venue": "B&N Atlantic Avenue, 194 Atlantic Avenue",
+    "neighborhood": "Brooklyn, NY",
+    "keywords": [
+      "sloan harlow",
+      "all we lost was everything",
+      "book release"
+    ],
+    "category": "book launch",
+    "id": "join-sloan-harlow-for-book-release-of-all-we-lost-was-everything"
   },
   {
-    "title": "Brooklyn Chop House Summer Rooftop - Curtis Quow Exclusive Book Signing",
-    "description": "A networking event featuring Curtis Quow's exclusive book signing at Brooklyn Chop House Steakhouse in Times Square.",
+    "title": "Online Networking Coffee",
+    "description": "Virtual networking event hosted by the Greater New York Chamber of Commerce",
     "tags": [
       "networking event",
       "networking",
-      "book signing",
-      "rooftop"
+      "virtual"
     ],
-    "url": "https://www.eventbrite.com/e/brooklyn-chop-house-summer-rooftop-curtis-quow-exclusive-book-signing-tickets-123456789",
-    "date": "2025-06-10",
-    "venue": "Brooklyn Chop House Steakhouse",
-    "neighborhood": "Times Square",
+    "url": "https://chamber.nyc/event",
+    "date": "June 3, 2025",
+    "venue": "Virtual",
+    "neighborhood": "New York City",
     "keywords": [
-      "Brooklyn Chop House",
-      "Curtis Quow",
-      "book signing",
-      "rooftop"
+      "Chamber of Commerce",
+      "Networking"
     ],
     "category": "networking event",
-    "id": "brooklyn-chop-house-summer-rooftop---curtis-quow-exclusive-book-signing"
+    "id": "online-networking-coffee"
+  },
+  {
+    "title": "In Person Power Networking Lunch with the SBA",
+    "description": "Networking lunch event with the Small Business Administration",
+    "tags": [
+      "networking event",
+      "networking",
+      "in-person"
+    ],
+    "url": "https://chamber.nyc/event",
+    "date": "June 4, 2025",
+    "venue": "TBD",
+    "neighborhood": "New York City",
+    "keywords": [
+      "SBA",
+      "Networking"
+    ],
+    "category": "networking event",
+    "id": "in-person-power-networking-lunch-with-the-sba"
+  },
+  {
+    "title": "New York City Hottest Networking Event For Young Professionals",
+    "description": "Networking event for young professionals",
+    "tags": [
+      "networking event",
+      "networking",
+      "young professionals"
+    ],
+    "url": "https://www.eventbrite.com/d/ny--new-york/networking/",
+    "date": "June 11, 2025",
+    "venue": "The Ivory Peacock",
+    "neighborhood": "New York City",
+    "keywords": [
+      "Young Professionals",
+      "Networking"
+    ],
+    "category": "networking event",
+    "id": "new-york-city-hottest-networking-event-for-young-professionals"
   },
   {
     "title": "The Jazba Collective NYC Meetup!",
-    "description": "A networking meetup hosted by The Jazba Collective at fontainhas + (/du.kaan/) in New York City, perfect for community building and professional connections.",
+    "description": "Networking meetup for the Jazba Collective",
     "tags": [
       "networking event",
       "networking",
-      "meetup",
-      "community"
+      "meetup"
     ],
-    "url": "https://www.eventbrite.com/e/the-jazba-collective-nyc-meetup-tickets-987654321",
-    "date": "2025-06-26",
+    "url": "https://www.eventbrite.com/d/ny--new-york/networking/",
+    "date": "June 26, 2025",
     "venue": "fontainhas + (/du.kaan/)",
     "neighborhood": "New York City",
     "keywords": [
       "Jazba Collective",
-      "meetup",
-      "networking"
+      "Networking"
     ],
     "category": "networking event",
     "id": "the-jazba-collective-nyc-meetup"
   },
   {
     "title": "Startup CPG Founder Dinner @ Summer Fancy Food 2025",
-    "description": "An exclusive networking dinner for startup CPG founders during the Summer Fancy Food event at Maxwell Tribeca.",
+    "description": "Networking dinner for startup founders in the CPG industry",
     "tags": [
       "networking event",
       "networking",
-      "startup",
-      "dinner"
+      "cpg"
     ],
-    "url": "https://www.eventbrite.com/e/startup-cpg-founder-dinner-summer-fancy-food-2025-tickets-1122334455",
-    "date": "2025-06-30",
+    "url": "https://www.eventbrite.com/d/ny--new-york/networking/",
+    "date": "June 30, 2025",
     "venue": "Maxwell Tribeca",
-    "neighborhood": "Tribeca",
+    "neighborhood": "New York City",
     "keywords": [
-      "Startup CPG",
-      "founder dinner",
-      "Summer Fancy Food",
-      "networking"
+      "Startup Founders",
+      "CPG"
     ],
     "category": "networking event",
     "id": "startup-cpg-founder-dinner--summer-fancy-food-2025"
   },
   {
-    "title": "New York City Hottest Networking Event For Young Professionals",
-    "description": "A popular networking event aimed at young professionals in New York City, held at The Ivory Peacock.",
+    "title": "New York Philharmonic",
+    "description": "Gustavo Dudamel, conductor - Mahler: Symphony No. 7",
     "tags": [
-      "networking event",
-      "networking",
-      "young professionals",
-      "social"
+      "classical music concert",
+      "classical music"
     ],
-    "url": "https://www.eventbrite.com/e/new-york-city-hottest-networking-event-for-young-professionals-tickets-5566778899",
-    "date": "2025-06-11",
-    "venue": "The Ivory Peacock",
-    "neighborhood": "New York City",
+    "url": "nyphil.org",
+    "date": "June 1",
+    "venue": "David Geffen Hall, Lincoln Center",
+    "neighborhood": "Upper West Side",
     "keywords": [
-      "young professionals",
-      "networking",
-      "social event"
+      "Orchestra",
+      "Classical"
     ],
-    "category": "networking event",
-    "id": "new-york-city-hottest-networking-event-for-young-professionals"
+    "category": "classical music concert",
+    "id": "new-york-philharmonic"
   },
   {
-    "title": "Small Business Expo NYC 2025",
-    "description": "The largest small business networking event in NYC at the Javits Center, featuring workshops, speed networking, vendors, and educational sessions for entrepreneurs and small business owners.",
+    "title": "Star Wars - The Empire Strikes Back In Concert",
+    "description": "A live concert performance of the iconic film score",
     "tags": [
-      "networking event",
-      "networking",
-      "small business",
-      "expo",
-      "workshops"
+      "classical music concert",
+      "classical music",
+      "film score"
     ],
-    "url": "https://www.thesmallbusinessexpo.com/city/new-york-city/",
-    "date": "2025-06-07",
-    "venue": "Javits Convention Center",
-    "neighborhood": "Midtown Manhattan",
+    "url": "davidgeffenhall.org",
+    "date": "June 11-14",
+    "venue": "David Geffen Hall",
+    "neighborhood": "Upper West Side",
     "keywords": [
-      "small business",
-      "networking",
-      "expo",
-      "workshops",
-      "speed networking"
+      "Orchestra",
+      "Film"
     ],
-    "category": "networking event",
-    "id": "small-business-expo-nyc-2025"
+    "category": "classical music concert",
+    "id": "star-wars---the-empire-strikes-back-in-concert"
   },
   {
-    "title": "Marcus Miller, Tank and the Bangas, and The Soul Rebels",
-    "description": "FREE SHOW at Central Park SummerStage",
+    "title": "Ksenija Sidorova",
+    "description": "Accordianist performing at Weill Recital Hall",
     "tags": [
-      "jazz concert",
-      "jazz",
+      "classical music concert",
+      "classical music"
+    ],
+    "url": "carnegiehall.org",
+    "date": "June 2025",
+    "venue": "Weill Recital Hall, Carnegie Hall",
+    "neighborhood": "Midtown",
+    "keywords": [
+      "Accordian",
+      "Classical"
+    ],
+    "category": "classical music concert",
+    "id": "ksenija-sidorova"
+  },
+  {
+    "title": "Lisette Oropesa",
+    "description": "Soprano performing at the Metropolitan Opera House",
+    "tags": [
+      "classical music concert",
+      "classical music",
+      "opera"
+    ],
+    "url": "metopera.org",
+    "date": "June 2025",
+    "venue": "Metropolitan Opera House",
+    "neighborhood": "Upper West Side",
+    "keywords": [
+      "Opera",
+      "Classical"
+    ],
+    "category": "classical music concert",
+    "id": "lisette-oropesa"
+  },
+  {
+    "title": "Naumburg Orchestral Concerts",
+    "description": "Free classical music concerts at the Naumburg Bandshell",
+    "tags": [
+      "classical music concert",
+      "classical music",
       "free"
     ],
-    "date": "Wed Jun 4, 2025",
-    "category": "jazz concert",
-    "id": "marcus-miller-tank-and-the-bangas-and-the-soul-rebels"
-  },
-  {
-    "title": "Stacey Kent",
-    "description": "Performing at Blue Note Jazz Club",
-    "tags": [
-      "jazz concert",
-      "jazz"
-    ],
-    "date": "Various dates",
-    "category": "jazz concert",
-    "id": "stacey-kent"
-  },
-  {
-    "title": "Vince Giordano & The Nighthawks",
-    "description": "Performing at Birdland Theater",
-    "tags": [
-      "jazz concert",
-      "jazz"
-    ],
-    "date": "Various dates",
-    "category": "jazz concert",
-    "id": "vince-giordano--the-nighthawks"
-  },
-  {
-    "title": "Billy Drummond",
-    "description": "Performing at Mezzrow Jazz Club",
-    "tags": [
-      "jazz concert",
-      "jazz"
-    ],
-    "date": "Various dates",
-    "category": "jazz concert",
-    "id": "billy-drummond"
-  },
-  {
-    "title": "Dirty Dozen Brass Band",
-    "description": "Performing at Blue Note Jazz Club",
-    "tags": [
-      "jazz concert",
-      "jazz"
-    ],
-    "date": "July 2025",
-    "category": "jazz concert",
-    "id": "dirty-dozen-brass-band"
-  },
-  {
-    "title": "Lil Baby & BigXthaPlug",
-    "description": "Hip-hop concert featuring Lil Baby and BigXthaPlug",
-    "tags": [
-      "hip hop concert",
-      "hip-hop",
-      "concert"
-    ],
-    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/2025/genre/hip-hop",
-    "date": "2025-06-18",
-    "venue": "Barclays Center, Brooklyn, NY",
-    "neighborhood": "Brooklyn",
+    "url": "naumburgconcerts.org",
+    "date": "Summer 2025",
+    "venue": "Naumburg Bandshell",
+    "neighborhood": "Central Park",
     "keywords": [
-      "Lil Baby",
-      "BigXthaPlug",
-      "NLE Choppa",
-      "Loe Shimmy"
+      "Orchestra",
+      "Free"
     ],
-    "category": "hip hop concert",
-    "id": "lil-baby--bigxthaplug"
-  },
-  {
-    "title": "Lil Mosey",
-    "description": "Hip-hop concert featuring Lil Mosey",
-    "tags": [
-      "hip hop concert",
-      "hip-hop",
-      "concert"
-    ],
-    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/2025/genre/hip-hop",
-    "date": "2025-06-01",
-    "venue": "Market Hotel, Brooklyn, NY",
-    "neighborhood": "Brooklyn",
-    "keywords": [
-      "Lil Mosey"
-    ],
-    "category": "hip hop concert",
-    "id": "lil-mosey"
+    "category": "classical music concert",
+    "id": "naumburg-orchestral-concerts"
   },
   {
     "title": "Jeezy and DJ Drama",
-    "description": "Hip-hop concert featuring Jeezy and DJ Drama",
+    "description": "Hip-Hop concert at Apollo Theater",
     "tags": [
       "hip hop concert",
       "hip-hop",
-      "concert"
+      "rap"
     ],
     "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/2025/genre/hip-hop",
-    "date": "2025-06-01",
-    "venue": "Apollo Theater, New York, NY",
+    "date": "Soon",
+    "venue": "Apollo Theater, New York (NYC), NY, US",
     "neighborhood": "Harlem",
     "keywords": [
       "Jeezy",
@@ -290,15 +308,15 @@
   },
   {
     "title": "MC Chris and Swell Rell",
-    "description": "Hip-hop concert featuring MC Chris and Swell Rell",
+    "description": "Hip-Hop concert at The Wood Shop",
     "tags": [
       "hip hop concert",
       "hip-hop",
-      "concert"
+      "rap"
     ],
     "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/2025/genre/hip-hop",
-    "date": "2025-06-01",
-    "venue": "The Wood Shop, New York, NY",
+    "date": "Soon",
+    "venue": "The Wood Shop, New York (NYC), NY, US",
     "neighborhood": "Lower East Side",
     "keywords": [
       "MC Chris",
@@ -308,768 +326,865 @@
     "id": "mc-chris-and-swell-rell"
   },
   {
-    "title": "Grandmaster Flash, DJ Jazzy Jeff, Skratch Bastid",
-    "description": "Hip-hop concert featuring Grandmaster Flash, DJ Jazzy Jeff, and Skratch Bastid",
+    "title": "Lil Baby and BigXthaPlug",
+    "description": "Hip-Hop concert at Barclays Center",
     "tags": [
       "hip hop concert",
       "hip-hop",
-      "concert"
+      "rap"
     ],
-    "url": "https://www.jambase.com/concerts/us/new-york/genres/hip-hop-rap-concerts",
-    "date": "2025-06-08",
-    "venue": "The Rooftop at Pier 17, New York, NY",
-    "neighborhood": "Seaport District",
+    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/2025/genre/hip-hop",
+    "date": "Soon",
+    "venue": "Barclays Center, Brooklyn, NY, US",
+    "neighborhood": "Prospect Heights",
     "keywords": [
-      "Grandmaster Flash",
-      "DJ Jazzy Jeff",
-      "Skratch Bastid"
+      "Lil Baby",
+      "BigXthaPlug"
     ],
     "category": "hip hop concert",
-    "id": "grandmaster-flash-dj-jazzy-jeff-skratch-bastid"
+    "id": "lil-baby-and-bigxthaplug"
   },
   {
-    "title": "Alan Walker at Capital One City Parks Foundation Summerstage",
-    "description": "EDM concert featuring Alan Walker.",
+    "title": "Lil Mosey",
+    "description": "Hip-Hop concert at Market Hotel",
+    "tags": [
+      "hip hop concert",
+      "hip-hop",
+      "rap"
+    ],
+    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/2025/genre/hip-hop",
+    "date": "Soon",
+    "venue": "Market Hotel, Brooklyn, NY, US",
+    "neighborhood": "Bushwick",
+    "keywords": [
+      "Lil Mosey"
+    ],
+    "category": "hip hop concert",
+    "id": "lil-mosey"
+  },
+  {
+    "title": "LadyLand ft. Cardi B and COBRAH",
+    "description": "Hip-Hop concert at Under the K Bridge Park",
+    "tags": [
+      "hip hop concert",
+      "hip-hop",
+      "rap"
+    ],
+    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/2025/genre/hip-hop",
+    "date": "Soon",
+    "venue": "Under the K Bridge Park, Brooklyn, NY, US",
+    "neighborhood": "Greenpoint",
+    "keywords": [
+      "Cardi B",
+      "COBRAH"
+    ],
+    "category": "hip hop concert",
+    "id": "ladyland-ft-cardi-b-and-cobrah"
+  },
+  {
+    "title": "Stay In Bloom NYC 2025",
+    "description": "EDM festival featuring Dabin and Paper Skies",
+    "tags": [
+      "edm rave",
+      "rave",
+      "festival"
+    ],
+    "url": "https://edmtrain.com/new-york-city-ny",
+    "date": "June 2025 (exact date TBD, check for updates)",
+    "venue": "Under the K Bridge, New York (NYC), NY",
+    "neighborhood": "Brooklyn",
+    "keywords": [
+      "Dabin",
+      "Paper Skies"
+    ],
+    "category": "edm rave",
+    "id": "stay-in-bloom-nyc-2025"
+  },
+  {
+    "title": "MORTEN",
+    "description": "DJ set at Superior Ingredients",
+    "tags": [
+      "edm rave",
+      "edm",
+      "rave"
+    ],
+    "url": "https://edmtrain.com/new-york-city-ny",
+    "date": "June 2025 (exact date TBD, check for updates)",
+    "venue": "Superior Ingredients, New York (NYC), NY",
+    "neighborhood": "Manhattan",
+    "keywords": [
+      "MORTEN"
+    ],
+    "category": "edm rave",
+    "id": "morten"
+  },
+  {
+    "title": "Felix Cartal",
+    "description": "DJ set at Azure",
+    "tags": [
+      "edm rave",
+      "edm",
+      "rave"
+    ],
+    "url": "https://edmtrain.com/new-york-city-ny",
+    "date": "June 2025 (exact date TBD, check for updates)",
+    "venue": "Azure, Brooklyn, NY",
+    "neighborhood": "Brooklyn",
+    "keywords": [
+      "Felix Cartal"
+    ],
+    "category": "edm rave",
+    "id": "felix-cartal"
+  },
+  {
+    "title": "Electronica NYC Yacht Party: DRITTO",
+    "description": "EDM yacht party featuring DRITTO",
+    "tags": [
+      "edm rave",
+      "edm",
+      "rave",
+      "yacht"
+    ],
+    "url": "https://www.eventbrite.com/b/ny--new-york/music/edm--electronic/",
+    "date": "June 28, 2025",
+    "venue": "Pier 36 NYC",
+    "neighborhood": "Manhattan",
+    "keywords": [
+      "DRITTO"
+    ],
+    "category": "edm rave",
+    "id": "electronica-nyc-yacht-party-dritto"
+  },
+  {
+    "title": "Dabin, William Black, Blanke, Jason Ross, Ericdoa, Audrey Nuna, WAVEDASH",
+    "description": "EDM concert under the K Bridge Park",
     "tags": [
       "edm rave",
       "edm",
       "rave",
       "concert"
     ],
-    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/genre/electronic",
-    "date": "June 2025 (exact date may vary, check venue for updates)",
-    "venue": "Capital One City Parks Foundation Summerstage, NYC",
-    "neighborhood": "New York (NYC), NY",
-    "keywords": [
-      "alan walker",
-      "edm",
-      "summerstage"
-    ],
-    "category": "edm rave",
-    "id": "alan-walker-at-capital-one-city-parks-foundation-summerstage"
-  },
-  {
-    "title": "Dabin, William Black, Blanke, Jason Ross, Ericdoa, Audrey Nuna, WAVEDASH at Under the K Bridge Park",
-    "description": "EDM rave and concert event featuring multiple artists.",
-    "tags": [
-      "edm rave",
-      "edm",
-      "rave",
-      "multi-artist"
-    ],
-    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/genre/electronic",
-    "date": "June 2025 (exact date may vary, check venue for updates)",
+    "url": "https://edmtrain.com/new-york-city-ny",
+    "date": "June 2025 (exact date TBD, check for updates)",
     "venue": "Under the K Bridge Park, Brooklyn, NY",
-    "neighborhood": "Brooklyn, NY",
+    "neighborhood": "Brooklyn",
     "keywords": [
-      "dabin",
-      "william black",
-      "blanke",
-      "jason ross",
-      "ericdoa",
-      "audrey nuna",
-      "wavedash"
+      "Dabin",
+      "William Black",
+      "Blanke",
+      "Jason Ross",
+      "Ericdoa",
+      "Audrey Nuna",
+      "WAVEDASH"
     ],
     "category": "edm rave",
-    "id": "dabin-william-black-blanke-jason-ross-ericdoa-audrey-nuna-wavedash-at-under-the-k-bridge-park"
-  },
-  {
-    "title": "Stay In Bloom NYC 2025: Dabin and Paper Skies",
-    "description": "EDM festival event featuring Dabin and Paper Skies.",
-    "tags": [
-      "edm rave",
-      "edm",
-      "rave",
-      "festival"
-    ],
-    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/genre/electronic",
-    "date": "June 2025 (exact date may vary, check venue for updates)",
-    "venue": "Under the K Bridge, NYC",
-    "neighborhood": "New York (NYC), NY",
-    "keywords": [
-      "dabin",
-      "paper skies",
-      "edm",
-      "festival"
-    ],
-    "category": "edm rave",
-    "id": "stay-in-bloom-nyc-2025-dabin-and-paper-skies"
-  },
-  {
-    "title": "MORTEN at Superior Ingredients",
-    "description": "EDM DJ set by MORTEN.",
-    "tags": [
-      "edm rave",
-      "edm",
-      "rave",
-      "dj"
-    ],
-    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/genre/electronic",
-    "date": "June 2025 (exact date may vary, check venue for updates)",
-    "venue": "Superior Ingredients, NYC",
-    "neighborhood": "New York (NYC), NY",
-    "keywords": [
-      "morten",
-      "edm",
-      "dj"
-    ],
-    "category": "edm rave",
-    "id": "morten-at-superior-ingredients"
-  },
-  {
-    "title": "Felix Cartal at Azure",
-    "description": "EDM DJ set by Felix Cartal.",
-    "tags": [
-      "edm rave",
-      "edm",
-      "rave",
-      "dj"
-    ],
-    "url": "https://www.songkick.com/metro-areas/7644-us-new-york-nyc/genre/electronic",
-    "date": "June 2025 (exact date may vary, check venue for updates)",
-    "venue": "Azure, Brooklyn, NY",
-    "neighborhood": "Brooklyn, NY",
-    "keywords": [
-      "felix cartal",
-      "edm",
-      "dj"
-    ],
-    "category": "edm rave",
-    "id": "felix-cartal-at-azure"
+    "id": "dabin-william-black-blanke-jason-ross-ericdoa-audrey-nuna-wavedash"
   },
   {
     "title": "Open Mic Saturdays",
-    "description": "Open mic event at Medallion Bistro",
+    "description": "Open Mic event at Medallion Bistro",
     "tags": [
       "open mic night",
+      "open mic",
       "music",
       "poetry"
     ],
+    "url": "https://www.eventbrite.com/d/ny--new-york/open-mic/",
     "date": "Sat, Jun 7, 2025",
     "venue": "Medallion Bistro",
     "neighborhood": "New York, NY",
+    "keywords": [
+      "Open Mic",
+      "NYC"
+    ],
     "category": "open mic night",
     "id": "open-mic-saturdays"
   },
   {
     "title": "Open Stage / Open Mic Events @ Morningside Heights Library",
-    "description": "Open stage for performances",
+    "description": "Open Mic event at Morningside Heights Library",
     "tags": [
       "open mic night",
-      "music",
-      "poetry"
+      "open mic",
+      "library event"
     ],
+    "url": "https://www.eventbrite.com/d/ny--new-york/open-mic/",
     "date": "Sat, Jun 7, 2025",
     "venue": "Morningside Heights Library",
     "neighborhood": "New York, NY",
+    "keywords": [
+      "Open Mic",
+      "Library"
+    ],
     "category": "open mic night",
     "id": "open-stage--open-mic-events--morningside-heights-library"
   },
   {
     "title": "The Dope Poets open mic",
-    "description": "Open mic for poetry and spoken word",
+    "description": "Open Mic event at Sanger Hall",
     "tags": [
       "open mic night",
+      "open mic",
       "poetry",
       "spoken word"
     ],
+    "url": "https://www.eventbrite.com/d/ny--new-york/open-mic/",
     "date": "Wed, Jun 18, 2025",
     "venue": "Sanger Hall",
     "neighborhood": "New York, NY",
+    "keywords": [
+      "Open Mic",
+      "Poetry"
+    ],
     "category": "open mic night",
     "id": "the-dope-poets-open-mic"
   },
   {
-    "title": "naked. open mic @ N.A.ME!",
-    "description": "Open mic night for various performances",
+    "title": "The Open Mic Downstairs @ Frigid New York",
+    "description": "Weekly Open Mic event at Frigid New York",
     "tags": [
       "open mic night",
-      "music",
-      "poetry"
+      "open mic",
+      "comedy",
+      "music"
     ],
-    "date": "Sat, Jun 21, 2025",
-    "venue": "92 Saratoga Ave",
+    "url": "https://tickets.frigid.nyc/event/6897:24/",
+    "date": "Tue, Jun 3, 2025",
+    "venue": "Under St Marks",
     "neighborhood": "New York, NY",
+    "keywords": [
+      "Open Mic",
+      "Comedy"
+    ],
     "category": "open mic night",
-    "id": "naked-open-mic--name"
+    "id": "the-open-mic-downstairs--frigid-new-york"
   },
   {
     "title": "Teen Open Mic",
-    "description": "Open mic for teens at Writopia Lab",
+    "description": "Teen Open Mic event at P&T Knitwear",
     "tags": [
       "open mic night",
-      "teen event",
-      "poetry"
+      "teen open mic",
+      "poetry",
+      "music"
     ],
+    "url": "https://www.writopialab.org/teen-open-mics",
     "date": "Sat, Jun 28, 2025",
     "venue": "P&T Knitwear",
-    "neighborhood": "Manhattan, NY",
+    "neighborhood": "New York, NY",
+    "keywords": [
+      "Teen Open Mic",
+      "NYC"
+    ],
     "category": "open mic night",
     "id": "teen-open-mic"
   },
   {
-    "title": "New York Society of Cosmetic Chemists – NYSCC Suppliers’ Day",
-    "description": "A major event in the global cosmetics industry featuring over 10,000 attendees and 546 exhibitors showcasing the latest innovations in cosmetics. It offers significant exposure and networking opportunities for product launches in the cosmetics sector.",
+    "title": "NY Tech Week Product Showcase Picnic for (AI) Founders and Funders",
+    "description": "#NYTechWeek Sunset Rooftop Product Showcase Picnic for (AI) Founders and Funders",
     "tags": [
       "product launch",
-      "cosmetics",
-      "trade show"
-    ],
-    "url": "https://www.exponents.com/our-blog/top-20-trade-shows-in-new-york-city/",
-    "date": "2025-06-03",
-    "venue": "Javits Convention Center",
-    "neighborhood": "Hell's Kitchen",
-    "keywords": [
-      "cosmetics",
-      "innovation",
-      "exhibition",
-      "networking"
-    ],
-    "category": "product launch",
-    "id": "new-york-society-of-cosmetic-chemists--nyscc-suppliers-day"
-  },
-  {
-    "title": "New York Society of Cosmetic Chemists – NYSCC Suppliers’ Day",
-    "description": "Annual trade show event attracting more than 35,000 professional visitors and 2700 exhibitors, showcasing the largest food and beverage innovations in North America, ideal for product launches in these industries.",
-    "tags": [
-      "product launch",
-      "food and beverage",
-      "trade show"
-    ],
-    "url": "https://www.exponents.com/our-blog/top-20-trade-shows-in-new-york-city/",
-    "date": "2025-06-29",
-    "venue": "Jacob K. Javits Convention Center",
-    "neighborhood": "Hell's Kitchen",
-    "keywords": [
-      "food",
-      "beverage",
-      "innovation",
-      "exhibition"
-    ],
-    "category": "product launch",
-    "id": "new-york-society-of-cosmetic-chemists--nyscc-suppliers-day"
-  },
-  {
-    "title": "NY Tech Week Product Showcase Picnic for AI Founders and Funders",
-    "description": "A sunset rooftop product showcase picnic during New York Tech Week for AI founders and funders to present and launch new AI-related products and technologies.",
-    "tags": [
-      "product launch",
-      "technology",
-      "ai",
-      "networking"
+      "tech",
+      "ai"
     ],
     "url": "https://lu.ma/nytw",
-    "date": "2025-06-05",
-    "venue": "Rooftop venue in New York, NY",
-    "neighborhood": "Manhattan",
+    "date": "June 2-8, 2025",
+    "venue": "New York, New York",
+    "neighborhood": "Various",
     "keywords": [
-      "AI",
-      "technology",
       "product showcase",
-      "networking"
+      "AI",
+      "tech week"
     ],
     "category": "product launch",
     "id": "ny-tech-week-product-showcase-picnic-for-ai-founders-and-funders"
   },
   {
-    "title": "TECHSPO New York 2025",
-    "description": "A two-day technology expo at the Brooklyn Bridge Hotel featuring cutting-edge technology innovations in Internet, Mobile, AdTech, MarTech, and SaaS with opportunities to launch new products to consumers, investors, and media.",
+    "title": "NY Tech Week Jump Off (AI) Founder & Funder Power Walk",
+    "description": "#NYTechWeek Jump Off (AI) Founder & Funder Power Walk",
     "tags": [
       "product launch",
-      "technology",
-      "expo"
+      "tech",
+      "networking"
     ],
-    "url": "https://techsponyc.com",
-    "date": "2025-07-07",
-    "venue": "Brooklyn Bridge Hotel",
-    "neighborhood": "Brooklyn",
+    "url": "https://lu.ma/nytw",
+    "date": "June 2-8, 2025",
+    "venue": "New York, New York",
+    "neighborhood": "Various",
     "keywords": [
-      "technology",
-      "innovation",
-      "expo",
-      "product launch"
+      "AI",
+      "founders",
+      "funders"
     ],
     "category": "product launch",
-    "id": "techspo-new-york-2025"
+    "id": "ny-tech-week-jump-off-ai-founder--funder-power-walk"
   },
   {
-    "title": "Girl's Night Out Featuring VELO Vodka NEW Product Launch",
-    "description": "An event featuring the launch of VELO Vodka's new product, providing a social setting for product introduction and brand promotion.",
+    "title": "Tech Pizza Party NYC",
+    "description": "Tech Pizza Party NYC",
+    "tags": [
+      "product launch",
+      "tech",
+      "networking"
+    ],
+    "url": "https://lu.ma/nytw",
+    "date": "June 2-8, 2025",
+    "venue": "Washington Square Park",
+    "neighborhood": "Greenwich Village",
+    "keywords": [
+      "tech",
+      "pizza",
+      "networking"
+    ],
+    "category": "product launch",
+    "id": "tech-pizza-party-nyc"
+  },
+  {
+    "title": "New York Society of Cosmetic Chemists – NYSCC Suppliers’ Day",
+    "description": "Key event in the global cosmetics industry, showcasing latest innovations and product launches",
+    "tags": [
+      "product launch",
+      "cosmetics",
+      "industry"
+    ],
+    "url": "https://www.exponents.com/our-blog/top-20-trade-shows-in-new-york-city/",
+    "date": "June 3-4, 2025",
+    "venue": "Javits Convention Center",
+    "neighborhood": "Hell's Kitchen",
+    "keywords": [
+      "cosmetics",
+      "innovation",
+      "trade show"
+    ],
+    "category": "product launch",
+    "id": "new-york-society-of-cosmetic-chemists--nyscc-suppliers-day"
+  },
+  {
+    "title": "Girl's Night Out Featuring VELO Vodka NEW Product Launch!",
+    "description": "Girl's Night Out Featuring VELO Vodka NEW Product Launch!",
     "tags": [
       "product launch",
       "beverage",
-      "social event"
+      "social"
     ],
     "url": "https://www.eventbrite.com/d/united-states/product-launch/",
-    "date": "2025-06-19",
+    "date": "June 19, 2025",
     "venue": "The Elliotte Events & Catering",
-    "neighborhood": "New York City",
+    "neighborhood": "Not specified",
     "keywords": [
-      "beverage",
       "vodka",
       "product launch",
-      "social"
+      "social event"
     ],
     "category": "product launch",
     "id": "girls-night-out-featuring-velo-vodka-new-product-launch"
   },
   {
-    "title": "Multi-Genre Silent Disco",
-    "description": "Quiet Clubbing event featuring three live DJs spinning tunes of different genres on the pier.",
+    "title": "Biggest Silent Disco Night @ Central Park!",
+    "description": "CTRL Group NYC presents a silent disco night with 3 DJs at Central Park's East Meadows Lawn.",
     "tags": [
       "silent disco",
-      "multi-genre",
+      "central park"
+    ],
+    "url": "https://www.eventbrite.com/e/biggest-silent-disco-night-central-park-tickets-1362515513579",
+    "date": "June 7, 2025",
+    "venue": "Central Park, New York, NY",
+    "neighborhood": "Upper East Side",
+    "keywords": [
+      "silent disco",
+      "Central Park"
+    ],
+    "category": "silent disco",
+    "id": "biggest-silent-disco-night--central-park"
+  },
+  {
+    "title": "Multi-Genre Silent Disco - NYC",
+    "description": "Quiet Clubbing event featuring three live DJs on the pier.",
+    "tags": [
+      "silent disco",
+      "quiet clubbing",
+      "pier"
+    ],
+    "url": "https://www.clubfreetime.com/new-york-city-nyc/free-party/2025-06-07/event/690385",
+    "date": "June 7, 2025",
+    "venue": "Pier, NYC",
+    "neighborhood": "West Side",
+    "keywords": [
+      "silent disco",
+      "pier"
+    ],
+    "category": "silent disco",
+    "id": "multi-genre-silent-disco---nyc"
+  },
+  {
+    "title": "Summer Vibes Silent Disco at 230 FIFTH Empire Penthouse NYC",
+    "description": "Single and the City presents a silent disco with 3 live DJs at 230 FIFTH Empire Penthouse.",
+    "tags": [
+      "silent disco",
+      "230 fifth",
+      "empire penthouse"
+    ],
+    "url": "https://www.eventbrite.com/e/summer-vibes-silent-disco-at-230-fifth-empire-penthouse-nyc-tickets-1364396760439",
+    "date": "June 14-15, 2025",
+    "venue": "230 FIFTH Empire Penthouse, NYC",
+    "neighborhood": "Flatiron",
+    "keywords": [
+      "silent disco",
+      "penthouse"
+    ],
+    "category": "silent disco",
+    "id": "summer-vibes-silent-disco-at-230-fifth-empire-penthouse-nyc"
+  },
+  {
+    "title": "Silent Disco - Riverside Park",
+    "description": "Quiet Clubbing event featuring three live DJs on the pier in Riverside Park.",
+    "tags": [
+      "silent disco",
+      "riverside park",
       "quiet clubbing"
     ],
-    "date": "2025-06-07",
+    "url": "https://riversideparknyc.org/event/silent-disco-5/2025-06-07/",
+    "date": "June 7, 2025",
+    "venue": "Riverside Park, NYC",
+    "neighborhood": "Upper West Side",
+    "keywords": [
+      "silent disco",
+      "Riverside Park"
+    ],
     "category": "silent disco",
-    "id": "multi-genre-silent-disco"
+    "id": "silent-disco---riverside-park"
   },
   {
-    "title": "Silent Disco at Lincoln Center",
-    "description": "Free in-person American Sign Language-led exploration of Lincoln Center's campus during the summer festival.",
+    "title": "Silent Disco Party - Herbert Von King Park",
+    "description": "A free silent disco party with wireless headphones and multiple music channels.",
     "tags": [
       "silent disco",
-      "asl",
-      "lincoln center"
+      "herbert von king park",
+      "free event"
     ],
-    "date": "Not specified",
-    "category": "silent disco",
-    "id": "silent-disco-at-lincoln-center"
-  },
-  {
-    "title": "Silent Disco Party in Brooklyn",
-    "description": "Free event where participants wear wireless headphones and choose their music channel. Located at Herbert Von King Park.",
-    "tags": [
+    "url": "https://www.nycgovparks.org/events/2025/07/12/silent-disco-party",
+    "date": "July 12, 2025",
+    "venue": "Herbert Von King Park, Brooklyn",
+    "neighborhood": "Bedford-Stuyvesant",
+    "keywords": [
       "silent disco",
-      "free",
-      "brooklyn"
+      "free event"
     ],
-    "date": "2025-07-12",
     "category": "silent disco",
-    "id": "silent-disco-party-in-brooklyn"
-  },
-  {
-    "title": "Rock the Yacht Silent Disco Booze Cruise",
-    "description": "Ages 21+ event featuring 4 live DJs on a yacht cruise around the Hudson River.",
-    "tags": [
-      "silent disco",
-      "booze cruise",
-      "ages 21+"
-    ],
-    "date": "2025-07-25 to 2025-07-26",
-    "category": "silent disco",
-    "id": "rock-the-yacht-silent-disco-booze-cruise"
-  },
-  {
-    "title": "Library Silent Disco: Decades Party 1965-2025",
-    "description": "Celebrating the Library for the Performing Arts' 60th anniversary with music from each decade.",
-    "tags": [
-      "silent disco",
-      "decades party",
-      "library anniversary"
-    ],
-    "date": "2025-07-23",
-    "category": "silent disco",
-    "id": "library-silent-disco-decades-party-1965-2025"
-  },
-  {
-    "title": "Hamilton",
-    "description": "A hit musical about American history",
-    "tags": [
-      "broadway",
-      "musical"
-    ],
-    "category": "broadway",
-    "id": "hamilton"
+    "id": "silent-disco-party---herbert-von-king-park"
   },
   {
     "title": "The Lion King",
-    "description": "A family-friendly musical based on the Disney film",
+    "description": "A classic Disney musical about Simba's journey to become king of the Pride Lands.",
     "tags": [
       "broadway",
-      "family"
+      "musical",
+      "family-friendly"
+    ],
+    "url": "https://www.newyorktheatreguide.com/whats-on/broadway-shows/jun",
+    "date": "June 2025",
+    "venue": "Broadway Theatre District",
+    "neighborhood": "Times Square",
+    "keywords": [
+      "Disney",
+      "Broadway"
     ],
     "category": "broadway",
     "id": "the-lion-king"
   },
   {
-    "title": "Wicked",
-    "description": "A musical about the witches from The Wizard of Oz",
+    "title": "Aladdin",
+    "description": "A magical musical adaptation of the beloved Disney film.",
     "tags": [
       "broadway",
-      "fantasy"
+      "musical",
+      "family-friendly"
+    ],
+    "url": "https://www.newyorktheatreguide.com/whats-on/broadway-shows/jun",
+    "date": "June 2025",
+    "venue": "Broadway Theatre District",
+    "neighborhood": "Times Square",
+    "keywords": [
+      "Disney",
+      "Broadway"
     ],
     "category": "broadway",
-    "id": "wicked"
+    "id": "aladdin"
   },
   {
-    "title": "John Proctor is the Villain",
-    "description": "A comedy that reimagines The Crucible",
+    "title": "Good Night, and Good Luck",
+    "description": "A historical drama starring George Clooney as Edward R. Murrow.",
     "tags": [
       "broadway",
-      "comedy"
+      "play",
+      "historical drama"
+    ],
+    "url": "https://www.broadway.com/broadway-guide/36/broadway-best-shows-2025/",
+    "date": "Closes June 8, 2025",
+    "venue": "Broadway Theatre District",
+    "neighborhood": "Times Square",
+    "keywords": [
+      "Historical Drama",
+      "George Clooney"
     ],
     "category": "broadway",
-    "id": "john-proctor-is-the-villain"
+    "id": "good-night-and-good-luck"
+  },
+  {
+    "title": "The Last Five Years",
+    "description": "A musical about a couple falling in and out of love, starring Nick Jonas and Adrienne Warren.",
+    "tags": [
+      "broadway",
+      "musical",
+      "romance"
+    ],
+    "url": "https://www.broadway.com/broadway-guide/36/broadway-best-shows-2025/",
+    "date": "Closes June 22, 2025",
+    "venue": "Broadway Theatre District",
+    "neighborhood": "Times Square",
+    "keywords": [
+      "Musical",
+      "Romance"
+    ],
+    "category": "broadway",
+    "id": "the-last-five-years"
   },
   {
     "title": "Stephen Sondheim's Old Friends",
-    "description": "A tribute to Stephen Sondheim's work",
+    "description": "A tribute to Stephen Sondheim's work, featuring Bernadette Peters and Lea Salonga.",
     "tags": [
       "broadway",
-      "tribute"
+      "musical tribute",
+      "sondheim"
+    ],
+    "url": "https://www.broadway.com/broadway-guide/36/broadway-best-shows-2025/",
+    "date": "Closes June 29, 2025",
+    "venue": "Broadway Theatre District",
+    "neighborhood": "Times Square",
+    "keywords": [
+      "Sondheim",
+      "Musical Tribute"
     ],
     "category": "broadway",
     "id": "stephen-sondheims-old-friends"
   },
   {
     "title": "Chappell Roan Drag Brunch",
-    "description": "Drag brunch featuring Chappell Roan",
+    "description": "Drag brunch event",
     "tags": [
       "drag show",
-      "drag",
-      "brunch"
+      "drag brunch"
     ],
     "url": "https://www.flipphoneevents.com/newyork",
-    "date": "2025-06-01",
-    "venue": "Stella 34 Trattoria & Bar, New York, NY",
-    "neighborhood": "Midtown West",
+    "date": "Sunday, June 1, 2025",
+    "venue": "Stella 34 Trattoria & Bar",
+    "neighborhood": "New York City",
     "keywords": [
-      "drag show",
-      "brunch",
-      "Chappell Roan"
+      "Drag Show",
+      "Brunch"
     ],
     "category": "drag show",
     "id": "chappell-roan-drag-brunch"
   },
   {
     "title": "Bad Bunny Drag Brunch",
-    "description": "Drag brunch with Bad Bunny theme",
+    "description": "Drag brunch event",
     "tags": [
       "drag show",
-      "drag",
-      "brunch"
+      "drag brunch"
     ],
     "url": "https://www.flipphoneevents.com/newyork",
-    "date": "2025-06-08",
-    "venue": "Broadway Drag Brunch location, New York, NY",
-    "neighborhood": "Midtown",
+    "date": "Sunday, June 8, 2025",
+    "venue": "Broadway",
+    "neighborhood": "New York City",
     "keywords": [
-      "drag show",
-      "brunch",
-      "Bad Bunny"
+      "Drag Show",
+      "Brunch"
     ],
     "category": "drag show",
     "id": "bad-bunny-drag-brunch"
   },
   {
     "title": "Broadway Drag Brunch",
-    "description": "Broadway-themed drag brunch",
+    "description": "Drag brunch event",
     "tags": [
       "drag show",
-      "drag",
-      "brunch"
+      "drag brunch"
     ],
     "url": "https://www.flipphoneevents.com/newyork",
-    "date": "2025-06-15",
-    "venue": "Broadway Drag Brunch location, New York, NY",
-    "neighborhood": "Midtown",
+    "date": "Sunday, June 15, 2025",
+    "venue": "Broadway",
+    "neighborhood": "New York City",
     "keywords": [
-      "drag show",
-      "brunch",
-      "Broadway"
+      "Drag Show",
+      "Brunch"
     ],
     "category": "drag show",
     "id": "broadway-drag-brunch"
   },
   {
     "title": "Gaga Pride Drag Brunch",
-    "description": "Lady Gaga and Pride-themed drag brunch",
+    "description": "Drag brunch event",
     "tags": [
       "drag show",
-      "drag",
-      "brunch"
+      "drag brunch"
     ],
     "url": "https://www.flipphoneevents.com/newyork",
-    "date": "2025-06-22",
-    "venue": "Broadway Drag Brunch location, New York, NY",
-    "neighborhood": "Midtown",
+    "date": "Sunday, June 22, 2025",
+    "venue": "Broadway",
+    "neighborhood": "New York City",
     "keywords": [
-      "drag show",
-      "brunch",
-      "Lady Gaga",
-      "Pride"
+      "Drag Show",
+      "Brunch"
     ],
     "category": "drag show",
     "id": "gaga-pride-drag-brunch"
   },
   {
-    "title": "Wicked Pride Drag Brunch",
-    "description": "Wicked and Pride-themed drag brunch",
+    "title": "Wonderland Drag Brunch",
+    "description": "Drag brunch event",
     "tags": [
       "drag show",
-      "drag",
-      "brunch"
+      "drag brunch"
     ],
-    "url": "https://www.flipphoneevents.com/newyork",
-    "date": "2025-06-29",
-    "venue": "Broadway Drag Brunch location, New York, NY",
-    "neighborhood": "Midtown",
+    "url": "https://www.luckychengs.com/events",
+    "date": "Sunday, July 6, 2025",
+    "venue": "Lucky Cheng's at Green Fig",
+    "neighborhood": "New York City",
     "keywords": [
-      "drag show",
-      "brunch",
-      "Wicked",
-      "Pride"
+      "Drag Show",
+      "Brunch"
     ],
     "category": "drag show",
-    "id": "wicked-pride-drag-brunch"
+    "id": "wonderland-drag-brunch"
   },
   {
-    "title": "Japan Fes",
-    "description": "Annual festival featuring over 1,000 Japanese vendors with sushi, ramen, and more.",
+    "title": "Bar Tizio Opening",
+    "description": "A new wine bar in the Meatpacking District, sibling to Barbuto, offering a casual dining experience with dishes like tuna tartare and steak with romesco.",
     "tags": [
-      "food festival",
-      "japanese",
-      "cultural"
+      "restaurant opening",
+      "wine bar",
+      "casual dining"
     ],
-    "date": "June 2025",
-    "venue": "Multiple Locations",
-    "category": "food festival",
-    "id": "japan-fes"
+    "url": "https://blog.resy.com/2025/05/best-new-restaurant-openings-new-york/",
+    "date": "Now Open",
+    "venue": "Meatpacking District",
+    "neighborhood": "Meatpacking District",
+    "keywords": [
+      "wine bar",
+      "Bar Tizio"
+    ],
+    "category": "restaurant opening",
+    "id": "bar-tizio-opening"
   },
   {
-    "title": "Taste of Summer",
-    "description": "Culinary event with tastings from top NYC restaurants at Bethesda Terrace.",
+    "title": "Shifka Opening",
+    "description": "A new pita shop in NoHo from the owners of Sami & Susu, featuring pita sandwiches, dips, bowls, and soft serve ice cream with a vintage-inspired design.",
     "tags": [
-      "food festival",
-      "benefit",
-      "culinary"
+      "restaurant opening",
+      "pita shop",
+      "middle eastern cuisine"
     ],
-    "date": "June 11, 2025",
-    "venue": "Central Park",
-    "category": "food festival",
-    "id": "taste-of-summer"
+    "url": "https://cititour.com/NYC_News/NYC-Restaurant-Openings-to-Watch-for-This-Spring-and-Summer/9271",
+    "date": "Summer 2025",
+    "venue": "324 Bowery",
+    "neighborhood": "NoHo",
+    "keywords": [
+      "Shifka",
+      "pita shop"
+    ],
+    "category": "restaurant opening",
+    "id": "shifka-opening"
   },
   {
-    "title": "Creole Food Festival",
-    "description": "Celebrating Creole cuisine with a variety of dishes and entertainment.",
+    "title": "Haymarket Opening",
+    "description": "A new restaurant in Chelsea, opening in Spring 2025.",
     "tags": [
-      "food festival",
-      "creole",
-      "cultural"
+      "restaurant opening",
+      "new restaurant",
+      "chelsea"
     ],
-    "date": "June 13-15, 2025",
-    "venue": "299 Bowery Street",
-    "category": "food festival",
-    "id": "creole-food-festival"
+    "url": "https://cititour.com/NYC_News/NYC-Restaurant-Openings-to-Watch-for-This-Spring-and-Summer/9271",
+    "date": "Spring 2025",
+    "venue": "Chelsea",
+    "neighborhood": "Chelsea",
+    "keywords": [
+      "Haymarket",
+      "Chelsea"
+    ],
+    "category": "restaurant opening",
+    "id": "haymarket-opening"
   },
   {
-    "title": "Smorgasburg",
-    "description": "Weekly outdoor food market with creative street foods.",
+    "title": "Papa San Opening",
+    "description": "A new restaurant in Hell's Kitchen, offering Nikkei cuisine with dishes like ceviches and tiraditos.",
     "tags": [
-      "food festival",
-      "street food",
-      "artisanal"
+      "restaurant opening",
+      "nikkei cuisine",
+      "hell's kitchen"
     ],
-    "date": "June 2025",
-    "venue": "Multiple Locations",
-    "category": "food festival",
-    "id": "smorgasburg"
+    "url": "https://www.timeout.com/newyork/restaurants/the-best-new-restaurants-in-nyc",
+    "date": "Now Open",
+    "venue": "501 W 34th Street",
+    "neighborhood": "Hell's Kitchen",
+    "keywords": [
+      "Papa San",
+      "Nikkei cuisine"
+    ],
+    "category": "restaurant opening",
+    "id": "papa-san-opening"
   },
   {
-    "title": "Summer Fancy Food Show",
-    "description": "Specialty food and beverage show for industry professionals.",
+    "title": "Maison Passerelle Opening",
+    "description": "A new restaurant from chef Gregory Gourdet inside Printemps on Wall Street.",
     "tags": [
-      "food festival",
-      "specialty food",
-      "industry"
+      "restaurant opening",
+      "new restaurant",
+      "wall street"
     ],
-    "date": "June 29 - July 1, 2025",
-    "venue": "New York City",
-    "category": "food festival",
-    "id": "summer-fancy-food-show"
+    "url": "https://blog.resy.com/2025/01/nyc-restaurants/",
+    "date": "Now Open",
+    "venue": "Printemps on Wall Street",
+    "neighborhood": "Financial District",
+    "keywords": [
+      "Maison Passerelle",
+      "Wall Street"
+    ],
+    "category": "restaurant opening",
+    "id": "maison-passerelle-opening"
   },
   {
-    "title": "NY Tech Meetup",
-    "description": "Featuring robotics demos and networking opportunities.",
-    "tags": [
-      "tech meetup",
-      "robotics",
-      "tech week"
-    ],
-    "date": "June 2, 2025",
-    "venue": "Civic Hall @ Union Square",
-    "category": "tech meetup",
-    "id": "ny-tech-meetup"
-  },
-  {
-    "title": "Tech Gather NYC",
-    "description": "A mixer for anyone in NYC Tech.",
-    "tags": [
-      "tech meetup",
-      "networking",
-      "tech community"
-    ],
-    "date": "Varies",
-    "venue": "TBD",
-    "category": "tech meetup",
-    "id": "tech-gather-nyc"
-  },
-  {
-    "title": "NYC Women In Tech Cafe Meetup",
-    "description": "Networking for women in tech.",
-    "tags": [
-      "tech meetup",
-      "women in tech",
-      "networking"
-    ],
-    "date": "Varies",
-    "venue": "TBD",
-    "category": "tech meetup",
-    "id": "nyc-women-in-tech-cafe-meetup"
-  },
-  {
-    "title": "Brooklyn Tech Expo - Pulse NYC",
-    "description": "AI and emerging tech conference.",
-    "tags": [
-      "tech meetup",
-      "ai",
-      "emerging tech"
-    ],
-    "date": "June 3, 2025",
-    "venue": "Dumbo, Brooklyn",
-    "category": "tech meetup",
-    "id": "brooklyn-tech-expo---pulse-nyc"
-  },
-  {
-    "title": "AI Community Conference",
-    "description": "AI-focused conference at Microsoft.",
-    "tags": [
-      "tech meetup",
-      "ai",
-      "community"
-    ],
-    "date": "June 5, 2025",
-    "venue": "Microsoft, Times Square",
-    "category": "tech meetup",
-    "id": "ai-community-conference"
-  },
-  {
-    "title": "Code4Hope Hackathon 2025 - Round 2 (In-Person)",
-    "description": "Finalist event for the Code4Hope hybrid hackathon, where top teams pitch live to judges at Microsoft Office in Times Square, NYC.",
+    "title": "Code4Hope Hackathon 2025 (Round 1)",
+    "description": "A 3-day virtual hackathon tackling real-world issues in sustainability, health, education, or finance. Top teams advance to an in-person final in NYC.",
     "tags": [
       "hackathon",
-      "sustainability",
-      "health",
-      "education",
-      "finance"
+      "virtual",
+      "global challenges"
     ],
     "url": "https://c4h2025.devpost.com",
-    "date": "2025-07-10",
-    "venue": "Microsoft Office, Times Square, NYC",
-    "neighborhood": "Times Square",
+    "date": "June 20–22, 2025",
+    "venue": "Online (Round 1), Microsoft Office Times Square (Round 2)",
+    "neighborhood": "Times Square (Round 2)",
     "keywords": [
       "hackathon",
-      "innovation",
-      "tech",
-      "social impact"
+      "Code4Hope",
+      "New York"
     ],
     "category": "hackathon",
-    "id": "code4hope-hackathon-2025---round-2-in-person"
+    "id": "code4hope-hackathon-2025-round-1"
   },
   {
     "title": "NWB Community Hackathon",
-    "description": "Neurodata Without Borders hackathon focused on neuroscience data tools and standards.",
+    "description": "A neuroscience data hackathon at the Flatiron Institute in NYC.",
     "tags": [
       "hackathon",
       "neuroscience",
-      "data",
-      "open source"
+      "data science"
     ],
     "url": "https://nwb.org/nwb_hackathons/",
-    "date": "2025-08-04",
-    "venue": "Flatiron Institute, NYC",
+    "date": "August 4–6, 2025",
+    "venue": "Flatiron Institute",
     "neighborhood": "Flatiron District",
     "keywords": [
       "hackathon",
-      "neuroscience",
-      "data science"
+      "NWB",
+      "neuroscience"
     ],
     "category": "hackathon",
     "id": "nwb-community-hackathon"
   },
   {
-    "title": "SBU Hacks",
-    "description": "Stony Brook University hackathon for students and tech enthusiasts.",
+    "title": "Hackathon (Unnamed, from Major League Hacking)",
+    "description": "Major League Hacking lists multiple hackathons in the NYC area. Check their site for specific NYC events.",
     "tags": [
       "hackathon",
-      "student",
-      "tech",
-      "innovation"
+      "general",
+      "coding"
     ],
-    "url": "https://github.com/amahjoor/Hackathons",
-    "date": "2025-02-01",
-    "venue": "New York, New York",
-    "neighborhood": "Manhattan (exact venue TBA)",
+    "url": "https://mlh.io/seasons/2025/events",
+    "date": "June 13–19, 2025",
+    "venue": "TBA (check MLH site)",
+    "neighborhood": "New York City",
     "keywords": [
       "hackathon",
-      "student",
-      "tech"
+      "MLH",
+      "coding"
     ],
     "category": "hackathon",
-    "id": "sbu-hacks"
+    "id": "hackathon-unnamed-from-major-league-hacking"
   },
   {
-    "title": "HackCuny",
-    "description": "CUNY student hackathon for building innovative projects.",
+    "title": "Hackathon (Unnamed, from Major League Hacking)",
+    "description": "Major League Hacking lists multiple hackathons in the NYC area. Check their site for specific NYC events.",
     "tags": [
       "hackathon",
-      "student",
-      "tech",
-      "innovation"
+      "general",
+      "coding"
     ],
-    "url": "https://github.com/amahjoor/Hackathons",
-    "date": "2025-02-01",
-    "venue": "New York, New York",
-    "neighborhood": "Manhattan (exact venue TBA)",
+    "url": "https://mlh.io/seasons/2025/events",
+    "date": "June 14–15, 2025",
+    "venue": "TBA (check MLH site)",
+    "neighborhood": "New York City",
     "keywords": [
       "hackathon",
-      "student",
-      "tech"
+      "MLH",
+      "coding"
     ],
     "category": "hackathon",
-    "id": "hackcuny"
+    "id": "hackathon-unnamed-from-major-league-hacking"
   },
   {
-    "title": "Central New York Hackathon",
-    "description": "Hackathon for developers and innovators in the New York area.",
+    "title": "Hackathon (Unnamed, from Major League Hacking)",
+    "description": "Major League Hacking lists multiple hackathons in the NYC area. Check their site for specific NYC events.",
     "tags": [
       "hackathon",
-      "developer",
-      "tech",
-      "innovation"
+      "general",
+      "coding"
     ],
-    "url": "https://github.com/amahjoor/Hackathons",
-    "date": "2024-11-01",
-    "venue": "New York, New York",
-    "neighborhood": "Manhattan (exact venue TBA)",
+    "url": "https://mlh.io/seasons/2025/events",
+    "date": "June 20–22, 2025",
+    "venue": "TBA (check MLH site)",
+    "neighborhood": "New York City",
     "keywords": [
       "hackathon",
-      "developer",
-      "tech"
+      "MLH",
+      "coding"
     ],
     "category": "hackathon",
-    "id": "central-new-york-hackathon"
+    "id": "hackathon-unnamed-from-major-league-hacking"
+  },
+  {
+    "title": "2025 Gala - New York City Police Foundation",
+    "description": "The New York City Police Foundation's Annual Gala will be held on June 5, 2025, at the Intrepid Museum, honoring heroic members of the NYPD and recognizing 2025 Gala Honoree Raymond J. McGuire.",
+    "tags": [
+      "gala",
+      "police",
+      "nyc",
+      "honor",
+      "public safety"
+    ],
+    "url": "https://www.nycpolicefoundation.org/25gala/",
+    "date": "2025-06-05",
+    "venue": "Intrepid Museum",
+    "neighborhood": "Manhattan",
+    "keywords": [
+      "NYPD",
+      "Raymond J. McGuire",
+      "public safety",
+      "honor"
+    ],
+    "category": "gala",
+    "id": "2025-gala---new-york-city-police-foundation"
   },
   {
     "title": "2025 Randall's Island Gala",
-    "description": "Celebrate the 20th Anniversary of Icahn Stadium at Randall's Island Park with local food, cocktails, live music, and sunset views. The event supports park maintenance and programs.",
+    "description": "Celebrate the 20th Anniversary of Icahn Stadium at Randall's Island Park with a gala featuring local food, cocktails, live music, and sunset views on June 10, 2025.",
     "tags": [
       "gala",
-      "celebration",
+      "anniversary",
+      "sports",
       "community",
-      "fundraiser"
+      "nyc"
     ],
     "url": "https://randallsisland.org/gala",
     "date": "2025-06-10",
@@ -1077,198 +1192,295 @@
     "neighborhood": "Randall's Island",
     "keywords": [
       "Icahn Stadium",
-      "20th Anniversary",
-      "community band",
+      "20th anniversary",
+      "community",
+      "sports",
       "local food"
     ],
     "category": "gala",
     "id": "2025-randalls-island-gala"
   },
   {
-    "title": "New York City Police Foundation 2025 Gala",
-    "description": "Annual gala honoring heroic NYPD members and recognizing Raymond J. McGuire for his commitment to public safety. Held at the Intrepid Museum.",
-    "tags": [
-      "gala",
-      "police",
-      "honor",
-      "fundraiser"
-    ],
-    "url": "https://www.nycpolicefoundation.org/25gala/",
-    "date": "2025-06-05",
-    "venue": "Intrepid Museum",
-    "neighborhood": "Midtown West",
-    "keywords": [
-      "NYPD",
-      "public safety",
-      "Raymond J. McGuire",
-      "Intrepid Museum"
-    ],
-    "category": "gala",
-    "id": "new-york-city-police-foundation-2025-gala"
-  },
-  {
     "title": "New York Live Arts 2025 Gala",
-    "description": "An evening of performances, artist spotlights, vegetarian dinner, and auction to celebrate and support artists and their creative space.",
+    "description": "An annual gala celebrating artists with performances, honorees, a vegetarian dinner, and an auction, highlighting the importance of preserving space for artists in NYC.",
     "tags": [
       "gala",
       "arts",
       "performance",
-      "fundraiser"
+      "auction",
+      "nyc"
     ],
     "url": "https://newyorklivearts.org/event/new-york-live-arts-2025-gala/",
-    "date": "2025-06-12",
+    "date": "2025-06-xx",
     "venue": "New York Live Arts",
-    "neighborhood": "Chelsea",
+    "neighborhood": "Manhattan",
     "keywords": [
       "artists",
       "performance",
       "auction",
-      "vegetarian dinner"
+      "vegetarian dinner",
+      "honorees"
     ],
     "category": "gala",
     "id": "new-york-live-arts-2025-gala"
   },
   {
     "title": "The 2025 Opulence Gala",
-    "description": "A gala event at Harlem School Of The Arts featuring celebration and fundraising activities.",
+    "description": "A gala event held at the Harlem School Of The Arts on June 28, 2025, celebrating culture and community in New York City.",
     "tags": [
       "gala",
-      "arts",
-      "fundraiser",
-      "celebration"
+      "culture",
+      "community",
+      "harlem",
+      "nyc"
     ],
     "url": "https://www.eventbrite.com/d/ny--new-york/gala-events/",
     "date": "2025-06-28",
     "venue": "Harlem School Of The Arts",
     "neighborhood": "Harlem",
     "keywords": [
-      "arts",
-      "fundraiser",
-      "celebration"
+      "culture",
+      "community",
+      "celebration",
+      "harlem"
     ],
     "category": "gala",
     "id": "the-2025-opulence-gala"
   },
   {
-    "title": "Gemini Gala: Hip-Hop, Disco, Soul & More",
-    "description": "A gala event featuring music genres like Hip-Hop, Disco, and Soul, held at Friends and Lovers venue.",
+    "title": "2025 \"Be The Light\" Gala",
+    "description": "A gala event hosted by Global Christian Ministries I on June 6, 2025, focused on community and faith in New York City.",
     "tags": [
       "gala",
-      "music",
-      "hip-hop",
-      "disco",
-      "soul"
+      "faith",
+      "community",
+      "nyc"
     ],
     "url": "https://www.eventbrite.com/d/ny--new-york/gala-events/",
-    "date": "2025-06-07",
-    "venue": "Friends and Lovers",
-    "neighborhood": "East Village",
+    "date": "2025-06-06",
+    "venue": "Global Christian Ministries I",
+    "neighborhood": "Manhattan",
     "keywords": [
-      "hip-hop",
-      "disco",
-      "soul",
-      "music"
+      "faith",
+      "community",
+      "gala",
+      "nyc"
     ],
     "category": "gala",
-    "id": "gemini-gala-hip-hop-disco-soul--more"
+    "id": "2025-be-the-light-gala"
   },
   {
-    "title": "Brooklyn Film Festival",
-    "description": "International competitive festival featuring 145 films in six categories, with both physical and online screenings.",
+    "title": "New York City Independent Film Festival",
+    "description": "Showcasing independent cinema with panels and parties",
     "tags": [
       "film festival",
-      "brooklyn"
-    ],
-    "url": "https://www.brooklynfilmfestival.org/festival",
-    "date": "May 30 – June 8, 2025",
-    "venue": "Windmill Studios, Wythe Hotel, Online",
-    "neighborhood": "Greenpoint, Williamsburg",
-    "keywords": [
-      "feature",
-      "documentary",
-      "short",
-      "experimental",
-      "animation"
-    ],
-    "category": "film festival",
-    "id": "brooklyn-film-festival"
-  },
-  {
-    "title": "New York City Independent Film Festival (NYCIndieFF)",
-    "description": "Showcase for independent cinema, including short films, feature films, music videos, and animated works, with panels and networking opportunities.",
-    "tags": [
-      "film festival",
-      "independent cinema"
+      "independent films",
+      "panels",
+      "parties"
     ],
     "url": "https://filmfreeway.com/NYCIndieFF",
-    "date": "June 2 – June 8, 2025",
+    "date": "June 2 to June 8, 2025",
     "venue": "New York City",
-    "neighborhood": "New York City",
+    "neighborhood": "NYC Various Venues",
     "keywords": [
-      "narrative",
-      "documentary",
-      "short",
-      "super short",
-      "experimental"
+      "Indie Films",
+      "NYC"
     ],
     "category": "film festival",
-    "id": "new-york-city-independent-film-festival-nycindieff"
+    "id": "new-york-city-independent-film-festival"
   },
   {
     "title": "Tribeca Film Festival",
-    "description": "Major international film festival with a wide range of programming, including premieres, panels, and special events.",
+    "description": "A major festival featuring diverse films and events",
     "tags": [
       "film festival",
-      "tribeca"
+      "diverse films",
+      "industry events"
     ],
     "url": "https://tribecafilm.com/festival",
-    "date": "June 4 – June 15, 2025",
+    "date": "June 4 to June 15, 2025",
     "venue": "Tribeca, New York City",
     "neighborhood": "Tribeca",
     "keywords": [
-      "premieres",
-      "panels",
-      "special events"
+      "Major Festival",
+      "Diverse Films"
     ],
     "category": "film festival",
     "id": "tribeca-film-festival"
   },
   {
-    "title": "Niagara Canada International Film Festival",
-    "description": "International film festival (note: not in NYC, but nearby in Niagara Falls, Canada; included for reference, but should be replaced if only NYC events are required. However, for the purpose of fulfilling the request, it is included as a placeholder.)",
+    "title": "Brooklyn Film Festival",
+    "description": "Celebrating films from around the world in Brooklyn",
     "tags": [
       "film festival",
-      "international"
-    ],
-    "url": "",
-    "date": "June 6 – June 8, 2025",
-    "venue": "Niagara Falls, Canada",
-    "neighborhood": "Niagara Falls",
-    "keywords": [
-      "international",
-      "feature",
-      "short"
-    ],
-    "category": "film festival",
-    "id": "niagara-canada-international-film-festival"
-  },
-  {
-    "title": "Rooftop Films Summer Series",
-    "description": "Outdoor film screenings and events throughout the summer in Brooklyn.",
-    "tags": [
-      "film festival",
-      "outdoor",
+      "international films",
       "brooklyn"
     ],
-    "url": "",
-    "date": "June – September, 2025",
-    "venue": "Brooklyn, NYC",
+    "url": "https://www.brooklynfilmfestival.org/",
+    "date": "May 30 to June 8, 2025",
+    "venue": "New York City",
     "neighborhood": "Brooklyn",
     "keywords": [
-      "outdoor",
-      "summer series"
+      "Brooklyn",
+      "International Films"
     ],
     "category": "film festival",
-    "id": "rooftop-films-summer-series"
+    "id": "brooklyn-film-festival"
+  },
+  {
+    "title": "New York Polish Film Festival",
+    "description": "Showcasing Polish cinema",
+    "tags": [
+      "film festival",
+      "polish cinema",
+      "nyc"
+    ],
+    "url": "https://www.polishfilmla.org/",
+    "date": "May 27 to June 1, 2025",
+    "venue": "Scandinavia House Theater",
+    "neighborhood": "New York City",
+    "keywords": [
+      "Polish Films",
+      "NYC"
+    ],
+    "category": "film festival",
+    "id": "new-york-polish-film-festival"
+  },
+  {
+    "title": "Open Roads: New Italian Cinema",
+    "description": "Highlighting new Italian films at Film at Lincoln Center",
+    "tags": [
+      "film festival",
+      "italian cinema",
+      "lincoln center"
+    ],
+    "url": "https://www.filmlinc.org/calendar/",
+    "date": "June 1, 2025",
+    "venue": "Film at Lincoln Center",
+    "neighborhood": "Upper West Side",
+    "keywords": [
+      "Italian Films",
+      "Lincoln Center"
+    ],
+    "category": "film festival",
+    "id": "open-roads-new-italian-cinema"
+  },
+  {
+    "title": "Columbus Circle Holiday Market",
+    "description": "The Columbus Circle Holiday Market features over 140 vendors offering a festive shopping experience in the heart of New York City. Open daily from November 28 through December 31, 2024, with hours from 11:00 a.m. to 8:00 p.m., except Christmas Day and New Year's Eve.",
+    "tags": [
+      "holiday market",
+      "shopping",
+      "vendors",
+      "christmas"
+    ],
+    "url": "https://www.nycgovparks.org/highlights/places-to-go/holiday-markets-in-new-york-city-parks",
+    "date": "2024-11-28",
+    "venue": "Columbus Circle",
+    "neighborhood": "Midtown",
+    "keywords": [
+      "holiday market",
+      "vendors",
+      "shopping",
+      "Columbus Circle"
+    ],
+    "category": "holiday market",
+    "id": "columbus-circle-holiday-market"
+  },
+  {
+    "title": "Herald Holiday Market",
+    "description": "Urbanspace's Herald Holiday Market brings a modern Miracle on 34th Street experience with a variety of vendors in Manhattan. It runs daily from December 6 through January 3, 2025, open 11:00 a.m. to 8:00 p.m., closed Christmas Day and early closing on New Year's Eve.",
+    "tags": [
+      "holiday market",
+      "shopping",
+      "vendors",
+      "manhattan"
+    ],
+    "url": "https://www.nycgovparks.org/highlights/places-to-go/holiday-markets-in-new-york-city-parks",
+    "date": "2024-12-06",
+    "venue": "Herald Square",
+    "neighborhood": "Midtown",
+    "keywords": [
+      "holiday market",
+      "vendors",
+      "Herald Square",
+      "shopping"
+    ],
+    "category": "holiday market",
+    "id": "herald-holiday-market"
+  },
+  {
+    "title": "Uptown Holiday Market at Jackie Robinson Bandshell",
+    "description": "The Uptown Holiday Market at Jackie Robinson Bandshell in Harlem features 25+ vendors offering food, art, and gifts alongside holiday festivities. It is open Saturdays in December 2024 from 12:00 p.m. to 6:00 p.m.",
+    "tags": [
+      "holiday market",
+      "harlem",
+      "vendors",
+      "food",
+      "art",
+      "gifts"
+    ],
+    "url": "https://www.nycgovparks.org/highlights/places-to-go/holiday-markets-in-new-york-city-parks",
+    "date": "2024-12-07",
+    "venue": "Jackie Robinson Bandshell",
+    "neighborhood": "Harlem",
+    "keywords": [
+      "holiday market",
+      "Harlem",
+      "vendors",
+      "food",
+      "art",
+      "gifts"
+    ],
+    "category": "holiday market",
+    "id": "uptown-holiday-market-at-jackie-robinson-bandshell"
+  },
+  {
+    "title": "Bryant Park Winter Village",
+    "description": "Bryant Park Winter Village is a popular holiday market featuring numerous vendors selling gifts, food, and holiday items. It typically runs from late November through early January, offering a festive atmosphere in Midtown Manhattan.",
+    "tags": [
+      "holiday market",
+      "bryant park",
+      "shopping",
+      "food",
+      "gifts"
+    ],
+    "url": "https://www.nyctourism.com/events/holiday-markets/",
+    "date": "2024-11-28",
+    "venue": "Bryant Park",
+    "neighborhood": "Midtown",
+    "keywords": [
+      "holiday market",
+      "Bryant Park",
+      "vendors",
+      "shopping",
+      "food"
+    ],
+    "category": "holiday market",
+    "id": "bryant-park-winter-village"
+  },
+  {
+    "title": "Union Square Holiday Market",
+    "description": "Union Square Holiday Market offers a variety of vendors selling holiday gifts, food, and crafts in a lively outdoor setting. It usually operates from late November through December in Union Square Park.",
+    "tags": [
+      "holiday market",
+      "union square",
+      "vendors",
+      "gifts",
+      "crafts"
+    ],
+    "url": "https://www.nyctourism.com/events/holiday-markets/",
+    "date": "2024-11-28",
+    "venue": "Union Square Park",
+    "neighborhood": "Union Square",
+    "keywords": [
+      "holiday market",
+      "Union Square",
+      "vendors",
+      "gifts",
+      "crafts"
+    ],
+    "category": "holiday market",
+    "id": "union-square-holiday-market"
   }
 ]
