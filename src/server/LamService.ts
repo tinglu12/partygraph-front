@@ -87,8 +87,7 @@ Return JSON in this format:
     const content = response.completion_message?.content;
     console.log("Llama classifyImage raw content:", content);
 
-    // @ts-expect-error - Llama model types are not properly typed
-    let text = typeof content === "string" ? content : content?.text;
+    const text = typeof content === "string" ? content : content?.text;
     if (!text) throw new Error("No text content in Llama API response");
 
     // Try to extract JSON from a code block
