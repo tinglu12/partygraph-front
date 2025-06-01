@@ -1,4 +1,4 @@
-export const sampleEvents = [
+export const samplePeople = [
   {
     id: "bloc-party,-metric,-blonde-redhead,-joan",
     people: [

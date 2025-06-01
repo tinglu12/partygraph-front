@@ -2,7 +2,9 @@ import { EventPerson } from "./EventPerson";
 
 export type EventType = {
   title: string;
+  id?: string;
   description?: string;
+  category?: string;
 
   date?: string;
   time?: string;

@@ -1,96 +1,66 @@
-export interface EventNode {
-  id: string;
-  title: string;
-  date: string;
-  description: string;
-  category?: string;
-  tags?: string[];
-  connections?: string[]; // IDs of connected nodes
-}
+import {
+  EventNode,
+  TagCenteredGraphData,
+  TagCenteredNode,
+} from "@/types/EventGraph";
 
-export interface GraphData {
-  nodes: EventNode[];
-  edges?: Array<{
-    source: string;
-    target: string;
-    label: string;
-  }>;
-}
+// export const sampleEvents: EventNode[] = [
+//   {
+//     id: "1",
+//     title: "Summer Music Festival",
+//     date: "2024-07-15",
+//     description: "Annual music festival featuring top artists",
+//     category: "Music",
+//     tags: ["festival", "outdoor", "music"],
+//     connections: ["2", "3"],
+//   },
+//   {
+//     id: "1.1",
+//     title: "Downtown Jam",
+//     date: "2024-07-15",
+//     description: "music and jamming",
+//     category: "Music",
+//     tags: ["festival", "indoor", "music"],
+//     connections: ["2", "3"],
+//   },
 
-// Enhanced interfaces for tag-centered visualization
-export interface TagCenteredNode {
-  id: string;
-  type: 'tag' | 'event';
-  data: EventNode | { tag: string };
-}
-
-export interface TagCenteredGraphData {
-  centralTag: string;
-  nodes: TagCenteredNode[];
-  edges: Array<{
-    source: string;
-    target: string;
-    label: string;
-  }>;
-}
-
-export const sampleEvents: EventNode[] = [
-  {
-    id: "1",
-    title: "Summer Music Festival",
-    date: "2024-07-15",
-    description: "Annual music festival featuring top artists",
-    category: "Music",
-    tags: ["festival", "outdoor", "music"],
-    connections: ["2", "3"],
-  },
-  {
-    id: "1.1",
-    title: "Downtown Jam",
-    date: "2024-07-15",
-    description: "music and jamming",
-    category: "Music",
-    tags: ["festival", "indoor", "music"],
-    connections: ["2", "3"],
-  },
-
-  {
-    id: "2",
-    title: "Food & Wine Expo",
-    date: "2024-07-16",
-    description: "Culinary delights and wine tasting",
-    category: "Food",
-    tags: ["food", "wine", "tasting"],
-    connections: ["1", "4"],
-  },
-  {
-    id: "3",
-    title: "Art Gallery Opening",
-    date: "2024-07-17",
-    description: "Contemporary art exhibition",
-    category: "Art",
-    tags: ["art", "exhibition", "gallery"],
-    connections: ["1", "5"],
-  },
-  {
-    id: "4",
-    title: "Tech Conference",
-    date: "2024-07-18",
-    description: "Latest innovations in technology",
-    category: "Technology",
-    tags: ["tech", "conference", "innovation"],
-    connections: ["2", "5"],
-  },
-  {
-    id: "5",
-    title: "Fashion Show",
-    date: "2024-07-19",
-    description: "Spring/Summer collection showcase",
-    category: "Fashion",
-    tags: ["fashion", "show", "design"],
-    connections: ["3", "4"],
-  },
-];
+//   {
+//     id: "2",
+//     title: "Food & Wine Expo",
+//     date: "2024-07-16",
+//     description: "Culinary delights and wine tasting",
+//     category: "Food",
+//     tags: ["food", "wine", "tasting"],
+//     connections: ["1", "4"],
+//   },
+//   {
+//     id: "3",
+//     title: "Art Gallery Opening",
+//     date: "2024-07-17",
+//     description: "Contemporary art exhibition",
+//     category: "Art",
+//     tags: ["art", "exhibition", "gallery"],
+//     connections: ["1", "5"],
+//   },
+//   {
+//     id: "4",
+//     title: "Tech Conference",
+//     date: "2024-07-18",
+//     description: "Latest innovations in technology",
+//     category: "Technology",
+//     tags: ["tech", "conference", "innovation"],
+//     connections: ["2", "5"],
+//   },
+//   {
+//     id: "5",
+//     title: "Fashion Show",
+//     date: "2024-07-19",
+//     description: "Spring/Summer collection showcase",
+//     category: "Fashion",
+//     tags: ["fashion", "show", "design"],
+//     connections: ["3", "4"],
+//   },
+// ];
 
 export const generateEdgesFromConnections = (nodes: EventNode[]) => {
   const edges: Array<{ source: string; target: string; label: string }> = [];
@@ -126,7 +96,7 @@ export const generateEdgesFromConnections = (nodes: EventNode[]) => {
  * Places the central tag in the middle with related events around it
  */
 export const createTagCenteredGraph = (
-  centralTag: string, 
+  centralTag: string,
   relatedEvents: EventNode[]
 ): TagCenteredGraphData => {
   const nodes: TagCenteredNode[] = [];
@@ -136,29 +106,29 @@ export const createTagCenteredGraph = (
   const tagNodeId = `tag-${centralTag}`;
   nodes.push({
     id: tagNodeId,
-    type: 'tag',
-    data: { tag: centralTag }
+    type: "tag",
+    data: { tag: centralTag },
   });
 
   // Create event nodes and connect them to the central tag
-  relatedEvents.forEach(event => {
+  relatedEvents.forEach((event) => {
     nodes.push({
       id: event.id,
-      type: 'event',
-      data: event
+      type: "event",
+      data: event,
     });
 
     // Connect each event to the central tag
     edges.push({
       source: tagNodeId,
       target: event.id,
-      label: 'tagged with'
+      label: "tagged with",
     });
   });
 
   return {
     centralTag,
     nodes,
-    edges
+    edges,
   };
 };
