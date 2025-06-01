@@ -20,7 +20,7 @@ export const VibeSearch = ({
   onSearch, 
   onTagSelect,
   isLoading = false,
-  placeholder = "Describe your perfect vibe... (e.g., 'energetic music with great food', 'chill art gallery vibes')" 
+  placeholder = "Search... (e.g. energetic music with great food, chill art gallery vibes, etc)" 
 }: VibeSearchProps) => {
   const [query, setQuery] = useState('');
   const [availableTags, setAvailableTags] = useState<string[]>([]);
@@ -78,7 +78,7 @@ export const VibeSearch = ({
       <div className="text-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-4">
           <Brain className="w-8 h-8 text-purple-400" />
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-[1.1]">
             Party Graph
           </h1>
           <Zap className="w-8 h-8 text-blue-400" />
@@ -94,8 +94,8 @@ export const VibeSearch = ({
 
       {/* Enhanced search form */}
       <form onSubmit={handleSubmit} className="mb-6">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="flex-1 relative">
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
+          <div className="flex-1 relative w-full">
             <Input
               type="text"
               value={query}
@@ -109,50 +109,47 @@ export const VibeSearch = ({
               <Brain className="w-5 h-5 text-purple-400" />
             </div>
           </div>
-          <Button 
-            type="submit" 
-            disabled={isLoading || !query.trim()}
-            className="h-16 px-8 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? (
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                <span className="hidden sm:inline">AI Searching...</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-3">
-                <Search className="w-5 h-5" />
-                <span className="hidden sm:inline">Search</span>
-              </div>
+          <div className="flex flex-row gap-2 items-center w-full sm:w-auto">
+            {/* Dropdown for manual tag selection */}
+            {mounted && availableTags.length > 0 && (
+              <select
+                className="h-16 px-4 pr-10 bg-white/10 text-gray-400 text-lg rounded-xl border border-white/20 focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 outline-none min-w-[180px] [&>option:not(:disabled)]:text-white [&>option:not(:disabled)]:bg-slate-800"
+                disabled={isLoading}
+                defaultValue=""
+                onChange={e => {
+                  if (e.target.value) handleTagClick(e.target.value);
+                }}
+              >
+                <option value="" disabled className="text-gray-400">Or view tags manually</option>
+                {availableTags.map(tag => (
+                  <option key={tag} value={tag} className="text-white bg-slate-800">{tag}</option>
+                ))}
+              </select>
             )}
-          </Button>
+            <Button 
+              type="submit" 
+              disabled={isLoading || !query.trim()}
+              className="h-16 px-8 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span className="hidden sm:inline">AI Searching...</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <Search className="w-5 h-5" />
+                  <span className="hidden sm:inline">Search</span>
+                </div>
+              )}
+            </Button>
+          </div>
         </div>
       </form>
 
+      {/* Remove the available tags section below the search bar */}
       {/* Enhanced suggestions section */}
-      <div className="text-center space-y-6">
-        {/* Available tags section - only show when mounted and tags are loaded */}
-        {mounted && availableTags.length > 0 && (
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-            <p className="text-gray-300 text-sm mb-4 font-medium flex items-center justify-center gap-2">
-              <Search className="w-4 h-4" />
-              Or search by specific tags:
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
-              {availableTags.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => handleTagClick(tag)}
-                  disabled={isLoading}
-                  className="px-3 py-1 text-xs bg-blue-600/20 hover:bg-blue-600/30 text-blue-200 hover:text-blue-100 rounded-full border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+      <div className="text-center space-y-6"></div>
     </div>
   );
 }; 
