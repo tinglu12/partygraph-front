@@ -5,7 +5,7 @@ import { sampleEvents } from "@/constants/sampleEvents";
 import { EventDetails } from "./EventDetails";
 import { FilterBar } from "./FilterBar";
 import { useGraph } from "../hooks/useGraph";
-import { X, Pin } from "lucide-react";
+import { X, Pin, RotateCcw } from "lucide-react";
 import { safeName } from "@/lib/utils";
 import { GraphData } from "@/types/EventGraph";
 
@@ -35,13 +35,14 @@ GraphProps) => {
   const {
     containerRef,
     selectedEvent,
-    // filteredEvents,
-    // filteredEdges,
-    // allTags,
+    filteredEvents,
+    filteredEdges,
+    allTags,
     handleSearch,
     handleCategoryChange,
     setSelectedEvent,
-  } = useGraph({ data, events: events, edges });
+    resetView
+  } = useGraph({ data, events, edges });
 
   const [pinnedEvents, setPinnedEvents] = useState<EventNode[]>([]);
   const [activeTab, setActiveTab] = useState<string | null>(null);
@@ -86,6 +87,15 @@ GraphProps) => {
           ref={containerRef}
           className="absolute inset-0 rounded-lg border bg-card h-full w-full"
         />
+
+        {/* Reset View Button */}
+        <button
+          onClick={resetView}
+          className="absolute top-4 right-4 z-30 p-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 hover:border-white/40 rounded-lg text-gray-300 hover:text-white transition-all duration-200 shadow-lg"
+          title="Reset view to show all nodes"
+        >
+          <RotateCcw className="w-4 h-4" />
+        </button>
 
         {/* Tab Navigation for Pinned Events */}
         {pinnedEvents.length > 0 && (
