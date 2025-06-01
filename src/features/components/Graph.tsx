@@ -25,7 +25,6 @@ export const Graph = ({
 }: // events = sampleEvents,
 // edges = generateEdgesFromConnections(sampleEvents),
 GraphProps) => {
-
   const {
     containerRef,
     selectedEvent,
@@ -35,8 +34,8 @@ GraphProps) => {
     handleSearch,
     handleCategoryChange,
     setSelectedEvent,
-  } = useGraph({data});
-
+    resetView,
+  } = useGraph({ data });
 
   const [pinnedEvents, setPinnedEvents] = useState<EventNode[]>([]);
   const [activeTab, setActiveTab] = useState<string | null>(null);
@@ -71,7 +70,6 @@ GraphProps) => {
 
   return (
     <div className="flex flex-col h-full">
-
       <div className="flex-1 relative h-[calc(100%-48px)]">
         <div
           ref={containerRef}
