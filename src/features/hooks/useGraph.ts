@@ -44,17 +44,27 @@ export const useGraph = ({
       type: 'tag'
     })), [events]);
 
-  const expandTagNode = (nodeId: string) => {
+  const fetchEventsByTag = async (tag: string, originalTag: string) => {
+    try {
+      const response = await fetch(`/api/events/tags?query=${encodeURIComponent(originalTag)}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch events');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching events by tag:', error);
+      return [];
+    }
+  };
+
+  const expandTagNode = async (nodeId: string, originalTag: string) => {
     if (!cyRef.current || expandedNodes.has(nodeId)) return;
 
     const clickedNode = cyRef.current.getElementById(nodeId);
     const clickedPos = clickedNode.position();
     const tagName = nodeId.replace('tag-', '');
 
-    const relatedEvents = events.filter(event => 
-      event.tags?.includes(tagName)
-    ).slice(0, 4);
-
+    const relatedEvents = await fetchEventsByTag(tagName, originalTag);
     if (relatedEvents.length === 0) return;
 
     // Calculate the radius based on the number of nodes to place
@@ -62,7 +72,7 @@ export const useGraph = ({
     const existingNodes = cyRef.current.nodes();
     const nodeSize = 60; // Approximate node size including padding
 
-    relatedEvents.forEach((event, index) => {
+    relatedEvents.forEach((event: EventNode, index: number) => {
       let angle = (index * 2 * Math.PI) / relatedEvents.length;
       let x = clickedPos.x + radius * Math.cos(angle);
       let y = clickedPos.y + radius * Math.sin(angle);
@@ -97,7 +107,7 @@ export const useGraph = ({
       }
 
       const existingNode = cyRef.current?.getElementById(event.id);
-      if (!existingNode) {
+      if (existingNode?.length === 0) {
         cyRef.current?.add({
           group: 'nodes',
           data: {
@@ -235,24 +245,56 @@ export const useGraph = ({
   useEffect(() => {
     if (!containerRef.current || cyRef.current) return;
 
-    const graphEvents = data?.nodes || filteredEvents;
-    const graphEdges = data?.edges || filteredEdges;
-
-    const cy = initializeCytoscape(containerRef.current, graphEvents, graphEdges);
+    // Start with tag nodes only
+    const cy = initializeCytoscape(containerRef.current, [], []); // Start with empty graph
     cyRef.current = cy;
+
+    // Add initial tag nodes in a circle
+    const centerX = cy.width() / 2;
+    const centerY = cy.height() / 2;
+    const radius = Math.min(centerX, centerY) * 0.8;
+
+    // Get unique tags from all events
+    const uniqueTags = Array.from(new Set(events.flatMap(event => event.tags || [])))
+      .slice(0, 5) // Take first 5 tags
+      .map(tag => ({
+        id: `tag-${tag}`,
+        name: tag,
+        type: 'tag'
+      }));
+
+    uniqueTags.forEach((tag, index) => {
+      const angle = (index * 2 * Math.PI) / uniqueTags.length;
+      // Add some randomness to the radius and angle
+      const randomRadius = radius * (0.8 + Math.random() * 0.4); // Random radius between 80% and 120% of base radius
+      const randomAngle = angle + (Math.random() - 0.5) * Math.PI / 4; // Random angle variation of ±22.5 degrees
+      const x = centerX + randomRadius * Math.cos(randomAngle);
+      const y = centerY + randomRadius * Math.sin(randomAngle);
+
+      cy.add({
+        group: 'nodes',
+        data: {
+          id: tag.id,
+          name: tag.name,
+          type: 'tag'
+        },
+        position: { x, y }
+      });
+    });
 
     cy.on('tap', 'node', (evt) => {
       const node = evt.target;
+      console.log("node", node);
       const nodeType = node.data('type');
       
       if (nodeType === 'event') {
-        const eventData = graphEvents.find(e => e.id === node.id());
+        const eventData = filteredEvents.find(e => e.id === node.id());
         if (eventData) {
           setSelectedEvent(eventData);
           expandEventNode(node.id());
         }
       } else if (nodeType === 'tag') {
-        expandTagNode(node.id());
+        expandTagNode(node.id(), node.data('name'));
       }
     });
 
@@ -269,58 +311,6 @@ export const useGraph = ({
       }
     };
   }, []);
-
-  useEffect(() => {
-    if (!cyRef.current) return;
-
-    const graphEvents = data?.nodes || filteredEvents;
-    const graphEdges = data?.edges || filteredEdges;
-
-    cyRef.current.elements().remove();
-
-    cyRef.current.add(graphEvents.map(event => ({
-      group: 'nodes',
-      data: {
-        id: event.id,
-        title: event.title,
-        date: event.date,
-        description: event.description,
-        type: 'event'
-      }
-    })));
-
-    cyRef.current.add(graphEdges.map(edge => ({
-      group: 'edges',
-      data: {
-        source: edge.source,
-        target: edge.target,
-        label: edge.label
-      }
-    })));
-
-    // Updated layout parameters for better node spacing
-    cyRef.current.layout({
-      name: 'cose-bilkent',
-      idealEdgeLength: 300, // Increased edge length
-      nodeOverlap: 50, // Reduced overlap
-      refresh: 20,
-      fit: true,
-      padding: 150, // Increased padding
-      randomize: true,
-      componentSpacing: 500, // Increased component spacing
-      nodeRepulsion: 2000000, // Increased repulsion
-      edgeElasticity: 200, // Reduced elasticity
-      nestingFactor: 0.2, // Increased nesting factor
-      gravity: 0.2, // Increased gravity
-      numIter: 6000, // More iterations
-      initialTemp: 2500, // Higher initial temperature
-      coolingFactor: 0.95, // Slower cooling
-      minTemp: 1.0,
-      quality: 'proof'
-    } as any).run();
-
-    setExpandedNodes(new Set());
-  }, [data, filteredEvents, filteredEdges]);
 
   const handleSearch = (query: string) => {
     const filtered = events.filter(event => 

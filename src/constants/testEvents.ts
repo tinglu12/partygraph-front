@@ -1,10 +1,11 @@
 export const testEvents = [
   {
+    id: "1",
     title: "Patterns That Remain Book Launch",
     description: "Book launch event in New York City",
     category: "Book Launch",
     keywords: ["Book Launch", "New York City"],
-    tags: ["book launch"],
+    tags: ["book launch", "music"],
   },
   {
     title: "NYC Launch for Run Away With Me by Brian Selznick",

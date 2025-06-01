@@ -252,37 +252,6 @@ export const initializeCytoscape = (
     }
   });
 
-  // First layout: grid to spread nodes
-  cy.layout({
-    name: 'grid',
-    rows: Math.ceil(Math.sqrt(events.length)),
-    cols: Math.ceil(Math.sqrt(events.length)),
-    padding: 100
-  }).run();
-
-  // After grid layout completes, run cose-bilkent
-  setTimeout(() => {
-    const layout = cy.layout({
-      name: 'cose-bilkent',
-      idealEdgeLength: 250,
-      nodeOverlap: 100,
-      refresh: 20,
-      fit: true,
-      padding: 100,
-      randomize: true,
-      componentSpacing: 400,
-      nodeRepulsion: 1000000,
-      edgeElasticity: 400,
-      nestingFactor: 0.1,
-      gravity: 0.1,
-      numIter: 5000,
-      initialTemp: 2000,
-      coolingFactor: 0.99,
-      minTemp: 1.0,
-      quality: 'proof'
-    } as any);
-    layout.run();
-  }, 1000);
 
   // Enable node dragging
   cy.on('dragfree', 'node', (evt) => {
