@@ -158,7 +158,7 @@ export async function plexSearchEvent(tag: string, count = 5, retry = 0) {
   let events = await perplx.searchEvent(tag, count);
 
   // sometimes the response is empty, so we retry
-  if (events.length === 0) {
+  if (!events || events.length === 0) {
     if (retry < 3) {
       console.log("Perplexity searchEvent failed, retrying", {
         query: tag,
@@ -182,16 +182,18 @@ export async function plexSearchEvent(tag: string, count = 5, retry = 0) {
     };
   });
 
-  console.log("Perplexity searchEvent result", events);
+  // console.log("Perplexity searchEvent result", events);
   return events;
 }
 
 export async function plexSearchMany(maxCats?: number, eventCount?: number) {
-  eventCount = eventCount ?? 5;
+  eventCount = eventCount ?? 10;
   const tags = [
     "book launch",
     "indie rock concert",
     "networking event",
+    "tech meetup",
+    "hackathon",
     "jazz concert",
     "classical music concert",
     "hip hop concert",
@@ -199,12 +201,11 @@ export async function plexSearchMany(maxCats?: number, eventCount?: number) {
     "product launch",
     "silent disco",
     "art gallery opening",
-    "broadway",
+    "broadway show",
+    "off broadway show",
     "drag show",
     "fashion show",
     "food festival",
-    "tech meetup",
-    "hackathon",
     "gala",
     "film festival",
     "night market",
