@@ -1,7 +1,8 @@
 const promptLib = {
   getPeople: `
   You are a helpful assistant.
-  Given the following event description, write up a list of people that would be likely to attend.
+  Given the following event description,
+  imagine a list of five types of people that would be likely to attend.
 
   Event: {{event}}
   `,

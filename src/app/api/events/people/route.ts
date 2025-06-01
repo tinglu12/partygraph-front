@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const event: EventType = {
     title: "launch party",
-    tags: {},
+    tags: [],
     description:
       "We are launching a new product and we want to celebrate with a party.",
   };

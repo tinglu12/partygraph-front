@@ -2,6 +2,7 @@
 
 import { getPrompt } from "@/constants/PromptLib";
 import { EventPerson } from "@/types/EventPerson";
+import { EventPeopleSchema } from "@/types/EventPersonSchema";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 
@@ -53,23 +54,27 @@ class LamService {
     return ["party", "event", "other"];
   }
 
-  async getPeople(event: EventType) {
+  async getPeople(event: EventType): Promise<EventPerson[]> {
     const prompt = await getPrompt("getPeople", {
       event: event.description,
     });
+
+    console.log("schema", EventPeopleSchema);
+
     const response = await this.client.chat.completions.create({
-      messages: [{ content: prompt, role: "user" }],
       model: this.model,
+      messages: [{ content: prompt, role: "user" }],
+      response_format: {
+        type: "json_schema",
+        json_schema: EventPeopleSchema,
+      },
     });
+
     const content = response.completion_message?.content;
-    const person: EventPerson = {
-      name: "John Doe",
-      age: 30,
-      gender: "male",
-      interests: ["music", "art", "food"],
-    };
-    console.log("getPeople", { content });
-    return [person];
+    // @ts-ignore
+    const blob = JSON.parse(content?.text?.trim() || "{}");
+    console.log("getPeople", blob);
+    return blob;
   }
 
   async getCategory(event: string) {
@@ -127,6 +132,10 @@ export async function classifyImage(imagePath: string) {
   return result;
 }
 
+/**
+ * @param event
+ * @returns list of people in the event
+ */
 export async function getPeople(event: EventType): Promise<EventPerson[]> {
   const lam = new LamService();
   const result = await lam.getPeople(event);

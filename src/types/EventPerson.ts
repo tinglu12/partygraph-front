@@ -1,8 +1,9 @@
 export type EventPerson = {
   name?: string;
+  stereotype?: string;
   description?: string;
-  age?: number;
-  gender?: string;
   interests?: string[];
-  tags?: string[];
+  // age?: number;
+  // gender?: string;
+  // tags?: string[];
 };
