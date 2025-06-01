@@ -22,6 +22,7 @@ import {
   TrendingUp,
   X,
   MessageCircle,
+  CheckCircle,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { sampleEvents } from "@/constants/sampleEvents-v2";
@@ -41,7 +42,8 @@ export default function VibePage() {
   const [error, setError] = useState<string | null>(null);
   const [searchMode, setSearchMode] = useState<"semantic" | "tag">("semantic");
   const [showUpload, setShowUpload] = useState(false);
-  const [recentlyAddedEvent, setRecentlyAddedEvent] = useState<EventNode | null>(null);
+  const [recentlyAddedEvent, setRecentlyAddedEvent] =
+    useState<EventNode | null>(null);
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showChat, setShowChat] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventNode | null>(null);
@@ -55,7 +57,7 @@ export default function VibePage() {
     "cozy jazz club performance",
     "rooftop party with city views",
     "indie rock concert with emerging artists",
-    "wine tasting event with friends"
+    "wine tasting event with friends",
   ];
 
   // Rotate example searches every 3 seconds
@@ -69,7 +71,7 @@ export default function VibePage() {
   // Handle Escape key to close modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         if (showUpload) {
           setShowUpload(false);
         } else if (showChat) {
@@ -79,8 +81,8 @@ export default function VibePage() {
     };
 
     if (showUpload || showChat) {
-      document.addEventListener('keydown', handleEscape);
-      return () => document.removeEventListener('keydown', handleEscape);
+      document.addEventListener("keydown", handleEscape);
+      return () => document.removeEventListener("keydown", handleEscape);
     }
   }, [showUpload, showChat]);
 
@@ -198,7 +200,7 @@ export default function VibePage() {
             onTagSelect={handleTagSearch}
             isLoading={isLoading}
           />
-          
+
           {/* Rotating example searches panel */}
           {!hasSearched && (
             <div className="max-w-5xl mx-auto px-6 mt-6">
@@ -207,15 +209,19 @@ export default function VibePage() {
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <TrendingUp className="w-5 h-5 text-purple-400" />
-                    <span className="text-white font-semibold">Try searching for:</span>
+                    <span className="text-white font-semibold">
+                      Try searching for:
+                    </span>
                   </div>
                   <div className="relative h-8 overflow-hidden">
-                    <div 
+                    <div
                       className="absolute inset-0 transition-transform duration-500 ease-in-out"
-                      style={{ transform: `translateY(-${currentExampleIndex * 32}px)` }}
+                      style={{
+                        transform: `translateY(-${currentExampleIndex * 32}px)`,
+                      }}
                     >
                       {exampleSearches.map((example, index) => (
-                        <div 
+                        <div
                           key={index}
                           className="h-8 flex items-center justify-center"
                         >
@@ -233,7 +239,7 @@ export default function VibePage() {
               </div>
             </div>
           )}
-          
+
           {/* Upload toggle section */}
           <div className="max-w-5xl mx-auto px-6 mt-4">
             <div className="text-center">
@@ -260,10 +266,17 @@ export default function VibePage() {
                 <div className="bg-gradient-to-r from-green-500/10 via-green-500/5 to-green-500/10 backdrop-blur-sm border border-green-500/20 rounded-3xl p-6">
                   <div className="flex items-center gap-3 mb-2">
                     <CheckCircle className="w-6 h-6 text-green-400" />
-                    <h3 className="text-xl font-bold text-white">Event Successfully Added!</h3>
+                    <h3 className="text-xl font-bold text-white">
+                      Event Successfully Added!
+                    </h3>
                   </div>
                   <p className="text-gray-300">
-                    Your event "<span className="text-white font-semibold">{recentlyAddedEvent.title}</span>" has been added to Party Graph and is now searchable by other users.
+                    Your event "
+                    <span className="text-white font-semibold">
+                      {recentlyAddedEvent.title}
+                    </span>
+                    " has been added to Party Graph and is now searchable by
+                    other users.
                   </p>
                 </div>
               </div>
@@ -462,11 +475,11 @@ export default function VibePage() {
 
       {/* Upload Modal Overlay */}
       {showUpload && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300"
           onClick={() => setShowUpload(false)}
         >
-          <div 
+          <div
             className="bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-slate-900/95 backdrop-blur-md rounded-3xl border border-white/20 shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
@@ -484,7 +497,7 @@ export default function VibePage() {
                 <X className="w-6 h-6 text-gray-400 hover:text-white" />
               </button>
             </div>
-            
+
             {/* Modal Content */}
             <div className="p-6">
               <FlyerUpload onEventExtracted={handleEventExtracted} />
@@ -494,7 +507,7 @@ export default function VibePage() {
       )}
 
       {/* Floating Chat Button */}
-      <FloatingChatButton 
+      <FloatingChatButton
         onChatClick={() => setShowChat(!showChat)}
         isChatOpen={showChat}
         hasSelectedEvent={!!selectedEvent}
@@ -502,17 +515,17 @@ export default function VibePage() {
 
       {/* Chat Modal Overlay */}
       {showChat && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4 animate-in fade-in duration-300"
           onClick={() => setShowChat(false)}
         >
-          <div 
+          <div
             className="bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-slate-900/95 backdrop-blur-md rounded-3xl border border-white/20 shadow-2xl max-w-2xl w-full h-[70vh] flex flex-col animate-in zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
-            <VibeChat 
-              selectedEvent={selectedEvent} 
-              onClose={() => setShowChat(false)} 
+            <VibeChat
+              selectedEvent={selectedEvent}
+              onClose={() => setShowChat(false)}
             />
           </div>
         </div>
