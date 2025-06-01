@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import cytoscape from 'cytoscape';
 import { initializeCytoscape } from '@/lib/cytoscapeConfig';
-import { EventNode } from '@/types/EventGraph';
+import { EventNode, TagCenteredNode } from '@/types/EventGraph';
 import { GraphData } from '@/types/EventGraph';
 import { calculateNodePosition } from '@/lib/nodePositioning';
+import { Tag } from '@/types/EventGraph';
 
 interface UseGraphProps {
   data?: GraphData;
@@ -39,7 +40,9 @@ export const useGraph = ({
   const [filteredEdges, setFilteredEdges] = useState(edges);
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
   const [graphEvents, setGraphEvents] = useState<EventNode[]>([]);
+  const [graphTags, setGraphTags] = useState<Tag[]>([]);
   const graphEventsRef = useRef<EventNode[]>([]);
+  const graphTagsRef = useRef<Tag[]>([]);
 
   // Memoize the tags to prevent unnecessary recalculations
   const allTags = useMemo(() => 
@@ -52,12 +55,14 @@ export const useGraph = ({
   // Update ref whenever graphEvents changes
   useEffect(() => {
     graphEventsRef.current = graphEvents;
-  }, [graphEvents]);
+    graphTagsRef.current = graphTags;
+  }, [graphEvents, graphTags]);
 
-  const fetchEventsByTag = async (tag: string) => {
+  const fetchEventsByTag = async (tag: string | undefined) => {
     console.log('fetching events by tag', tag);
+    console.log('graphTags', graphTags);
     try {
-      const response = await fetch(`/api/events/tags?query=${encodeURIComponent(tag)}`);
+      const response = await fetch(`/api/events/tags?query=${encodeURIComponent(tag || '')}`);
       if (!response.ok) {
         throw new Error('Failed to fetch events');
       }
@@ -79,10 +84,13 @@ export const useGraph = ({
 
     const clickedNode = cyRef.current.getElementById(nodeId);
     const clickedPos = clickedNode.position();
+    console.log('clickedNode', nodeId);
+    console.log('graphTagsRef.current', graphTagsRef.current);
 
-    const tagName = nodeId.replace('tag-', '');
-
-    const relatedEvents = await fetchEventsByTag(tagName);
+    const tagName = graphTagsRef.current.find(tag => tag.id === nodeId);
+    console.log('graphTagsRef.current', tagName);
+    console.log('tagName', tagName);
+    const relatedEvents = await fetchEventsByTag(tagName?.name);
 
     if (relatedEvents.length === 0) return;
 
@@ -160,7 +168,7 @@ export const useGraph = ({
     const clickedNode = cyRef.current.getElementById(nodeId);
     const clickedPos = clickedNode.position();
 
-    const event = events.find(e => e.id === nodeId);
+    const event = graphEventsRef.current.find(e => e.id === nodeId);
 
     if (!event?.tags) return;
 
@@ -186,11 +194,10 @@ export const useGraph = ({
           id: tagId,
           name: tag,
           type: 'tag',
-          originalTag: tag // Store the original tag name for reference
         },
         position
       });
-
+      setGraphTags(prev => [...prev, { id: tagId, name: tag, type: 'tag' }]);
       if (tagNode) {
         // Check if either node is in a group
         const sourceGroup = clickedNode.data('group');
@@ -209,7 +216,7 @@ export const useGraph = ({
               data: {
                 source: nodeId,
                 target: tagId,
-                label: 'tagged'
+                label: ''
               }
             });
           }
@@ -244,15 +251,17 @@ export const useGraph = ({
           const x = centerX + radius * Math.cos(angle);
           const y = centerY + radius * Math.sin(angle);
 
+          const tagId = `tag-${tag}-${index}`;
           cy.add({
             group: 'nodes',
             data: {
-              id: `tag-${tag}`,
+              id: tagId,
               name: tag,
               type: 'tag'
             },
             position: { x, y }
           });
+          setGraphTags(prev => [...prev, { id: tagId, name: tag, type: 'tag' }]);
         });
       } catch (error) {
         console.error('Error initializing graph with random tags:', error);
@@ -271,6 +280,7 @@ export const useGraph = ({
         const eventData = graphEventsRef.current.find((e: EventNode) => e.id === node.id());
         console.log('eventData', eventData);
         if (eventData) {
+          console.log('hi');
           setSelectedEvent(eventData);
           expandEventNode(node.id());
         }
