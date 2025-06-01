@@ -164,7 +164,7 @@ export async function plexSearchEvent(tag: string, count = 5) {
 }
 
 export async function plexSearchMany(maxCats?: number, eventCount?: number) {
-  eventCount = eventCount ?? 2;
+  eventCount = eventCount ?? 5;
   const tags = [
     "book launch",
     "indie rock concert",

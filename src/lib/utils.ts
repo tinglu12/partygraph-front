@@ -14,10 +14,10 @@ export function safeName(name: string) {
 
 // lower case and dedupe
 export function cleanTags(arr: string[], tag: string) {
+  let items = [tag, ...arr];
+  items = items.map((elem) => elem.toLowerCase());
+  // dedupe
+  items = items.filter((item, index, self) => self.indexOf(item) === index);
   // TODO avoid duplicate with the first element eg 'hiphop' and 'hiphop concert'
-  const items = arr.map((elem) => elem.toLowerCase());
-  const finalItems = items.filter(
-    (item, index, self) => self.indexOf(item) === index
-  );
-  return [tag, ...finalItems];
+  return items;
 }
