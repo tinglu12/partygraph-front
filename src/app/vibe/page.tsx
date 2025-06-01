@@ -11,11 +11,9 @@ import {
 } from "@/actions/vibeSearchActions";
 import {
   AlertCircle,
-  CheckCircle,
   Info,
   Sparkles,
   Brain,
-  Zap,
   Cpu,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";

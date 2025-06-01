@@ -95,7 +95,7 @@ export const useGraph = ({
     if (relatedEvents.length === 0) return;
 
     // Calculate the radius based on the number of nodes to place
-    const radius = Math.max(200, relatedEvents.length * 50);
+    const radius = Math.max(250, relatedEvents.length * 50);
     const existingNodes = cyRef.current.nodes();
 
     relatedEvents.forEach((event: EventNode, index: number) => {
@@ -241,15 +241,48 @@ export const useGraph = ({
           throw new Error('Failed to fetch random tags');
         }
         const randomTags = await response.json();
+        console.log('randomTags', randomTags);
 
         const centerX = cy.width() / 2;
         const centerY = cy.height() / 2;
-        const radius = Math.min(centerX, centerY) * 0.6;
+        const minDistance = 200; // Minimum distance between nodes
+        const maxAttempts = 50; // Maximum attempts to find non-overlapping position
+
+        const placedPositions: { x: number; y: number }[] = [];
 
         randomTags.forEach((tag: string, index: number) => {
-          const angle = (index * 2 * Math.PI) / randomTags.length;
-          const x = centerX + radius * Math.cos(angle);
-          const y = centerY + radius * Math.sin(angle);
+          let position;
+          let attempts = 0;
+          let isOverlapping = true;
+
+          while (isOverlapping && attempts < maxAttempts) {
+            // Generate random position within the viewport
+            const x = Math.random() * (cy.width() - 200) + 100; // Keep some margin from edges
+            const y = Math.random() * (cy.height() - 200) + 100;
+
+            // Check if this position overlaps with any existing nodes
+            isOverlapping = placedPositions.some(pos => {
+              const dx = pos.x - x;
+              const dy = pos.y - y;
+              return Math.sqrt(dx * dx + dy * dy) < minDistance;
+            });
+
+            if (!isOverlapping) {
+              position = { x, y };
+              placedPositions.push(position);
+            }
+
+            attempts++;
+          }
+
+          // If we couldn't find a non-overlapping position, use a fallback position
+          if (!position) {
+            const angle = (index * 2 * Math.PI) / randomTags.length;
+            position = {
+              x: centerX + (cy.width() * 0.4) * Math.cos(angle),
+              y: centerY + (cy.height() * 0.4) * Math.sin(angle)
+            };
+          }
 
           const tagId = `tag-${tag}-${index}`;
           cy.add({
@@ -259,7 +292,7 @@ export const useGraph = ({
               name: tag,
               type: 'tag'
             },
-            position: { x, y }
+            position
           });
           setGraphTags(prev => [...prev, { id: tagId, name: tag, type: 'tag' }]);
         });
