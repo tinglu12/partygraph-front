@@ -66,6 +66,7 @@ class LamService {
       messages: [{ content: prompt, role: "user" }],
       response_format: {
         type: "json_schema",
+        // @ts-ignore
         json_schema: EventPeopleSchema,
       },
     });

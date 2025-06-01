@@ -73,13 +73,19 @@ export const EventPeopleSchema = {
               description:
                 "a two word short nickname for this type of person. do not use a prefix like 'the' ",
             },
-            stereotype: {
-              type: "string",
+            // stereotype: {
+            //   type: "string",
+            //   description:
+            //     "a five words or less stereotype of the person, a typical type of person found in different neighborhoods of New York",
+            // },
+            quotes: {
+              type: "array",
               description:
-                "a stereotype of the person, a typical type of person found in different neighborhoods of New York",
+                "a list of three short funny or interesting quotes this type of person might say at this type of event, in an 'overheard in New York' style",
+              items: { type: "string" },
             },
           },
-          required: ["nickname", "stereotype"],
+          required: ["nickname", "quotes"],
           additionalProperties: false,
         },
       },
