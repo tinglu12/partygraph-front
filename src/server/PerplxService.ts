@@ -195,8 +195,7 @@ export async function plexSearchMany(maxCats?: number, eventCount?: number) {
     "jazz concert",
     "classical music concert",
     "hip hop concert",
-    "edm rave",
-    "open mic night",
+    "rave",
     "product launch",
     "silent disco",
     "art gallery opening",
@@ -204,12 +203,13 @@ export async function plexSearchMany(maxCats?: number, eventCount?: number) {
     "drag show",
     "fashion show",
     "food festival",
-    "restaurant opening",
     "tech meetup",
     "hackathon",
     "gala",
     "film festival",
-    "holiday market",
+    "night market",
+    // "open mic night",
+    // "restaurant opening",
   ];
 
   const activeTags = maxCats ? tags.slice(0, maxCats) : tags;
