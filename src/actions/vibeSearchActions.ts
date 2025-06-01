@@ -151,8 +151,17 @@ export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
   try {
     const response = await fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3001'}/api/events/tags?query=${encodeURIComponent(tag)}`);
     
+    // Better error handling before parsing JSON
     if (!response.ok) {
-      throw new Error('Failed to fetch events by tag');
+      console.error(`API request failed with status ${response.status}: ${response.statusText}`);
+      throw new Error(`Failed to fetch events by tag: ${response.status} ${response.statusText}`);
+    }
+
+    // Check if response is actually JSON before parsing
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      console.error('API response is not JSON:', contentType);
+      throw new Error('API response is not JSON');
     }
 
     const data = await response.json();
@@ -160,7 +169,8 @@ export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
     return data[0] || [];
   } catch (error) {
     console.error('Error fetching events by tag:', error);
-    // Fallback to local search
+    // Fallback to local search when API fails
+    console.log('Falling back to local search for tag:', tag);
     return sampleEvents.filter(event => event.tags?.includes(tag));
   }
 }
