@@ -10,6 +10,8 @@ tech-week:
 enrich-events:
   bun cli.ts enrich-events
 
+dedupe:
+  bun cli.ts dedupe
 
 
 

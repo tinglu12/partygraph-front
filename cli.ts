@@ -31,6 +31,9 @@ async function main() {
     case "enrich-events":
       await enrichEvents();
       break;
+    case "dedupe":
+      await dedupeEvents();
+      break;
     case "classify-image":
       // Pass the image path from the command line
       const imagePath = process.argv[3];
@@ -100,6 +103,22 @@ async function enrichEvents() {
   const events = await sampleEvents;
   const selected = events.filter((event) => event.category === "nytechweek");
   const enriched = await plexEnrichEvents(selected);
+}
+
+async function dedupeEvents() {
+  const events = await sampleEvents;
+  const unique = events.filter(
+    (event, index, self) => index === self.findIndex((t) => t.id === event.id)
+  );
+  console.log("dedupeEvents result", {
+    before: events.length,
+    unique: unique.length,
+  });
+  fs.writeFileSync(
+    "./public/scraped/deduped-events.json",
+    JSON.stringify(unique, null, 2)
+  );
+  return unique;
 }
 
 async function searchEventTest() {
