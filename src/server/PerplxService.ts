@@ -1,5 +1,6 @@
 "use server";
 
+import { cleanTags, safeName } from "@/lib/utils";
 import { EventType } from "@/types/EventType";
 import axios from "axios";
 
@@ -20,22 +21,22 @@ class PerplexityService {
 
   async searchEvent(query: string, count = 2): Promise<any[]> {
     const prompt = `
-    Find ${count} events of type: ${query} in New York City.
+    Find ${count} events of type: ${query} in New York City in the next 30 days.
     return ${count} items as a JSON array of objects.
 
     DO not add any other text to the response.
     Do not add backticks or \`\`\` json to the response.
     `;
 
-    const categories = [
-      "music",
-      "art",
-      "food",
-      "drink",
-      "party",
-      "launch party",
-    ];
-    const categoriesString = categories.join(", ");
+    // const categories = [
+    //   "music",
+    //   "art",
+    //   "food",
+    //   "drink",
+    //   "party",
+    //   "launch party",
+    // ];
+    // const categoriesString = categories.join(", ");
 
     const schema = {
       type: "object",
@@ -46,7 +47,11 @@ class PerplexityService {
             type: "object",
             properties: {
               title: { type: "string" },
-              description: { type: "string" },
+              description: {
+                type: "string",
+                description:
+                  "a short description of the event, 1-2 sentences, no more than 100 words",
+              },
               tags: {
                 type: "array",
                 items: {
@@ -55,10 +60,27 @@ class PerplexityService {
                     "a list of common tags associated with the event must be lowercase",
                 },
               },
-              category: {
+              url: {
                 type: "string",
-                description: `the category of the event, one of ${categoriesString} `,
+                description:
+                  "the original url of the event, must be a valid url",
               },
+              date: {
+                type: "string",
+                description: "the date of the event, must be a valid date",
+              },
+              venue: {
+                type: "string",
+                description: "the venue of the event",
+              },
+              neighborhood: {
+                type: "string",
+                description: "which small neighborhood of the city",
+              },
+              // category: {
+              //   type: "string",
+              //   description: `the category of the event, one of ${categoriesString} `,
+              // },
               keywords: {
                 type: "array",
                 items: {
@@ -67,7 +89,17 @@ class PerplexityService {
                     "a list of unique keywords from the event description",
                 },
               },
+              // required: [
+              //   "title",
+              //   "tags",
+              // "description",
+              // "url",
+              // "date",
+              // "venue",
+              // "neighborhood",
+              // ],
             },
+            required: ["title", "tags"],
           },
         },
       },
@@ -110,14 +142,19 @@ class PerplexityService {
   }
 }
 
-export async function plexSearchEvent(query: string, count = 5) {
+export async function plexSearchEvent(tag: string, count = 5) {
   const perplx = new PerplexityService();
-  const safeName = (name: string) => name.toLowerCase().replace(/ /g, "-");
-  console.log("Perplexity searchEvent", { query, count });
-  let events = await perplx.searchEvent(query, count);
+
+  console.log("Perplexity searchEvent", { query: tag, count });
+  let events = await perplx.searchEvent(tag, count);
   events = events.map((event) => {
+    // const itemTags = [...(event?.tags ?? []), tag];
+    const finalTags = cleanTags([...(event?.tags ?? [])], tag);
+
     return {
       ...event,
+      tags: finalTags,
+      category: tag,
       id: safeName(event.title),
     };
   });
@@ -127,26 +164,55 @@ export async function plexSearchEvent(query: string, count = 5) {
 }
 
 export async function plexSearchMany() {
-  const tags = ["book launch", "music concert"];
+  // const tags = [
+  //   "book launch",
+  //   "music concert",
+  //   "gallery opening",
+  //   "hackathon",
+  //   "launch party",
+  //   "open mic night",
+  //   "comedy show",
+  //   "food festival",
+  //   "networking event",
+  //   "tech meetup",
+  // ];
+
+  const tags = [
+    "indie rock concert",
+    "jazz concert",
+    "classical music concert",
+    "hip hop concert",
+    "edm rave",
+    "open mic night",
+    "product launch",
+    "silent disco",
+    "art gallery opening",
+    "broadway",
+    "drag show",
+    "fashion show",
+    "food festival",
+    "restaurant opening",
+    "tech meetup",
+    "hackathon",
+    // "hot yoga",
+    // "running club",
+    // "dance class",
+    "gala",
+    "film festival",
+    "film screening",
+    "holiday market",
+    // "trivia night",
+  ];
 
   // const promises = tags.map((tag) => plexSearchEvent(tag));
 
   // const results = await Promise.all(promises);
   let results: any[] = [];
   for (const tag of tags) {
-    const catResults: any[] = await plexSearchEvent(tag);
-    console.log("Perplexity searchMany result", catResults);
+    const catResults: any[] = await plexSearchEvent(tag, 2);
+    console.log("Perplexity searchMany result =>", { tag, catResults });
 
-    const enrichedResults = catResults?.map((result) => {
-      // inject original tag into the tags array
-      const tags = [...(result?.tags ?? []), tag];
-      const item = {
-        ...result,
-        tags,
-      };
-      return item;
-    });
-    results.push(...enrichedResults);
+    results.push(...catResults);
   }
   // console.log("Perplexity searchMany result", { tags, results });
 
