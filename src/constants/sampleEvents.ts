@@ -8,7 +8,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "bloc-party,-metric,-blonde-redhead,-joan",
+    id: "bloc-party-metric-blonde-redhead-joan",
   },
   {
     title: "The Unlikely Candidates, Anaïs & The Hoops",
@@ -17,7 +17,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "the-unlikely-candidates,-anaïs-&-the-hoops",
+    id: "the-unlikely-candidates-anaïs-&-the-hoops",
   },
   {
     title: "Florist, Allegra Krieger",
@@ -26,7 +26,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "florist,-allegra-krieger",
+    id: "florist-allegra-krieger",
   },
   {
     title:
@@ -36,7 +36,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "kate-stephenson,-eliza-&-the-delusionals,-annie-blackman,-grace-gardner",
+    id: "kate-stephenson-eliza-&-the-delusionals-annie-blackman-grace-gardner",
   },
   {
     title: "Sinkane, Ghost Funk Orchestra",
@@ -45,7 +45,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "sinkane,-ghost-funk-orchestra",
+    id: "sinkane-ghost-funk-orchestra",
   },
   {
     title: "Alex Orange Drink, Gymshorts",
@@ -54,7 +54,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "alex-orange-drink,-gymshorts",
+    id: "alex-orange-drink-gymshorts",
   },
   {
     title: "HNTR, Helang",
@@ -63,7 +63,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "hntr,-helang",
+    id: "hntr-helang",
   },
   {
     title: "The Kooks, lovelytheband",
@@ -72,7 +72,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "the-kooks,-lovelytheband",
+    id: "the-kooks-lovelytheband",
   },
   {
     title: "Art d'Ecco, Darky Ramone, Gargoyle",
@@ -81,7 +81,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "art-d'ecco,-darky-ramone,-gargoyle",
+    id: "art-decco-darky-ramone-gargoyle",
   },
   {
     title: "The Backseat Lovers, Palmyra",
@@ -90,7 +90,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["indie", "rock"],
     category: "concert",
     keywords: ["indie rock", "live music", "New York City"],
-    id: "the-backseat-lovers,-palmyra",
+    id: "the-backseat-lovers-palmyra",
   },
   {
     title: "Wycliffe Gordon Concert",
@@ -163,7 +163,7 @@ export const sampleEvents: EventNode[] = [
       "Dafnis Prieto",
       "Jazz Gallery",
     ],
-    id: "vijay-iyer,-henry-threadgill,-and-dafnis-prieto-jazz-concert",
+    id: "vijay-iyer-henry-threadgill-and-dafnis-prieto-jazz-concert",
   },
   {
     title: "Ethan Iverson Jazz Concert",
@@ -234,7 +234,7 @@ export const sampleEvents: EventNode[] = [
       "SummerStage",
       "Central Park",
     ],
-    id: "marcus-miller,-tank-and-the-bangas,-and-the-soul-rebels-jazz-concert",
+    id: "marcus-miller-tank-and-the-bangas-and-the-soul-rebels-jazz-concert",
   },
   {
     title: "Emily King Jazz Concert",
@@ -305,7 +305,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["piano", "classical", "classical music concert"],
     category: "classical music concert",
     keywords: ["Evgeny Kissin", "Carnegie Hall", "Stern Auditorium", "2025"],
-    id: "evgeny-kissin-at-stern-auditorium,-carnegie-hall",
+    id: "evgeny-kissin-at-stern-auditorium-carnegie-hall",
   },
   {
     title: "The Knights",
@@ -369,7 +369,7 @@ export const sampleEvents: EventNode[] = [
       "Green-Wood Cemetery",
       "June 28, 2025",
     ],
-    id: "death-of-classical:-ghost-quartet",
+    id: "death-of-classical-ghost-quartet",
   },
   {
     title: "RenChorNY: Monteverdi's L’Orfeo",
@@ -383,7 +383,7 @@ export const sampleEvents: EventNode[] = [
       "Trinity Lutheran Church",
       "June 28, 2025",
     ],
-    id: "renchorny:-monteverdi's-l’orfeo",
+    id: "renchorny-monteverdis-lorfeo",
   },
   {
     title: "Smino & Samara Cyn",
@@ -408,7 +408,7 @@ export const sampleEvents: EventNode[] = [
       "Under the K Bridge",
       "New York City",
     ],
-    id: "dabin,-william-black,-blanke,-jason-ross",
+    id: "dabin-william-black-blanke-jason-ross",
   },
   {
     title: "DD Osama & Sugarhill Ddot",
@@ -422,7 +422,7 @@ export const sampleEvents: EventNode[] = [
       "House Of Independents",
       "New York City area",
     ],
-    id: "dd-osama-&-sugarhill-ddot",
+    id: "dd-osama-sugarhill-ddot",
   },
   {
     title: "Post Malone, Jelly Roll, Chandler Walters, Wyatt Flores",
@@ -431,7 +431,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Post Malone", "Jelly Roll", "Citi Field", "New York City"],
-    id: "post-malone,-jelly-roll,-chandler-walters,-wyatt-flores",
+    id: "post-malone-jelly-roll-chandler-walters-wyatt-flores",
   },
   {
     title: "Lights & KiNG MALA",
@@ -450,7 +450,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["hip hop", "rap", "festival", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Tyler, the Creator", "Governors Ball", "New York City"],
-    id: "governors-ball:-tyler,-the-creator,-olivia-rodrigo,-hozier,-and-more",
+    id: "governors-ball-tyler-the-creator-olivia-rodrigo-hozier-and-more",
   },
   {
     title: "Lil Wayne 'Tha Carter VI' Release Party",
@@ -459,7 +459,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["hip hop", "rap", "live music", "hip hop concert"],
     category: "music",
     keywords: ["Lil Wayne", "Madison Square Garden", "New York City"],
-    id: "lil-wayne-'tha-carter-vi'-release-party",
+    id: "lil-wayne-tha-carter-vi-release-party",
   },
   {
     title: "Master P, The Lox, Bone Thugs-N-Harmony",
@@ -474,7 +474,7 @@ export const sampleEvents: EventNode[] = [
       "New Jersey Performing Arts Center",
       "New York City area",
     ],
-    id: "master-p,-the-lox,-bone-thugs-n-harmony",
+    id: "master-p-the-lox-bone-thugs-n-harmony",
   },
   {
     title: "Grandmaster Flash, DJ Jazzy Jeff, Skratch Bastid",
@@ -489,7 +489,7 @@ export const sampleEvents: EventNode[] = [
       "The Rooftop at Pier 17",
       "New York City",
     ],
-    id: "grandmaster-flash,-dj-jazzy-jeff,-skratch-bastid",
+    id: "grandmaster-flash-dj-jazzy-jeff-skratch-bastid",
   },
   {
     title: "Eem Triplin & DC the Don",
@@ -508,7 +508,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["edm", "party", "rave", "new york city", "edm rave"],
     category: "party",
     keywords: ["golden era", "edm party", "17 Meadow St"],
-    id: "feels-so-close-(18+)-|-an-edm-golden-era-party",
+    id: "feels-so-close-(18+)-an-edm-golden-era-party",
   },
   {
     title: "The #1 EDM Boat Party NYC - House Music Yacht Cruise",
@@ -518,7 +518,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["edm", "boat party", "house music", "new york city", "edm rave"],
     category: "party",
     keywords: ["house music", "yacht cruise", "Pier 36"],
-    id: "the-#1-edm-boat-party-nyc---house-music-yacht-cruise",
+    id: "the-#1-edm-boat-party-nyc-house-music-yacht-cruise",
   },
   {
     title: "Kitty’s RAVE (18+)",
@@ -528,7 +528,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["edm", "rave", "party", "new york city", "edm rave"],
     category: "party",
     keywords: ["rave", "18+", "The Brooklyn Monarch"],
-    id: "kitty’s-rave-(18+)",
+    id: "kittys-rave-(18+)",
   },
   {
     title:
@@ -546,7 +546,7 @@ export const sampleEvents: EventNode[] = [
     ],
     category: "party",
     keywords: ["open bar", "Skyport Marina", "boat party"],
-    id: "soundwave-boat-party-2025-|-hip-hop-•-latin-•-edm-(open-bar-available!)",
+    id: "soundwave-boat-party-2025-hip-hop-latin-edm-(open-bar-available!)",
   },
   {
     title: "LEVELS 'N' STUFF [EDM FESTIVAL CLASSICS] EARLY PARTY",
@@ -556,7 +556,7 @@ export const sampleEvents: EventNode[] = [
     tags: ["edm", "party", "festival classics", "new york city", "edm rave"],
     category: "party",
     keywords: ["festival classics", "DROM", "early party"],
-    id: "levels-'n'-stuff-[edm-festival-classics]-early-party",
+    id: "levels-n-stuff-[edm-festival-classics]-early-party",
   },
   {
     title: "LadyLand Festival",
@@ -847,7 +847,7 @@ export const sampleEvents: EventNode[] = [
     date: "07-19-2025",
     category: "Writing and Open Mic",
     keywords: ["writing", "poetry", "comedy"],
-    id: "house-of-khaos-|-writing-workshop-+-open-mic",
+    id: "house-of-khaos-|-writing-workshop-open-mic",
     tags: ["open mic night"],
   },
   {
@@ -865,7 +865,7 @@ export const sampleEvents: EventNode[] = [
     date: "06-23-2025",
     category: "Comedy Open Mic",
     keywords: ["comedy", "stand-up"],
-    id: "the-industry-room.-new-york’s-best-open-mic-show",
+    id: "the-industry-room-new-yorks-best-open-mic-show",
     tags: ["open mic night"],
   },
   {
