@@ -9,13 +9,16 @@ import {
   Sparkles,
   Clock,
   Star,
+  MessageCircle,
 } from "lucide-react";
 
 interface EventsListProps {
   events: EventNode[];
   highlightedIds?: string[];
+  selectedEventId?: string;
   title?: string;
   subtitle?: string;
+  onEventClick?: (event: EventNode) => void;
 }
 
 /**
@@ -25,8 +28,10 @@ interface EventsListProps {
 export const EventsList = ({
   events,
   highlightedIds = [],
+  selectedEventId,
   title = "Events",
   subtitle,
+  onEventClick,
 }: EventsListProps) => {
   if (!events || events.length === 0) {
     return (
@@ -73,14 +78,19 @@ export const EventsList = ({
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => {
           const isHighlighted = highlightedIds.includes(event.id);
+          const isSelected = selectedEventId === event.id;
 
           return (
             <div
               key={event.id}
+              onClick={() => onEventClick?.(event)}
               className={`
                 group relative rounded-3xl p-8 border transition-all duration-500 backdrop-blur-sm hover:scale-[1.02] hover:shadow-2xl
+                ${onEventClick ? 'cursor-pointer' : ''}
                 ${
-                  isHighlighted
+                  isSelected
+                    ? "bg-gradient-to-br from-green-600/30 via-emerald-500/20 to-green-600/30 border-green-400/60 shadow-lg shadow-green-500/25 ring-2 ring-green-400/50"
+                    : isHighlighted
                     ? "bg-gradient-to-br from-purple-600/30 via-purple-500/20 to-blue-600/30 border-purple-400/60 shadow-lg shadow-purple-500/25"
                     : "bg-gradient-to-br from-white/10 to-white/5 border-white/20 hover:from-white/15 hover:to-white/10 hover:border-white/40"
                 }
@@ -90,6 +100,13 @@ export const EventsList = ({
               {isHighlighted && (
                 <div className="absolute -top-3 -right-3 w-6 h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center">
                   <Star className="w-3 h-3 text-white" />
+                </div>
+              )}
+
+              {/* Selected for chat indicator */}
+              {isSelected && (
+                <div className="absolute -top-3 -left-3 w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center animate-pulse">
+                  <MessageCircle className="w-3 h-3 text-white" />
                 </div>
               )}
 

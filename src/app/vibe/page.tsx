@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { VibeSearch } from "@/components/VibeSearch";
 import { FlyerUpload } from "@/components/FlyerUpload";
+import { FloatingChatButton } from "@/components/FloatingChatButton";
+import { VibeChat } from "@/components/VibeChat";
 import { Graph } from "@/features/components/Graph";
 import { TagCenteredGraph } from "@/components/TagCenteredGraph";
 import { EventsList } from "@/components/EventsList";
@@ -21,6 +23,7 @@ import {
   Upload,
   TrendingUp,
   X,
+  MessageCircle,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { sampleEvents } from "@/constants/sampleEvents";
@@ -42,6 +45,8 @@ export default function VibePage() {
   const [showUpload, setShowUpload] = useState(false);
   const [recentlyAddedEvent, setRecentlyAddedEvent] = useState<EventNode | null>(null);
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
+  const [showChat, setShowChat] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<EventNode | null>(null);
 
   // Example searches that rotate
   const exampleSearches = [
@@ -66,16 +71,20 @@ export default function VibePage() {
   // Handle Escape key to close modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && showUpload) {
-        setShowUpload(false);
+      if (e.key === 'Escape') {
+        if (showUpload) {
+          setShowUpload(false);
+        } else if (showChat) {
+          setShowChat(false);
+        }
       }
     };
 
-    if (showUpload) {
+    if (showUpload || showChat) {
       document.addEventListener('keydown', handleEscape);
       return () => document.removeEventListener('keydown', handleEscape);
     }
-  }, [showUpload]);
+  }, [showUpload, showChat]);
 
   // Handle semantic vibe search using AI
   const handleVibeSearch = async (query: string) => {
@@ -166,6 +175,13 @@ export default function VibePage() {
     setError(null);
     setSearchQuery(`Flyer Upload: ${event.title}`);
     setSearchMode("semantic");
+    setSelectedEvent(event);
+  };
+
+  // Handle event selection for chat context
+  const handleEventSelect = (event: EventNode) => {
+    setSelectedEvent(event);
+    setShowChat(true);
   };
 
   return (
@@ -371,6 +387,8 @@ export default function VibePage() {
                   <div className="max-w-7xl mx-auto">
                     <EventsList
                       events={searchResults}
+                      onEventClick={handleEventSelect}
+                      selectedEventId={selectedEvent?.id}
                       title={
                         recentlyAddedEvent
                           ? "Your New Event"
@@ -473,6 +491,31 @@ export default function VibePage() {
             <div className="p-6">
               <FlyerUpload onEventExtracted={handleEventExtracted} />
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Chat Button */}
+      <FloatingChatButton 
+        onChatClick={() => setShowChat(!showChat)}
+        isChatOpen={showChat}
+        hasSelectedEvent={!!selectedEvent}
+      />
+
+      {/* Chat Modal Overlay */}
+      {showChat && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4 animate-in fade-in duration-300"
+          onClick={() => setShowChat(false)}
+        >
+          <div 
+            className="bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-slate-900/95 backdrop-blur-md rounded-3xl border border-white/20 shadow-2xl max-w-2xl w-full h-[70vh] flex flex-col animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <VibeChat 
+              selectedEvent={selectedEvent} 
+              onClose={() => setShowChat(false)} 
+            />
           </div>
         </div>
       )}
