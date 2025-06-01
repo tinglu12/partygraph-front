@@ -14,11 +14,9 @@ import {
 } from "@/actions/vibeSearchActions";
 import {
   AlertCircle,
-  CheckCircle,
   Info,
   Sparkles,
   Brain,
-  Zap,
   Cpu,
   Upload,
   TrendingUp,

@@ -1,9 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { EventNode } from "@/lib/sampleData";
 
 interface FilterBarProps {
-  events: EventNode[];
+  events: any[];
   onSearch: (query: string) => void;
   onCategoryChange: (category: string) => void;
 }

@@ -10,8 +10,8 @@ export function GET() {
   // Shuffle the tags array
   const shuffled = allTags.sort(() => 0.5 - Math.random());
 
-  // Get first 4 tags (or all if less than 4)
-  const randomTags = shuffled.slice(0, 4);
+  // Get first 6 tags (or all if less than 6)
+  const randomTags = shuffled.slice(0, 6);
 
   console.log("Random tags selected:", randomTags);
   return NextResponse.json(randomTags);
