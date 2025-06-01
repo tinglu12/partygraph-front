@@ -201,7 +201,7 @@ export const FlyerUpload = ({ onEventExtracted, className = "" }: FlyerUploadPro
               <div className="flex justify-center">
                 <div className="relative">
                   {previewUrl && (
-                    <Image 
+                    <img 
                       src={previewUrl} 
                       alt="Flyer preview" 
                       className="max-w-full max-h-48 rounded-lg shadow-lg object-contain"

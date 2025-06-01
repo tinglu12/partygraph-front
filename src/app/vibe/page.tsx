@@ -186,6 +186,16 @@ export default function VibePage() {
     }
   };
 
+  // Handle clearing search
+  const handleClearSearch = () => {
+    setHasSearched(false);
+    setSearchQuery("");
+    setSearchResults([]);
+    setTagGraphData(null);
+    setError(null);
+    setSelectedEvent(null);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
       {/* Enhanced background decorations with AI theme */}
@@ -236,6 +246,7 @@ export default function VibePage() {
           <VibeSearch
             onSearch={handleVibeSearch}
             onTagSelect={handleTagSearch}
+            onClearSearch={handleClearSearch}
             isLoading={isLoading}
           />
 

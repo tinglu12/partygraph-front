@@ -24,6 +24,7 @@ export const calculateNodePosition = ({
   nodeSize = 60,
   maxAttempts = 10
 }: NodePositioningOptions): Position => {
+  // Start with a base angle that's more spread out
   let angle = (index * 2 * Math.PI) / totalNodes;
   let x = centerPos.x + radius * Math.cos(angle);
   let y = centerPos.y + radius * Math.sin(angle);
@@ -48,9 +49,13 @@ export const calculateNodePosition = ({
 
     if (!hasOverlap) break;
 
-    // If there's an overlap, try a new position with increased radius
-    angle += Math.PI / 4; // Rotate by 45 degrees
-    const newRadius = radius + (attempts * 20); // Increase radius with each attempt
+    // If there's an overlap, try a new position with increased radius and dynamic angle
+    // Use a golden ratio based angle increment for better distribution
+    const goldenRatio = (1 + Math.sqrt(5)) / 2;
+    angle += (Math.PI * 2) / goldenRatio; // This creates a more natural spiral pattern
+    
+    // Increase radius more gradually
+    const newRadius = radius + (attempts * 15); // Reduced from 20 to 15 for smoother expansion
     x = centerPos.x + newRadius * Math.cos(angle);
     y = centerPos.y + newRadius * Math.sin(angle);
     attempts++;

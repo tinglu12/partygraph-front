@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import cytoscape from 'cytoscape';
 import { initializeCytoscape } from '@/lib/cytoscapeConfig';
-import { EventNode, TagCenteredNode } from '@/types/EventGraph';
+import { EventNode } from '@/types/EventGraph';
 import { GraphData } from '@/types/EventGraph';
 import { calculateNodePosition } from '@/lib/nodePositioning';
 import { Tag } from '@/types/EventGraph';
@@ -151,7 +151,7 @@ export const useGraph = ({
               data: {
                 source: nodeId,
                 target: event.id,
-                label: 'has'
+                label: ''
               }
             });
           }
@@ -184,12 +184,20 @@ export const useGraph = ({
         existingNodes
       });
       
-      // Create a unique ID for this tag instance
-      const tagId = `tag-${tag}-${nodeId}-${index}`;
-      const existingTagNode = cyRef.current?.getElementById(tagId);
-      if(existingTagNode?.length === 0) {
-        // Always create a new tag node
-        const tagNode = cyRef.current?.add({
+      // First try to find an existing tag node with the same name
+      const existingTagNode = cyRef.current?.nodes().filter(node => 
+        node.data('type') === 'tag' && node.data('name') === tag
+      ).first();
+
+      let tagId: string;
+      if (existingTagNode && existingTagNode.length > 0 && existingTagNode.isNode()) {
+        // Reuse existing tag node
+        tagId = existingTagNode.id();
+        // Update position of existing node
+      } else {
+        // Create new tag node if none exists
+        tagId = `tag-${tag}`;
+        cyRef.current?.add({
           group: 'nodes',
           data: {
             id: tagId,
@@ -198,25 +206,30 @@ export const useGraph = ({
           },
           position
         });
-        setGraphTags(prev => [...prev, { id: tagId, name: tag, type: 'tag' }]);
-
-        const existingEdges = cyRef.current?.edges().filter(edge => 
-          (edge.source().id() === nodeId && edge.target().id() === tagId) ||
-          (edge.source().id() === tagId && edge.target().id() === nodeId)
-        ) || [];
-
-        if (existingEdges.length === 0) {
-          cyRef.current?.add({
-            group: 'edges',
-            data: {
-              source: nodeId,
-              target: tagId,
-              label: ''
-            }
-          });
-        }
+        setGraphTags(prev => {
+          // Check if tag already exists in state
+          if (prev.some(t => t.name === tag)) {
+            return prev;
+          }
+          return [...prev, { id: tagId, name: tag, type: 'tag' }];
+        });
       }
-      
+
+      const existingEdges = cyRef.current?.edges().filter(edge => 
+        (edge.source().id() === nodeId && edge.target().id() === tagId) ||
+        (edge.source().id() === tagId && edge.target().id() === nodeId)
+      ) || [];
+
+      if (existingEdges.length === 0) {
+        cyRef.current?.add({
+          group: 'edges',
+          data: {
+            source: nodeId,
+            target: tagId,
+            label: ''
+          }
+        });
+      }
     });
 
     setExpandedNodes(prev => new Set([...prev, nodeId]));
