@@ -1,9 +1,16 @@
 import { searchEvent, classifyImage } from "@/server/LamService";
-import { plexSearchEvent, plexSearchMany } from "@/server/PerplxService";
+import {
+  plexEnrichEvents,
+  plexSearchEvent,
+  plexSearchMany,
+} from "@/server/PerplxService";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 import fs from "fs";
 import { techWeekEvents } from "./data/tech-week";
+import { techWeekAll } from "./data/raw/tech-week-all";
+import { safeName } from "@/lib/utils";
+import { sampleEvents } from "@/constants/sampleEvents";
 
 const client = new LlamaAPIClient({
   apiKey: process.env["LLAMA_API_KEY"], // This is the default and can be omitted
@@ -19,7 +26,10 @@ async function main() {
       await plexManyTest();
       break;
     case "tech-week":
-      await techWeekTest();
+      await techWeekFormat();
+      break;
+    case "enrich-events":
+      await enrichEvents();
       break;
     case "classify-image":
       // Pass the image path from the command line
@@ -60,27 +70,36 @@ async function plexManyTest() {
   return result;
 }
 
-async function techWeekTest() {
-  const raw = await techWeekEvents;
+async function techWeekFormat() {
+  const raw = await techWeekAll;
   const out = raw.map((event) => {
     const item = {
-      ...event,
-      title: event.title,
-      description: event.description,
-      tags: event.tags,
-      url: event.url,
-      date: event.date,
+      id: safeName(event.Title),
+      title: event.Title,
+      description: event.Title,
+      neighborhood: event.Location,
+      tags: ["nytechweek"],
+      keywords: ["nytechweek"],
+      category: "nytechweek",
+      url: event.URL,
+      date: `${event.Day} ${event.Time}`,
     };
     return item;
   });
   console.log("techWeekTest result", { out });
 
   fs.writeFileSync(
-    "./public/scraped/tech-week.json",
+    "./public/scraped/tech-week-all.json",
     JSON.stringify(out, null, 2)
   );
 
   return out;
+}
+
+async function enrichEvents() {
+  const events = await sampleEvents;
+  const selected = events.filter((event) => event.category === "nytechweek");
+  const enriched = await plexEnrichEvents(selected);
 }
 
 async function searchEventTest() {

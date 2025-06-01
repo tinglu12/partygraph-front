@@ -1,6 +1,7 @@
 # TODO
 
-
+- [ ] dedupe events based on ID
+- [ ] enrich techweek events
 
 ## Hannah
 - [ ] image analysis (offline)

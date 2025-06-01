@@ -1,7 +1,7 @@
 "use server";
 
 import { EventNode } from "@/types/EventGraph";
-import { sampleEvents } from "@/constants/sampleEvents-v2";
+import { sampleEvents } from "@/constants/sampleEvents";
 
 /**
  * Add a new event to the system

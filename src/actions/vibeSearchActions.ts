@@ -4,7 +4,7 @@ import { createTagCenteredGraph } from "@/lib/sampleData";
 import { searchEvent } from "@/server/LamService";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { EventType } from "@/types/EventType";
-import { sampleEvents } from "@/constants/sampleEvents-v2";
+import { sampleEvents } from "@/constants/sampleEvents";
 
 /**
  * Convert EventNode to EventType for compatibility with LamService

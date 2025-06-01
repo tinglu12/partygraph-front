@@ -4,6 +4,131 @@ import { cleanTags, safeName } from "@/lib/utils";
 import { EventType } from "@/types/EventType";
 import axios from "axios";
 
+const eventSingleSchema = {
+  type: "object",
+  properties: {
+    title: { type: "string" },
+    description: {
+      type: "string",
+      description:
+        "a short description of the event, 1-2 sentences, no more than 100 words",
+    },
+    tags: {
+      type: "array",
+      items: {
+        type: "string",
+        description:
+          "a list of common tags associated with the event must be lowercase",
+      },
+    },
+    url: {
+      type: "string",
+      description: "the original url of the event, must be a valid url",
+    },
+    date: {
+      type: "string",
+      description: "the date of the event, must be a valid date",
+    },
+    venue: {
+      type: "string",
+      description: "the name of the venue of the event",
+    },
+    address: {
+      type: "string",
+      description: "the address of the event",
+    },
+    neighborhood: {
+      type: "string",
+      description:
+        "the neighborhood of the city for the event, eg SoHo, Williamsburg, East Village, LES etc.",
+    },
+    keywords: {
+      type: "array",
+      items: {
+        type: "string",
+        description: "a list of unique keywords from the event description",
+      },
+    },
+  },
+  required: [
+    "title",
+    "tags",
+    "description",
+    "url",
+    "date",
+    "venue",
+    "neighborhood",
+    "keywords",
+  ],
+};
+
+const eventListSchema = {
+  type: "object",
+  properties: {
+    items: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          description: {
+            type: "string",
+            description:
+              "a short description of the event, 1-2 sentences, no more than 100 words",
+          },
+          tags: {
+            type: "array",
+            items: {
+              type: "string",
+              description:
+                "a list of common tags associated with the event must be lowercase",
+            },
+          },
+          url: {
+            type: "string",
+            description: "the original url of the event, must be a valid url",
+          },
+          date: {
+            type: "string",
+            description: "the date of the event, must be a valid date",
+          },
+          venue: {
+            type: "string",
+            description: "the name of the venue of the event",
+          },
+          address: {
+            type: "string",
+            description: "the address of the event",
+          },
+          neighborhood: {
+            type: "string",
+            description:
+              "the neighborhood of the city for the event, eg SoHo, Williamsburg, East Village, LES etc.",
+          },
+          keywords: {
+            type: "array",
+            items: {
+              type: "string",
+              description:
+                "a list of unique keywords from the event description",
+            },
+          },
+        },
+        required: [
+          "title",
+          "tags",
+          "description",
+          "url",
+          "date",
+          "venue",
+          "neighborhood",
+          "keywords",
+        ],
+      },
+    },
+  },
+};
+
 class PerplexityService {
   private apiKey: string;
   private model: string;
@@ -19,113 +144,14 @@ class PerplexityService {
     }
   }
 
-  async searchEvent(query: string, count = 2): Promise<any[]> {
-    const prompt = `
-    Find ${count} events of type: ${query} in New York City in the next 30 days.
-    return ${count} items as a JSON array of objects.
-
-    DO not add any other text to the response.
-    Do not add backticks or \`\`\` json to the response.
-    `;
-
-    // const categories = [
-    //   "music",
-    //   "art",
-    //   "food",
-    //   "drink",
-    //   "party",
-    //   "launch party",
-    // ];
-    // const categoriesString = categories.join(", ");
-
-    const schema = {
-      type: "object",
-      properties: {
-        items: {
-          type: "array",
-          items: {
-            type: "object",
-            properties: {
-              title: { type: "string" },
-              description: {
-                type: "string",
-                description:
-                  "a short description of the event, 1-2 sentences, no more than 100 words",
-              },
-              tags: {
-                type: "array",
-                items: {
-                  type: "string",
-                  description:
-                    "a list of common tags associated with the event must be lowercase",
-                },
-              },
-              url: {
-                type: "string",
-                description:
-                  "the original url of the event, must be a valid url",
-              },
-              date: {
-                type: "string",
-                description: "the date of the event, must be a valid date",
-              },
-              venue: {
-                type: "string",
-                description: "the name of the venue of the event",
-              },
-              address: {
-                type: "string",
-                description: "the address of the event",
-              },
-              neighborhood: {
-                type: "string",
-                description:
-                  "the neighborhood of the city for the event, eg SoHo, Williamsburg, East Village, LES etc.",
-              },
-              // category: {
-              //   type: "string",
-              //   description: `the category of the event, one of ${categoriesString} `,
-              // },
-              keywords: {
-                type: "array",
-                items: {
-                  type: "string",
-                  description:
-                    "a list of unique keywords from the event description",
-                },
-              },
-              // required: [
-              //   "title",
-              //   "tags",
-              // "description",
-              // "url",
-              // "date",
-              // "venue",
-              // "neighborhood",
-              // ],
-            },
-            required: [
-              "title",
-              "tags",
-              "description",
-              "url",
-              "date",
-              "venue",
-              "neighborhood",
-              "keywords",
-            ],
-          },
-        },
-      },
-    };
-
+  async post(prompt: string, schema?: any) {
     const response = await axios.post(
       this.apiUrl,
       {
         model: this.model,
         response_format: {
           type: "json_schema",
-          json_schema: { schema: schema },
+          json_schema: { schema },
         },
         messages: [
           {
@@ -144,6 +170,20 @@ class PerplexityService {
     );
 
     const content = response.data.choices?.[0]?.message?.content;
+    return content;
+  }
+
+  async searchEvent(query: string, count = 2): Promise<any[]> {
+    const prompt = `
+    Find ${count} events of type: ${query} in New York City in the next 30 days.
+    return ${count} items as a JSON array of objects.
+
+    DO not add any other text to the response.
+    Do not add backticks or \`\`\` json to the response.
+    `;
+
+    const content = await this.post(prompt, eventListSchema);
+
     // console.log("Perplexity raw content:", content);
     // Try to parse the array of JSON objects from the response
     let result;
@@ -153,6 +193,17 @@ class PerplexityService {
       throw new Error("Failed to parse Perplexity API response as JSON array");
     }
     return result.items;
+  }
+
+  async enrichEventFromUrl(url: string) {
+    const prompt = `
+    Find the event details for the following url: ${url}
+    return the event details as a JSON object.
+    `;
+
+    const content = await this.post(prompt, eventSingleSchema);
+    console.log("Perplexity searchEventByUrl content:", content);
+    return content;
   }
 }
 
@@ -189,6 +240,16 @@ export async function plexSearchEvent(tag: string, count = 5, retry = 0) {
 
   // console.log("Perplexity searchEvent result", events);
   return events;
+}
+
+export async function plexEnrichEvents(events: EventType[]) {
+  const perplx = new PerplexityService();
+  for (const event of events) {
+    console.log("enrich one", event);
+    // @ts-ignore
+    const enriched = await perplx.enrichEventFromUrl(event.link || event.url);
+    console.log("enrich one", enriched);
+  }
 }
 
 export async function plexSearchMany(maxCats?: number, eventCount?: number) {

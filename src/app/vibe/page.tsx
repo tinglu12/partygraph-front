@@ -25,7 +25,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
-import { sampleEvents } from "@/constants/sampleEvents-v2";
+import { sampleEvents } from "@/constants/sampleEvents";
 
 /**
  * Enhanced AI-powered vibe discovery page with semantic search capabilities
@@ -49,16 +49,19 @@ export default function VibePage() {
   const [selectedEvent, setSelectedEvent] = useState<EventNode | null>(null);
 
   // Example searches that rotate
-  const exampleSearches = useMemo(() => [
-    "energetic music with dancing and live bands",
-    "chill art gallery opening with wine",
-    "outdoor food festival with local vendors",
-    "late night techno party with great vibes",
-    "cozy jazz club performance",
-    "rooftop party with city views",
-    "indie rock concert with emerging artists",
-    "wine tasting event with friends",
-  ], []);
+  const exampleSearches = useMemo(
+    () => [
+      "energetic music with dancing and live bands",
+      "chill art gallery opening with wine",
+      "outdoor food festival with local vendors",
+      "late night techno party with great vibes",
+      "cozy jazz club performance",
+      "rooftop party with city views",
+      "indie rock concert with emerging artists",
+      "wine tasting event with friends",
+    ],
+    []
+  );
 
   // Rotate example searches every 3 seconds
   useEffect(() => {
@@ -220,7 +223,7 @@ export default function VibePage() {
             ))}
           </div>
         </div>
-        
+
         {/* Light Purple Backdrop - faster parallax */}
         <div className="absolute top-0 left-0 w-full h-[600px] opacity-80 translate-y-[300px]">
           <div className="flex h-full animate-[smooth-scroll_80s_linear_infinite]">
@@ -235,7 +238,7 @@ export default function VibePage() {
             ))}
           </div>
         </div>
-        
+
         {/* Gradient overlay to blend skyline with content */}
         <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-transparent via-transparent to-slate-900/30"></div>
       </div>
