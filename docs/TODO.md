@@ -1,5 +1,7 @@
 # TODO
 
+
+
 ## Hannah
 - [ ] image analysis (offline)
 - [ ] analyzed image display?
@@ -20,4 +22,9 @@
 People
 - [ ] people chatbar - chatting about the event
 - [ ] chat bubbles over people
+
+
+## Other
+- [ ] scrape lu.ma calendar RSS feed
+
 

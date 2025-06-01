@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { generateEdgesFromConnections } from "@/lib/sampleData";
-import { sampleEvents } from "@/constants/sampleEvents";
+import { sampleEvents } from "@/constants/sampleEvents-v1";
 import { EventDetails } from "./EventDetails";
 import { FilterBar } from "./FilterBar";
 import { useGraph } from "../hooks/useGraph";
@@ -25,7 +25,6 @@ export const Graph = ({
 }: // events = sampleEvents,
 // edges = generateEdgesFromConnections(sampleEvents),
 GraphProps) => {
-
   const {
     containerRef,
     selectedEvent,
@@ -72,7 +71,6 @@ GraphProps) => {
 
   return (
     <div className="flex flex-col h-full">
-
       <div className="flex-1 relative h-[calc(100%-48px)]">
         <div
           ref={containerRef}
