@@ -4,11 +4,11 @@
 - [ ] image analysis (offline)
 - [ ] analyzed image display?
 
-## Hannah
+## Ben
 - [ ] redo event scraper
 - [ ] add 'hackathons' as category
-- [ ] clean up IDs
-- [ ] add dates, venue, URL
+- [ ] clean up IDs (avoid dupes)
+- [ ] add dates, venue, URL to structured data (schema)
 - [ ] normalize tags
 
 ## Events Graph display
