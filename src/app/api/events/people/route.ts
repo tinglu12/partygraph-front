@@ -1,14 +1,19 @@
-import { getCategory, getPeople } from "@/server/LamService";
+import { getPeople } from "@/server/LamService";
 import { EventPerson } from "@/types/EventPerson";
 import { EventType } from "@/types/EventType";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const query: string | null = searchParams.get("query");
+  if (!query) {
+    console.error("No query provided");
+    return NextResponse.json({ error: "No query provided" }, { status: 400 });
+  }
+
   const event: EventType = {
-    title: "launch party",
-    tags: {},
-    description:
-      "We are launching a new product and we want to celebrate with a party.",
+    title: query,
+    description: query,
   };
   const people: EventPerson[] = await getPeople(event);
   event.people = people;
