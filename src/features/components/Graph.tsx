@@ -25,12 +25,6 @@ export const Graph = ({
 }: // events = sampleEvents,
 // edges = generateEdgesFromConnections(sampleEvents),
 GraphProps) => {
-  const events: EventNode[] = sampleEvents.map((event) => ({
-    ...event,
-    id: event.id || safeName(event.title),
-  }));
-
-  const edges = generateEdgesFromConnections(events);
 
   const {
     containerRef,
@@ -41,8 +35,8 @@ GraphProps) => {
     handleSearch,
     handleCategoryChange,
     setSelectedEvent,
-    resetView
-  } = useGraph({ data, events, edges });
+  } = useGraph({data});
+
 
   const [pinnedEvents, setPinnedEvents] = useState<EventNode[]>([]);
   const [activeTab, setActiveTab] = useState<string | null>(null);
@@ -77,11 +71,7 @@ GraphProps) => {
 
   return (
     <div className="flex flex-col h-full">
-      <FilterBar
-        events={events}
-        onSearch={handleSearch}
-        onCategoryChange={handleCategoryChange}
-      />
+
       <div className="flex-1 relative h-[calc(100%-48px)]">
         <div
           ref={containerRef}

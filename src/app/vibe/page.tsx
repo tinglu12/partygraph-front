@@ -308,11 +308,11 @@ export default function VibePage() {
               </div>
 
               <div className="max-w-7xl mx-auto">
-                <EventsList
+                {/* <EventsList
                   events={sampleEvents}
                   title="All Available Events"
                   subtitle="Explore our complete event catalog, or use AI search above to find your perfect vibe"
-                />
+                /> */}
               </div>
             </div>
           </div>
