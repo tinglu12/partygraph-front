@@ -1,4 +1,4 @@
-import { searchEvent } from "@/server/LamService";
+import { searchEvent, classifyImage } from "@/server/LamService";
 import { plexSearchEvent, plexSearchMany } from "@/server/PerplxService";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
@@ -15,6 +15,16 @@ async function main() {
       break;
     case "plex-many":
       await plexManyTest();
+      break;
+    case "classify-image":
+      // Pass the image path from the command line
+      const imagePath = process.argv[3];
+      if (!imagePath) {
+        console.error("Please provide an image path.");
+        process.exit(1);
+      }
+      const result = await classifyImage(imagePath);
+      console.log("classifyImage result", result);
       break;
     case "search":
   }
@@ -37,6 +47,7 @@ async function plexTest() {
 async function plexManyTest() {
   const result = await plexSearchMany();
   console.log("plexManyTest result", { result });
+  
   return result;
 }
 
@@ -88,11 +99,23 @@ async function lamTest() {
     model: model,
   });
   const content = createChatCompletionResponse.completion_message?.content;
-  console.log(content);
+  console.log("Llama classifyImage raw content:", content);
 
-  // @ts-ignore
-  const category = content?.text.trim();
-  console.log(category);
+  let result;
+  try {
+    // If content is an object with a 'text' property, use that
+    let text = typeof content === "string" ? content : content?.text;
+    if (!text) throw new Error("No text content in Llama API response");
+
+    // Try to extract JSON from a code block
+    const match = text.match(/```json\\s*([\\s\\S]*?)```/i) || text.match(/```([\\s\\S]*?)```/i);
+    const jsonString = match ? match[1] : text;
+
+    result = JSON.parse(jsonString);
+  } catch (e) {
+    throw new Error("Failed to parse Llama API response as JSON");
+  }
+  return result;
 }
 
 (async () => {
