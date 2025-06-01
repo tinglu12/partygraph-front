@@ -186,42 +186,37 @@ export const useGraph = ({
       
       // Create a unique ID for this tag instance
       const tagId = `tag-${tag}-${nodeId}-${index}`;
+      const existingTagNode = cyRef.current?.getElementById(tagId);
+      if(existingTagNode?.length === 0) {
+        // Always create a new tag node
+        const tagNode = cyRef.current?.add({
+          group: 'nodes',
+          data: {
+            id: tagId,
+            name: tag,
+            type: 'tag',
+          },
+          position
+        });
+        setGraphTags(prev => [...prev, { id: tagId, name: tag, type: 'tag' }]);
 
-      // Always create a new tag node
-      const tagNode = cyRef.current?.add({
-        group: 'nodes',
-        data: {
-          id: tagId,
-          name: tag,
-          type: 'tag',
-        },
-        position
-      });
-      setGraphTags(prev => [...prev, { id: tagId, name: tag, type: 'tag' }]);
-      if (tagNode) {
-        // Check if either node is in a group
-        const sourceGroup = clickedNode.data('group');
-        const targetGroup = tagNode.data('group');
-        
-        // Only create edge if neither node is in a group
-        if (!sourceGroup && !targetGroup) {
-          const existingEdges = cyRef.current?.edges().filter(edge => 
-            (edge.source().id() === nodeId && edge.target().id() === tagId) ||
-            (edge.source().id() === tagId && edge.target().id() === nodeId)
-          ) || [];
+        const existingEdges = cyRef.current?.edges().filter(edge => 
+          (edge.source().id() === nodeId && edge.target().id() === tagId) ||
+          (edge.source().id() === tagId && edge.target().id() === nodeId)
+        ) || [];
 
-          if (existingEdges.length === 0) {
-            cyRef.current?.add({
-              group: 'edges',
-              data: {
-                source: nodeId,
-                target: tagId,
-                label: ''
-              }
-            });
-          }
+        if (existingEdges.length === 0) {
+          cyRef.current?.add({
+            group: 'edges',
+            data: {
+              source: nodeId,
+              target: tagId,
+              label: ''
+            }
+          });
         }
       }
+      
     });
 
     setExpandedNodes(prev => new Set([...prev, nodeId]));
@@ -313,7 +308,6 @@ export const useGraph = ({
         const eventData = graphEventsRef.current.find((e: EventNode) => e.id === node.id());
         console.log('eventData', eventData);
         if (eventData) {
-          console.log('hi');
           setSelectedEvent(eventData);
           expandEventNode(node.id());
         }
