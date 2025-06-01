@@ -96,9 +96,15 @@ export const initializeCytoscape = (
           'text-halign': 'center',
           'text-wrap': 'wrap',
           'text-max-width': '100px',
-          'width': 40,
-          'height': 40,
-          'shape': 'rectangle'
+          'width': 'label',
+          'height': 'label',
+          'padding': '10px',
+          'shape': 'rectangle',
+          'text-justification': 'center',
+          'text-margin-y': 0,
+          'text-margin-x': 0,
+          'min-width': '40px',
+          'min-height': '40px'
         }
       },
       {
