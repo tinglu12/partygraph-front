@@ -17,6 +17,23 @@ export interface GraphData {
   }>;
 }
 
+// Enhanced interfaces for tag-centered visualization
+export interface TagCenteredNode {
+  id: string;
+  type: 'tag' | 'event';
+  data: EventNode | { tag: string };
+}
+
+export interface TagCenteredGraphData {
+  centralTag: string;
+  nodes: TagCenteredNode[];
+  edges: Array<{
+    source: string;
+    target: string;
+    label: string;
+  }>;
+}
+
 export const sampleEvents: EventNode[] = [
   {
     id: "1",
@@ -102,4 +119,46 @@ export const generateEdgesFromConnections = (nodes: EventNode[]) => {
   });
 
   return edges;
+};
+
+/**
+ * Creates a tag-centered graph structure for visualization
+ * Places the central tag in the middle with related events around it
+ */
+export const createTagCenteredGraph = (
+  centralTag: string, 
+  relatedEvents: EventNode[]
+): TagCenteredGraphData => {
+  const nodes: TagCenteredNode[] = [];
+  const edges: Array<{ source: string; target: string; label: string }> = [];
+
+  // Create central tag node
+  const tagNodeId = `tag-${centralTag}`;
+  nodes.push({
+    id: tagNodeId,
+    type: 'tag',
+    data: { tag: centralTag }
+  });
+
+  // Create event nodes and connect them to the central tag
+  relatedEvents.forEach(event => {
+    nodes.push({
+      id: event.id,
+      type: 'event',
+      data: event
+    });
+
+    // Connect each event to the central tag
+    edges.push({
+      source: tagNodeId,
+      target: event.id,
+      label: 'tagged with'
+    });
+  });
+
+  return {
+    centralTag,
+    nodes,
+    edges
+  };
 };
