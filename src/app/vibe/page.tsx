@@ -237,7 +237,7 @@ export default function VibePage() {
 
         {/* Enhanced initial state */}
         {!hasSearched && (
-          <div className="px-6 pb-8 h-[calc(100vh-200px)]">
+          <div className="px-6 pb-8">
             {/* Enhanced initial content */}
             <div className="space-y-12 h-full">
               <div className="max-w-7xl mx-auto h-full">
@@ -248,7 +248,7 @@ export default function VibePage() {
                     <Sparkles className="w-6 h-6 text-blue-400" />
                   </h3>
                   
-                  <div className="h-[500px]">
+                  <div className="h-[700px]">
                     <Graph />
                   </div>
                 </div>
