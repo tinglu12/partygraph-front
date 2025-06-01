@@ -70,47 +70,146 @@ export const initializeCytoscape = (
   events: Event[],
   edges: Edge[]
 ) => {
+  // Add custom CSS for dark background that matches the purple UI
+  const style = document.createElement('style');
+  style.textContent = `
+    .cytoscape-container {
+      background: linear-gradient(135deg, 
+        rgba(15, 23, 42, 0.95) 0%, 
+        rgba(30, 41, 59, 0.90) 100%
+      );
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .cytoscape-container canvas {
+      border-radius: 12px;
+      filter: drop-shadow(0 0 10px rgba(76, 175, 80, 0.4)) 
+              drop-shadow(0 0 20px rgba(76, 175, 80, 0.2)) 
+              drop-shadow(0 0 30px rgba(76, 175, 80, 0.1));
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // Add styling class to container
+  container.classList.add('cytoscape-container');
+
   const cy = cytoscape({
     container,
     style: [
       {
         selector: 'node[type="event"]',
         style: {
-          'background-color': '#4CAF50',
+          'background-color': 'rgba(0, 0, 0, 0.1)',
+          'background-opacity': 0.1,
+          'border-width': 4,
+          'border-color': '#4CAF50',
+          'border-opacity': 1,
           'label': 'data(title)',
           'text-valign': 'bottom',
           'text-halign': 'center',
           'text-wrap': 'wrap',
-          'text-max-width': '100px',
-          'width': 40,
-          'height': 40,
-          'shape': 'ellipse'
+          'text-max-width': '120px',
+          'color': '#ffffff',
+          'font-size': 12,
+          'font-weight': 'bold',
+          'width': 50,
+          'height': 50,
+          'shape': 'ellipse',
+          'overlay-opacity': 0,
+          'ghost': 'yes',
+          'ghost-offset-x': 0,
+          'ghost-offset-y': 0,
+          'ghost-opacity': 0.3
+        }
+      },
+      // Luminescent ring color variations
+      {
+        selector: 'node[type="event"][colorIndex="1"]',
+        style: {
+          'border-color': '#EC4899'
+        }
+      },
+      {
+        selector: 'node[type="event"][colorIndex="2"]',
+        style: {
+          'border-color': '#22C55E'
+        }
+      },
+      {
+        selector: 'node[type="event"][colorIndex="3"]',
+        style: {
+          'border-color': '#FBbf24'
+        }
+      },
+      {
+        selector: 'node[type="event"][colorIndex="4"]',
+        style: {
+          'border-color': '#8B5CF6'
+        }
+      },
+      {
+        selector: 'node[type="event"][colorIndex="5"]',
+        style: {
+          'border-color': '#EF4444'
+        }
+      },
+      {
+        selector: 'node[type="event"][colorIndex="6"]',
+        style: {
+          'border-color': '#06B6D4'
+        }
+      },
+      {
+        selector: 'node[type="event"][colorIndex="7"]',
+        style: {
+          'border-color': '#F59E0B'
         }
       },
       {
         selector: 'node[type="tag"]',
         style: {
-          'background-color': '#8B5CF6',
+          'background-color': 'rgba(0, 0, 0, 0.1)',
+          'background-opacity': 0.1,
+          'border-width': 3,
+          'border-color': '#8B5CF6',
+          'border-opacity': 1,
           'label': 'data(name)',
           'text-valign': 'center',
           'text-halign': 'center',
           'text-wrap': 'wrap',
           'text-max-width': '100px',
+          'color': '#ffffff',
+          'font-size': 11,
+          'font-weight': 'bold',
           'width': 'label',
           'height': 'label',
-          'padding': '10px',
-          'shape': 'rectangle',
+          'padding': '8px',
+          'shape': 'round-rectangle',
           'text-justification': 'center',
           'text-margin-y': 0,
           'text-margin-x': 0,
-          'min-width': '40px',
-          'min-height': '40px'
+          'min-width': '50px',
+          'min-height': '25px'
+        }
+      },
+      {
+        selector: 'node:hover',
+        style: {
+          'border-width': 6,
+          'border-opacity': 1,
+          'width': 60,
+          'height': 60,
+          'z-index': 999,
+          'ghost-opacity': 0.5
         }
       },
       {
         selector: 'node:active',
         style: {
-          'background-color': '#45a049'
+          'border-width': 7,
+          'border-opacity': 1
         }
       },
       {
@@ -128,11 +227,16 @@ export const initializeCytoscape = (
       {
         selector: '.highlighted',
         style: {
-          'background-color': '#F59E0B',
-          'border-width': 3,
-          'border-color': '#D97706',
+          'background-color': 'rgba(245, 158, 11, 0.2)',
+          'background-opacity': 0.2,
+          'border-width': 6,
+          'border-color': '#F59E0B',
+          'border-opacity': 1,
           'z-index': 999,
-          'opacity': 1
+          'opacity': 1,
+          'width': 65,
+          'height': 65,
+          'ghost-opacity': 0.6
         }
       },
       {

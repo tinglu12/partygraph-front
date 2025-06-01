@@ -2,8 +2,14 @@
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, Sparkles, Brain, Zap } from 'lucide-react';
+import { Search, Sparkles, Brain, Zap, ChevronDown, Tag, X } from 'lucide-react';
 import { getAllTags } from '@/actions/vibeSearchActions';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 interface VibeSearchProps {
   onSearch: (query: string) => void;
@@ -24,6 +30,7 @@ export const VibeSearch = ({
 }: VibeSearchProps) => {
   const [query, setQuery] = useState('');
   const [availableTags, setAvailableTags] = useState<string[]>([]);
+  const [selectedTag, setSelectedTag] = useState<string>('');
   const [mounted, setMounted] = useState(false);
 
   // Handle client-side mounting
@@ -64,12 +71,18 @@ export const VibeSearch = ({
 
   // Handle tag selection
   const handleTagClick = (tag: string) => {
+    setSelectedTag(tag);
     if (onTagSelect) {
       onTagSelect(tag);
     } else {
       setQuery(tag);
       onSearch(tag);
     }
+  };
+
+  // Handle clearing selection
+  const handleClearSelection = () => {
+    setSelectedTag('');
   };
 
   return (
@@ -99,33 +112,65 @@ export const VibeSearch = ({
               onKeyPress={handleKeyPress}
               placeholder={placeholder}
               disabled={isLoading}
-              className="w-full !h-18 !text-xl px-8 bg-white/15 backdrop-blur-sm border-white/30 text-white placeholder:text-gray-400 focus:bg-white/20 focus:border-purple-400/70 focus:shadow-2xl focus:shadow-purple-500/30 transition-all duration-300 rounded-2xl pr-14 shadow-lg"
+              className="w-full !h-18 !text-xl px-8 bg-white/20 backdrop-blur-md border-white/40 text-white placeholder:text-gray-400 focus:bg-white/25 focus:border-purple-400/80 focus:shadow-2xl focus:shadow-purple-500/30 hover:bg-white/22 transition-all duration-300 rounded-2xl pr-14 shadow-lg"
             />
             <div className="absolute right-5 top-1/2 transform -translate-y-1/2">
               <Brain className="w-6 h-6 text-purple-400" />
             </div>
           </div>
           <div className="flex flex-row gap-2 items-center w-full sm:w-auto">
-            {/* Dropdown for manual tag selection */}
+            {/* Shadcn dropdown for manual tag selection */}
             {mounted && availableTags.length > 0 && (
-              <select
-                className="h-18 px-4 pr-10 bg-white/15 text-white !text-xl rounded-2xl border border-white/30 focus:border-blue-400/70 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 outline-none min-w-[180px] [&>option:not(:disabled)]:text-white [&>option:not(:disabled)]:bg-slate-800 shadow-lg"
-                disabled={isLoading}
-                defaultValue=""
-                onChange={e => {
-                  if (e.target.value) handleTagClick(e.target.value);
-                }}
-              >
-                <option value="" disabled className="text-gray-400">Or view tags manually</option>
-                {availableTags.map(tag => (
-                  <option key={tag} value={tag} className="text-white bg-slate-800">{tag}</option>
-                ))}
-              </select>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    disabled={isLoading}
+                    className="h-18 px-4 pr-3 bg-white/20 backdrop-blur-md text-gray-300 !text-xl rounded-2xl border border-white/40 hover:bg-white/22 hover:text-white focus:bg-white/25 focus:border-blue-400/80 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 min-w-[180px] justify-between font-normal shadow-lg"
+                  >
+                    <span className={selectedTag ? "text-white" : "opacity-75"}>
+                      {selectedTag || "Or view tags manually"}
+                    </span>
+                    <ChevronDown className="w-5 h-5 ml-2 opacity-75" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent 
+                  className="w-[var(--radix-dropdown-menu-trigger-width)] max-h-60 overflow-hidden bg-white/15 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl"
+                  align="end"
+                >
+                  <div className="max-h-60 overflow-y-auto pr-1 py-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:mr-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:mt-2 [&::-webkit-scrollbar-track]:mb-3 [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent">
+                    {selectedTag && (
+                      <DropdownMenuItem
+                        onClick={handleClearSelection}
+                        className="text-gray-300 hover:bg-white/10 focus:bg-white/10 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 border-b border-white/20 mb-1"
+                      >
+                        <X className="w-4 h-4 mr-2 text-gray-400" />
+                        Clear selection
+                      </DropdownMenuItem>
+                    )}
+                    {availableTags.map(tag => (
+                      <DropdownMenuItem
+                        key={tag}
+                        onClick={() => handleTagClick(tag)}
+                        className={`text-white hover:bg-white/20 focus:bg-white/20 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 ${
+                          selectedTag === tag ? 'bg-white/15 border border-purple-400/50' : ''
+                        }`}
+                      >
+                        <Tag className="w-4 h-4 mr-2 text-purple-400" />
+                        {tag}
+                        {selectedTag === tag && (
+                          <div className="ml-auto w-2 h-2 bg-purple-400 rounded-full"></div>
+                        )}
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
             )}
             <Button 
               type="submit" 
               disabled={isLoading || !query.trim()}
-              className="h-18 px-10 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="h-18 px-10 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
             >
               {isLoading ? (
                 <div className="flex items-center gap-3">
