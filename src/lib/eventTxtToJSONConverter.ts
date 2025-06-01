@@ -1,3 +1,5 @@
+"use server";
+
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 
@@ -12,7 +14,8 @@ class EventConverter {
     this.model = "Llama-4-Maverick-17B-128E-Instruct-FP8";
   }
 
-  async convertToStructuredEvent(rawText: string): Promise<EventData> {
+  // TODO move to LamService
+  async convertToStructuredEvent(rawText: string): Promise<EventType> {
     const prompt = `
 You are an event classification assistant. Given a raw event description, extract structured metadata and tags based on the following ontology. Only choose from the listed values or return "unknown" if the data is missing. Return your response as JSON only.
 

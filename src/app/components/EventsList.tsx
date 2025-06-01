@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { EventType } from "@/types/EventType";
 
-export default function ChatterBox() {
+export default function EventsList() {
   const [eventData, setEventData] = useState<EventType[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -11,7 +11,8 @@ export default function ChatterBox() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/events");
+        // const response = await fetch("/api/events/tags");
+        const response = await fetch("/api/events/people");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -23,7 +24,6 @@ export default function ChatterBox() {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -36,18 +36,16 @@ export default function ChatterBox() {
       <div className="space-y-2">
         <ul className="list-disc pl-5">
           {eventData.map((event) => (
-            <li key={event.name}>
-              <h4>{event.name}</h4>
+            <div key={event.title}>
+              <p>{event.title}</p>
               <p>{event.description}</p>
-              <p>tags: {event.tags?.join(", ")}</p>
-            </li>
+              <p>type: {event.tags?.type?.join(", ")}</p>
+              <p>keywords: {event.keywords?.join(", ")}</p>
+              <p>people.names: {event.people?.map((p) => p.name).join(", ")}</p>
+            </div>
           ))}
         </ul>
       </div>
     </div>
   );
 }
-
-// <p>{event.location}</p>
-// <p>{event.date}</p>
-// <p>{event.attendees}</p>

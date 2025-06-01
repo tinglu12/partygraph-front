@@ -25,8 +25,18 @@ export const sampleEvents: EventNode[] = [
     description: "Annual music festival featuring top artists",
     category: "Music",
     tags: ["festival", "outdoor", "music"],
-    connections: ["2", "3"]
+    connections: ["2", "3"],
   },
+  {
+    id: "1.1",
+    title: "Downtown Jam",
+    date: "2024-07-15",
+    description: "music and jamming",
+    category: "Music",
+    tags: ["festival", "indoor", "music"],
+    connections: ["2", "3"],
+  },
+
   {
     id: "2",
     title: "Food & Wine Expo",
@@ -34,7 +44,7 @@ export const sampleEvents: EventNode[] = [
     description: "Culinary delights and wine tasting",
     category: "Food",
     tags: ["food", "wine", "tasting"],
-    connections: ["1", "4"]
+    connections: ["1", "4"],
   },
   {
     id: "3",
@@ -43,7 +53,7 @@ export const sampleEvents: EventNode[] = [
     description: "Contemporary art exhibition",
     category: "Art",
     tags: ["art", "exhibition", "gallery"],
-    connections: ["1", "5"]
+    connections: ["1", "5"],
   },
   {
     id: "4",
@@ -52,7 +62,7 @@ export const sampleEvents: EventNode[] = [
     description: "Latest innovations in technology",
     category: "Technology",
     tags: ["tech", "conference", "innovation"],
-    connections: ["2", "5"]
+    connections: ["2", "5"],
   },
   {
     id: "5",
@@ -61,30 +71,33 @@ export const sampleEvents: EventNode[] = [
     description: "Spring/Summer collection showcase",
     category: "Fashion",
     tags: ["fashion", "show", "design"],
-    connections: ["3", "4"]
-  }
+    connections: ["3", "4"],
+  },
 ];
 
 export const generateEdgesFromConnections = (nodes: EventNode[]) => {
   const edges: Array<{ source: string; target: string; label: string }> = [];
-  
-  nodes.forEach(node => {
+
+  nodes.forEach((node) => {
     if (node.connections) {
-      node.connections.forEach(targetId => {
+      node.connections.forEach((targetId) => {
         // Only create edge if it doesn't already exist
-        if (!edges.some(edge => 
-          (edge.source === node.id && edge.target === targetId) ||
-          (edge.source === targetId && edge.target === node.id)
-        )) {
+        if (
+          !edges.some(
+            (edge) =>
+              (edge.source === node.id && edge.target === targetId) ||
+              (edge.source === targetId && edge.target === node.id)
+          )
+        ) {
           edges.push({
             source: node.id,
             target: targetId,
-            label: 'Connected'
+            label: "Connected",
           });
         }
       });
     }
   });
-  
+
   return edges;
-}; 
+};

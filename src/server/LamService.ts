@@ -1,5 +1,7 @@
 "use server";
 
+import { getPrompt } from "@/constants/PromptLib";
+import { EventPerson } from "@/types/EventPerson";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 
@@ -49,6 +51,25 @@ class LamService {
   async classifyImage(imagePath: string): Promise<string[]> {
     // TODO
     return ["party", "event", "other"];
+  }
+
+  async getPeople(event: EventType) {
+    const prompt = await getPrompt("getPeople", {
+      event: event.description,
+    });
+    const response = await this.client.chat.completions.create({
+      messages: [{ content: prompt, role: "user" }],
+      model: this.model,
+    });
+    const content = response.completion_message?.content;
+    const person: EventPerson = {
+      name: "John Doe",
+      age: 30,
+      gender: "male",
+      interests: ["music", "art", "food"],
+    };
+    console.log("getPeople", { content });
+    return [person];
   }
 
   async getCategory(event: string) {
@@ -103,5 +124,12 @@ export async function classifyImage(imagePath: string) {
   const lam = new LamService();
   const result = await lam.classifyImage(imagePath);
   console.log("classifyImage result", { imagePath, result });
+  return result;
+}
+
+export async function getPeople(event: EventType): Promise<EventPerson[]> {
+  const lam = new LamService();
+  const result = await lam.getPeople(event);
+  console.log("getPeople result", { event, result });
   return result;
 }
