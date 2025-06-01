@@ -1,4 +1,4 @@
-import { EventNode } from "@/lib/sampleData";
+import { EventNode } from "@/types/EventGraph";
 import { X, Calendar, Info, Tag as TagIcon, Folder, Sparkles, Pin } from "lucide-react";
 
 interface EventDetailsProps {
@@ -68,7 +68,7 @@ export function EventDetails({ event, onClose, onPin, isPinned = false, hasTabNa
             </div>
             <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wider">Date</h3>
           </div>
-          <p className="text-white font-medium ml-8">{event.date}</p>
+          {/* <p className="text-white font-medium ml-8">{event.date}</p> */}
         </div>
 
         {/* Description section */}
