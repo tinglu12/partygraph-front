@@ -35,6 +35,7 @@ GraphProps) => {
     handleSearch,
     handleCategoryChange,
     setSelectedEvent,
+    resetView,
   } = useGraph({data});
 
 
