@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { VibeSearch } from "@/components/VibeSearch";
+import { FlyerUpload } from "@/components/FlyerUpload";
 import { Graph } from "@/features/components/Graph";
 import { TagCenteredGraph } from "@/components/TagCenteredGraph";
 import { EventsList } from "@/components/EventsList";
@@ -17,6 +18,7 @@ import {
   Brain,
   Zap,
   Cpu,
+  Upload,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { sampleEvents } from "@/constants/sampleEvents";
@@ -35,6 +37,8 @@ export default function VibePage() {
   const [hasSearched, setHasSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchMode, setSearchMode] = useState<"semantic" | "tag">("semantic");
+  const [showUpload, setShowUpload] = useState(false);
+  const [recentlyAddedEvent, setRecentlyAddedEvent] = useState<EventNode | null>(null);
 
   // Handle semantic vibe search using AI
   const handleVibeSearch = async (query: string) => {
@@ -43,6 +47,7 @@ export default function VibePage() {
     setHasSearched(true);
     setError(null);
     setSearchMode("semantic");
+    setRecentlyAddedEvent(null);
 
     try {
       console.log(`Starting AI semantic search for: "${query}"`);
@@ -90,6 +95,7 @@ export default function VibePage() {
     setHasSearched(true);
     setError(null);
     setSearchMode("tag");
+    setRecentlyAddedEvent(null);
 
     try {
       console.log(`Searching by tag: "${tag}"`);
@@ -113,6 +119,18 @@ export default function VibePage() {
     }
   };
 
+  // Handle successful flyer upload and event extraction
+  const handleEventExtracted = (event: EventNode) => {
+    setRecentlyAddedEvent(event);
+    setShowUpload(false);
+    setHasSearched(true);
+    setSearchResults([event]);
+    setTagGraphData(null);
+    setError(null);
+    setSearchQuery(`Flyer Upload: ${event.title}`);
+    setSearchMode("semantic");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
       {/* Enhanced background decorations with AI theme */}
@@ -129,11 +147,56 @@ export default function VibePage() {
             onTagSelect={handleTagSearch}
             isLoading={isLoading}
           />
+          
+          {/* Upload toggle section */}
+          <div className="max-w-5xl mx-auto px-6 mt-8">
+            <div className="text-center">
+              <p className="text-gray-300 mb-4">
+                Can't find what you're looking for? Add your own event!
+              </p>
+              <button
+                onClick={() => setShowUpload(!showUpload)}
+                className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+              >
+                <Upload className="w-5 h-5" />
+                {showUpload ? "Hide Upload" : "Upload Event Flyer"}
+              </button>
+            </div>
+          </div>
+
+          {/* Flyer upload section */}
+          {showUpload && (
+            <div className="max-w-5xl mx-auto px-6 mt-8">
+              <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
+                <h3 className="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center gap-3">
+                  <Brain className="w-6 h-6 text-purple-400" />
+                  AI Flyer Analysis
+                  <Upload className="w-6 h-6 text-green-400" />
+                </h3>
+                <FlyerUpload onEventExtracted={handleEventExtracted} />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Enhanced results section */}
         {hasSearched && (
           <div className="px-6 pb-8">
+            {/* Show recently added event banner */}
+            {recentlyAddedEvent && (
+              <div className="max-w-5xl mx-auto mb-8">
+                <div className="bg-gradient-to-r from-green-500/10 via-green-500/5 to-green-500/10 backdrop-blur-sm border border-green-500/20 rounded-3xl p-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <CheckCircle className="w-6 h-6 text-green-400" />
+                    <h3 className="text-xl font-bold text-white">Event Successfully Added!</h3>
+                  </div>
+                  <p className="text-gray-300">
+                    Your event "<span className="text-white font-semibold">{recentlyAddedEvent.title}</span>" has been added to Party Graph and is now searchable by other users.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {isLoading ? (
               <div className="text-center text-white py-16">
                 <div className="max-w-lg mx-auto bg-gradient-to-r from-white/10 via-white/5 to-white/10 backdrop-blur-sm rounded-3xl p-12 border border-white/20">
@@ -251,12 +314,16 @@ export default function VibePage() {
                     <EventsList
                       events={searchResults}
                       title={
-                        tagGraphData
+                        recentlyAddedEvent
+                          ? "Your New Event"
+                          : tagGraphData
                           ? `All Events: #${tagGraphData.centralTag}`
                           : "Matching Events"
                       }
                       subtitle={
-                        searchMode === "semantic"
+                        recentlyAddedEvent
+                          ? "Event successfully extracted from flyer and added to Party Graph"
+                          : searchMode === "semantic"
                           ? "Events discovered through AI semantic analysis of your vibe description"
                           : `Events tagged with "${searchQuery}"`
                       }
