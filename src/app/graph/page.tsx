@@ -3,7 +3,7 @@ import React from 'react'
 
 const GraphPage = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 h-screen">
       <Graph />
     </div>
   )

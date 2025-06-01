@@ -96,9 +96,15 @@ export const initializeCytoscape = (
           'text-halign': 'center',
           'text-wrap': 'wrap',
           'text-max-width': '100px',
-          'width': 40,
-          'height': 40,
-          'shape': 'rectangle'
+          'width': 'label',
+          'height': 'label',
+          'padding': '10px',
+          'shape': 'rectangle',
+          'text-justification': 'center',
+          'text-margin-y': 0,
+          'text-margin-x': 0,
+          'min-width': '40px',
+          'min-height': '40px'
         }
       },
       {
@@ -197,27 +203,25 @@ export const initializeCytoscape = (
         // Create a group ID
         const groupId = `group-${Date.now()}`;
         
-        // Add group class to selected nodes
+        // Check if any of the selected nodes are already in a group
+        const existingGroups = new Set<string>();
         selectedNodes.forEach(node => {
-          node.addClass('grouped');
-          node.data('group', groupId);
+          const group = node.data('group');
+          if (group) {
+            existingGroups.add(group);
+          }
         });
 
-        // Create edges between all nodes in the group
-        selectedNodes.forEach((node1, i) => {
-          selectedNodes.forEach((node2, j) => {
-            if (i < j) {
-              cy.add({
-                group: 'edges',
-                data: {
-                  source: node1.id(),
-                  target: node2.id(),
-                  label: 'Grouped'
-                }
-              });
-            }
+        // If nodes are from different groups, don't create new connections
+        if (existingGroups.size > 1) {
+          console.log('Nodes are from different groups, skipping connection creation');
+        } else {
+          // Add group class to selected nodes
+          selectedNodes.forEach(node => {
+            node.addClass('grouped');
+            node.data('group', groupId);
           });
-        });
+        }
       }
 
       isBoxSelecting = false;
