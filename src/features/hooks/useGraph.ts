@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import cytoscape from 'cytoscape';
 import { initializeCytoscape } from '@/lib/cytoscapeConfig';
-import { EventNode, GraphData } from '@/types/EventGraph';
+import { EventNode, TagCenteredNode } from '@/types/EventGraph';
+import { GraphData } from '@/types/EventGraph';
 import { calculateNodePosition } from '@/lib/nodePositioning';
+import { Tag } from '@/types/EventGraph';
 
 interface UseGraphProps {
   data?: GraphData;
@@ -12,7 +14,6 @@ interface UseGraphProps {
     target: string;
     label: string;
   }>;
-  onEventSelect?: (event: EventNode | null) => void;
 }
 
 interface UseGraphReturn {
@@ -30,8 +31,7 @@ interface UseGraphReturn {
 export const useGraph = ({ 
   data,
   events = [],
-  edges = [],
-  onEventSelect
+  edges = []
 }: UseGraphProps): UseGraphReturn => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
@@ -40,13 +40,9 @@ export const useGraph = ({
   const [filteredEdges, setFilteredEdges] = useState(edges);
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
   const [graphEvents, setGraphEvents] = useState<EventNode[]>([]);
+  const [graphTags, setGraphTags] = useState<Tag[]>([]);
   const graphEventsRef = useRef<EventNode[]>([]);
-
-  // Custom setSelectedEvent that also calls the callback
-  const handleSetSelectedEvent = (event: EventNode | null) => {
-    setSelectedEvent(event);
-    onEventSelect?.(event);
-  };
+  const graphTagsRef = useRef<Tag[]>([]);
 
   // Memoize the tags to prevent unnecessary recalculations
   const allTags = useMemo(() => 
@@ -59,12 +55,14 @@ export const useGraph = ({
   // Update ref whenever graphEvents changes
   useEffect(() => {
     graphEventsRef.current = graphEvents;
-  }, [graphEvents]);
+    graphTagsRef.current = graphTags;
+  }, [graphEvents, graphTags]);
 
-  const fetchEventsByTag = async (tag: string) => {
+  const fetchEventsByTag = async (tag: string | undefined) => {
     console.log('fetching events by tag', tag);
+    console.log('graphTags', graphTags);
     try {
-      const response = await fetch(`/api/events/tags?query=${encodeURIComponent(tag)}`);
+      const response = await fetch(`/api/events/tags?query=${encodeURIComponent(tag || '')}`);
       if (!response.ok) {
         throw new Error('Failed to fetch events');
       }
@@ -86,15 +84,18 @@ export const useGraph = ({
 
     const clickedNode = cyRef.current.getElementById(nodeId);
     const clickedPos = clickedNode.position();
+    console.log('clickedNode', nodeId);
+    console.log('graphTagsRef.current', graphTagsRef.current);
 
-    const tagName = nodeId.replace('tag-', '');
-
-    const relatedEvents = await fetchEventsByTag(tagName);
+    const tagName = graphTagsRef.current.find(tag => tag.id === nodeId);
+    console.log('graphTagsRef.current', tagName);
+    console.log('tagName', tagName);
+    const relatedEvents = await fetchEventsByTag(tagName?.name);
 
     if (relatedEvents.length === 0) return;
 
     // Calculate the radius based on the number of nodes to place
-    const radius = Math.max(200, relatedEvents.length * 50);
+    const radius = Math.max(250, relatedEvents.length * 50);
     const existingNodes = cyRef.current.nodes();
 
     relatedEvents.forEach((event: EventNode, index: number) => {
@@ -167,7 +168,7 @@ export const useGraph = ({
     const clickedNode = cyRef.current.getElementById(nodeId);
     const clickedPos = clickedNode.position();
 
-    const event = events.find(e => e.id === nodeId);
+    const event = graphEventsRef.current.find(e => e.id === nodeId);
 
     if (!event?.tags) return;
 
@@ -193,11 +194,10 @@ export const useGraph = ({
           id: tagId,
           name: tag,
           type: 'tag',
-          originalTag: tag // Store the original tag name for reference
         },
         position
       });
-
+      setGraphTags(prev => [...prev, { id: tagId, name: tag, type: 'tag' }]);
       if (tagNode) {
         // Check if either node is in a group
         const sourceGroup = clickedNode.data('group');
@@ -216,7 +216,7 @@ export const useGraph = ({
               data: {
                 source: nodeId,
                 target: tagId,
-                label: 'tagged'
+                label: ''
               }
             });
           }
@@ -241,25 +241,60 @@ export const useGraph = ({
           throw new Error('Failed to fetch random tags');
         }
         const randomTags = await response.json();
+        console.log('randomTags', randomTags);
 
         const centerX = cy.width() / 2;
         const centerY = cy.height() / 2;
-        const radius = Math.min(centerX, centerY) * 0.6;
+        const minDistance = 200; // Minimum distance between nodes
+        const maxAttempts = 50; // Maximum attempts to find non-overlapping position
+
+        const placedPositions: { x: number; y: number }[] = [];
 
         randomTags.forEach((tag: string, index: number) => {
-          const angle = (index * 2 * Math.PI) / randomTags.length;
-          const x = centerX + radius * Math.cos(angle);
-          const y = centerY + radius * Math.sin(angle);
+          let position;
+          let attempts = 0;
+          let isOverlapping = true;
 
+          while (isOverlapping && attempts < maxAttempts) {
+            // Generate random position within the viewport
+            const x = Math.random() * (cy.width() - 200) + 100; // Keep some margin from edges
+            const y = Math.random() * (cy.height() - 200) + 100;
+
+            // Check if this position overlaps with any existing nodes
+            isOverlapping = placedPositions.some(pos => {
+              const dx = pos.x - x;
+              const dy = pos.y - y;
+              return Math.sqrt(dx * dx + dy * dy) < minDistance;
+            });
+
+            if (!isOverlapping) {
+              position = { x, y };
+              placedPositions.push(position);
+            }
+
+            attempts++;
+          }
+
+          // If we couldn't find a non-overlapping position, use a fallback position
+          if (!position) {
+            const angle = (index * 2 * Math.PI) / randomTags.length;
+            position = {
+              x: centerX + (cy.width() * 0.4) * Math.cos(angle),
+              y: centerY + (cy.height() * 0.4) * Math.sin(angle)
+            };
+          }
+
+          const tagId = `tag-${tag}-${index}`;
           cy.add({
             group: 'nodes',
             data: {
-              id: `tag-${tag}`,
+              id: tagId,
               name: tag,
               type: 'tag'
             },
-            position: { x, y }
+            position
           });
+          setGraphTags(prev => [...prev, { id: tagId, name: tag, type: 'tag' }]);
         });
       } catch (error) {
         console.error('Error initializing graph with random tags:', error);
@@ -278,7 +313,8 @@ export const useGraph = ({
         const eventData = graphEventsRef.current.find((e: EventNode) => e.id === node.id());
         console.log('eventData', eventData);
         if (eventData) {
-          handleSetSelectedEvent(eventData);
+          console.log('hi');
+          setSelectedEvent(eventData);
           expandEventNode(node.id());
         }
       } else if (nodeType === 'tag') {
@@ -288,7 +324,7 @@ export const useGraph = ({
 
     cy.on('tap', (evt) => {
       if (evt.target === cy) {
-        handleSetSelectedEvent(null);
+        setSelectedEvent(null);
       }
     });
 
@@ -386,7 +422,7 @@ export const useGraph = ({
     allTags,
     handleSearch,
     handleCategoryChange,
-    setSelectedEvent: handleSetSelectedEvent,
+    setSelectedEvent,
     resetView
   };
 }; 
