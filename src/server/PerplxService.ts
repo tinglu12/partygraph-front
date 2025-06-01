@@ -52,7 +52,7 @@ class PerplexityService {
                 items: {
                   type: "string",
                   description:
-                    "a list of common tags associated with the event",
+                    "a list of common tags associated with the event must be lowercase",
                 },
               },
               category: {
@@ -110,12 +110,20 @@ class PerplexityService {
   }
 }
 
-export async function plexSearchEvent(query: string) {
-  console.log("Perplexity searchEvent", { query });
+export async function plexSearchEvent(query: string, count = 5) {
   const perplx = new PerplexityService();
-  const result = await perplx.searchEvent(query);
-  console.log("Perplexity searchEvent result", result);
-  return result;
+  const safeName = (name: string) => name.toLowerCase().replace(/ /g, "-");
+  console.log("Perplexity searchEvent", { query, count });
+  let events = await perplx.searchEvent(query, count);
+  events = events.map((event) => {
+    return {
+      ...event,
+      id: safeName(event.title),
+    };
+  });
+
+  console.log("Perplexity searchEvent result", events);
+  return events;
 }
 
 export async function plexSearchMany() {
