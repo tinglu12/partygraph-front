@@ -38,6 +38,7 @@ export const useGraph = ({
   const [filteredEdges, setFilteredEdges] = useState(edges);
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
   const [graphEvents, setGraphEvents] = useState<EventNode[]>([]);
+  const graphEventsRef = useRef<EventNode[]>([]);
 
   // Memoize the tags to prevent unnecessary recalculations
   const allTags = useMemo(() => 
@@ -46,6 +47,11 @@ export const useGraph = ({
       name: tag,
       type: 'tag'
     })), [events]);
+
+  // Update ref whenever graphEvents changes
+  useEffect(() => {
+    graphEventsRef.current = graphEvents;
+  }, [graphEvents]);
 
   const fetchEventsByTag = async (tag: string) => {
     console.log('fetching events by tag', tag);
@@ -108,8 +114,13 @@ export const useGraph = ({
           position
         });
         console.log('event', event);
-        setGraphEvents(prev => [...prev, event]);
-        
+        setGraphEvents(prev => {
+          // Check if event already exists in state
+          if (prev.some(e => e.id === event.id)) {
+            return prev;
+          }
+          return [...prev, event];
+        });
       }
 
       const targetNode = cyRef.current?.getElementById(event.id);
@@ -154,7 +165,7 @@ export const useGraph = ({
 
     const radius = Math.max(200, event.tags.length * 50);
     const existingNodes = cyRef.current.nodes();
-
+    console.log(event.tags);
     event.tags.forEach((tag: string, index: number) => {
       const position = calculateNodePosition({
         centerPos: clickedPos,
@@ -255,8 +266,8 @@ export const useGraph = ({
       console.log('nodeType', nodeType);
       
       if (nodeType === 'event') {
-        console.log('graphEvents', graphEvents);
-        const eventData = graphEvents.find((e: EventNode) => e.id === node.id());
+        console.log('graphEvents', graphEventsRef.current);
+        const eventData = graphEventsRef.current.find((e: EventNode) => e.id === node.id());
         console.log('eventData', eventData);
         if (eventData) {
           setSelectedEvent(eventData);
