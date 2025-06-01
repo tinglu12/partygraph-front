@@ -13,11 +13,11 @@ export function EventDetails({ event, onClose, onPin, isPinned = false, hasTabNa
   if (!event) return null;
 
   return (
-    <div className={`w-[400px] bg-gradient-to-br from-slate-900/95 via-purple-900/90 to-slate-900/95 backdrop-blur-xl border-r border-white/20 shadow-2xl ${
+    <div className={`w-[400px] bg-gradient-to-br from-slate-900/95 via-purple-900/90 to-slate-900/95 backdrop-blur-xl border-r border-white/20 shadow-2xl rounded-l-lg ${
       hasTabNavigation ? 'h-[calc(100%-3rem)]' : 'h-full'
     }`}>
       {/* Enhanced header with glass morphism */}
-      <div className={`flex items-center justify-between p-4 bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-sm ${
+      <div className={`flex items-center justify-between p-4 bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-sm rounded-tl-lg ${
         hasTabNavigation 
           ? 'border-b border-white/10' 
           : 'border-b border-white/10'

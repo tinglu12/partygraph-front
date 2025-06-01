@@ -69,7 +69,7 @@ export const Graph = ({
         
         {/* Tab Navigation for Pinned Events */}
         {pinnedEvents.length > 0 && (
-          <div className="absolute top-0 left-0 w-[400px] z-40 bg-gradient-to-r from-slate-900/90 via-purple-900/80 to-slate-900/90 backdrop-blur-xl border-r border-white/20">
+          <div className="absolute top-0 left-0 w-[400px] z-40 bg-gradient-to-r from-slate-900/90 via-purple-900/80 to-slate-900/90 backdrop-blur-xl border-r border-white/20 rounded-tl-lg">
             <div className="flex items-center gap-1 p-2 overflow-x-auto">
               <div className="flex items-center gap-1 mr-2 text-xs text-gray-400">
                 <Pin className="w-3 h-3" />
