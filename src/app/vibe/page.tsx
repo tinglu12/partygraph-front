@@ -194,9 +194,45 @@ export default function VibePage() {
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/3 to-blue-500/3 rounded-full blur-3xl"></div>
 
+      {/* Parallax Background Images - endless horizontal scrolling */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Dark Purple Backdrop - slower parallax */}
+        <div className="absolute top-0 left-0 w-full h-[600px] opacity-25 translate-y-[80px]">
+          <div className="flex h-full animate-[smooth-scroll_120s_linear_infinite]">
+            {/* Repeat the image 6 times for smoother transition */}
+            {[...Array(6)].map((_, i) => (
+              <img
+                key={i}
+                src="/partygraphBackdrop_lightPurple.png"
+                alt=""
+                className="h-full min-w-full object-cover object-top flex-shrink-0"
+              />
+            ))}
+          </div>
+        </div>
+        
+        {/* Light Purple Backdrop - faster parallax */}
+        <div className="absolute top-0 left-0 w-full h-[600px] opacity-50 translate-y-[260px]">
+          <div className="flex h-full animate-[smooth-scroll_80s_linear_infinite]">
+            {/* Repeat the image 6 times for smoother transition */}
+            {[...Array(6)].map((_, i) => (
+              <img
+                key={i}
+                src="/partygraphBackdrop_darkPurple.png"
+                alt=""
+                className="h-full min-w-full object-cover object-top flex-shrink-0"
+              />
+            ))}
+          </div>
+        </div>
+        
+        {/* Gradient overlay to blend skyline with content */}
+        <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-transparent via-transparent to-slate-900/30"></div>
+      </div>
+
       <div className="relative z-10">
         {/* Enhanced search interface with AI branding */}
-        <div className="pt-8 pb-6">
+        <div className="pt-8 pb-6 relative z-20">
           <VibeSearch
             onSearch={handleVibeSearch}
             onTagSelect={handleTagSearch}
@@ -244,7 +280,7 @@ export default function VibePage() {
 
         {/* Enhanced results section */}
         {hasSearched && (
-          <div className="px-6 pb-8">
+          <div className="px-6 pb-8 relative z-20">
             {/* Show recently added event banner */}
             {recentlyAddedEvent && (
               <div className="max-w-5xl mx-auto mb-8">
@@ -429,7 +465,7 @@ export default function VibePage() {
 
         {/* Enhanced initial state */}
         {!hasSearched && (
-          <div className="pb-8">
+          <div className="pb-8 relative z-20">
             {/* Enhanced initial content */}
             <div className="space-y-12 h-full">
               {/* Full width graph container - no max-width constraint */}

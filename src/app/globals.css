@@ -119,3 +119,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom keyframes for smooth infinite scrolling */
+@keyframes smooth-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
