@@ -6,6 +6,9 @@ export interface EventNode {
   category?: string;
   tags?: string[];
   keywords?: string[];
+  venue?: string;
+  neighborhood?: string;
+  url?: string;
   connections?: string[]; // IDs of connected nodes
 }
 

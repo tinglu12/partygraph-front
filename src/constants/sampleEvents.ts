@@ -1,6 +1,6 @@
 import { EventNode } from "@/types/EventGraph";
 
-export const sampleEvents: EventNode[] = [
+export const xsampleEvents: EventNode[] = [
   {
     title: "Bloc Party, Metric, Blonde Redhead, joan",
     description: "Indie rock concert at Forest Hills Stadium",

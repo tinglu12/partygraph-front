@@ -99,7 +99,7 @@ class PerplexityService {
               // "neighborhood",
               // ],
             },
-            required: ["title", "tags"],
+            required: ["title", "tags", "description", "url"],
           },
         },
       },
