@@ -1,5 +1,5 @@
 import { EventNode } from "@/types/EventGraph";
-import { X, Calendar, Info, Tag as TagIcon, Folder, Sparkles, Pin } from "lucide-react";
+import { X, Calendar, Info, Tag as TagIcon, Folder, Sparkles, Pin, ExternalLink } from "lucide-react";
 
 interface EventDetailsProps {
   event: EventNode | null;
@@ -117,6 +117,28 @@ export function EventDetails({ event, onClose, onPin, isPinned = false, hasTabNa
                   #{tag}
                 </span>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* URL section */}
+        {event.url && (
+          <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-6 h-6 bg-gradient-to-r from-cyan-600/30 to-teal-600/30 rounded-lg flex items-center justify-center border border-cyan-500/30">
+                <ExternalLink className="w-3 h-3 text-cyan-300" />
+              </div>
+              <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wider">Event URL</h3>
+            </div>
+            <div className="ml-8">
+              <a
+                href={event.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-200 text-sm hover:text-cyan-100 transition-colors duration-200 underline decoration-cyan-400/50 hover:decoration-cyan-300 underline-offset-2 break-all"
+              >
+                {event.url}
+              </a>
             </div>
           </div>
         )}
