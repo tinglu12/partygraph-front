@@ -222,7 +222,7 @@ export default function VibePage() {
         </div>
         
         {/* Light Purple Backdrop - faster parallax */}
-        <div className="absolute top-0 left-0 w-full h-[600px] opacity-50 translate-y-[260px]">
+        <div className="absolute top-0 left-0 w-full h-[600px] opacity-80 translate-y-[300px]">
           <div className="flex h-full animate-[smooth-scroll_80s_linear_infinite]">
             {/* Repeat the image 6 times for smoother transition */}
             {[...Array(6)].map((_, i) => (
@@ -483,8 +483,8 @@ export default function VibePage() {
               <div className="w-full h-full">
                 <div className="bg-white/5 backdrop-blur-sm border-b border-white/10 h-full">
                   {/* Header with padding */}
-                  <div className="p-8 pb-6">
-                    <h3 className="text-2xl font-bold text-white mb-0 text-center flex items-center justify-center gap-3">
+                  <div className="h-16 flex items-center justify-center">
+                    <h3 className="text-2xl font-bold text-white flex items-center justify-center gap-3">
                       <Sparkles className="w-6 h-6 text-purple-400" />
                       Event Network Overview
                       <Sparkles className="w-6 h-6 text-blue-400" />
@@ -492,7 +492,7 @@ export default function VibePage() {
                   </div>
 
                   {/* Graph container spanning full browser width */}
-                  <div className="h-[700px] pb-8">
+                  <div className="h-[700px] pb-8 px-0 md:px-8 lg:px-16">
                     <Graph onEventSelect={handleEventSelect} />
                   </div>
                 </div>
