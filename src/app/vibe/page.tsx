@@ -247,7 +247,9 @@ export default function VibePage() {
                     Event Network Overview
                     <Sparkles className="w-6 h-6 text-blue-400" />
                   </h3>
-                  <Graph events={sampleEvents} edges={generateEdgesFromConnections(sampleEvents)} />
+                  <div className="h-full w-full">
+                    <Graph />
+                  </div>
                 </div>
               </div>
               
