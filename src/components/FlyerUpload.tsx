@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Upload, FileImage, X, Brain, Sparkles, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { EventNode } from '@/types/EventGraph';
+import Image from 'next/image';
 
 interface FlyerUploadProps {
   onEventExtracted?: (event: EventNode) => void;
@@ -200,7 +201,7 @@ export const FlyerUpload = ({ onEventExtracted, className = "" }: FlyerUploadPro
               <div className="flex justify-center">
                 <div className="relative">
                   {previewUrl && (
-                    <img 
+                    <Image 
                       src={previewUrl} 
                       alt="Flyer preview" 
                       className="max-w-full max-h-48 rounded-lg shadow-lg object-contain"

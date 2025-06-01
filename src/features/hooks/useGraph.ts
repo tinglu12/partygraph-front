@@ -328,7 +328,7 @@ export const useGraph = ({
         cyRef.current = null;
       }
     };
-  }, []);
+  }, [graphTags, expandedNodes, graphEvents]);
 
   useEffect(() => {
     if (!cyRef.current) return;

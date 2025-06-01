@@ -39,7 +39,7 @@ export default function EventsList() {
             <div key={event.title}>
               <p>{event.title}</p>
               <p>{event.description}</p>
-              <p>type: {event.tags?.type?.join(", ")}</p>
+              <p>type: {event.tags?.join(", ")}</p>
               <p>keywords: {event.keywords?.join(", ")}</p>
               <p>people.names: {event.people?.map((p) => p.name).join(", ")}</p>
             </div>

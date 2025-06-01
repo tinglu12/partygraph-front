@@ -223,7 +223,7 @@ export async function plexSearchMany(maxCats?: number, eventCount?: number) {
   // const promises = tags.map((tag) => plexSearchEvent(tag));
 
   // const results = await Promise.all(promises);
-  let results: any[] = [];
+  const results: any[] = [];
   for (const tag of activeTags) {
     const catResults: any[] = await plexSearchEvent(tag, eventCount);
     console.log("Perplexity searchMany result =>", { tag, catResults });

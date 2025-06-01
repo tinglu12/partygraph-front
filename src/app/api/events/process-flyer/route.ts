@@ -206,7 +206,7 @@ Return ONLY valid JSON, no other text.`;
     });
 
     const content = response.completion_message?.content;
-    let text = typeof content === "string" ? content : content?.text;
+    const text = typeof content === "string" ? content : content?.text;
     
     if (!text) {
       console.log('No enhanced data extracted, returning initial data');

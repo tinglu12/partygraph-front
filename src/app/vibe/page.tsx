@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { VibeSearch } from "@/components/VibeSearch";
 import { FlyerUpload } from "@/components/FlyerUpload";
 import { FloatingChatButton } from "@/components/FloatingChatButton";
@@ -49,7 +49,7 @@ export default function VibePage() {
   const [selectedEvent, setSelectedEvent] = useState<EventNode | null>(null);
 
   // Example searches that rotate
-  const exampleSearches = [
+  const exampleSearches = useMemo(() => [
     "energetic music with dancing and live bands",
     "chill art gallery opening with wine",
     "outdoor food festival with local vendors",
@@ -58,7 +58,7 @@ export default function VibePage() {
     "rooftop party with city views",
     "indie rock concert with emerging artists",
     "wine tasting event with friends",
-  ];
+  ], []);
 
   // Rotate example searches every 3 seconds
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function VibePage() {
       setCurrentExampleIndex((prev) => (prev + 1) % exampleSearches.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [exampleSearches]);
 
   // Handle Escape key to close modal
   useEffect(() => {
