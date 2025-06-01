@@ -32,11 +32,6 @@ export const Graph = ({
 
   return (
     <div className="flex flex-col h-full">
-      <FilterBar 
-        events={events}
-        onSearch={handleSearch}
-        onCategoryChange={handleCategoryChange}
-      />
       <div className="flex-1 relative h-[calc(100%-48px)]">
         <div 
           ref={containerRef} 
