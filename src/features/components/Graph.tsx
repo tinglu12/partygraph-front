@@ -31,7 +31,7 @@ export const Graph = ({
   } = useGraph({ data, events, edges });
 
   return (
-    <div className="flex flex-col h-full min-h-[600px]">
+    <div className="flex flex-col h-full">
       <FilterBar 
         events={events}
         onSearch={handleSearch}
@@ -40,7 +40,7 @@ export const Graph = ({
       <div className="flex-1 relative h-[calc(100%-48px)]">
         <div 
           ref={containerRef} 
-          className="absolute inset-0 rounded-lg border bg-card"
+          className="absolute inset-0 rounded-lg border bg-card h-full w-full"
         />
         {selectedEvent && (
           <div className="absolute top-0 right-0 h-full w-[350px] z-50 bg-background/95 shadow-lg">

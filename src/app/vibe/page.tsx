@@ -237,17 +237,18 @@ export default function VibePage() {
 
         {/* Enhanced initial state */}
         {!hasSearched && (
-          <div className="px-6 pb-8">
+          <div className="px-6 pb-8 h-[calc(100vh-200px)]">
             {/* Enhanced initial content */}
-            <div className="space-y-12">
-              <div className="max-w-7xl mx-auto">
-                <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
+            <div className="space-y-12 h-full">
+              <div className="max-w-7xl mx-auto h-full">
+                <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 h-full">
                   <h3 className="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center gap-3">
                     <Sparkles className="w-6 h-6 text-purple-400" />
                     Event Network Overview
                     <Sparkles className="w-6 h-6 text-blue-400" />
                   </h3>
-                  <div className="h-full w-full">
+                  
+                  <div className="h-[500px]">
                     <Graph />
                   </div>
                 </div>
