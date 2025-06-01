@@ -75,7 +75,7 @@ class LamService {
     // @ts-ignore
     const blob = JSON.parse(content?.text?.trim() || "{}");
     console.log("getPeople", blob);
-    return blob;
+    return blob?.people;
   }
 
   async getCategory(event: string) {
