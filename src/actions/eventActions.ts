@@ -1,31 +1,31 @@
 "use server";
 
 import { EventNode } from "@/types/EventGraph";
-import { sampleEvents } from "@/constants/sampleEvents";
-import { writeFile } from "fs/promises";
-import path from "path";
+import { sampleEvents } from "@/constants/sampleEvents-v2";
 
 /**
  * Add a new event to the system
  * For now, this adds to the in-memory sampleEvents array
  * In a real app, this would save to a database
  */
-export async function addEvent(event: EventNode): Promise<{ success: boolean; event?: EventNode; error?: string }> {
+export async function addEvent(
+  event: EventNode
+): Promise<{ success: boolean; event?: EventNode; error?: string }> {
   try {
     // Validate required fields
     if (!event.title || !event.id) {
       return {
         success: false,
-        error: "Event must have a title and ID"
+        error: "Event must have a title and ID",
       };
     }
 
     // Check if event with this ID already exists
-    const existingEvent = sampleEvents.find(e => e.id === event.id);
+    const existingEvent = sampleEvents.find((e) => e.id === event.id);
     if (existingEvent) {
       return {
         success: false,
-        error: "Event with this ID already exists"
+        error: "Event with this ID already exists",
       };
     }
 
@@ -49,14 +49,13 @@ export async function addEvent(event: EventNode): Promise<{ success: boolean; ev
 
     return {
       success: true,
-      event: newEvent
+      event: newEvent,
     };
-
   } catch (error) {
     console.error("Error adding event:", error);
     return {
       success: false,
-      error: "Failed to add event"
+      error: "Failed to add event",
     };
   }
 }
@@ -66,9 +65,9 @@ export async function addEvent(event: EventNode): Promise<{ success: boolean; ev
  * Includes special handling for flyer-sourced events
  */
 export async function addFlyerEvent(
-  eventData: Omit<EventNode, 'id'> & { 
-    location?: string; 
-    time?: string; 
+  eventData: Omit<EventNode, "id"> & {
+    location?: string;
+    time?: string;
     price?: string;
     artists?: string[];
     genre?: string;
@@ -79,25 +78,27 @@ export async function addFlyerEvent(
     const timestamp = Date.now();
     const titleSlug = eventData.title
       .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-    
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
     const eventId = `flyer-${titleSlug}-${timestamp}`;
 
     // Create enhanced description with flyer information
     let description = eventData.description || "";
-    
+
     // Add location, time, and price to description if available
     const additionalInfo = [];
-    if (eventData.location) additionalInfo.push(`Location: ${eventData.location}`);
+    if (eventData.location)
+      additionalInfo.push(`Location: ${eventData.location}`);
     if (eventData.time) additionalInfo.push(`Time: ${eventData.time}`);
     if (eventData.price) additionalInfo.push(`Price: ${eventData.price}`);
     if (eventData.artists && eventData.artists.length > 0) {
-      additionalInfo.push(`Artists: ${eventData.artists.join(', ')}`);
+      additionalInfo.push(`Artists: ${eventData.artists.join(", ")}`);
     }
-    
+
     if (additionalInfo.length > 0) {
-      description = description + (description ? '\n\n' : '') + additionalInfo.join('\n');
+      description =
+        description + (description ? "\n\n" : "") + additionalInfo.join("\n");
     }
 
     // Create enhanced tags
@@ -106,7 +107,7 @@ export async function addFlyerEvent(
       tags.push(eventData.genre);
     }
     if (eventData.artists) {
-      eventData.artists.forEach(artist => {
+      eventData.artists.forEach((artist) => {
         if (!tags.includes(artist)) {
           tags.push(artist);
         }
@@ -131,18 +132,17 @@ export async function addFlyerEvent(
 
     // Add the event to the system
     const result = await addEvent(newEvent);
-    
+
     if (result.success) {
       console.log(`Successfully added flyer event: ${newEvent.title}`);
     }
 
     return result;
-
   } catch (error) {
     console.error("Error adding flyer event:", error);
     return {
       success: false,
-      error: "Failed to add flyer event"
+      error: "Failed to add flyer event",
     };
   }
 }
@@ -159,21 +159,24 @@ export async function getAllEvents(): Promise<EventNode[]> {
  * Get event by ID
  */
 export async function getEventById(id: string): Promise<EventNode | null> {
-  const event = sampleEvents.find(e => e.id === id);
+  const event = sampleEvents.find((e) => e.id === id);
   return event || null;
 }
 
 /**
  * Update an existing event
  */
-export async function updateEvent(id: string, updates: Partial<EventNode>): Promise<{ success: boolean; event?: EventNode; error?: string }> {
+export async function updateEvent(
+  id: string,
+  updates: Partial<EventNode>
+): Promise<{ success: boolean; event?: EventNode; error?: string }> {
   try {
-    const eventIndex = sampleEvents.findIndex(e => e.id === id);
-    
+    const eventIndex = sampleEvents.findIndex((e) => e.id === id);
+
     if (eventIndex === -1) {
       return {
         success: false,
-        error: "Event not found"
+        error: "Event not found",
       };
     }
 
@@ -190,14 +193,13 @@ export async function updateEvent(id: string, updates: Partial<EventNode>): Prom
 
     return {
       success: true,
-      event: updatedEvent
+      event: updatedEvent,
     };
-
   } catch (error) {
     console.error("Error updating event:", error);
     return {
       success: false,
-      error: "Failed to update event"
+      error: "Failed to update event",
     };
   }
 }
@@ -205,14 +207,16 @@ export async function updateEvent(id: string, updates: Partial<EventNode>): Prom
 /**
  * Delete an event
  */
-export async function deleteEvent(id: string): Promise<{ success: boolean; error?: string }> {
+export async function deleteEvent(
+  id: string
+): Promise<{ success: boolean; error?: string }> {
   try {
-    const eventIndex = sampleEvents.findIndex(e => e.id === id);
-    
+    const eventIndex = sampleEvents.findIndex((e) => e.id === id);
+
     if (eventIndex === -1) {
       return {
         success: false,
-        error: "Event not found"
+        error: "Event not found",
       };
     }
 
@@ -220,14 +224,13 @@ export async function deleteEvent(id: string): Promise<{ success: boolean; error
     console.log(`Deleted event: ${deletedEvent.title} (ID: ${id})`);
 
     return {
-      success: true
+      success: true,
     };
-
   } catch (error) {
     console.error("Error deleting event:", error);
     return {
       success: false,
-      error: "Failed to delete event"
+      error: "Failed to delete event",
     };
   }
-} 
+}

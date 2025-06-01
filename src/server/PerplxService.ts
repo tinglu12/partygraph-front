@@ -71,11 +71,16 @@ class PerplexityService {
               },
               venue: {
                 type: "string",
-                description: "the venue of the event",
+                description: "the name of the venue of the event",
+              },
+              address: {
+                type: "string",
+                description: "the address of the event",
               },
               neighborhood: {
                 type: "string",
-                description: "which small neighborhood of the city",
+                description:
+                  "the neighborhood of the city for the event, eg SoHo, Williamsburg, East Village, LES etc.",
               },
               // category: {
               //   type: "string",
@@ -99,7 +104,16 @@ class PerplexityService {
               // "neighborhood",
               // ],
             },
-            required: ["title", "tags", "description", "url"],
+            required: [
+              "title",
+              "tags",
+              "description",
+              "url",
+              "date",
+              "venue",
+              "neighborhood",
+              "keywords",
+            ],
           },
         },
       },
@@ -130,7 +144,7 @@ class PerplexityService {
     );
 
     const content = response.data.choices?.[0]?.message?.content;
-    console.log("Perplexity raw content:", content);
+    // console.log("Perplexity raw content:", content);
     // Try to parse the array of JSON objects from the response
     let result;
     try {
@@ -142,11 +156,25 @@ class PerplexityService {
   }
 }
 
-export async function plexSearchEvent(tag: string, count = 5) {
+export async function plexSearchEvent(tag: string, count = 5, retry = 0) {
   const perplx = new PerplexityService();
 
   console.log("Perplexity searchEvent", { query: tag, count });
   let events = await perplx.searchEvent(tag, count);
+
+  // sometimes the response is empty, so we retry
+  if (!events || events.length === 0) {
+    if (retry < 3) {
+      console.log("Perplexity searchEvent failed, retrying", {
+        query: tag,
+        count,
+        retry,
+      });
+      return plexSearchEvent(tag, count, retry + 1);
+    }
+    console.error("failed on event");
+  }
+
   events = events.map((event) => {
     // const itemTags = [...(event?.tags ?? []), tag];
     const finalTags = cleanTags([...(event?.tags ?? [])], tag);
@@ -159,34 +187,35 @@ export async function plexSearchEvent(tag: string, count = 5) {
     };
   });
 
-  console.log("Perplexity searchEvent result", events);
+  // console.log("Perplexity searchEvent result", events);
   return events;
 }
 
 export async function plexSearchMany(maxCats?: number, eventCount?: number) {
-  eventCount = eventCount ?? 5;
+  eventCount = eventCount ?? 10;
   const tags = [
     "book launch",
     "indie rock concert",
     "networking event",
+    "tech meetup",
+    "hackathon",
     "jazz concert",
     "classical music concert",
     "hip hop concert",
-    "edm rave",
-    "open mic night",
+    "rave",
     "product launch",
     "silent disco",
     "art gallery opening",
-    "broadway",
+    "broadway show",
+    "off broadway show",
     "drag show",
     "fashion show",
     "food festival",
-    "restaurant opening",
-    "tech meetup",
-    "hackathon",
     "gala",
     "film festival",
-    "holiday market",
+    "night market",
+    // "open mic night",
+    // "restaurant opening",
   ];
 
   const activeTags = maxCats ? tags.slice(0, maxCats) : tags;

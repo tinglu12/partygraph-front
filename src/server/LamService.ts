@@ -45,7 +45,7 @@ class LamService {
     const content = createChatCompletionResponse.completion_message?.content;
     console.log(content);
 
-    // @ts-ignore
+    // @ts-expect-error - Llama model types are not properly typed
     const event = content?.text.trim();
     return event;
   }
@@ -87,6 +87,7 @@ Return JSON in this format:
     const content = response.completion_message?.content;
     console.log("Llama classifyImage raw content:", content);
 
+    // @ts-expect-error - Llama model types are not properly typed
     let text = typeof content === "string" ? content : content?.text;
     if (!text) throw new Error("No text content in Llama API response");
 
@@ -115,13 +116,13 @@ Return JSON in this format:
       messages: [{ content: prompt, role: "user" }],
       response_format: {
         type: "json_schema",
-        // @ts-ignore
+        // @ts-expect-error - Llama model types are not properly typed
         json_schema: EventPeopleSchema,
       },
     });
 
     const content = response.completion_message?.content;
-    // @ts-ignore
+    // @ts-expect-error - Llama model types are not properly typed
     const blob = JSON.parse(content?.text?.trim() || "{}");
     console.log("getPeople", blob);
     return blob?.people;
@@ -148,7 +149,7 @@ Return JSON in this format:
     const content = createChatCompletionResponse.completion_message?.content;
     console.log(content);
 
-    // @ts-ignore
+    // @ts-expect-error - Llama model types are not properly typed
     const category = content?.text.trim();
 
     return category;
