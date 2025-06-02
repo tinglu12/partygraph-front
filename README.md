@@ -5,8 +5,6 @@ https://cerebralvalley.ai/e/llama-4-hackathon-nyc-f673085d
 
 *PartyGraph: new york central event finder, powered by Llama.*
 
-Party Graph is a new york central event finder utilizing a node based visualizer to find connections between events, venues, and many more activities. The goal of this project is to increase access to finding community(ies) in New York by making it easier for people to discover gatherings that match their interest. Our Event Network is made from two different nodes: rectangular tag nodes, and circular event nodes. Each tag leads to related events, and each event has tags associated with it.  As you explore the events and tags you’re interested in, a web of interconnectivity unfurls, helping you visualize what is meaningful to you and where you want to be spending your time.
-
 ## The Problem
 
 *   Platforms like Eventbrite and DoNYC prioritize large, ticketed, or sponsored events, burying smaller, community-driven gathering. Small events are hard to find unless you're in-the-know.
