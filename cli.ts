@@ -100,9 +100,19 @@ async function techWeekFormat() {
 }
 
 async function enrichEvents() {
+  const maxEvents = 2;
   const events = await sampleEvents;
-  const selected = events.filter((event) => event.category === "nytechweek");
+  const selected = events
+    .filter((event) => event.category === "nytechweek")
+    .slice(0, maxEvents);
+
   const enriched = await plexEnrichEvents(selected);
+  console.log("enrichedEvents result", { enriched });
+  fs.writeFileSync(
+    "./public/scraped/enriched-events.json",
+    JSON.stringify(enriched, null, 2)
+  );
+  return enriched;
 }
 
 async function dedupeEvents() {

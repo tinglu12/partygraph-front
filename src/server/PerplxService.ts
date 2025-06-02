@@ -195,14 +195,27 @@ class PerplexityService {
     return result.items;
   }
 
-  async enrichEventFromUrl(url: string) {
+  async enrichEventFromUrl(event: EventType) {
+    // @ts-ignore
+    const url = event.link || event.url;
+    // TODO fix why we have 'link' and not 'url'
+    // normalize types so we dont have EventType and EventNode
     const prompt = `
-    Find the event details for the following url: ${url}
-    return the event details as a JSON object.
+Tell me about the event on this page including
+- title
+- location
+- description
+- date
+- location
+- 5 tags
+- 5 keywords
+return the info in json format
+    URL: ${url}
+
     `;
 
     const content = await this.post(prompt, eventSingleSchema);
-    console.log("Perplexity searchEventByUrl content:", content);
+    console.log("Perplexity searchEventByUrl content:", content, prompt);
     return content;
   }
 }
@@ -246,8 +259,7 @@ export async function plexEnrichEvents(events: EventType[]) {
   const perplx = new PerplexityService();
   for (const event of events) {
     console.log("enrich one", event);
-    // @ts-ignore
-    const enriched = await perplx.enrichEventFromUrl(event.link || event.url);
+    const enriched = await perplx.enrichEventFromUrl(event);
     console.log("enrich one", enriched);
   }
 }
