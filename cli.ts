@@ -1,3 +1,5 @@
+import { PromisePool } from "@supercharge/promise-pool";
+
 import { searchEvent, classifyImage, getPeople } from "@/server/LamService";
 import {
   plexEnrichEvents,
@@ -62,14 +64,34 @@ async function addPeople() {
   console.log("events with people:", { updated });
 }
 
+// scrape partiful events using jina
 async function scrapeEvents() {
   const events = await sampleEvents;
-  const maxEvents = 3;
-  const selected = events.filter((event) => event.url?.includes("partiful"));
+  const selected = events.filter((event) => event.category === "nytechweek");
+  const maxEvents = 20;
+  const concurrency = 5;
   const sampled = sampleSize(selected, maxEvents);
-  const proms = sampled.map(scrapeAndFormatEvent);
-  const results = await Promise.all(proms);
-  console.log("enrichedEvents result", { results });
+
+  const { results, errors } = await PromisePool.withConcurrency(concurrency)
+    .for(sampled)
+    .process(async (event, index, pool) => {
+      console.log("scraping event", { index, event });
+      const enriched = await scrapeAndFormatEvent(event);
+      fs.writeFileSync(
+        `./public/enriched/${enriched.id}.json`,
+        JSON.stringify(enriched, null, 2)
+      );
+      return enriched;
+    });
+
+  fs.writeFileSync(
+    `./public/events/enriched-events-${maxEvents}.json`,
+    JSON.stringify(results, null, 2)
+  );
+
+  // const proms = sampled.map(scrapeAndFormatEvent);
+  // const results = await Promise.all(proms);
+  console.log("enrichedEvents result", { results, errors });
 }
 
 async function plexTest() {

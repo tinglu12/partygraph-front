@@ -7,6 +7,7 @@ import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 import fs from "fs/promises";
 import { EventNodeSchema } from "@/types/EventNodeSchema";
+import { EventNode } from "@/types/EventGraph";
 
 class LamService {
   private client: LlamaAPIClient;
@@ -129,11 +130,12 @@ Return JSON in this format:
     return blob?.people;
   }
 
-  async formatRawEventData(raw: string) {
+  async formatRawEventData(raw: string, retry = 0): Promise<EventNode | null> {
     const prompt = `format this event info into the JSON structure provided: ${raw}`;
     const response = await this.client.chat.completions.create({
       model: this.model,
       messages: [{ content: prompt, role: "user" }],
+      max_completion_tokens: 3000, // needed
       response_format: {
         type: "json_schema",
         json_schema: EventNodeSchema,
@@ -148,7 +150,14 @@ Return JSON in this format:
       return blob;
     } catch (e) {
       // const text = typeof content === "string" ? content : content?.text;
-      console.error("Failed to parse Llama API response as JSON", content);
+      console.error("Failed to parse Llama API response as JSON", {
+        error: e,
+        raw,
+        content,
+      });
+      if (retry < 3) {
+        return this.formatRawEventData(raw, retry + 1);
+      }
       return null;
     }
   }

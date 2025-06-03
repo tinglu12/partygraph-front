@@ -10,27 +10,32 @@ export const EventNodeSchema: BaseSchema = {
       title: { type: "string", description: "the title of the event" },
       description: {
         type: "string",
-        description: "the description of the event",
+        description: "A short description of the event in twenty words or less",
       },
-      date: { type: "string", description: "the date of the event" },
-      // category: { type: "string" },
+
       tags: {
         type: "array",
         items: { type: "string" },
-        description:
-          "five tags that describe the event. Do NOT have to be hashtags",
+        description: `five keywords extracted from the event description that describe the event.
+          these can be any words that describe the event, do NOT have to be hashtags`,
       },
       keywords: {
         type: "array",
         items: { type: "string" },
         description:
-          "a list of keywords extracted from the event description that describe the event",
+          "a list of unique or distinctive keywords extracted from the event description that describe the event",
       },
-      venue: { type: "string" },
-      address: { type: "string" },
-      neighborhood: { type: "string" },
+
+      date: {
+        type: "string",
+        description: `the date of the event. Assume year is 2025 if no year is found. Just the date with no extra text.`,
+      },
+      // category: { type: "string" },
+      // venue: { type: "string" },
+      // address: { type: "string" },
+      // neighborhood: { type: "string" },
     },
-    required: ["title", "description", "tags", "keywords"],
+    required: ["title", "description", "tags", "keywords", "date"],
     additionalProperties: false,
   },
 };

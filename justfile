@@ -14,25 +14,25 @@ cls:
   # tput reset
   clear && printf '\e[3J'
 
-dev:
+dev: cls
   pnpm dev
 
-plex-many:
+plex-many: cls
   bun cli.ts plex-many
 
-tech-week:
+tech-week: cls
   bun cli.ts tech-week
 
-enrich-events:
+enrich-events: cls
   bun cli.ts enrich-events
 
-add-people:
+add-people: cls
   bun cli.ts add-people
 
-dedupe:
+dedupe: cls
   bun cli.ts dedupe
 
-scrape-events:
+scrape-events: cls
   bun cli.ts scrape-events
 
 scrape-partiful:

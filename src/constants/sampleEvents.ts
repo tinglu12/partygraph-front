@@ -2662,6 +2662,7 @@ export const sampleEvents: EventNode[] = [
     category: "demo night",
     id: "climate-tech-demo-night",
   },
+
   {
     id: "roast-the-ny-tech-week-coffee-kickoff",
     title: "“Roast” The NY Tech Week Coffee Kickoff",
