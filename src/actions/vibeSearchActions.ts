@@ -5,6 +5,7 @@ import { searchEvent } from "@/server/LamService";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { EventType } from "@/types/EventType";
 import { sampleEvents } from "@/constants/sampleEvents";
+import { sampleSize } from "lodash";
 
 /**
  * Convert EventNode to EventType for compatibility with LamService
@@ -161,12 +162,13 @@ export async function searchTagCenteredByVibe(
  * Server action to get events by exact tag match using the API
  */
 export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
+  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3001";
+  const searchUrl = `${baseUrl}/api/events/tags?query=${encodeURIComponent(
+    tag
+  )}`;
+  console.log("baseUrl", { baseUrl, searchUrl });
   try {
-    const response = await fetch(
-      `${
-        process.env.NEXTAUTH_URL || "http://localhost:3001"
-      }/api/events/tags?query=${encodeURIComponent(tag)}`
-    );
+    const response = await fetch(searchUrl);
 
     if (!response.ok) {
       throw new Error("Failed to fetch events by tag");
@@ -184,15 +186,23 @@ export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
 
 /**
  * Server action to get all unique tags from events
+ * LIMITE to 100 tags
  */
 export async function getAllTags(): Promise<string[]> {
+  const maxTags = 300;
   const tagSet = new Set<string>();
   sampleEvents.forEach((event) => {
     if (event.tags) {
       event.tags.forEach((tag) => tagSet.add(tag));
     }
   });
-  return Array.from(tagSet).sort();
+  const arr = Array.from(tagSet);
+  console.log("all tags", arr.length);
+  const filtered = arr.filter((tag) => tag.length < 10);
+  const sample = sampleSize(filtered, maxTags);
+  const sorted = sample.sort();
+  const final = ["nytechweek", ...sorted]; // insert nytechweek at the beginning
+  return final;
 }
 
 /**

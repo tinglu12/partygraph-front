@@ -1,16 +1,24 @@
 "use client";
-import { useState, useEffect } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Search, Sparkles, Brain, Zap, ChevronDown, Tag, X } from 'lucide-react';
-import { getAllTags } from '@/actions/vibeSearchActions';
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Search,
+  Sparkles,
+  Brain,
+  Zap,
+  ChevronDown,
+  Tag,
+  X,
+} from "lucide-react";
+import { getAllTags } from "@/actions/vibeSearchActions";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
+} from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 interface VibeSearchProps {
   onSearch: (query: string) => void;
@@ -24,16 +32,16 @@ interface VibeSearchProps {
  * Enhanced search component with semantic AI-powered search capabilities
  * Features beautiful modern design, tag suggestions, and LLaMA integration
  */
-export const VibeSearch = ({ 
-  onSearch, 
+export const VibeSearch = ({
+  onSearch,
   onTagSelect,
   onClearSearch,
   isLoading = false,
-  placeholder = "Describe your perfect vibe..." 
+  placeholder = "Describe your perfect vibe...",
 }: VibeSearchProps) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [availableTags, setAvailableTags] = useState<string[]>([]);
-  const [selectedTag, setSelectedTag] = useState<string>('');
+  const [selectedTag, setSelectedTag] = useState<string>("");
   const [mounted, setMounted] = useState(false);
 
   // Handle client-side mounting
@@ -48,10 +56,10 @@ export const VibeSearch = ({
         const tags = await getAllTags();
         setAvailableTags(tags);
       } catch (error) {
-        console.error('Failed to load tags:', error);
+        console.error("Failed to load tags:", error);
       }
     };
-    
+
     if (mounted) {
       loadTags();
     }
@@ -67,7 +75,7 @@ export const VibeSearch = ({
 
   // Handle Enter key press
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !isLoading) {
+    if (e.key === "Enter" && !isLoading) {
       handleSubmit(e as any);
     }
   };
@@ -85,8 +93,8 @@ export const VibeSearch = ({
 
   // Handle clearing selection
   const handleClearSelection = () => {
-    setSelectedTag('');
-    setQuery('');
+    setSelectedTag("");
+    setQuery("");
     if (onClearSearch) {
       onClearSearch();
     }
@@ -98,7 +106,11 @@ export const VibeSearch = ({
       <div className="text-center mb-10">
         <div className="flex items-center justify-center gap-3 mb-6 w-full h-full">
           <Brain className="w-8 h-8 text-purple-400" />
-          <Link href="/vibe" className="hover:opacity-80 transition-opacity" onClick={handleClearSelection}>
+          <Link
+            href="/vibe"
+            className="hover:opacity-80 transition-opacity"
+            onClick={handleClearSelection}
+          >
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-[1.2] py-1">
               Party Graph
             </h1>
@@ -143,7 +155,7 @@ export const VibeSearch = ({
                     <ChevronDown className="w-5 h-5 ml-2 opacity-75" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent 
+                <DropdownMenuContent
                   className="w-[var(--radix-dropdown-menu-trigger-width)] max-h-60 overflow-hidden bg-white/15 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl"
                   align="end"
                 >
@@ -157,12 +169,14 @@ export const VibeSearch = ({
                         Clear selection
                       </DropdownMenuItem>
                     )}
-                    {availableTags.map(tag => (
+                    {availableTags.map((tag) => (
                       <DropdownMenuItem
                         key={tag}
                         onClick={() => handleTagClick(tag)}
                         className={`text-white hover:bg-white/20 focus:bg-white/20 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 ${
-                          selectedTag === tag ? 'bg-white/15 border border-purple-400/50' : ''
+                          selectedTag === tag
+                            ? "bg-white/15 border border-purple-400/50"
+                            : ""
                         }`}
                       >
                         <Tag className="w-4 h-4 mr-2 text-purple-400" />
@@ -176,8 +190,8 @@ export const VibeSearch = ({
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isLoading || !query.trim()}
               className="h-18 px-10 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
             >
@@ -202,4 +216,4 @@ export const VibeSearch = ({
       <div className="text-center space-y-6"></div>
     </div>
   );
-}; 
+};

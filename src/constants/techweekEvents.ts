@@ -11323,13 +11323,7 @@ export const techweekEvents: EventNode[] = [
     description:
       "Join us for the 3rd annual The AI & Finance Conference. This year we will be focused on large quantitative models, language models, investment management and trading themes.",
     neighborhood: "UNION SQUARE",
-    tags: [
-      "nytechweek",
-      "ai",
-      "finance",
-      "conference",
-      "quantitative models, language models, investment management, trading themes. ",
-    ],
+    tags: ["nytechweek", "ai", "finance", "conference", "quantitative models"],
     keywords: ["nytechweek"],
     category: "nytechweek",
     url: "https://partiful.com/e/mLmqeLFWiYH4CTRrayt6",
