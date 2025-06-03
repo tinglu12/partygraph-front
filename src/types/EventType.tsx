@@ -7,6 +7,7 @@ export type EventType = {
   category?: string;
 
   date?: string;
+  dates?: string[];
   time?: string;
   location?: string;
   neighborhood?: string;

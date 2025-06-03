@@ -12,11 +12,115 @@ import {
   Star,
   MessageCircle,
 } from "lucide-react";
+import {
+  convertDayOfWeekToDate,
+  isDayOfWeekFormat,
+} from "@/utils/dateConversion";
 
-// Union type to handle both event types
-// EventNode: from search results, has 'url' and 'connections'
-// EventType: from API calls, has 'link', 'people', and 'keywords'
+// Union type to handle both EventNode and EventType
 type UnifiedEvent = EventNode | EventType;
+
+// Type guard to check if event is EventNode
+function isEventNode(event: UnifiedEvent): event is EventNode {
+  return 'connections' in event;
+}
+
+// Helper to get event ID
+function getEventId(event: UnifiedEvent): string {
+  if (isEventNode(event)) {
+    return event.id;
+  }
+  return event.id || event.title; // Fallback to title if no ID
+}
+
+// Helper to get event URL
+function getEventUrl(event: UnifiedEvent): string | undefined {
+  if (isEventNode(event)) {
+    return event.url;
+  }
+  return event.link;
+}
+
+// Helper to format event date display
+function formatEventDate(event: UnifiedEvent): string {
+  try {
+    // Handle events with dates array (new flexible format)
+    if (event.dates && event.dates.length > 0) {
+      // Sort dates to show range properly
+      const sortedDates = event.dates.map(d => new Date(d)).sort((a, b) => a.getTime() - b.getTime());
+      
+      if (sortedDates.length === 1) {
+        // Single date
+        return sortedDates[0].toLocaleDateString('en-US', { 
+          weekday: 'long', 
+          month: 'short', 
+          day: 'numeric' 
+        });
+      } else if (sortedDates.length === 2) {
+        // Two dates - show as range
+        const startStr = sortedDates[0].toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric' 
+        });
+        const endStr = sortedDates[1].toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric' 
+        });
+        return `${startStr} - ${endStr}`;
+      } else {
+        // Multiple dates - show first and last with count
+        const startStr = sortedDates[0].toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric' 
+        });
+        const endStr = sortedDates[sortedDates.length - 1].toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric' 
+        });
+        return `${startStr} - ${endStr} (${sortedDates.length} dates)`;
+      }
+    }
+    
+    // Fallback to original date field
+    if (event.date) {
+      // Check if it's a day-of-week format that can be converted
+      if (isDayOfWeekFormat(event.date)) {
+        const convertedDate = convertDayOfWeekToDate(event.date);
+        if (convertedDate) {
+          const eventDate = new Date(convertedDate);
+          const timeInfo = event.date.match(/(\d{1,2}:\d{2}\s*(AM|PM))/i);
+          const timeStr = timeInfo ? timeInfo[1] : '';
+          
+          return eventDate.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            month: 'short', 
+            day: 'numeric' 
+          }) + (timeStr ? ` at ${timeStr}` : '');
+        }
+      }
+      
+      // Try to parse the date if it's a proper date string
+      if (event.date.includes('-') || event.date.includes('/')) {
+        const eventDate = new Date(event.date);
+        if (!isNaN(eventDate.getTime())) {
+          return eventDate.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            month: 'short', 
+            day: 'numeric' 
+          });
+        }
+      }
+      
+      // Return the original string if it's not parseable (fallback)
+      return event.date;
+    }
+    
+    return "Date TBA";
+  } catch (error) {
+    console.error('Error formatting event date:', error);
+    return event.date || "Date TBA";
+  }
+}
 
 interface EventsListProps {
   events: UnifiedEvent[];
@@ -27,32 +131,10 @@ interface EventsListProps {
   onEventClick?: (event: UnifiedEvent) => void;
 }
 
-// Type guard to distinguish between EventNode and EventType
-// EventNode has 'connections', EventType has 'people'
-function isEventNode(event: UnifiedEvent): event is EventNode {
-  return 'connections' in event;
-}
-
-// Helper function to get event ID from either data type
-function getEventId(event: UnifiedEvent, index: number): string {
-  if ('id' in event && event.id) {
-    return event.id;
-  }
-  return `event-${index}`;
-}
-
-// Helper function to get event URL from either data type
-// EventNode uses 'url', EventType uses 'link'
-function getEventUrl(event: UnifiedEvent): string | undefined {
-  if (isEventNode(event)) {
-    return event.url;
-  }
-  return event.link;
-}
-
 /**
  * Enhanced list view of events with beautiful styling and improved visual elements
  * Shows events in modern, interactive cards with rich visual hierarchy
+ * Supports both EventNode and EventType, including date ranges
  */
 export const EventsList = ({
   events,
@@ -105,13 +187,15 @@ export const EventsList = ({
 
       {/* Enhanced events grid */}
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {events.map((event, index) => {
-          const isHighlighted = highlightedIds.includes(getEventId(event, index));
-          const isSelected = selectedEventId === getEventId(event, index);
+        {events.map((event) => {
+          const eventId = getEventId(event);
+          const eventUrl = getEventUrl(event);
+          const isHighlighted = highlightedIds.includes(eventId);
+          const isSelected = selectedEventId === eventId;
 
           return (
             <div
-              key={getEventId(event, index)}
+              key={eventId}
               onClick={() => onEventClick?.(event)}
               className={`
                 group relative rounded-3xl p-8 border transition-all duration-500 backdrop-blur-sm hover:scale-[1.02] hover:shadow-2xl
@@ -139,23 +223,14 @@ export const EventsList = ({
                 </div>
               )}
 
-              {/* Event category badge
-              {event.category && (
-                <div className="absolute top-6 right-6">
-                  <span className="bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30 backdrop-blur-sm">
-                    {event.category}
-                  </span>
-                </div>
-              )} */}
-
               {/* Event title with enhanced typography */}
               <div className="mb-4">
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-purple-200 transition-colors leading-tight">
                   {event.title}
                 </h3>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
+                <div className="flex items-center gap-2 text-sm text-purple-300">
                   <Clock className="w-4 h-4 text-purple-400" />
-                  {event.date && <span>{event.date}</span>}
+                  <span>{formatEventDate(event)}</span>
                 </div>
               </div>
 
@@ -180,29 +255,24 @@ export const EventsList = ({
                 </div>
               )}
 
-              {/* People section for EventType */}
+              {/* People indicator for EventType */}
               {!isEventNode(event) && event.people && event.people.length > 0 && (
                 <div className="flex items-center gap-2 text-xs text-gray-400 pt-4 border-t border-white/10">
-                  <Users className="w-4 h-4 text-green-400" />
+                  <Users className="w-4 h-4 text-blue-400" />
                   <span>
-                    People: {event.people.map((p) => p.name).join(", ")}
+                    <span className="font-semibold text-blue-300">
+                      {event.people.length}
+                    </span>{" "}
+                    featured {event.people.length === 1 ? 'person' : 'people'}
                   </span>
                 </div>
               )}
 
-              {/* Keywords section for EventType */}
-              {!isEventNode(event) && event.keywords && event.keywords.length > 0 && (
-                <div className="flex items-center gap-2 text-xs text-gray-400 pt-2 border-t border-white/10">
-                  <Tag className="w-4 h-4 text-blue-400" />
-                  <span>Keywords: {event.keywords.join(", ")}</span>
-                </div>
-              )}
-
               {/* Event URL */}
-              {getEventUrl(event) && (
+              {eventUrl && (
                 <div className="flex justify-center mt-4 pt-4 border-t border-white/10">
                   <a 
-                    href={getEventUrl(event)}
+                    href={eventUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
@@ -246,29 +316,16 @@ export const EventsList = ({
         })}
       </div>
 
-      {/* Enhanced footer stats */}
-      {events.length > 0 && (
-        <div className="text-center pt-8 border-t border-white/10">
-          <div className="flex items-center justify-center gap-6 text-sm text-gray-400">
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-purple-400" />
-              <span>{events.length} total events</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Tag className="w-4 h-4 text-blue-400" />
-              <span>
-                {new Set(events.flatMap((e) => e.tags || [])).size} unique tags
-              </span>
-            </div>
-            {highlightedIds.length > 0 && (
-              <div className="flex items-center gap-2">
-                <Star className="w-4 h-4 text-yellow-400" />
-                <span>{highlightedIds.length} highlighted</span>
-              </div>
-            )}
-          </div>
+      {/* Enhanced AI-powered suggestions footer */}
+      <div className="text-center text-gray-400 mt-12 pt-8 border-t border-white/10">
+        <div className="flex items-center justify-center gap-2 text-sm">
+          <Sparkles className="w-4 h-4 text-purple-400" />
+          <span>
+            Events matched using AI semantic analysis and tag similarity
+          </span>
+          <Sparkles className="w-4 h-4 text-blue-400" />
         </div>
-      )}
+      </div>
     </div>
   );
 };

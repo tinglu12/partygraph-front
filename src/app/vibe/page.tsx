@@ -25,7 +25,15 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
+import { EventType } from "@/types/EventType";
 import { sampleEvents } from "@/constants/sampleEvents";
+import {
+  convertDayOfWeekToDate,
+  isDayOfWeekFormat,
+} from "@/utils/dateConversion";
+
+// Union type to handle both EventNode and EventType (same as in EventsList)
+type UnifiedEvent = EventNode | EventType;
 
 /**
  * Enhanced AI-powered vibe discovery page with semantic search capabilities
@@ -46,7 +54,7 @@ export default function VibePage() {
     useState<EventNode | null>(null);
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showChat, setShowChat] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState<EventNode | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<UnifiedEvent | null>(null);
   const [dateFilter, setDateFilter] = useState<Date[]>([]);
 
   // Example searches that rotate
@@ -105,22 +113,51 @@ export default function VibePage() {
   const filterEventsByDate = useCallback((events: EventNode[]): EventNode[] => {
     if (dateFilter.length === 0) return events;
     
-    // Normalize filter dates to date-only (no time)
-    const filterDates = dateFilter.map(date => 
-      new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()
+    // Normalize filter dates to ISO date strings (YYYY-MM-DD)
+    const filterDateStrings = dateFilter.map(date => 
+      date.toISOString().split('T')[0] // Convert to YYYY-MM-DD format
     );
     
     return events.filter(event => {
-      if (!event.date) return false;
-      
       try {
-        // Parse event date - handle different formats
-        const eventDate = new Date(event.date);
-        const eventDateOnly = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
+        // Handle events with dates array (new flexible format)
+        if (event.dates && event.dates.length > 0) {
+          // Check if any of the event's dates match any of the selected filter dates
+          return event.dates.some(eventDateStr => {
+            // Normalize event date to YYYY-MM-DD format
+            const eventDateOnly = new Date(eventDateStr).toISOString().split('T')[0];
+            return filterDateStrings.includes(eventDateOnly);
+          });
+        }
         
-        return filterDates.includes(eventDateOnly.getTime());
+        // Fallback to original date field for backward compatibility
+        if (event.date && !event.dates) {
+          // Check if it's a day-of-week format that needs conversion
+          if (isDayOfWeekFormat(event.date)) {
+            const convertedDate = convertDayOfWeekToDate(event.date);
+            if (convertedDate) {
+              const eventDateOnly = new Date(convertedDate).toISOString().split('T')[0];
+              return filterDateStrings.includes(eventDateOnly);
+            }
+          } else {
+            // Try to parse as regular date
+            const eventDate = new Date(event.date);
+            if (!isNaN(eventDate.getTime())) {
+              const eventDateOnly = eventDate.toISOString().split('T')[0];
+              return filterDateStrings.includes(eventDateOnly);
+            }
+          }
+        }
+        
+        // If no date information is available, exclude from results
+        return false;
       } catch (error) {
-        console.error('Error parsing event date:', event.date);
+        console.error('Error parsing event date:', {
+          eventId: event.id,
+          date: event.date,
+          dates: event.dates,
+          error
+        });
         return false;
       }
     });
@@ -239,7 +276,7 @@ export default function VibePage() {
   };
 
   // Handle event selection for chat context
-  const handleEventSelect = (event: EventNode | null) => {
+  const handleEventSelect = (event: UnifiedEvent | null) => {
     setSelectedEvent(event);
     if (event) {
       setShowChat(true);
@@ -642,7 +679,7 @@ export default function VibePage() {
             onClick={(e) => e.stopPropagation()}
           >
             <VibeChat
-              selectedEvent={selectedEvent}
+              selectedEvent={selectedEvent as EventNode}
               onClose={() => setShowChat(false)}
             />
           </div>
