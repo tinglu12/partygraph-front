@@ -385,7 +385,7 @@ export const VibeSearch = ({
                     className="h-18 px-4 pr-3 bg-white/20 backdrop-blur-md text-gray-300 !text-xl rounded-2xl border border-white/40 hover:bg-white/22 hover:text-white focus:bg-white/25 focus:border-blue-400/80 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 min-w-[180px] justify-between font-normal shadow-lg"
                   >
                     <span className={selectedTag ? "text-white" : "opacity-75"}>
-                      {selectedTag || "Or view tags manually"}
+                      {selectedTag || "Search by tag"}
                     </span>
                     <ChevronDown className="w-5 h-5 ml-2 opacity-75" />
                   </Button>
