@@ -55,6 +55,12 @@ export const VibeSearch = ({
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [mounted, setMounted] = useState(false);
   const [date, setDate] = useState<Date[]>([]);
+  
+  // Drag selection state
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartDate, setDragStartDate] = useState<Date | null>(null);
+  const [dragMode, setDragMode] = useState<'select' | 'deselect'>('select');
+  const [previewDates, setPreviewDates] = useState<Date[]>([]);
 
   // Handle client-side mounting
   useEffect(() => {
@@ -76,6 +82,121 @@ export const VibeSearch = ({
       loadTags();
     }
   }, [mounted]);
+
+  // Handle drag start
+  const handleDragStart = (startDate: Date) => {
+    setIsDragging(true);
+    setDragStartDate(startDate);
+    
+    // Determine drag mode based on initial date selection state
+    const isStartSelected = isDateSelected(startDate);
+    setDragMode(isStartSelected ? 'deselect' : 'select');
+    
+    // Set initial preview
+    setPreviewDates([startDate]);
+  };
+
+  // Handle drag over/move
+  const handleDragMove = (currentDate: Date) => {
+    if (!isDragging || !dragStartDate) return;
+    
+    // Calculate range between start and current date
+    const rangeDates = getDateRange(dragStartDate, currentDate);
+    setPreviewDates(rangeDates);
+  };
+
+  // Handle drag end
+  const handleDragEnd = (endDate: Date) => {
+    if (!isDragging || !dragStartDate) return;
+    
+    const rangeDates = getDateRange(dragStartDate, endDate);
+    
+    let newSelection: Date[];
+    
+    if (dragMode === 'select') {
+      // Add range dates to selection (avoid duplicates)
+      const existingTimes = new Set(date.map(d => d.getTime()));
+      const newDates = rangeDates.filter(d => !existingTimes.has(d.getTime()));
+      newSelection = [...date, ...newDates];
+    } else {
+      // Remove range dates from selection
+      const rangeTimes = new Set(rangeDates.map(d => d.getTime()));
+      newSelection = date.filter(d => !rangeTimes.has(d.getTime()));
+    }
+    
+    handleDateSelect(newSelection);
+    
+    // Reset drag state
+    setIsDragging(false);
+    setDragStartDate(null);
+    setPreviewDates([]);
+  };
+
+  // Handle global mouse events for drag operations
+  useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      if (isDragging && dragStartDate) {
+        handleDragEnd(dragStartDate);
+      }
+    };
+
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        // Prevent text selection during drag
+        e.preventDefault();
+      }
+    };
+
+    if (isDragging) {
+      document.addEventListener('mouseup', handleGlobalMouseUp);
+      document.addEventListener('mousemove', handleGlobalMouseMove);
+      document.body.style.userSelect = 'none'; // Prevent text selection
+      
+      return () => {
+        document.removeEventListener('mouseup', handleGlobalMouseUp);
+        document.removeEventListener('mousemove', handleGlobalMouseMove);
+        document.body.style.userSelect = '';
+      };
+    }
+  }, [isDragging, dragStartDate]);
+
+  // Helper function to check if a date is selected
+  const isDateSelected = (checkDate: Date): boolean => {
+    return date.some(selectedDate => 
+      selectedDate.getTime() === checkDate.getTime()
+    );
+  };
+
+  // Helper function to get dates between two dates (inclusive)
+  const getDateRange = (start: Date, end: Date): Date[] => {
+    const dates: Date[] = [];
+    const startTime = Math.min(start.getTime(), end.getTime());
+    const endTime = Math.max(start.getTime(), end.getTime());
+    
+    for (let time = startTime; time <= endTime; time += 24 * 60 * 60 * 1000) {
+      dates.push(new Date(time));
+    }
+    
+    return dates;
+  };
+
+  // Handle single click (original behavior)
+  const handleSingleDateClick = (clickedDate: Date) => {
+    if (isDragging) return; // Don't handle single clicks during drag
+    
+    const isSelected = isDateSelected(clickedDate);
+    let newSelection: Date[];
+    
+    if (isSelected) {
+      // Remove the date
+      newSelection = date.filter(d => d.getTime() !== clickedDate.getTime());
+    } else {
+      // Add the date
+      newSelection = [...date, clickedDate];
+    }
+    
+    handleDateSelect(newSelection);
+  };
 
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
@@ -117,9 +238,101 @@ export const VibeSearch = ({
     setSelectedTag("");
     setQuery("");
     setDate([]);
+    setPreviewDates([]);
+    setIsDragging(false);
+    setDragStartDate(null);
     if (onClearSearch) {
       onClearSearch();
     }
+  };
+
+  // Custom DraggableCalendar component
+  const DraggableCalendar = () => {
+    return (
+      <div
+        className="select-none"
+        onMouseLeave={() => {
+          if (isDragging && dragStartDate) {
+            handleDragEnd(dragStartDate);
+          }
+        }}
+      >
+        <Calendar
+          mode="multiple"
+          selected={date}
+          onSelect={() => {}} // We'll handle selection manually
+          disabled={(dateToCheck) => dateToCheck < new Date("1900-01-01")}
+          initialFocus
+          className="rounded-2xl border-0"
+          classNames={{
+            day_today: "bg-gray-100/10 text-gray-300 hover:bg-gray-100/20"
+          }}
+          components={{
+            Day: ({ date: dayDate, displayMonth, ...props }) => {
+              const isSelected = date.some(d => d.getTime() === dayDate.getTime());
+              const isPreview = isDragging && previewDates.some(p => p.getTime() === dayDate.getTime());
+              
+              return (
+                <button
+                  className={cn(
+                    "size-8 p-0 font-normal relative cursor-pointer transition-colors rounded-md",
+                    isSelected && "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
+                    isPreview && dragMode === 'select' && "bg-purple-400/40 text-white border border-purple-400/60",
+                    isPreview && dragMode === 'deselect' && "bg-red-400/40 text-white border border-red-400/60",
+                    !isSelected && !isPreview && "hover:bg-accent hover:text-accent-foreground",
+                    dayDate.toDateString() === new Date().toDateString() && "bg-gray-100/10 text-gray-300"
+                  )}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    handleDragStart(dayDate);
+                  }}
+                  onMouseEnter={() => {
+                    if (isDragging) {
+                      handleDragMove(dayDate);
+                    }
+                  }}
+                  onMouseUp={() => {
+                    if (isDragging) {
+                      handleDragEnd(dayDate);
+                    } else {
+                      handleSingleDateClick(dayDate);
+                    }
+                  }}
+                  onTouchStart={(e) => {
+                    e.preventDefault();
+                    handleDragStart(dayDate);
+                  }}
+                  onTouchMove={(e) => {
+                    e.preventDefault();
+                    // Get the element under the touch point
+                    const touch = e.touches[0];
+                    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                    const dayButton = element?.closest('[data-date]');
+                    if (dayButton) {
+                      const dateStr = dayButton.getAttribute('data-date');
+                      if (dateStr) {
+                        const touchDate = new Date(dateStr);
+                        handleDragMove(touchDate);
+                      }
+                    }
+                  }}
+                  onTouchEnd={() => {
+                    if (isDragging && dragStartDate) {
+                      handleDragEnd(dragStartDate);
+                    } else {
+                      handleSingleDateClick(dayDate);
+                    }
+                  }}
+                  data-date={dayDate.toISOString()}
+                >
+                  {dayDate.getDate()}
+                </button>
+              );
+            }
+          }}
+        />
+      </div>
+    );
   };
 
   return (
@@ -241,17 +454,7 @@ export const VibeSearch = ({
                 className="w-auto p-0 bg-white/15 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl" 
                 align="end"
               >
-                <Calendar
-                  mode="multiple"
-                  selected={date}
-                  onSelect={handleDateSelect}
-                  disabled={(date) => date < new Date("1900-01-01")}
-                  initialFocus
-                  className="rounded-2xl border-0"
-                  classNames={{
-                    day_today: "bg-gray-100/10 text-gray-300 hover:bg-gray-100/20"
-                  }}
-                />
+                <DraggableCalendar />
                 {date.length > 0 && (
                   <div className="p-3 border-t border-white/20">
                     <Button
