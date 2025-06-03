@@ -47,7 +47,7 @@ export default function VibePage() {
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showChat, setShowChat] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventNode | null>(null);
-  const [dateFilter, setDateFilter] = useState<Date | undefined>(undefined);
+  const [dateFilter, setDateFilter] = useState<Date[]>([]);
 
   // Example searches that rotate
   const exampleSearches = useMemo(
@@ -98,14 +98,17 @@ export default function VibePage() {
     setTagGraphData(null);
     setError(null);
     setSelectedEvent(null);
-    setDateFilter(undefined);
+    setDateFilter([]);
   };
 
   // Helper function to filter events by date
   const filterEventsByDate = useCallback((events: EventNode[]): EventNode[] => {
-    if (!dateFilter) return events;
+    if (dateFilter.length === 0) return events;
     
-    const filterDate = new Date(dateFilter.getFullYear(), dateFilter.getMonth(), dateFilter.getDate());
+    // Normalize filter dates to date-only (no time)
+    const filterDates = dateFilter.map(date => 
+      new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()
+    );
     
     return events.filter(event => {
       if (!event.date) return false;
@@ -115,7 +118,7 @@ export default function VibePage() {
         const eventDate = new Date(event.date);
         const eventDateOnly = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
         
-        return eventDateOnly.getTime() === filterDate.getTime();
+        return filterDates.includes(eventDateOnly.getTime());
       } catch (error) {
         console.error('Error parsing event date:', event.date);
         return false;
@@ -150,8 +153,8 @@ export default function VibePage() {
         setSearchResults(filteredEvents);
         
         // Show message if date filter removed results
-        if (dateFilter && filteredEvents.length === 0 && events.length > 0) {
-          setError(`Found ${events.length} matching events, but none on the selected date. Try a different date or remove the date filter.`);
+        if (dateFilter.length > 0 && filteredEvents.length === 0 && events.length > 0) {
+          setError(`Found ${events.length} matching events, but none on the selected dates. Try different dates or remove the date filter.`);
         }
       } else {
         // Fallback to direct event search
@@ -161,8 +164,8 @@ export default function VibePage() {
         if (filteredEvents.length > 0) {
           setSearchResults(filteredEvents);
           setTagGraphData(null);
-        } else if (dateFilter && events.length > 0) {
-          setError(`Found ${events.length} matching events, but none on the selected date. Try a different date or remove the date filter.`);
+        } else if (dateFilter.length > 0 && events.length > 0) {
+          setError(`Found ${events.length} matching events, but none on the selected dates. Try different dates or remove the date filter.`);
           setSearchResults([]);
           setTagGraphData(null);
         } else {
@@ -203,8 +206,8 @@ export default function VibePage() {
       if (filteredEvents.length > 0) {
         setSearchResults(filteredEvents);
         setTagGraphData(null);
-      } else if (dateFilter && events.length > 0) {
-        setError(`Found ${events.length} events with tag "${tag}", but none on the selected date. Try a different date or remove the date filter.`);
+      } else if (dateFilter.length > 0 && events.length > 0) {
+        setError(`Found ${events.length} events with tag "${tag}", but none on the selected dates. Try different dates or remove the date filter.`);
         setSearchResults([]);
         setTagGraphData(null);
       } else {
@@ -295,7 +298,7 @@ export default function VibePage() {
             onTagSelect={handleTagSearch}
             onClearSearch={handleClearSearch}
             isLoading={isLoading}
-            onDateFilter={(date) => setDateFilter(date)}
+            onDateFilter={(dates) => setDateFilter(dates)}
           />
 
           {/* Rotating example searches panel - moved back above graph */}
@@ -492,13 +495,21 @@ export default function VibePage() {
                           ? "Event successfully extracted from flyer and added to Party Graph"
                           : searchMode === "semantic"
                           ? `Events discovered through AI semantic analysis of your vibe description${
-                              dateFilter 
-                                ? ` • Filtered for ${dateFilter.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
+                              dateFilter.length > 0
+                                ? dateFilter.length === 1
+                                  ? ` • Filtered for ${dateFilter[0].toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
+                                  : dateFilter.length <= 3
+                                  ? ` • Filtered for ${dateFilter.map(date => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })).join(', ')}`
+                                  : ` • Filtered for ${dateFilter.length} selected dates`
                                 : ""
                             }`
                           : `Events tagged with "${searchQuery}"${
-                              dateFilter 
-                                ? ` • Filtered for ${dateFilter.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
+                              dateFilter.length > 0
+                                ? dateFilter.length === 1
+                                  ? ` • Filtered for ${dateFilter[0].toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
+                                  : dateFilter.length <= 3
+                                  ? ` • Filtered for ${dateFilter.map(date => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })).join(', ')}`
+                                  : ` • Filtered for ${dateFilter.length} selected dates`
                                 : ""
                             }`
                       }

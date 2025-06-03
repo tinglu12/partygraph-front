@@ -33,7 +33,7 @@ interface VibeSearchProps {
   onSearch: (query: string) => void;
   onTagSelect?: (tag: string) => void;
   onClearSearch?: () => void;
-  onDateFilter?: (date: Date | undefined) => void;
+  onDateFilter?: (dates: Date[]) => void;
   isLoading?: boolean;
   placeholder?: string;
 }
@@ -54,7 +54,7 @@ export const VibeSearch = ({
   const [availableTags, setAvailableTags] = useState<string[]>([]);
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [mounted, setMounted] = useState(false);
-  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [date, setDate] = useState<Date[]>([]);
 
   // Handle client-side mounting
   useEffect(() => {
@@ -104,10 +104,11 @@ export const VibeSearch = ({
   };
 
   // Handle date selection
-  const handleDateSelect = (selectedDate: Date | undefined) => {
-    setDate(selectedDate);
+  const handleDateSelect = (selectedDates: Date[] | undefined) => {
+    const dates = selectedDates || [];
+    setDate(dates);
     if (onDateFilter) {
-      onDateFilter(selectedDate);
+      onDateFilter(dates);
     }
   };
 
@@ -115,7 +116,7 @@ export const VibeSearch = ({
   const handleClearSelection = () => {
     setSelectedTag("");
     setQuery("");
-    setDate(undefined);
+    setDate([]);
     if (onClearSearch) {
       onClearSearch();
     }
@@ -220,11 +221,18 @@ export const VibeSearch = ({
                   disabled={isLoading}
                   className={cn(
                     "h-18 px-4 bg-white/20 backdrop-blur-md text-gray-300 !text-xl rounded-2xl border border-white/40 hover:bg-white/22 hover:text-white focus:bg-white/25 focus:border-blue-400/80 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 min-w-[160px] justify-between font-normal shadow-lg",
-                    !date && "opacity-75"
+                    date.length === 0 && "opacity-75"
                   )}
                 >
-                  <span className={date ? "text-white" : ""}>
-                    {date ? format(date, "MMM dd, yyyy") : "Filter by date"}
+                  <span className={date.length > 0 ? "text-white" : ""}>
+                    {date.length === 0 
+                      ? "Filter by date"
+                      : date.length === 1 
+                      ? format(date[0], "MMM dd, yyyy")
+                      : date.length <= 3
+                      ? date.map(d => format(d, "MMM dd")).join(", ")
+                      : `${date.length} dates selected`
+                    }
                   </span>
                   <CalendarIcon className="w-5 h-5 ml-2 opacity-75" />
                 </Button>
@@ -234,22 +242,25 @@ export const VibeSearch = ({
                 align="end"
               >
                 <Calendar
-                  mode="single"
+                  mode="multiple"
                   selected={date}
                   onSelect={handleDateSelect}
                   disabled={(date) => date < new Date("1900-01-01")}
                   initialFocus
                   className="rounded-2xl border-0"
+                  classNames={{
+                    day_today: "bg-gray-100/10 text-gray-300 hover:bg-gray-100/20"
+                  }}
                 />
-                {date && (
+                {date.length > 0 && (
                   <div className="p-3 border-t border-white/20">
                     <Button
                       variant="ghost"
-                      onClick={() => handleDateSelect(undefined)}
+                      onClick={() => handleDateSelect([])}
                       className="w-full text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
                     >
                       <X className="w-4 h-4 mr-2" />
-                      Clear date
+                      Clear {date.length === 1 ? "date" : "dates"}
                     </Button>
                   </div>
                 )}
