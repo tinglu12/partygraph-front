@@ -130,31 +130,11 @@ export const EventsList = ({
               </div>
 
               {/* Event description with better formatting */}
-              <p className="text-gray-300 text-sm mb-6 leading-relaxed line-clamp-3 group-hover:text-gray-200 transition-colors">
-                {event.description}
+              <p className="text-gray-300 text-sm mb-6 leading-relaxed h-16 flex items-start group-hover:text-gray-200 transition-colors">
+                <span className="line-clamp-3">
+                  {event.description}
+                </span>
               </p>
-
-              {/* Enhanced tags section */}
-              {event.tags && event.tags.length > 0 && (
-                <div className="mb-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Tag className="w-4 h-4 text-gray-400" />
-                    <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">
-                      Tags
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {event.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-gradient-to-r from-blue-600/25 to-purple-600/25 text-blue-200 text-xs rounded-full border border-blue-500/20 backdrop-blur-sm font-medium hover:scale-105 transition-transform cursor-pointer"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* Enhanced connections indicator */}
               {event.connections && event.connections.length > 0 && (
@@ -182,6 +162,27 @@ export const EventsList = ({
                   >
                     🔗 View Event
                   </a>
+                </div>
+              )}
+
+              {/* Enhanced tags section - moved after View Event button */}
+              {event.tags && event.tags.length > 0 && (
+                <div className="mb-4 mt-4">
+                  <div className="flex flex-wrap justify-center gap-1 opacity-60">
+                    {event.tags.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white/80"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                    {event.tags.length > 2 && (
+                      <span className="text-xs text-white/60">
+                        +{event.tags.length - 2} more
+                      </span>
+                    )}
+                  </div>
                 </div>
               )}
 

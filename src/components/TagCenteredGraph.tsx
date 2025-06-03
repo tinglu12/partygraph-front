@@ -45,10 +45,26 @@ const FallbackVisualization = ({
           </div>
           <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 text-white px-10 py-6 rounded-3xl text-2xl md:text-3xl font-bold shadow-2xl border border-purple-500/30 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-green-600/20 rounded-3xl blur-xl"></div>
-            <div className="relative flex items-center justify-center gap-3">
-              <Sparkles className="w-6 h-6" />
-              <span>#{graphData.centralTag}</span>
-              <Sparkles className="w-6 h-6" />
+            <div className="relative flex flex-col items-center justify-center gap-3">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-6 h-6" />
+                <span>#{graphData.centralTag}</span>
+                <Sparkles className="w-6 h-6" />
+              </div>
+              
+              {/* Similar tags */}
+              {graphData.similarTags && graphData.similarTags.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-2 mt-2">
+                  {graphData.similarTags.map((tag, index) => (
+                    <span 
+                      key={tag} 
+                      className="text-sm bg-white/20 text-white px-3 py-1 rounded-full border border-white/30 backdrop-blur-sm"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <p className="text-gray-300 mt-4 text-lg">
@@ -109,30 +125,18 @@ const FallbackVisualization = ({
                     <Sparkles className="w-3 h-3" />
                     {event.date}
                   </div> */}
-                  {event.category && (
-                    <div className={`
-                      mt-3 text-xs px-3 py-1 rounded-full inline-block border font-semibold
-                      ${isSelected 
-                        ? "bg-blue-500/30 border-blue-400/50 text-blue-100" 
-                        : "bg-white/20 border-white/30"
-                      }
-                    `}>
-                      {event.category}
-                    </div>
-                  )}
                   
                   {/* Event details section - replacing tags */}
                   <div className="mt-3 space-y-2 text-xs">
-                    {/* Brief description */}
+                    {/* Brief description - exactly 3 lines */}
                     {event.description && (
                       <div className={`
-                        text-left leading-relaxed
+                        text-left leading-relaxed h-12 flex items-start
                         ${isSelected ? "text-blue-100" : "text-green-100"}
                       `}>
-                        {event.description.length > 100 
-                          ? `${event.description.substring(0, 100)}...` 
-                          : event.description
-                        }
+                        <div className="line-clamp-3">
+                          {event.description}
+                        </div>
                       </div>
                     )}
                     
@@ -176,6 +180,40 @@ const FallbackVisualization = ({
                         >
                           🔗 View Event
                         </a>
+                      </div>
+                    )}
+                    
+                    {/* Main category tag - moved after View Event button */}
+                    {event.category && (
+                      <div className="flex justify-center mt-2">
+                        <div className={`
+                          text-xs px-3 py-1 rounded-full inline-block border font-semibold
+                          ${isSelected 
+                            ? "bg-blue-500/30 border-blue-400/50 text-blue-100" 
+                            : "bg-white/20 border-white/30"
+                          }
+                        `}>
+                          {event.category}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Subtle tags section */}
+                    {event.tags && event.tags.length > 0 && (
+                      <div className="flex flex-wrap justify-center gap-1 mt-2 opacity-60">
+                        {event.tags.slice(0, 2).map((tag: string) => (
+                          <span 
+                            key={tag} 
+                            className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white/80"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                        {event.tags.length > 2 && (
+                          <span className="text-xs text-white/60">
+                            +{event.tags.length - 2} more
+                          </span>
+                        )}
                       </div>
                     )}
                   </div>
