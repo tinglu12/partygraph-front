@@ -1,8 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const CTA = () => {
+  const router = useRouter();
   return (
     <section className="py-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
@@ -10,23 +11,24 @@ export const CTA = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Ready to Explore the Network?
           </h2>
-          
+
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of event enthusiasts who've discovered amazing experiences 
-            through our connected event ecosystem.
+            Join thousands of event enthusiasts who've discovered amazing
+            experiences through our connected event ecosystem.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              onClick={() => router.push("/vibe")}
             >
               Start Exploring
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            
-            <Button 
-              variant="outline" 
+
+            <Button
+              variant="outline"
               size="lg"
               className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full backdrop-blur-sm transition-all duration-300"
             >
@@ -34,9 +36,9 @@ export const CTA = () => {
               Get Updates
             </Button>
           </div>
-          
+
           <div className="text-sm text-gray-400">
-            Free to join • No spam • Unsubscribe anytime
+            Free to join • No spam • Unsubscribe anytime | v0.0.2
           </div>
         </div>
       </div>
