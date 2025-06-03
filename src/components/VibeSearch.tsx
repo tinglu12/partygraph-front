@@ -1,7 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
+import { format } from "date-fns";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Search,
   Sparkles,
@@ -10,6 +17,7 @@ import {
   ChevronDown,
   Tag,
   X,
+  CalendarIcon,
 } from "lucide-react";
 import { getAllTags } from "@/actions/vibeSearchActions";
 import {
@@ -19,11 +27,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface VibeSearchProps {
   onSearch: (query: string) => void;
   onTagSelect?: (tag: string) => void;
   onClearSearch?: () => void;
+  onDateFilter?: (date: Date | undefined) => void;
   isLoading?: boolean;
   placeholder?: string;
 }
@@ -36,6 +46,7 @@ export const VibeSearch = ({
   onSearch,
   onTagSelect,
   onClearSearch,
+  onDateFilter,
   isLoading = false,
   placeholder = "Describe your perfect vibe...",
 }: VibeSearchProps) => {
@@ -43,6 +54,7 @@ export const VibeSearch = ({
   const [availableTags, setAvailableTags] = useState<string[]>([]);
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [mounted, setMounted] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(undefined);
 
   // Handle client-side mounting
   useEffect(() => {
@@ -91,10 +103,19 @@ export const VibeSearch = ({
     }
   };
 
+  // Handle date selection
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+    if (onDateFilter) {
+      onDateFilter(selectedDate);
+    }
+  };
+
   // Handle clearing selection
   const handleClearSelection = () => {
     setSelectedTag("");
     setQuery("");
+    setDate(undefined);
     if (onClearSearch) {
       onClearSearch();
     }
@@ -190,6 +211,51 @@ export const VibeSearch = ({
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
+
+            {/* Date picker with calendar popup */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  disabled={isLoading}
+                  className={cn(
+                    "h-18 px-4 bg-white/20 backdrop-blur-md text-gray-300 !text-xl rounded-2xl border border-white/40 hover:bg-white/22 hover:text-white focus:bg-white/25 focus:border-blue-400/80 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 min-w-[160px] justify-between font-normal shadow-lg",
+                    !date && "opacity-75"
+                  )}
+                >
+                  <span className={date ? "text-white" : ""}>
+                    {date ? format(date, "MMM dd, yyyy") : "Filter by date"}
+                  </span>
+                  <CalendarIcon className="w-5 h-5 ml-2 opacity-75" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent 
+                className="w-auto p-0 bg-white/15 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl" 
+                align="end"
+              >
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={handleDateSelect}
+                  disabled={(date) => date < new Date("1900-01-01")}
+                  initialFocus
+                  className="rounded-2xl border-0"
+                />
+                {date && (
+                  <div className="p-3 border-t border-white/20">
+                    <Button
+                      variant="ghost"
+                      onClick={() => handleDateSelect(undefined)}
+                      className="w-full text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+                    >
+                      <X className="w-4 h-4 mr-2" />
+                      Clear date
+                    </Button>
+                  </div>
+                )}
+              </PopoverContent>
+            </Popover>
+
             <Button
               type="submit"
               disabled={isLoading || !query.trim()}

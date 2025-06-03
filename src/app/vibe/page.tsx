@@ -47,6 +47,7 @@ export default function VibePage() {
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showChat, setShowChat] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventNode | null>(null);
+  const [dateFilter, setDateFilter] = useState<Date | undefined>(undefined);
 
   // Example searches that rotate
   const exampleSearches = useMemo(
@@ -89,6 +90,39 @@ export default function VibePage() {
     }
   }, [showUpload, showChat]);
 
+  // Handle clearing search
+  const handleClearSearch = () => {
+    setHasSearched(false);
+    setSearchQuery("");
+    setSearchResults([]);
+    setTagGraphData(null);
+    setError(null);
+    setSelectedEvent(null);
+    setDateFilter(undefined);
+  };
+
+  // Helper function to filter events by date
+  const filterEventsByDate = useCallback((events: EventNode[]): EventNode[] => {
+    if (!dateFilter) return events;
+    
+    const filterDate = new Date(dateFilter.getFullYear(), dateFilter.getMonth(), dateFilter.getDate());
+    
+    return events.filter(event => {
+      if (!event.date) return false;
+      
+      try {
+        // Parse event date - handle different formats
+        const eventDate = new Date(event.date);
+        const eventDateOnly = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
+        
+        return eventDateOnly.getTime() === filterDate.getTime();
+      } catch (error) {
+        console.error('Error parsing event date:', event.date);
+        return false;
+      }
+    });
+  }, [dateFilter]);
+
   // Handle semantic vibe search using AI
   const handleVibeSearch = async (query: string) => {
     setIsLoading(true);
@@ -110,12 +144,26 @@ export default function VibePage() {
         const events = graphData.nodes
           .filter((node: any) => node.type === "event")
           .map((node: any) => node.data as EventNode);
-        setSearchResults(events);
+        
+        // Apply date filter to events
+        const filteredEvents = filterEventsByDate(events);
+        setSearchResults(filteredEvents);
+        
+        // Show message if date filter removed results
+        if (dateFilter && filteredEvents.length === 0 && events.length > 0) {
+          setError(`Found ${events.length} matching events, but none on the selected date. Try a different date or remove the date filter.`);
+        }
       } else {
         // Fallback to direct event search
         const events = await searchEventsByVibe(query);
-        if (events.length > 0) {
-          setSearchResults(events);
+        const filteredEvents = filterEventsByDate(events);
+        
+        if (filteredEvents.length > 0) {
+          setSearchResults(filteredEvents);
+          setTagGraphData(null);
+        } else if (dateFilter && events.length > 0) {
+          setError(`Found ${events.length} matching events, but none on the selected date. Try a different date or remove the date filter.`);
+          setSearchResults([]);
           setTagGraphData(null);
         } else {
           setError(
@@ -150,8 +198,14 @@ export default function VibePage() {
       console.log(`Searching by tag: "${tag}"`);
 
       const events = await searchEventsByTag(tag);
-      if (events.length > 0) {
-        setSearchResults(events);
+      const filteredEvents = filterEventsByDate(events);
+      
+      if (filteredEvents.length > 0) {
+        setSearchResults(filteredEvents);
+        setTagGraphData(null);
+      } else if (dateFilter && events.length > 0) {
+        setError(`Found ${events.length} events with tag "${tag}", but none on the selected date. Try a different date or remove the date filter.`);
+        setSearchResults([]);
         setTagGraphData(null);
       } else {
         setError(`No events found with tag "${tag}".`);
@@ -187,16 +241,6 @@ export default function VibePage() {
     if (event) {
       setShowChat(true);
     }
-  };
-
-  // Handle clearing search
-  const handleClearSearch = () => {
-    setHasSearched(false);
-    setSearchQuery("");
-    setSearchResults([]);
-    setTagGraphData(null);
-    setError(null);
-    setSelectedEvent(null);
   };
 
   return (
@@ -251,6 +295,7 @@ export default function VibePage() {
             onTagSelect={handleTagSearch}
             onClearSearch={handleClearSearch}
             isLoading={isLoading}
+            onDateFilter={(date) => setDateFilter(date)}
           />
 
           {/* Rotating example searches panel - moved back above graph */}
@@ -446,8 +491,16 @@ export default function VibePage() {
                         recentlyAddedEvent
                           ? "Event successfully extracted from flyer and added to Party Graph"
                           : searchMode === "semantic"
-                          ? "Events discovered through AI semantic analysis of your vibe description"
-                          : `Events tagged with "${searchQuery}"`
+                          ? `Events discovered through AI semantic analysis of your vibe description${
+                              dateFilter 
+                                ? ` • Filtered for ${dateFilter.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
+                                : ""
+                            }`
+                          : `Events tagged with "${searchQuery}"${
+                              dateFilter 
+                                ? ` • Filtered for ${dateFilter.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
+                                : ""
+                            }`
                       }
                     />
                   </div>
