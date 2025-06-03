@@ -11,6 +11,7 @@ import { techWeekEvents } from "./data/tech-week";
 import { techWeekAll } from "./data/raw/tech-week-all";
 import { safeName } from "@/lib/utils";
 import { sampleEvents } from "@/constants/sampleEvents";
+import { jinaScrapeEvent } from "@/server/JinaService";
 
 const client = new LlamaAPIClient({
   apiKey: process.env["LLAMA_API_KEY"], // This is the default and can be omitted
@@ -34,6 +35,9 @@ async function main() {
     case "enrich-events":
       await enrichEvents();
       break;
+    case "scrape-events":
+      await scrapeEvents();
+      break;
     case "dedupe":
       await dedupeEvents();
       break;
@@ -52,9 +56,20 @@ async function main() {
 }
 
 async function addPeople() {
+  const events = await sampleEvents.slice(0, 2);
+  const updated = await getPeople(events[0]);
+  console.log("events with people:", { updated });
+}
+
+async function scrapeEvents() {
   const events = await sampleEvents;
-  const enriched = await getPeople(events[2]);
-  console.log("getPeople result", { enriched });
+  const maxEvents = 2;
+  const selected = events
+    .filter((event) => event.url?.includes("partiful"))
+    .slice(0, maxEvents);
+  const proms = selected.map(jinaScrapeEvent);
+  const results = await Promise.all(proms);
+  console.log("enrichedEvents result", { results });
 }
 
 async function plexTest() {
