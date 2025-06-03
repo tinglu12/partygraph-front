@@ -11,7 +11,8 @@ import { techWeekEvents } from "./data/tech-week";
 import { techWeekAll } from "./data/raw/tech-week-all";
 import { safeName } from "@/lib/utils";
 import { sampleEvents } from "@/constants/sampleEvents";
-import { jinaScrapeEvent } from "@/server/JinaService";
+import { jinaScrapeEvent, scrapeAndFormatEvent } from "@/server/JinaService";
+import { sampleSize } from "lodash";
 
 const client = new LlamaAPIClient({
   apiKey: process.env["LLAMA_API_KEY"], // This is the default and can be omitted
@@ -63,11 +64,10 @@ async function addPeople() {
 
 async function scrapeEvents() {
   const events = await sampleEvents;
-  const maxEvents = 2;
-  const selected = events
-    .filter((event) => event.url?.includes("partiful"))
-    .slice(0, maxEvents);
-  const proms = selected.map(jinaScrapeEvent);
+  const maxEvents = 3;
+  const selected = events.filter((event) => event.url?.includes("partiful"));
+  const sampled = sampleSize(selected, maxEvents);
+  const proms = sampled.map(scrapeAndFormatEvent);
   const results = await Promise.all(proms);
   console.log("enrichedEvents result", { results });
 }

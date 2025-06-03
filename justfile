@@ -32,6 +32,9 @@ add-people:
 dedupe:
   bun cli.ts dedupe
 
+scrape-events:
+  bun cli.ts scrape-events
+
 scrape-partiful:
   curl "https://r.jina.ai/https://partiful.com/e/z0P1P7Nydm6XrUTa7p6d" \
     -H "Authorization: Bearer $JINA_READER_API_KEY"

@@ -6,6 +6,7 @@ import { EventPeopleSchema } from "@/types/EventPersonSchema";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 import fs from "fs/promises";
+import { EventNodeSchema } from "@/types/EventNodeSchema";
 
 class LamService {
   private client: LlamaAPIClient;
@@ -40,6 +41,7 @@ class LamService {
     const createChatCompletionResponse =
       await this.client.chat.completions.create({
         messages: [{ content: prompt, role: "user" }],
+        max_completion_tokens: 2000,
         model: this.model,
       });
     const content = createChatCompletionResponse.completion_message?.content;
@@ -127,6 +129,30 @@ Return JSON in this format:
     return blob?.people;
   }
 
+  async formatRawEventData(raw: string) {
+    const prompt = `format this event info into the JSON structure provided: ${raw}`;
+    const response = await this.client.chat.completions.create({
+      model: this.model,
+      messages: [{ content: prompt, role: "user" }],
+      response_format: {
+        type: "json_schema",
+        json_schema: EventNodeSchema,
+      },
+    });
+    const content = response.completion_message?.content;
+
+    try {
+      // @ts-expect-error - Llama model types are not properly typed
+      const blob = JSON.parse(content?.text?.trim() || "{}");
+      console.log("formatRawEventData", blob);
+      return blob;
+    } catch (e) {
+      // const text = typeof content === "string" ? content : content?.text;
+      console.error("Failed to parse Llama API response as JSON", content);
+      return null;
+    }
+  }
+
   async getCategory(event: string) {
     const prompt = `
     You are a helpful assistant.
@@ -190,5 +216,12 @@ export async function getPeople(event: EventType): Promise<EventPerson[]> {
   const lam = new LamService();
   const result = await lam.getPeople(event);
   console.log("getPeople result", { event, result });
+  return result;
+}
+
+export async function formatRawEventData(raw: string) {
+  const lam = new LamService();
+  const result = await lam.formatRawEventData(raw);
+  console.log("formatRawEventData result", { raw, result });
   return result;
 }

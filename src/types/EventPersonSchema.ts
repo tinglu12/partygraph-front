@@ -103,7 +103,6 @@ import { LlamaAPIClient } from "llama-api-client";
 
 export const EventPeopleSchema = {
   name: "EventPeople",
-
   schema: {
     type: "object",
     properties: {
