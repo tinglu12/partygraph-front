@@ -5,7 +5,14 @@ import { searchEvent } from "@/server/LamService";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { EventType } from "@/types/EventType";
 import { sampleEvents } from "@/constants/sampleEvents";
-import { sampleSize } from "lodash";
+
+/**
+ * Simple function to get a random sample from an array
+ */
+function sampleSize<T>(array: T[], size: number): T[] {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, size);
+}
 
 /**
  * Convert EventNode to EventType for compatibility with LamService
