@@ -109,6 +109,23 @@ export default function VibePage() {
     setDateFilter([]);
   };
 
+  // Handle date filter changes - re-run search with selected dates
+  const handleDateFilter = (dates: Date[]) => {
+    setDateFilter(dates);
+    
+    // If we have an active search query, re-run the search with the new date filter
+    if (searchQuery && hasSearched) {
+      if (searchMode === "semantic") {
+        // Re-run the vibe search with the current query
+        // Use setTimeout to avoid state update conflicts
+        setTimeout(() => handleVibeSearch(searchQuery), 0);
+      } else if (searchMode === "tag") {
+        // Re-run the tag search with the current query
+        setTimeout(() => handleTagSearch(searchQuery), 0);
+      }
+    }
+  };
+
   // Helper function to filter events by date
   const filterEventsByDate = useCallback((events: EventNode[]): EventNode[] => {
     if (dateFilter.length === 0) return events;
@@ -335,7 +352,7 @@ export default function VibePage() {
             onTagSelect={handleTagSearch}
             onClearSearch={handleClearSearch}
             isLoading={isLoading}
-            onDateFilter={(dates) => setDateFilter(dates)}
+            onDateFilter={handleDateFilter}
           />
 
           {/* Rotating example searches panel - moved back above graph */}
