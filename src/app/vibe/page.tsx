@@ -111,40 +111,69 @@ export default function VibePage() {
 
   // Handle date filter changes - re-run search with selected dates
   const handleDateFilter = (dates: Date[]) => {
+    console.log('🗓️ Date filter changed:', {
+      newDates: dates.map(d => d.toISOString().split('T')[0]),
+      currentSearchQuery: searchQuery,
+      hasSearched,
+      searchMode
+    });
+    
     setDateFilter(dates);
     
     // If we have an active search query, re-run the search with the new date filter
     if (searchQuery && hasSearched) {
+      console.log('🔄 Re-triggering search with new date filter...');
       if (searchMode === "semantic") {
-        // Re-run the vibe search with the current query
-        // Use setTimeout to avoid state update conflicts
-        setTimeout(() => handleVibeSearch(searchQuery), 0);
+        // Re-run the vibe search with the current query and new dates
+        setTimeout(() => {
+          console.log('🎯 Re-running vibe search with dates:', searchQuery, dates.map(d => d.toISOString().split('T')[0]));
+          handleVibeSearchWithDates(searchQuery, dates);
+        }, 0);
       } else if (searchMode === "tag") {
-        // Re-run the tag search with the current query
-        setTimeout(() => handleTagSearch(searchQuery), 0);
+        // Re-run the tag search with the current query and new dates
+        setTimeout(() => {
+          console.log('🏷️ Re-running tag search with dates:', searchQuery, dates.map(d => d.toISOString().split('T')[0]));
+          handleTagSearchWithDates(searchQuery, dates);
+        }, 0);
       }
+    } else {
+      console.log('❌ Not re-triggering search:', { searchQuery, hasSearched, searchMode });
     }
   };
 
   // Helper function to filter events by date
-  const filterEventsByDate = useCallback((events: EventNode[]): EventNode[] => {
-    if (dateFilter.length === 0) return events;
+  const filterEventsByDate = useCallback((events: EventNode[], filterDates?: Date[]): EventNode[] => {
+    // Use passed dates or fall back to state
+    const datesToFilter = filterDates || dateFilter;
+    
+    if (datesToFilter.length === 0) return events;
+    
+    console.log('🔍 Filtering events by date:', {
+      totalEvents: events.length,
+      dateFilter: datesToFilter.map(d => d.toISOString().split('T')[0]),
+      sampleEventDates: events.slice(0, 3).map(e => ({ title: e.title, date: e.date, dates: e.dates }))
+    });
     
     // Normalize filter dates to ISO date strings (YYYY-MM-DD)
-    const filterDateStrings = dateFilter.map(date => 
+    const filterDateStrings = datesToFilter.map(date => 
       date.toISOString().split('T')[0] // Convert to YYYY-MM-DD format
     );
     
-    return events.filter(event => {
+    const filteredEvents = events.filter(event => {
       try {
         // Handle events with dates array (new flexible format)
         if (event.dates && event.dates.length > 0) {
           // Check if any of the event's dates match any of the selected filter dates
-          return event.dates.some(eventDateStr => {
+          const matches = event.dates.some(eventDateStr => {
             // Normalize event date to YYYY-MM-DD format
             const eventDateOnly = new Date(eventDateStr).toISOString().split('T')[0];
             return filterDateStrings.includes(eventDateOnly);
           });
+          
+          if (matches) {
+            console.log('✅ Event matches (dates array):', { title: event.title, dates: event.dates });
+          }
+          return matches;
         }
         
         // Fallback to original date field for backward compatibility
@@ -154,19 +183,36 @@ export default function VibePage() {
             const convertedDate = convertDayOfWeekToDate(event.date);
             if (convertedDate) {
               const eventDateOnly = new Date(convertedDate).toISOString().split('T')[0];
-              return filterDateStrings.includes(eventDateOnly);
+              const matches = filterDateStrings.includes(eventDateOnly);
+              
+              console.log('🔄 Day-of-week conversion:', {
+                title: event.title,
+                originalDate: event.date,
+                convertedDate,
+                eventDateOnly,
+                filterDates: filterDateStrings,
+                matches
+              });
+              
+              return matches;
             }
           } else {
             // Try to parse as regular date
             const eventDate = new Date(event.date);
             if (!isNaN(eventDate.getTime())) {
               const eventDateOnly = eventDate.toISOString().split('T')[0];
-              return filterDateStrings.includes(eventDateOnly);
+              const matches = filterDateStrings.includes(eventDateOnly);
+              
+              if (matches) {
+                console.log('✅ Event matches (regular date):', { title: event.title, date: event.date });
+              }
+              return matches;
             }
           }
         }
         
         // If no date information is available, exclude from results
+        console.log('❌ Event excluded (no date info):', { title: event.title, date: event.date, dates: event.dates });
         return false;
       } catch (error) {
         console.error('Error parsing event date:', {
@@ -178,7 +224,141 @@ export default function VibePage() {
         return false;
       }
     });
+    
+    console.log('🎯 Filtering result:', {
+      originalCount: events.length,
+      filteredCount: filteredEvents.length,
+      removedCount: events.length - filteredEvents.length
+    });
+    
+    return filteredEvents;
   }, [dateFilter]);
+
+  // Helper search functions that accept dates directly (to avoid async state issues)
+  const handleVibeSearchWithDates = async (query: string, filterDates: Date[]) => {
+    setIsLoading(true);
+    setSearchQuery(query);
+    setHasSearched(true);
+    setError(null);
+    setSearchMode("semantic");
+    setRecentlyAddedEvent(null);
+
+    try {
+      console.log(`Starting AI semantic search for: "${query}" with dates:`, filterDates.map(d => d.toISOString().split('T')[0]));
+
+      // Try tag-centered search first for better visualization
+      const graphData = await searchTagCenteredByVibe(query);
+
+      if (graphData) {
+        // Extract events from graph for filtering
+        const events = graphData.nodes
+          .filter((node: any) => node.type === "event")
+          .map((node: any) => node.data as EventNode);
+        
+        console.log('📊 Graph data events extracted (with dates):', {
+          totalGraphNodes: graphData.nodes.length,
+          eventNodes: events.length,
+          sampleEvents: events.slice(0, 2).map(e => ({ title: e.title, date: e.date, dates: e.dates })),
+          filterDates: filterDates.map(d => d.toISOString().split('T')[0])
+        });
+        
+        // Apply date filter to events using passed dates
+        const filteredEvents = filterEventsByDate(events, filterDates);
+        
+        if (filterDates.length > 0) {
+          // Filter the graph data itself to only include filtered events
+          const filteredEventIds = new Set(filteredEvents.map(e => e.id));
+          const filteredGraphData = {
+            ...graphData,
+            nodes: graphData.nodes.filter((node: any) => 
+              node.type === "tag" || filteredEventIds.has(node.data.id)
+            ),
+            edges: graphData.edges.filter((edge: any) => {
+              const sourceIsTag = graphData.nodes.find((n: any) => n.id === edge.source)?.type === "tag";
+              const targetIsTag = graphData.nodes.find((n: any) => n.id === edge.target)?.type === "tag";
+              return (sourceIsTag && filteredEventIds.has(edge.target)) || 
+                     (targetIsTag && filteredEventIds.has(edge.source)) ||
+                     (filteredEventIds.has(edge.source) && filteredEventIds.has(edge.target));
+            })
+          };
+          setTagGraphData(filteredGraphData);
+        } else {
+          setTagGraphData(graphData);
+        }
+        
+        setSearchResults(filteredEvents);
+        
+        // Show message if date filter removed results
+        if (filterDates.length > 0 && filteredEvents.length === 0 && events.length > 0) {
+          setError(`Found ${events.length} matching events, but none on the selected dates. Try different dates or remove the date filter.`);
+        }
+      } else {
+        // Fallback to direct event search
+        const events = await searchEventsByVibe(query);
+        const filteredEvents = filterEventsByDate(events, filterDates);
+        
+        if (filteredEvents.length > 0) {
+          setSearchResults(filteredEvents);
+          setTagGraphData(null);
+        } else if (filterDates.length > 0 && events.length > 0) {
+          setError(`Found ${events.length} matching events, but none on the selected dates. Try different dates or remove the date filter.`);
+          setSearchResults([]);
+          setTagGraphData(null);
+        } else {
+          setError(
+            "No events found matching your vibe. Try a different description or browse available tags below."
+          );
+          setSearchResults([]);
+          setTagGraphData(null);
+        }
+      }
+    } catch (error) {
+      console.error("Error in AI vibe search:", error);
+      setError(
+        "AI search encountered an error. Please try again or use a simpler description."
+      );
+      setSearchResults([]);
+      setTagGraphData(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleTagSearchWithDates = async (tag: string, filterDates: Date[]) => {
+    setIsLoading(true);
+    setSearchQuery(tag);
+    setHasSearched(true);
+    setError(null);
+    setSearchMode("tag");
+    setRecentlyAddedEvent(null);
+
+    try {
+      console.log(`Searching by tag: "${tag}" with dates:`, filterDates.map(d => d.toISOString().split('T')[0]));
+
+      const events = await searchEventsByTag(tag);
+      const filteredEvents = filterEventsByDate(events, filterDates);
+      
+      if (filteredEvents.length > 0) {
+        setSearchResults(filteredEvents);
+        setTagGraphData(null);
+      } else if (filterDates.length > 0 && events.length > 0) {
+        setError(`Found ${events.length} events with tag "${tag}", but none on the selected dates. Try different dates or remove the date filter.`);
+        setSearchResults([]);
+        setTagGraphData(null);
+      } else {
+        setError(`No events found with tag "${tag}".`);
+        setSearchResults([]);
+        setTagGraphData(null);
+      }
+    } catch (error) {
+      console.error("Error in tag search:", error);
+      setError("Tag search failed. Please try again.");
+      setSearchResults([]);
+      setTagGraphData(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Handle semantic vibe search using AI
   const handleVibeSearch = async (query: string) => {
@@ -196,14 +376,42 @@ export default function VibePage() {
       const graphData = await searchTagCenteredByVibe(query);
 
       if (graphData) {
-        setTagGraphData(graphData);
-        // Extract events from graph for list view
+        // Extract events from graph for filtering
         const events = graphData.nodes
           .filter((node: any) => node.type === "event")
           .map((node: any) => node.data as EventNode);
         
+        console.log('📊 Graph data events extracted:', {
+          totalGraphNodes: graphData.nodes.length,
+          eventNodes: events.length,
+          sampleEvents: events.slice(0, 2).map(e => ({ title: e.title, date: e.date, dates: e.dates })),
+          currentDateFilter: dateFilter.map(d => d.toISOString().split('T')[0])
+        });
+        
         // Apply date filter to events
         const filteredEvents = filterEventsByDate(events);
+        
+        if (dateFilter.length > 0) {
+          // Filter the graph data itself to only include filtered events
+          const filteredEventIds = new Set(filteredEvents.map(e => e.id));
+          const filteredGraphData = {
+            ...graphData,
+            nodes: graphData.nodes.filter((node: any) => 
+              node.type === "tag" || filteredEventIds.has(node.data.id)
+            ),
+            edges: graphData.edges.filter((edge: any) => {
+              const sourceIsTag = graphData.nodes.find((n: any) => n.id === edge.source)?.type === "tag";
+              const targetIsTag = graphData.nodes.find((n: any) => n.id === edge.target)?.type === "tag";
+              return (sourceIsTag && filteredEventIds.has(edge.target)) || 
+                     (targetIsTag && filteredEventIds.has(edge.source)) ||
+                     (filteredEventIds.has(edge.source) && filteredEventIds.has(edge.target));
+            })
+          };
+          setTagGraphData(filteredGraphData);
+        } else {
+          setTagGraphData(graphData);
+        }
+        
         setSearchResults(filteredEvents);
         
         // Show message if date filter removed results
