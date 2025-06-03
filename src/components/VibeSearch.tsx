@@ -88,9 +88,9 @@ export const VibeSearch = ({
     setIsDragging(true);
     setDragStartDate(startDate);
     
-    // Determine drag mode based on initial date selection state
-    const isStartSelected = isDateSelected(startDate);
-    setDragMode(isStartSelected ? 'deselect' : 'select');
+    // Always start in select mode initially
+    // We'll determine the final mode in handleDragEnd based on the range
+    setDragMode('select');
     
     // Set initial preview
     setPreviewDates([startDate]);
@@ -102,6 +102,23 @@ export const VibeSearch = ({
     
     // Calculate range between start and current date
     const rangeDates = getDateRange(dragStartDate, currentDate);
+    
+    // Dynamically determine preview mode based on range content
+    const isStartSelected = isDateSelected(dragStartDate);
+    const unselectedInRange = rangeDates.filter(d => !isDateSelected(d));
+    
+    // Update drag mode for visual feedback
+    if (isStartSelected && unselectedInRange.length > 0) {
+      // Starting from selected, but range has unselected -> will add
+      setDragMode('select');
+    } else if (isStartSelected && unselectedInRange.length === 0) {
+      // Starting from selected, all in range selected -> will remove
+      setDragMode('deselect');
+    } else {
+      // Starting from unselected -> will add
+      setDragMode('select');
+    }
+    
     setPreviewDates(rangeDates);
   };
 
@@ -111,17 +128,32 @@ export const VibeSearch = ({
     
     const rangeDates = getDateRange(dragStartDate, endDate);
     
+    // Determine the appropriate action based on the range selection state
+    const isStartSelected = isDateSelected(dragStartDate);
+    const unselectedInRange = rangeDates.filter(d => !isDateSelected(d));
+    const selectedInRange = rangeDates.filter(d => isDateSelected(d));
+    
     let newSelection: Date[];
     
-    if (dragMode === 'select') {
-      // Add range dates to selection (avoid duplicates)
+    // If we start from a selected date but there are unselected dates in the range,
+    // add the unselected dates (user's requested behavior)
+    if (isStartSelected && unselectedInRange.length > 0) {
+      // Add unselected dates to selection
+      const existingTimes = new Set(date.map(d => d.getTime()));
+      const newDates = unselectedInRange.filter(d => !existingTimes.has(d.getTime()));
+      newSelection = [...date, ...newDates];
+    } 
+    // If we start from a selected date and ALL dates in range are already selected,
+    // then remove them (deselect behavior)
+    else if (isStartSelected && unselectedInRange.length === 0) {
+      const rangeTimes = new Set(rangeDates.map(d => d.getTime()));
+      newSelection = date.filter(d => !rangeTimes.has(d.getTime()));
+    }
+    // If we start from an unselected date, add all dates in range
+    else {
       const existingTimes = new Set(date.map(d => d.getTime()));
       const newDates = rangeDates.filter(d => !existingTimes.has(d.getTime()));
       newSelection = [...date, ...newDates];
-    } else {
-      // Remove range dates from selection
-      const rangeTimes = new Set(rangeDates.map(d => d.getTime()));
-      newSelection = date.filter(d => !rangeTimes.has(d.getTime()));
     }
     
     handleDateSelect(newSelection);
