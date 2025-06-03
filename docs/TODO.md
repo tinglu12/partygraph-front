@@ -1,7 +1,8 @@
 # TODO
 
-- [ ] dedupe events based on ID
-- [ ] enrich techweek events
+- [x] dedupe events based on ID
+- [x] enrich techweek events
+- [ ] cleanup all events - check length of description, number of tags, tags aren't junk, etc.
 
 ## Hannah
 - [ ] image analysis (offline)
