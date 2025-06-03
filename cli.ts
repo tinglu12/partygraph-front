@@ -1,4 +1,4 @@
-import { searchEvent, classifyImage } from "@/server/LamService";
+import { searchEvent, classifyImage, getPeople } from "@/server/LamService";
 import {
   plexEnrichEvents,
   plexSearchEvent,
@@ -28,6 +28,9 @@ async function main() {
     case "tech-week":
       await techWeekFormat();
       break;
+    case "add-people":
+      await addPeople();
+      break;
     case "enrich-events":
       await enrichEvents();
       break;
@@ -46,6 +49,12 @@ async function main() {
       break;
     case "search":
   }
+}
+
+async function addPeople() {
+  const events = await sampleEvents;
+  const enriched = await getPeople(events[2]);
+  console.log("getPeople result", { enriched });
 }
 
 async function plexTest() {

@@ -91,7 +91,8 @@ Return JSON in this format:
     if (!text) throw new Error("No text content in Llama API response");
 
     // Try to extract JSON from a code block
-    const match = text.match(/```json\s*([\s\S]*?)```/i) || text.match(/```([\s\S]*?)```/i);
+    const match =
+      text.match(/```json\s*([\s\S]*?)```/i) || text.match(/```([\s\S]*?)```/i);
     const jsonString = match ? match[1] : text;
 
     let result;
@@ -115,8 +116,10 @@ Return JSON in this format:
       messages: [{ content: prompt, role: "user" }],
       response_format: {
         type: "json_schema",
-        // @ts-expect-error - Llama model types are not properly typed
-        json_schema: EventPeopleSchema,
+        json_schema: {
+          name: "EventPeople",
+          schema: EventPeopleSchema,
+        },
       },
     });
 

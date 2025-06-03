@@ -60,37 +60,35 @@
 // };
 
 export const EventPeopleSchema = {
-  schema: {
-    type: "object",
-    properties: {
-      people: {
-        type: "array",
-        items: {
-          type: "object",
-          properties: {
-            nickname: {
-              type: "string",
-              description:
-                "a two word short nickname for this type of person. do not use a prefix like 'the' ",
-            },
-            // stereotype: {
-            //   type: "string",
-            //   description:
-            //     "a five words or less stereotype of the person, a typical type of person found in different neighborhoods of New York",
-            // },
-            quotes: {
-              type: "array",
-              description:
-                "a list of three short funny or interesting quotes this type of person might say at this type of event, in an 'overheard in New York' style",
-              items: { type: "string" },
-            },
+  type: "object",
+  properties: {
+    people: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          nickname: {
+            type: "string",
+            description:
+              "a two word short nickname for this type of person. do not use a prefix like 'the' ",
           },
-          required: ["nickname", "quotes"],
-          additionalProperties: false,
+          // stereotype: {
+          //   type: "string",
+          //   description:
+          //     "a five words or less stereotype of the person, a typical type of person found in different neighborhoods of New York",
+          // },
+          quotes: {
+            type: "array",
+            description:
+              "a list of three short funny or interesting quotes this type of person might say at this type of event, in an 'overheard in New York' style",
+            items: { type: "string" },
+          },
         },
+        required: ["nickname", "quotes"],
+        additionalProperties: false,
       },
     },
-    required: ["people"], // ✅ add this if people must be present
-    additionalProperties: false,
   },
+  required: ["people"], // ✅ add this if people must be present
+  additionalProperties: false,
 };

@@ -26,6 +26,9 @@ tech-week:
 enrich-events:
   bun cli.ts enrich-events
 
+add-people:
+  bun cli.ts add-people
+
 dedupe:
   bun cli.ts dedupe
 
