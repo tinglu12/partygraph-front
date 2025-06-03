@@ -1,22 +1,32 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Sparkles, Link, Eye, Brain, Zap } from 'lucide-react';
+import { Sparkles, Link, Eye, Brain, Zap, MessageCircle } from 'lucide-react';
 
 import { EventNode, TagCenteredNode } from '@/types/EventGraph';
 import { TagCenteredGraphData } from '@/types/EventGraph';
 interface TagCenteredGraphProps {
   graphData: TagCenteredGraphData;
   className?: string;
+  onEventClick?: (event: EventNode) => void;
+  selectedEventId?: string;
 }
 
 /**
  * Enhanced fallback visualization with modern styling and animations
  */
-const FallbackVisualization = ({ graphData }: { graphData: TagCenteredGraphData }) => {
+const FallbackVisualization = ({ 
+  graphData, 
+  onEventClick, 
+  selectedEventId 
+}: { 
+  graphData: TagCenteredGraphData;
+  onEventClick?: (event: EventNode) => void;
+  selectedEventId?: string;
+}) => {
   const events = graphData.nodes.filter((n: TagCenteredNode) => n.type === 'event');
   
   return (
-    <div className="w-full h-[800px] bg-gradient-to-br from-slate-900/50 via-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/20 flex flex-col items-center justify-center p-8 relative overflow-hidden">
+    <div className="w-full min-h-[800px] bg-gradient-to-br from-slate-900/50 via-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/20 flex flex-col items-center justify-start py-12 px-8 relative overflow-visible">
       {/* Enhanced background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-600/5 via-transparent to-blue-600/5"></div>
       <div className="absolute top-8 left-8 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
@@ -35,10 +45,26 @@ const FallbackVisualization = ({ graphData }: { graphData: TagCenteredGraphData 
           </div>
           <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 text-white px-10 py-6 rounded-3xl text-2xl md:text-3xl font-bold shadow-2xl border border-purple-500/30 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-green-600/20 rounded-3xl blur-xl"></div>
-            <div className="relative flex items-center justify-center gap-3">
-              <Sparkles className="w-6 h-6" />
-              <span>#{graphData.centralTag}</span>
-              <Sparkles className="w-6 h-6" />
+            <div className="relative flex flex-col items-center justify-center gap-3">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-6 h-6" />
+                <span>#{graphData.centralTag}</span>
+                <Sparkles className="w-6 h-6" />
+              </div>
+              
+              {/* Similar tags */}
+              {graphData.similarTags && graphData.similarTags.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-2 mt-2">
+                  {graphData.similarTags.map((tag, index) => (
+                    <span 
+                      key={tag} 
+                      className="text-sm bg-white/20 text-white px-3 py-1 rounded-full border border-white/30 backdrop-blur-sm"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <p className="text-gray-300 mt-4 text-lg">
@@ -57,48 +83,151 @@ const FallbackVisualization = ({ graphData }: { graphData: TagCenteredGraphData 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full max-w-7xl">
           {events.map((node: TagCenteredNode, index: number) => {
             const event = node.data as EventNode;
+            const isSelected = selectedEventId === event.id;
+            
             return (
               <div 
                 key={node.id}
-                className="group bg-gradient-to-br from-green-600/25 via-emerald-500/15 to-teal-600/25 border border-green-500/40 text-white px-6 py-6 rounded-2xl text-center hover:scale-110 transition-all duration-500 backdrop-blur-sm hover:shadow-2xl hover:shadow-green-500/30 relative overflow-hidden cursor-pointer"
+                onClick={() => onEventClick?.(event)}
+                className={`
+                  group relative transition-all duration-500 backdrop-blur-sm hover:shadow-2xl rounded-2xl text-center overflow-hidden cursor-pointer
+                  ${onEventClick ? 'hover:scale-110' : 'hover:scale-105'}
+                  ${isSelected 
+                    ? "bg-gradient-to-br from-blue-600/30 via-purple-500/20 to-blue-600/30 border-2 border-blue-400/80 shadow-lg shadow-blue-500/40 ring-2 ring-blue-400/60" 
+                    : "bg-gradient-to-br from-green-600/25 via-emerald-500/15 to-teal-600/25 border border-green-500/40 hover:shadow-green-500/30"
+                  }
+                  text-white px-6 py-6
+                `}
               >
-                {/* Event number indicator */}
-                <div className="absolute -top-2 -left-2 w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 border-white shadow-lg">
-                  {index + 1}
-                </div>
+                {/* Selected for chat indicator */}
+                {isSelected && (
+                  <div className="absolute top-2 right-2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center animate-pulse">
+                    <MessageCircle className="w-3 h-3 text-white" />
+                  </div>
+                )}
 
-                <div className="absolute inset-0 bg-gradient-to-br from-green-600/0 via-emerald-600/0 to-teal-600/0 group-hover:from-green-600/15 group-hover:via-emerald-600/10 group-hover:to-teal-600/15 rounded-2xl transition-all duration-500"></div>
+                <div className={`
+                  absolute inset-0 rounded-2xl transition-all duration-500
+                  ${isSelected 
+                    ? "bg-gradient-to-br from-blue-600/15 via-purple-600/10 to-blue-600/15" 
+                    : "bg-gradient-to-br from-green-600/0 via-emerald-600/0 to-teal-600/0 group-hover:from-green-600/15 group-hover:via-emerald-600/10 group-hover:to-teal-600/15"
+                  }
+                `}></div>
                 
                 <div className="relative z-10">
-                  <div className="font-bold text-base md:text-lg mb-3 leading-tight group-hover:text-green-100 transition-colors">
+                  <div className={`
+                    font-bold text-base md:text-lg mb-3 leading-tight transition-colors
+                    ${isSelected ? "text-blue-100" : "group-hover:text-green-100"}
+                  `}>
                     {event.title}
                   </div>
                   {/* <div className="text-xs text-green-200 opacity-90 mb-3 flex items-center justify-center gap-2">
                     <Sparkles className="w-3 h-3" />
                     {event.date}
                   </div> */}
-                  {event.category && (
-                    <div className="mt-3 text-xs bg-white/20 px-3 py-1 rounded-full inline-block border border-white/30 font-semibold">
-                      {event.category}
-                    </div>
-                  )}
-                  {event.tags && event.tags.length > 0 && (
-                    <div className="mt-3 flex flex-wrap justify-center gap-1">
-                      {event.tags.slice(0, 3).map((tag: string) => (
-                        <span key={tag} className="text-xs bg-green-500/30 text-green-100 px-2 py-1 rounded-full border border-green-400/30">
-                          #{tag}
-                        </span>
-                      ))}
-                      {event.tags.length > 3 && (
-                        <span className="text-xs text-green-200">+{event.tags.length - 3}</span>
-                      )}
-                    </div>
-                  )}
+                  
+                  {/* Event details section - replacing tags */}
+                  <div className="mt-3 space-y-2 text-xs">
+                    {/* Brief description - exactly 3 lines */}
+                    {event.description && (
+                      <div className={`
+                        text-left leading-relaxed h-12 flex items-start
+                        ${isSelected ? "text-blue-100" : "text-green-100"}
+                      `}>
+                        <div className="line-clamp-3">
+                          {event.description}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Date */}
+                    {event.date && (
+                      <div className={`
+                        flex items-center gap-1 justify-center
+                        ${isSelected ? "text-blue-200" : "text-green-200"}
+                      `}>
+                        <span className="font-medium">📅</span>
+                        <span>{event.date}</span>
+                      </div>
+                    )}
+                    
+                    {/* Location/Borough */}
+                    {event.neighborhood && (
+                      <div className={`
+                        flex items-center gap-1 justify-center
+                        ${isSelected ? "text-blue-200" : "text-green-200"}
+                      `}>
+                        <span className="font-medium">📍</span>
+                        <span>{event.neighborhood}</span>
+                      </div>
+                    )}
+                    
+                    {/* Event URL */}
+                    {event.url && (
+                      <div className="flex justify-center mt-2">
+                        <a 
+                          href={event.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className={`
+                            px-3 py-1 rounded-full text-xs font-medium border transition-all hover:scale-105
+                            ${isSelected 
+                              ? "bg-blue-500/30 border-blue-400/50 text-blue-100 hover:bg-blue-500/40" 
+                              : "bg-white/20 border-white/30 hover:bg-white/30"
+                            }
+                          `}
+                        >
+                          🔗 View Event
+                        </a>
+                      </div>
+                    )}
+                    
+                    {/* Main category tag - moved after View Event button */}
+                    {event.category && (
+                      <div className="flex justify-center mt-2">
+                        <div className={`
+                          text-xs px-3 py-1 rounded-full inline-block border font-semibold
+                          ${isSelected 
+                            ? "bg-blue-500/30 border-blue-400/50 text-blue-100" 
+                            : "bg-white/20 border-white/30"
+                          }
+                        `}>
+                          {event.category}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Subtle tags section */}
+                    {event.tags && event.tags.length > 0 && (
+                      <div className="flex flex-wrap justify-center gap-1 mt-2 opacity-60">
+                        {event.tags.slice(0, 2).map((tag: string) => (
+                          <span 
+                            key={tag} 
+                            className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white/80"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                        {event.tags.length > 2 && (
+                          <span className="text-xs text-white/60">
+                            +{event.tags.length - 2} more
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Hover glow effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 rounded-2xl blur-xl"></div>
+                  <div className={`
+                    absolute inset-0 rounded-2xl blur-xl
+                    ${isSelected 
+                      ? "bg-gradient-to-r from-blue-400/20 to-purple-400/20" 
+                      : "bg-gradient-to-r from-green-400/20 to-emerald-400/20"
+                    }
+                  `}></div>
                 </div>
               </div>
             );
@@ -130,7 +259,9 @@ const FallbackVisualization = ({ graphData }: { graphData: TagCenteredGraphData 
  */
 export const TagCenteredGraph = ({ 
   graphData,
-  className = "w-full rounded-3xl border bg-card"
+  className = "w-full rounded-3xl border bg-card",
+  onEventClick,
+  selectedEventId
 }: TagCenteredGraphProps) => {
   const [mounted, setMounted] = useState(false);
 
@@ -164,7 +295,7 @@ export const TagCenteredGraph = ({
 
   return (
     <div className="space-y-8">
-      <FallbackVisualization graphData={graphData} />
+      <FallbackVisualization graphData={graphData} onEventClick={onEventClick} selectedEventId={selectedEventId} />
       
       {/* Enhanced legend with AI branding */}
       <div className="flex justify-center">
@@ -180,8 +311,21 @@ export const TagCenteredGraph = ({
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div>
-                <span className="font-semibold text-white block">Central Tag:</span>
+                <span className="font-semibold text-white block">Central Tag(s):</span>
                 <span className="text-gray-300">"{graphData.centralTag}" (AI-discovered)</span>
+                {graphData.similarTags && graphData.similarTags.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    <span className="text-xs text-gray-400 mr-1">Similar:</span>
+                    {graphData.similarTags.map((tag, index) => (
+                      <span 
+                        key={tag} 
+                        className="text-xs bg-purple-500/20 text-purple-200 px-2 py-1 rounded-full border border-purple-400/30"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-4">

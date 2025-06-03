@@ -472,12 +472,16 @@ export default function VibePage() {
                 {/* Tag-centered graph visualization */}
                 {tagGraphData && (
                   <div className="max-w-7xl mx-auto">
-                    <TagCenteredGraph graphData={tagGraphData} />
+                    <TagCenteredGraph 
+                      graphData={tagGraphData} 
+                      onEventClick={handleEventSelect}
+                      selectedEventId={selectedEvent?.id}
+                    />
                   </div>
                 )}
 
                 {/* Enhanced events list */}
-                {searchResults.length > 0 && (
+                {searchResults.length > 0 && !tagGraphData && (
                   <div className="max-w-7xl mx-auto">
                     <EventsList
                       events={searchResults}
@@ -486,8 +490,6 @@ export default function VibePage() {
                       title={
                         recentlyAddedEvent
                           ? "Your New Event"
-                          : tagGraphData
-                          ? `All Events: #${tagGraphData.centralTag}`
                           : "Matching Events"
                       }
                       subtitle={
@@ -498,8 +500,6 @@ export default function VibePage() {
                               dateFilter.length > 0
                                 ? dateFilter.length === 1
                                   ? ` • Filtered for ${dateFilter[0].toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
-                                  : dateFilter.length <= 3
-                                  ? ` • Filtered for ${dateFilter.map(date => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })).join(', ')}`
                                   : ` • Filtered for ${dateFilter.length} selected dates`
                                 : ""
                             }`
@@ -507,8 +507,6 @@ export default function VibePage() {
                               dateFilter.length > 0
                                 ? dateFilter.length === 1
                                   ? ` • Filtered for ${dateFilter[0].toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
-                                  : dateFilter.length <= 3
-                                  ? ` • Filtered for ${dateFilter.map(date => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })).join(', ')}`
                                   : ` • Filtered for ${dateFilter.length} selected dates`
                                 : ""
                             }`

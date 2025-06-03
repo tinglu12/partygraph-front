@@ -31,6 +31,7 @@ export interface TagCenteredNode {
 
 export interface TagCenteredGraphData {
   centralTag: string;
+  similarTags?: string[]; // The 5 most similar tags found during search
   nodes: TagCenteredNode[];
   edges: Array<{
     source: string;
