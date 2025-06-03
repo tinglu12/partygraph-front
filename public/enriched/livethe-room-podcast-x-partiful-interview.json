@@ -1,12 +1,15 @@
 {
   "id": "livethe-room-podcast-x-partiful-interview",
   "title": "Live:The Room Podcast X Partiful Interview",
-  "description": "This year, in partnership with Season 12 sponsors Mercury and Perkins Coie, and location sponsor Level Ten, Madison and Claudia will record a live episode featuring an interview with Shreya Murthy, CEO and co-founder of Partiful. Following the show, attendees will have the chance to connect with other founders and investors during a cocktail reception.",
+  "description": "The Room Podcast, in partnership with Season 12 sponsors Mercury and Perkins Coie, and location sponsor Level Ten, will record a live episode featuring an interview with Shreya Murthy, CEO and co-founder of Partiful, followed by a cocktail reception.",
   "neighborhood": "SOHO",
   "tags": [
     "nytechweek",
+    "#nytechweek",
     "the room podcast",
-    "partiful"
+    "partiful",
+    "mercury",
+    "perkins coie"
   ],
   "keywords": [
     "nytechweek"

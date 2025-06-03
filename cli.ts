@@ -68,14 +68,20 @@ async function addPeople() {
 async function scrapeEvents() {
   const events = await sampleEvents;
   const selected = events.filter((event) => event.category === "nytechweek");
-  const maxEvents = 20;
-  const concurrency = 5;
+  const maxEvents = 1000;
+  const concurrency = 20;
   const sampled = sampleSize(selected, maxEvents);
 
   const { results, errors } = await PromisePool.withConcurrency(concurrency)
     .for(sampled)
     .process(async (event, index, pool) => {
-      console.log("scraping event", { index, event });
+      const progress = Math.round(((index + 1) / sampled.length) * 100);
+      console.log("scraping event", {
+        index,
+        total: sampled.length,
+        progress: `${progress}%`,
+        id: event.id,
+      });
       const enriched = await scrapeAndFormatEvent(event);
       fs.writeFileSync(
         `./public/enriched/${enriched.id}.json`,

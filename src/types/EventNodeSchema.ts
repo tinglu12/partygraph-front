@@ -13,29 +13,36 @@ export const EventNodeSchema: BaseSchema = {
         description: "A short description of the event in twenty words or less",
       },
 
-      tags: {
-        type: "array",
-        items: { type: "string" },
-        description: `five keywords extracted from the event description that describe the event.
-          these can be any words that describe the event, do NOT have to be hashtags`,
-      },
+      // tags: {
+      //   type: "array",
+      //   items: { type: "string" },
+      //   description: `five keywords extracted from the event description that describe the event.
+      //     these can be any words that describe the event, do NOT have to be hashtags`,
+      // },
       keywords: {
         type: "array",
         items: { type: "string" },
+        minItems: 3,
+        maxItems: 5,
         description:
-          "a list of unique or distinctive keywords extracted from the event description that describe the event",
+          "Up to five keywords extracted from the event description that describe the event",
       },
 
-      date: {
-        type: "string",
-        description: `the date of the event. Assume year is 2025 if no year is found. Just the date with no extra text.`,
-      },
+      // date: {
+      //   type: "string",
+      //   description: `the date of the event. Assume year is 2025 if no year is found. Just the date with no extra text.`,
+      // },
       // category: { type: "string" },
       // venue: { type: "string" },
       // address: { type: "string" },
       // neighborhood: { type: "string" },
     },
-    required: ["title", "description", "tags", "keywords", "date"],
+    required: [
+      "title",
+      "description",
+      // "tags",
+      "keywords",
+    ],
     additionalProperties: false,
   },
 };

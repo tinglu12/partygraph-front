@@ -1,13 +1,15 @@
 {
   "id": "vc-open-office-hours",
   "title": "VC Open Office Hours",
-  "description": "In these distributed meetings from June 3rd-6th, founders meet real VCs and discuss their idea in a 20-minute intro session. These meetings are not about getting a fundraising check by the end of your chat - rather it's about convincing them to take another meeting for a deeper dive. After you RSVP, you will receive a link to sign up for meetings with investors for This event is a part of #NYTechWeek—a week of events hosted by VCs and startups to bring together the tech ecosystem. Learn more at www.tech-week.com.",
+  "description": "In these distributed meetings from June 3rd-6th, founders meet real VCs and discuss their idea in a 20-minute intro session. These meetings are not about getting a fundraising check by the end of your chat - rather it's about convincing them to take another meeting for a deeper dive. After you RSVP, you will receive a link to sign up for meetings with investors. This event is a part of #NYTechWeek—a week of events hosted by VCs and startups to bring together the tech ecosystem. Learn more at www.tech-week.com.",
   "neighborhood": "SOHO",
   "tags": [
     "nytechweek",
+    "#nytechweek",
+    "vc",
     "startups",
-    "vcs",
-    "tech ecosystem"
+    "tech ecosystem",
+    "fundraising"
   ],
   "keywords": [
     "nytechweek"

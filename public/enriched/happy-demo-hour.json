@@ -1,12 +1,14 @@
 {
   "id": "happy-demo-hour",
   "title": "Happy Demo Hour",
-  "description": "Draper Startup House and Draper Associates are teaming up to showcase some of the most exciting early-stage founders from our global community. Expect bold ideas, short and sharp pitches, and a crowd of VCs, angels, and fellow builders who like their innovation shaken, not stirred. What to expect: \n\n* Rapid-fire startup pitches\n* Connect with angel investors & other founders\n* Craft drinks, great people",
+  "description": "Draper Startup House and Draper Associates are teaming up to showcase some of the most exciting early-stage founders from our global community. Expect bold ideas, short and sharp pitches, and a crowd of VCs, angels, and fellow builders who like their innovation shaken, not stirred.",
   "neighborhood": "MIDTOWN",
   "tags": [
     "nytechweek",
     "startup",
-    "demo day"
+    "demo day",
+    "happy hour",
+    "draper startup house"
   ],
   "keywords": [
     "nytechweek"
