@@ -170,6 +170,21 @@ export const EventsList = ({
                 </div>
               )}
 
+              {/* Event URL */}
+              {event.url && (
+                <div className="flex justify-center mt-4 pt-4 border-t border-white/10">
+                  <a 
+                    href={event.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="px-4 py-2 bg-gradient-to-r from-purple-600/30 to-blue-600/30 text-purple-200 text-sm font-medium rounded-full border border-purple-500/30 backdrop-blur-sm hover:scale-105 hover:from-purple-600/40 hover:to-blue-600/40 transition-all duration-200"
+                  >
+                    🔗 View Event
+                  </a>
+                </div>
+              )}
+
               {/* Hover effect overlay with gradient */}
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-600/0 via-blue-600/0 to-purple-600/0 group-hover:from-purple-600/5 group-hover:via-blue-600/5 group-hover:to-purple-600/5 transition-all duration-500 pointer-events-none"></div>
 

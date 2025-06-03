@@ -26,7 +26,7 @@ const FallbackVisualization = ({
   const events = graphData.nodes.filter((n: TagCenteredNode) => n.type === 'event');
   
   return (
-    <div className="w-full h-[800px] bg-gradient-to-br from-slate-900/50 via-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/20 flex flex-col items-center justify-center p-8 relative overflow-hidden">
+    <div className="w-full min-h-[800px] bg-gradient-to-br from-slate-900/50 via-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/20 flex flex-col items-center justify-start py-12 px-8 relative overflow-visible">
       {/* Enhanced background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-600/5 via-transparent to-blue-600/5"></div>
       <div className="absolute top-8 left-8 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
@@ -83,20 +83,9 @@ const FallbackVisualization = ({
                   text-white px-6 py-6
                 `}
               >
-                {/* Event number indicator */}
-                <div className={`
-                  absolute -top-2 -left-2 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 border-white shadow-lg
-                  ${isSelected 
-                    ? "bg-gradient-to-r from-blue-500 to-purple-500" 
-                    : "bg-gradient-to-r from-green-500 to-emerald-500"
-                  }
-                `}>
-                  {index + 1}
-                </div>
-
                 {/* Selected for chat indicator */}
                 {isSelected && (
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center animate-pulse">
+                  <div className="absolute top-2 right-2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center animate-pulse">
                     <MessageCircle className="w-3 h-3 text-white" />
                   </div>
                 )}
@@ -131,32 +120,65 @@ const FallbackVisualization = ({
                       {event.category}
                     </div>
                   )}
-                  {event.tags && event.tags.length > 0 && (
-                    <div className="mt-3 flex flex-wrap justify-center gap-1">
-                      {event.tags.slice(0, 3).map((tag: string) => (
-                        <span 
-                          key={tag} 
+                  
+                  {/* Event details section - replacing tags */}
+                  <div className="mt-3 space-y-2 text-xs">
+                    {/* Brief description */}
+                    {event.description && (
+                      <div className={`
+                        text-left leading-relaxed
+                        ${isSelected ? "text-blue-100" : "text-green-100"}
+                      `}>
+                        {event.description.length > 100 
+                          ? `${event.description.substring(0, 100)}...` 
+                          : event.description
+                        }
+                      </div>
+                    )}
+                    
+                    {/* Date */}
+                    {event.date && (
+                      <div className={`
+                        flex items-center gap-1 justify-center
+                        ${isSelected ? "text-blue-200" : "text-green-200"}
+                      `}>
+                        <span className="font-medium">📅</span>
+                        <span>{event.date}</span>
+                      </div>
+                    )}
+                    
+                    {/* Location/Borough */}
+                    {event.neighborhood && (
+                      <div className={`
+                        flex items-center gap-1 justify-center
+                        ${isSelected ? "text-blue-200" : "text-green-200"}
+                      `}>
+                        <span className="font-medium">📍</span>
+                        <span>{event.neighborhood}</span>
+                      </div>
+                    )}
+                    
+                    {/* Event URL */}
+                    {event.url && (
+                      <div className="flex justify-center mt-2">
+                        <a 
+                          href={event.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className={`
-                            text-xs px-2 py-1 rounded-full border
+                            px-3 py-1 rounded-full text-xs font-medium border transition-all hover:scale-105
                             ${isSelected 
-                              ? "bg-blue-500/30 text-blue-100 border-blue-400/30" 
-                              : "bg-green-500/30 text-green-100 border-green-400/30"
+                              ? "bg-blue-500/30 border-blue-400/50 text-blue-100 hover:bg-blue-500/40" 
+                              : "bg-white/20 border-white/30 hover:bg-white/30"
                             }
                           `}
                         >
-                          #{tag}
-                        </span>
-                      ))}
-                      {event.tags.length > 3 && (
-                        <span className={`
-                          text-xs
-                          ${isSelected ? "text-blue-200" : "text-green-200"}
-                        `}>
-                          +{event.tags.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  )}
+                          🔗 View Event
+                        </a>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Hover glow effect */}
