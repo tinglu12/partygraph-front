@@ -1,6 +1,7 @@
 "use client";
 
 import { EventNode } from "@/types/EventGraph";
+import { EventType } from "@/types/EventType";
 import {
   Calendar,
   // MapPin,
@@ -12,13 +13,41 @@ import {
   MessageCircle,
 } from "lucide-react";
 
+// Union type to handle both event types
+// EventNode: from search results, has 'url' and 'connections'
+// EventType: from API calls, has 'link', 'people', and 'keywords'
+type UnifiedEvent = EventNode | EventType;
+
 interface EventsListProps {
-  events: EventNode[];
+  events: UnifiedEvent[];
   highlightedIds?: string[];
   selectedEventId?: string;
   title?: string;
   subtitle?: string;
-  onEventClick?: (event: EventNode) => void;
+  onEventClick?: (event: UnifiedEvent) => void;
+}
+
+// Type guard to distinguish between EventNode and EventType
+// EventNode has 'connections', EventType has 'people'
+function isEventNode(event: UnifiedEvent): event is EventNode {
+  return 'connections' in event;
+}
+
+// Helper function to get event ID from either data type
+function getEventId(event: UnifiedEvent, index: number): string {
+  if ('id' in event && event.id) {
+    return event.id;
+  }
+  return `event-${index}`;
+}
+
+// Helper function to get event URL from either data type
+// EventNode uses 'url', EventType uses 'link'
+function getEventUrl(event: UnifiedEvent): string | undefined {
+  if (isEventNode(event)) {
+    return event.url;
+  }
+  return event.link;
 }
 
 /**
@@ -76,13 +105,13 @@ export const EventsList = ({
 
       {/* Enhanced events grid */}
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {events.map((event) => {
-          const isHighlighted = highlightedIds.includes(event.id);
-          const isSelected = selectedEventId === event.id;
+        {events.map((event, index) => {
+          const isHighlighted = highlightedIds.includes(getEventId(event, index));
+          const isSelected = selectedEventId === getEventId(event, index);
 
           return (
             <div
-              key={event.id}
+              key={getEventId(event, index)}
               onClick={() => onEventClick?.(event)}
               className={`
                 group relative rounded-3xl p-8 border transition-all duration-500 backdrop-blur-sm hover:scale-[1.02] hover:shadow-2xl
@@ -126,6 +155,7 @@ export const EventsList = ({
                 </h3>
                 <div className="flex items-center gap-2 text-sm text-gray-400">
                   <Clock className="w-4 h-4 text-purple-400" />
+                  {event.date && <span>{event.date}</span>}
                 </div>
               </div>
 
@@ -136,8 +166,8 @@ export const EventsList = ({
                 </span>
               </p>
 
-              {/* Enhanced connections indicator */}
-              {event.connections && event.connections.length > 0 && (
+              {/* Enhanced connections indicator for EventNode */}
+              {isEventNode(event) && event.connections && event.connections.length > 0 && (
                 <div className="flex items-center gap-2 text-xs text-gray-400 pt-4 border-t border-white/10">
                   <Users className="w-4 h-4 text-green-400" />
                   <span>
@@ -150,11 +180,29 @@ export const EventsList = ({
                 </div>
               )}
 
+              {/* People section for EventType */}
+              {!isEventNode(event) && event.people && event.people.length > 0 && (
+                <div className="flex items-center gap-2 text-xs text-gray-400 pt-4 border-t border-white/10">
+                  <Users className="w-4 h-4 text-green-400" />
+                  <span>
+                    People: {event.people.map((p) => p.name).join(", ")}
+                  </span>
+                </div>
+              )}
+
+              {/* Keywords section for EventType */}
+              {!isEventNode(event) && event.keywords && event.keywords.length > 0 && (
+                <div className="flex items-center gap-2 text-xs text-gray-400 pt-2 border-t border-white/10">
+                  <Tag className="w-4 h-4 text-blue-400" />
+                  <span>Keywords: {event.keywords.join(", ")}</span>
+                </div>
+              )}
+
               {/* Event URL */}
-              {event.url && (
+              {getEventUrl(event) && (
                 <div className="flex justify-center mt-4 pt-4 border-t border-white/10">
                   <a 
-                    href={event.url}
+                    href={getEventUrl(event)}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
