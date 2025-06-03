@@ -38,7 +38,7 @@ export const CTA = () => {
           </div>
 
           <div className="text-sm text-gray-400">
-            Free to join • No spam • Unsubscribe anytime | v0.0.2
+            Free to join • No spam • Unsubscribe anytime | v0.0.3
           </div>
         </div>
       </div>

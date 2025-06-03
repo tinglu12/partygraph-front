@@ -162,6 +162,7 @@ export async function searchTagCenteredByVibe(
  * Server action to get events by exact tag match using the API
  */
 export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
+  // TODO this throws an error locally but seems to return data..?
   const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3001";
   const searchUrl = `${baseUrl}/api/events/tags?query=${encodeURIComponent(
     tag
