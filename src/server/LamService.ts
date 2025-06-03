@@ -22,7 +22,118 @@ class LamService {
     this.model = "Llama-4-Maverick-17B-128E-Instruct-FP8";
   }
 
+  /**
+   * Enhanced tag-based search that constrains LLaMA to existing tag vocabulary
+   * This ensures consistent results and prevents hallucinated tags
+   * 
+   * @param filter - User's search query/vibe description
+   * @param events - Available events with their tags
+   * @returns Array of the 5 most relevant existing tags
+   */
+  async searchEventTags(filter: string, events: EventType[]): Promise<string[]> {
+    // Extract all unique tags from the event dataset
+    // This creates our "vocabulary" that LLaMA must choose from
+    const allTags = Array.from(new Set(
+      events.flatMap(event => event.tags || [])
+    )).filter((tag: string) => tag && tag.length > 0); // Remove empty/null tags
+
+    // Limit tags for LLaMA context window (too many tags can overwhelm the model)
+    const tagLimit = 500;
+    const limitedTags = allTags.slice(0, tagLimit);
+
+    console.log(`Providing ${limitedTags.length} existing tags to LLaMA for selection`);
+
+    const prompt = `
+You are a semantic tag matching assistant. Given a user's search description, find the 5 most relevant tags from the provided tag vocabulary.
+
+IMPORTANT CONSTRAINTS:
+- You MUST only return tags that exist in the provided vocabulary
+- Return exactly 5 tags (or fewer if less than 5 are relevant)
+- Return ONLY the tag names, comma-separated, no explanations
+- Do NOT create new tags or modify existing ones
+- Focus on semantic similarity, not just keyword matching
+
+User's search: "${filter}"
+
+Available tag vocabulary:
+${limitedTags.join(', ')}
+
+Return the 5 most relevant tags:`;
+
+    try {
+      const response = await this.client.chat.completions.create({
+        messages: [{ content: prompt, role: "user" }],
+        max_completion_tokens: 200, // Short response expected
+        model: this.model,
+        temperature: 0.3, // Lower temperature for more consistent results
+      });
+
+      const content = response.completion_message?.content;
+      // @ts-expect-error - Llama model types are not properly typed
+      const tagsText = content?.text?.trim() || "";
+      
+      if (!tagsText) {
+        console.log("LLaMA returned empty response for tag search");
+        return [];
+      }
+
+      // Parse the comma-separated tags and validate they exist in our vocabulary
+      const selectedTags = tagsText
+        .split(',')
+        .map((tag: string) => tag.trim())
+        .filter((tag: string) => tag.length > 0)
+        .filter((tag: string) => limitedTags.includes(tag)) // Ensure tag exists in vocabulary
+        .slice(0, 5); // Limit to 5 tags max
+
+      console.log(`LLaMA selected tags for "${filter}":`, selectedTags);
+      return selectedTags;
+
+    } catch (error) {
+      console.error("Error in LLaMA tag search:", error);
+      return [];
+    }
+  }
+
+  /**
+   * Legacy event search method - now updated to use tag-based approach
+   * This maintains backward compatibility while using the improved tag system
+   * 
+   * @param filter - User's search query
+   * @param events - Available events
+   * @returns Single event title (for backward compatibility) or null
+   */
   async searchEvent(filter: string, events: EventType[]) {
+    // Use the new tag-based search approach
+    const selectedTags = await this.searchEventTags(filter, events);
+    
+    if (selectedTags.length === 0) {
+      console.log("No relevant tags found, falling back to title-based search");
+      // Fallback to original title-based search if no tags found
+      return this.searchEventByTitle(filter, events);
+    }
+
+    // Find events that have any of the selected tags
+    // This matches the logic used in the fallback search for consistency
+    const matchingEvents = events.filter(event => 
+      event.tags && event.tags.some(tag => selectedTags.includes(tag))
+    );
+
+    if (matchingEvents.length === 0) {
+      console.log("No events found with selected tags, falling back to title search");
+      return this.searchEventByTitle(filter, events);
+    }
+
+    // Return the first matching event's title for backward compatibility
+    // The calling code expects a single event title, not an array
+    console.log(`Found ${matchingEvents.length} events matching tags: [${selectedTags.join(', ')}]`);
+    return matchingEvents[0].title;
+  }
+
+  /**
+   * Original title-based search method (extracted for fallback use)
+   * This is the legacy approach that only looks at titles and descriptions
+   */
+  private async searchEventByTitle(filter: string, events: EventType[]) {
     const eventString = events
       .map((event) => `- ${event.title} ${event.description}`)
       .join("\n");
@@ -233,4 +344,61 @@ export async function formatRawEventData(raw: string) {
   const result = await lam.formatRawEventData(raw);
   console.log("formatRawEventData result", { raw, result });
   return result;
+}
+
+/**
+ * Enhanced search that returns both LLaMA-selected tags and matching events
+ * This provides the full context needed for UI display and consistent search logic
+ * 
+ * @param filter - User's search query
+ * @param events - Available events with tags
+ * @returns Object containing selected tags and matching events
+ */
+export async function searchEventsByTags(filter: string, events: EventType[]) {
+  const lam = new LamService();
+  
+  try {
+    // Get LLaMA's tag recommendations
+    const selectedTags = await lam.searchEventTags(filter, events);
+    
+    if (selectedTags.length === 0) {
+      console.log("LLaMA found no relevant tags for search");
+      return { selectedTags: [], matchingEvents: [] };
+    }
+
+    // Find all events that match any of the selected tags
+    // This uses the same logic as our fallback search for consistency
+    const matchingEvents = events.filter(event => 
+      event.tags && event.tags.some(tag => selectedTags.includes(tag))
+    );
+
+    // Score and rank events by number of matching tags (same as fallback logic)
+    const scoredEvents = matchingEvents.map(event => {
+      const eventMatchingTags = event.tags?.filter(tag => selectedTags.includes(tag)) || [];
+      const score = eventMatchingTags.reduce((total, tag) => {
+        const tagIndex = selectedTags.indexOf(tag);
+        // Higher weight for tags that ranked higher in LLaMA's selection
+        const weight = 1 - (tagIndex / selectedTags.length) * 0.5;
+        return total + weight;
+      }, 0);
+      
+      return { event, score, matchingTags: eventMatchingTags };
+    });
+
+    // Sort by score descending (events with more/better tags first)
+    const rankedEvents = scoredEvents
+      .sort((a, b) => b.score - a.score)
+      .map(item => item.event);
+
+    console.log(`LLaMA search for "${filter}": found ${selectedTags.length} tags, ${rankedEvents.length} events`);
+    return { 
+      selectedTags, 
+      matchingEvents: rankedEvents,
+      searchMethod: 'llama-tags' as const
+    };
+
+  } catch (error) {
+    console.error("Error in LLaMA tag-based search:", error);
+    return { selectedTags: [], matchingEvents: [], searchMethod: 'error' as const };
+  }
 }

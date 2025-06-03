@@ -180,8 +180,21 @@ export const TagCenteredGraph = ({
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div>
-                <span className="font-semibold text-white block">Central Tag:</span>
+                <span className="font-semibold text-white block">Central Tag(s):</span>
                 <span className="text-gray-300">"{graphData.centralTag}" (AI-discovered)</span>
+                {graphData.similarTags && graphData.similarTags.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    <span className="text-xs text-gray-400 mr-1">Similar:</span>
+                    {graphData.similarTags.map((tag, index) => (
+                      <span 
+                        key={tag} 
+                        className="text-xs bg-purple-500/20 text-purple-200 px-2 py-1 rounded-full border border-purple-400/30"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-4">
