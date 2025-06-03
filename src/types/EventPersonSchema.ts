@@ -1,3 +1,12 @@
+// import { JsonSchemaResponseFormat } from "llama-api-client";
+
+import { LlamaAPIClient } from "llama-api-client";
+// const { JsonSchemaResponseFormat } =
+//   LlamaAPIClient.Chat.Completions.CompletionCreateParams
+//     .JsonSchemaResponseFormat;
+
+// LlamaAPIClient.Chat.Completions.CompletionCreateParams.JsonSchemaResponseFormat
+
 // export const EventPersonSchema = {
 //   $schema: "http://json-schema.org/draft-07/schema#",
 //   $id: "EventPersonSchema.json",
@@ -59,36 +68,68 @@
 //   additionalProperties: false,
 // };
 
+// types arent compatible with json-schema-types
+// import { type JSONSchema } from "ya-json-schema-types";
+
+// interface EventPersonSchema  {
+//   name: string;
+//   schema: {
+//     type: "object";
+//     properties: {
+//       people: {
+//         type: "array";
+//         items: {
+//           type: "object";
+//           properties: {
+//             nickname: {
+//               type: "string";
+//               description: string;
+//             };
+//             quotes: {
+//               type: "array";
+//               description: string;
+//               items: { type: "string" };
+//             };
+//           };
+//           required: ["nickname", "quotes"];
+//           additionalProperties: false;
+//         };
+//       };
+//     };
+//     required: ["people"];
+//     additionalProperties: false;
+//   };
+// }
+
 export const EventPeopleSchema = {
-  type: "object",
-  properties: {
-    people: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          nickname: {
-            type: "string",
-            description:
-              "a two word short nickname for this type of person. do not use a prefix like 'the' ",
+  name: "EventPeople",
+
+  schema: {
+    type: "object",
+    properties: {
+      people: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            nickname: {
+              type: "string",
+              description:
+                "a two word short nickname for this type of person. do not use a prefix like 'the' ",
+            },
+            quotes: {
+              type: "array",
+              description:
+                "a list of three short funny or interesting quotes this type of person might say at this type of event, in an 'overheard in New York' style",
+              items: { type: "string" },
+            },
           },
-          // stereotype: {
-          //   type: "string",
-          //   description:
-          //     "a five words or less stereotype of the person, a typical type of person found in different neighborhoods of New York",
-          // },
-          quotes: {
-            type: "array",
-            description:
-              "a list of three short funny or interesting quotes this type of person might say at this type of event, in an 'overheard in New York' style",
-            items: { type: "string" },
-          },
+          required: ["nickname", "quotes"],
+          additionalProperties: false,
         },
-        required: ["nickname", "quotes"],
-        additionalProperties: false,
       },
     },
+    required: ["people"],
+    additionalProperties: false,
   },
-  required: ["people"], // ✅ add this if people must be present
-  additionalProperties: false,
 };

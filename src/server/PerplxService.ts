@@ -4,6 +4,23 @@ import { cleanTags, safeName } from "@/lib/utils";
 import { EventType } from "@/types/EventType";
 import axios from "axios";
 
+// TypeScript interfaces for the schemas
+interface EventSchema {
+  title: string;
+  description: string;
+  tags: string[];
+  url: string;
+  date: string;
+  venue: string;
+  address: string;
+  neighborhood: string;
+  keywords: string[];
+}
+
+interface EventListResponse {
+  items: EventSchema[];
+}
+
 const eventSingleSchema = {
   type: "object",
   properties: {
@@ -60,74 +77,17 @@ const eventSingleSchema = {
     "neighborhood",
     "keywords",
   ],
-};
+} as const;
 
 const eventListSchema = {
   type: "object",
   properties: {
     items: {
       type: "array",
-      items: {
-        type: "object",
-        properties: {
-          title: { type: "string" },
-          description: {
-            type: "string",
-            description:
-              "a short description of the event, 1-2 sentences, no more than 100 words",
-          },
-          tags: {
-            type: "array",
-            items: {
-              type: "string",
-              description:
-                "a list of common tags associated with the event must be lowercase",
-            },
-          },
-          url: {
-            type: "string",
-            description: "the original url of the event, must be a valid url",
-          },
-          date: {
-            type: "string",
-            description: "the date of the event, must be a valid date",
-          },
-          venue: {
-            type: "string",
-            description: "the name of the venue of the event",
-          },
-          address: {
-            type: "string",
-            description: "the address of the event",
-          },
-          neighborhood: {
-            type: "string",
-            description:
-              "the neighborhood of the city for the event, eg SoHo, Williamsburg, East Village, LES etc.",
-          },
-          keywords: {
-            type: "array",
-            items: {
-              type: "string",
-              description:
-                "a list of unique keywords from the event description",
-            },
-          },
-        },
-        required: [
-          "title",
-          "tags",
-          "description",
-          "url",
-          "date",
-          "venue",
-          "neighborhood",
-          "keywords",
-        ],
-      },
+      items: eventSingleSchema,
     },
   },
-};
+} as const;
 
 class PerplexityService {
   private apiKey: string;
@@ -144,7 +104,10 @@ class PerplexityService {
     }
   }
 
-  async post(prompt: string, schema?: any) {
+  async post(
+    prompt: string,
+    schema?: typeof eventSingleSchema | typeof eventListSchema
+  ) {
     const response = await axios.post(
       this.apiUrl,
       {
@@ -173,7 +136,7 @@ class PerplexityService {
     return content;
   }
 
-  async searchEvent(query: string, count = 2): Promise<any[]> {
+  async searchEvent(query: string, count = 2): Promise<EventSchema[]> {
     const prompt = `
     Find ${count} events of type: ${query} in New York City in the next 30 days.
     return ${count} items as a JSON array of objects.
@@ -195,7 +158,7 @@ class PerplexityService {
     return result.items;
   }
 
-  async enrichEventFromUrl(event: EventType) {
+  async enrichEventFromUrl(event: EventType): Promise<EventSchema> {
     // @ts-ignore
     const url = event.link || event.url;
     // TODO fix why we have 'link' and not 'url'

@@ -109,17 +109,14 @@ Return JSON in this format:
       event: event.description,
     });
 
-    console.log("schema", EventPeopleSchema);
+    // console.log("schema", EventPeopleSchema);
 
     const response = await this.client.chat.completions.create({
       model: this.model,
       messages: [{ content: prompt, role: "user" }],
       response_format: {
         type: "json_schema",
-        json_schema: {
-          name: "EventPeople",
-          schema: EventPeopleSchema,
-        },
+        json_schema: EventPeopleSchema,
       },
     });
 
