@@ -56,6 +56,7 @@ export default function VibePage() {
   const [showChat, setShowChat] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<UnifiedEvent | null>(null);
   const [dateFilter, setDateFilter] = useState<Date[]>([]);
+  const [isClient, setIsClient] = useState(false);
 
   // Example searches that rotate
   const exampleSearches = useMemo(
@@ -72,13 +73,20 @@ export default function VibePage() {
     []
   );
 
-  // Rotate example searches every 3 seconds
+  // Handle client-side mounting to prevent hydration issues
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Rotate example searches every 3 seconds - only after client-side mount
+  useEffect(() => {
+    if (!isClient) return;
+    
     const interval = setInterval(() => {
       setCurrentExampleIndex((prev) => (prev + 1) % exampleSearches.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [exampleSearches]);
+  }, [exampleSearches, isClient]);
 
   // Handle Escape key to close modal
   useEffect(() => {
