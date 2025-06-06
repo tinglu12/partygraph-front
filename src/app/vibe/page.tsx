@@ -341,6 +341,60 @@ export default function VibePage() {
     try {
       console.log(`Searching by tag: "${tag}" with dates:`, filterDates.map(d => d.toISOString().split('T')[0]));
 
+      // Try to create a tag-centered graph visualization first (like the search bar does)
+      try {
+        const graphData = await searchTagCenteredByVibe(tag);
+        
+        if (graphData) {
+          // Extract events from graph for filtering
+          const events = graphData.nodes
+            .filter((node: any) => node.type === "event")
+            .map((node: any) => node.data as EventNode);
+          
+          console.log('📊 Tag search - Graph data events extracted:', {
+            totalGraphNodes: graphData.nodes.length,
+            eventNodes: events.length,
+            filterDates: filterDates.map(d => d.toISOString().split('T')[0])
+          });
+          
+          // Apply date filter to events using passed dates
+          const filteredEvents = filterEventsByDate(events, filterDates);
+          
+          if (filterDates.length > 0) {
+            // Filter the graph data itself to only include filtered events
+            const filteredEventIds = new Set(filteredEvents.map(e => e.id));
+            const filteredGraphData = {
+              ...graphData,
+              nodes: graphData.nodes.filter((node: any) => 
+                node.type === "tag" || filteredEventIds.has(node.data.id)
+              ),
+              edges: graphData.edges.filter((edge: any) => {
+                const sourceIsTag = graphData.nodes.find((n: any) => n.id === edge.source)?.type === "tag";
+                const targetIsTag = graphData.nodes.find((n: any) => n.id === edge.target)?.type === "tag";
+                return (sourceIsTag && filteredEventIds.has(edge.target)) || 
+                       (targetIsTag && filteredEventIds.has(edge.source)) ||
+                       (filteredEventIds.has(edge.source) && filteredEventIds.has(edge.target));
+              })
+            };
+            setTagGraphData(filteredGraphData);
+          } else {
+            setTagGraphData(graphData);
+          }
+          
+          setSearchResults(filteredEvents);
+          
+          // Show message if date filter removed results
+          if (filterDates.length > 0 && filteredEvents.length === 0 && events.length > 0) {
+            setError(`Found ${events.length} events with tag "${tag}", but none on the selected dates. Try different dates or remove the date filter.`);
+          }
+          
+          return; // Success - exit early
+        }
+      } catch (graphError) {
+        console.log("Tag-centered graph creation failed for tag search, falling back to direct search:", graphError);
+      }
+      
+      // Fallback: Use direct tag search if graph creation fails
       const events = await searchEventsByTag(tag);
       const filteredEvents = filterEventsByDate(events, filterDates);
       
@@ -468,6 +522,60 @@ export default function VibePage() {
     try {
       console.log(`Searching by tag: "${tag}"`);
 
+      // Try to create a tag-centered graph visualization first (like the search bar does)
+      try {
+        const graphData = await searchTagCenteredByVibe(tag);
+        
+        if (graphData) {
+          // Extract events from graph for filtering
+          const events = graphData.nodes
+            .filter((node: any) => node.type === "event")
+            .map((node: any) => node.data as EventNode);
+          
+          console.log('📊 Tag search - Graph data events extracted:', {
+            totalGraphNodes: graphData.nodes.length,
+            eventNodes: events.length,
+            currentDateFilter: dateFilter.map(d => d.toISOString().split('T')[0])
+          });
+          
+          // Apply date filter to events
+          const filteredEvents = filterEventsByDate(events);
+          
+          if (dateFilter.length > 0) {
+            // Filter the graph data itself to only include filtered events
+            const filteredEventIds = new Set(filteredEvents.map(e => e.id));
+            const filteredGraphData = {
+              ...graphData,
+              nodes: graphData.nodes.filter((node: any) => 
+                node.type === "tag" || filteredEventIds.has(node.data.id)
+              ),
+              edges: graphData.edges.filter((edge: any) => {
+                const sourceIsTag = graphData.nodes.find((n: any) => n.id === edge.source)?.type === "tag";
+                const targetIsTag = graphData.nodes.find((n: any) => n.id === edge.target)?.type === "tag";
+                return (sourceIsTag && filteredEventIds.has(edge.target)) || 
+                       (targetIsTag && filteredEventIds.has(edge.source)) ||
+                       (filteredEventIds.has(edge.source) && filteredEventIds.has(edge.target));
+              })
+            };
+            setTagGraphData(filteredGraphData);
+          } else {
+            setTagGraphData(graphData);
+          }
+          
+          setSearchResults(filteredEvents);
+          
+          // Show message if date filter removed results
+          if (dateFilter.length > 0 && filteredEvents.length === 0 && events.length > 0) {
+            setError(`Found ${events.length} events with tag "${tag}", but none on the selected dates. Try different dates or remove the date filter.`);
+          }
+          
+          return; // Success - exit early
+        }
+      } catch (graphError) {
+        console.log("Tag-centered graph creation failed for tag search, falling back to direct search:", graphError);
+      }
+      
+      // Fallback: Use direct tag search if graph creation fails
       const events = await searchEventsByTag(tag);
       const filteredEvents = filterEventsByDate(events);
       
