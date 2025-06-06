@@ -4,16 +4,7 @@ import { createTagCenteredGraph } from "@/lib/sampleData";
 import { searchEvent, searchEventsByTags } from "@/server/LamService";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { EventType } from "@/types/EventType";
-import { techweekEvents } from "@/constants/techweekEvents";
-import { sampleDateRangeEvents } from "@/constants/sampleDateRangeEvents";
-import { sampleEvents as originalSampleEvents } from "@/constants/sampleEvents";
-// import {
-//   searchJinaEventsByKeywords,
-//   searchTagCenteredByKeywords
-// } from "@/lib/services/LamService";
-
-// Combine existing events with sample date range events for testing
-const sampleEvents: EventNode[] = [...sampleDateRangeEvents, ...originalSampleEvents];
+import { sampleEvents } from "@/constants/sampleEvents";
 
 /**
  * Simple function to get a random sample from an array

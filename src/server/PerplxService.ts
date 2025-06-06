@@ -30,18 +30,23 @@ const eventSingleSchema = {
       description:
         "a short description of the event, 1-2 sentences, no more than 100 words",
     },
+
     tags: {
       type: "array",
       items: {
         type: "string",
+        minItems: 5,
+        maxItems: 5,
         description:
           "a list of common tags associated with the event must be lowercase",
       },
     },
+
     url: {
       type: "string",
       description: "the original url of the event, must be a valid url",
     },
+
     date: {
       type: "string",
       description: "the date of the event, must be a valid date",
@@ -63,6 +68,8 @@ const eventSingleSchema = {
       type: "array",
       items: {
         type: "string",
+        minItems: 5,
+        maxItems: 5,
         description: "a list of unique keywords from the event description",
       },
     },
