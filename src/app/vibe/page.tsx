@@ -5,6 +5,7 @@ import { FlyerUpload } from "@/components/FlyerUpload";
 import { FloatingChatButton } from "@/components/FloatingChatButton";
 import { VibeChat } from "@/components/VibeChat";
 import { Graph } from "@/features/components/Graph";
+import { CytoscapeGraph } from "@/components/CytoscapeGraph";
 import { TagCenteredGraph } from "@/components/TagCenteredGraph";
 import { EventsList } from "@/components/EventsList";
 import {
@@ -623,12 +624,12 @@ export default function VibePage() {
   };
 
   // Handle event selection for chat context
-  const handleEventSelect = (event: UnifiedEvent | null) => {
+  const handleEventSelect = useCallback((event: UnifiedEvent | null) => {
     setSelectedEvent(event);
     if (event) {
       setShowChat(true);
     }
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
@@ -940,7 +941,17 @@ export default function VibePage() {
                     </h3>
                   </div>
 
-                  {/* Graph container spanning full browser width */}
+                  {/* Cytoscape Knowledge Graph */}
+                  <div className="h-[600px] pb-4 px-4 md:px-8 lg:px-16">
+                    <CytoscapeGraph 
+                      events={sampleEvents.slice(0, 50)}
+                      onEventClick={(event) => handleEventSelect(event)}
+                      selectedEventId={selectedEvent?.id}
+                      height={550}
+                    />
+                  </div>
+
+                  {/* Original Graph container spanning full browser width */}
                   <div className="h-[700px] pb-8 px-0 md:px-8 lg:px-16">
                     <Graph onEventSelect={handleEventSelect} />
                   </div>
