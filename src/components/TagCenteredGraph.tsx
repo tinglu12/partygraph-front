@@ -57,7 +57,7 @@ const FallbackVisualization = ({
                 <div className="flex flex-wrap justify-center gap-2 mt-2">
                   {graphData.similarTags.map((tag, index) => (
                     <span 
-                      key={tag} 
+                      key={`similar-tag-${index}-${tag}`} 
                       className="text-sm bg-white/20 text-white px-3 py-1 rounded-full border border-white/30 backdrop-blur-sm"
                     >
                       #{tag}
@@ -201,9 +201,9 @@ const FallbackVisualization = ({
                     {/* Subtle tags section */}
                     {event.tags && event.tags.length > 0 && (
                       <div className="flex flex-wrap justify-center gap-1 mt-2 opacity-60">
-                        {event.tags.slice(0, 2).map((tag: string) => (
+                        {event.tags.slice(0, 2).map((tag: string, tagIndex: number) => (
                           <span 
-                            key={tag} 
+                            key={`event-${event.id}-tag-${tagIndex}-${tag}`} 
                             className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white/80"
                           >
                             #{tag}
@@ -315,10 +315,9 @@ export const TagCenteredGraph = ({
                 <span className="text-gray-300">"{graphData.centralTag}" (AI-discovered)</span>
                 {graphData.similarTags && graphData.similarTags.length > 0 && (
                   <div className="mt-2 flex flex-wrap gap-1">
-                    <span className="text-xs text-gray-400 mr-1">Similar:</span>
                     {graphData.similarTags.map((tag, index) => (
                       <span 
-                        key={tag} 
+                        key={`similar-tag-${index}-${tag}`} 
                         className="text-xs bg-purple-500/20 text-purple-200 px-2 py-1 rounded-full border border-purple-400/30"
                       >
                         #{tag}

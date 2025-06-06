@@ -828,9 +828,9 @@ export default function VibePage() {
                             new Set(sampleEvents.flatMap((e) => e.tags || []))
                           )
                             .slice(0, 8)
-                            .map((tag) => (
+                            .map((tag, index) => (
                               <button
-                                key={tag}
+                                key={`suggested-tag-${index}-${tag}`}
                                 onClick={() => handleTagSearch(tag)}
                                 className="px-3 py-1 text-sm bg-blue-600/20 hover:bg-blue-600/30 text-blue-200 rounded-full border border-blue-500/20 transition-colors"
                               >

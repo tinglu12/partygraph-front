@@ -287,9 +287,9 @@ export const EventsList = ({
               {event.tags && event.tags.length > 0 && (
                 <div className="mb-4 mt-4">
                   <div className="flex flex-wrap justify-center gap-1 opacity-60">
-                    {event.tags.slice(0, 2).map((tag) => (
+                    {event.tags.slice(0, 2).map((tag, tagIndex) => (
                       <span
-                        key={tag}
+                        key={`event-${getEventId(event)}-tag-${tagIndex}-${tag}`}
                         className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white/80"
                       >
                         #{tag}
