@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 export const CTA = () => {
   const router = useRouter();
-  const version = process.env.NEXT_PUBLIC_VERSION || "v0.0.4";
+  const version = process.env.NEXT_PUBLIC_VERSION || "v0.0.5";
   return (
     <section className="py-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
