@@ -944,7 +944,7 @@ export default function VibePage() {
                   {/* Cytoscape Knowledge Graph */}
                   <div className="h-[600px] pb-4 px-4 md:px-8 lg:px-16">
                     <CytoscapeGraph 
-                      events={sampleEvents.slice(0, 50)}
+                      events={sampleEvents}
                       onEventClick={(event) => handleEventSelect(event)}
                       selectedEventId={selectedEvent?.id}
                       height={550}

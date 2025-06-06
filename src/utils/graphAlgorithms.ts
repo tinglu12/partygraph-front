@@ -24,13 +24,13 @@ export function calculateJaccardSimilarity(tagsA: string[], tagsB: string[]): nu
  */
 export function findKNearestNeighbors(
   events: EventNode[], 
-  k: number = 3
+  k: number = 5
 ): Array<{ source: string; target: string; similarity: number }> {
   const startTime = performance.now();
   const edges: Array<{ source: string; target: string; similarity: number }> = [];
   
-  // Safety limit to prevent crashes
-  const MAX_EVENTS = 200;
+  // Safety limit to prevent crashes - increased for better coverage
+  const MAX_EVENTS = 1500;
   const limitedEvents = events.slice(0, MAX_EVENTS);
   
   console.log(`🔬 Starting KNN analysis for ${limitedEvents.length} events (limited from ${events.length})`);
@@ -200,7 +200,7 @@ export interface CytoscapeData {
 
 export function buildCytoscapeData(
   events: EventNode[], 
-  k: number = 3
+  k: number = 5
 ): CytoscapeData {
   // Build k-nearest neighbor edges
   const connections = findKNearestNeighbors(events, k);

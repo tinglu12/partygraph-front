@@ -13,14 +13,19 @@ import { sampleEvents as originalSampleEvents } from "@/constants/sampleEvents";
 // } from "@/lib/services/LamService";
 
 // Combine existing events with sample date range events for testing
+// Note: For production, replace with getAllEvents() from database
 const sampleEvents: EventNode[] = [...sampleDateRangeEvents, ...originalSampleEvents];
 
 /**
- * Simple function to get a random sample from an array
+ * Get all events from the database (when database is implemented)
+ * Currently returns all sample events + date range events
  */
-function sampleSize<T>(array: T[], size: number): T[] {
-  const shuffled = [...array].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, size);
+export async function getAllEventsFromDatabase(): Promise<EventNode[]> {
+  // TODO: Replace with actual database query
+  // For now, return all sample events
+  const allEvents = [...sampleDateRangeEvents, ...originalSampleEvents];
+  console.log(`Total events available: ${allEvents.length}`);
+  return allEvents;
 }
 
 /**
@@ -531,22 +536,22 @@ export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
 
 /**
  * Server action to get all unique tags from events
- * LIMITE to 100 tags
+ * Now returns ALL tags without arbitrary limits
  */
 export async function getAllTags(): Promise<string[]> {
-  const maxTags = 300;
   const tagSet = new Set<string>();
   sampleEvents.forEach((event) => {
     if (event.tags) {
       event.tags.forEach((tag) => tagSet.add(tag));
     }
   });
-  const arr = Array.from(tagSet);
-  console.log("all tags", arr.length);
-  const filtered = arr.filter((tag) => tag.length < 10);
-  const sample = sampleSize(filtered, maxTags);
-  const sorted = sample.sort();
-  const final = ["nytechweek", ...sorted]; // insert nytechweek at the beginning
+  const allTags = Array.from(tagSet);
+  console.log(`Total available tags: ${allTags.length}`);
+  
+  // Sort all tags alphabetically, with nytechweek at the beginning
+  const sorted = allTags.filter(tag => tag !== "nytechweek").sort();
+  const final = ["nytechweek", ...sorted];
+  
   return final;
 }
 
@@ -561,4 +566,13 @@ export async function getAllCategories(): Promise<string[]> {
     }
   });
   return Array.from(categorySet).sort();
+}
+
+/**
+ * Server action to get ALL events without any filtering
+ * Useful for displaying the complete event catalog
+ */
+export async function getAllEvents(): Promise<EventNode[]> {
+  console.log(`Returning all ${sampleEvents.length} available events`);
+  return sampleEvents;
 }
