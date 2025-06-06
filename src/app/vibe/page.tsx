@@ -143,6 +143,12 @@ export default function VibePage() {
 
   // Helper function to filter events by date
   const filterEventsByDate = useCallback((events: EventNode[], filterDates?: Date[]): EventNode[] => {
+    // Ensure events is always an array to prevent .slice() and other array method errors
+    if (!Array.isArray(events)) {
+      console.warn('⚠️ filterEventsByDate received non-array events:', { events, type: typeof events });
+      return [];
+    }
+    
     // Use passed dates or fall back to state
     const datesToFilter = filterDates || dateFilter;
     
