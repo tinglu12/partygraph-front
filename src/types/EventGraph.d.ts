@@ -2,7 +2,8 @@ export interface EventNode {
   id: string;
   title: string;
   description: string;
-  date?: string;
+  date?: string; // Keep for backward compatibility with legacy single-date format
+  dates?: string[]; // New: array of ISO date strings for flexible date patterns
   category?: string;
   tags?: string[];
   keywords?: string[];

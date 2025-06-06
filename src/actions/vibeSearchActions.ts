@@ -4,7 +4,16 @@ import { createTagCenteredGraph } from "@/lib/sampleData";
 import { searchEvent, searchEventsByTags } from "@/server/LamService";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { EventType } from "@/types/EventType";
-import { sampleEvents } from "@/constants/sampleEvents";
+import { sampleEvents as originalSampleEvents } from "@/constants/sampleEvents";
+import { techweekEvents } from "@/constants/techweekEvents";
+import { sampleDateRangeEvents } from "@/constants/sampleDateRangeEvents";
+import { 
+  searchJinaEventsByKeywords, 
+  searchTagCenteredByKeywords 
+} from "@/lib/services/LamService";
+
+// Combine existing events with sample date range events for testing
+const sampleEvents: EventNode[] = [...sampleDateRangeEvents, ...techweekEvents];
 
 /**
  * Simple function to get a random sample from an array
@@ -433,12 +442,32 @@ export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
     }
 
     const data = await response.json();
-    console.log(`Found ${data[0]?.length || 0} events for tag: "${tag}"`);
-    return data[0] || [];
+    
+    // Ensure we always return an array - handle various response formats
+    let events: EventNode[] = [];
+    
+    if (Array.isArray(data)) {
+      // If data is directly an array
+      events = data;
+    } else if (data && Array.isArray(data[0])) {
+      // If data[0] is an array (current expected format)
+      events = data[0];
+    } else if (data && data.events && Array.isArray(data.events)) {
+      // If data.events is an array
+      events = data.events;
+    } else {
+      console.warn('Unexpected API response format for searchEventsByTag:', data);
+      events = [];
+    }
+    
+    console.log(`Found ${events.length} events for tag: "${tag}"`);
+    return events;
   } catch (error) {
     console.error("Error fetching events by tag:", error);
-    // Fallback to local search
-    return sampleEvents.filter((event) => event.tags?.includes(tag));
+    // Fallback to local search - ensure this also returns an array
+    const localResults = sampleEvents.filter((event) => event.tags?.includes(tag));
+    console.log(`Fallback to local search found ${localResults.length} events for tag: "${tag}"`);
+    return localResults;
   }
 }
 

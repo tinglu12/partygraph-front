@@ -57,7 +57,7 @@ const FallbackVisualization = ({
                 <div className="flex flex-wrap justify-center gap-2 mt-2">
                   {graphData.similarTags.map((tag, index) => (
                     <span 
-                      key={tag} 
+                      key={`similar-tag-${index}-${tag}`} 
                       className="text-sm bg-white/20 text-white px-3 py-1 rounded-full border border-white/30 backdrop-blur-sm"
                     >
                       #{tag}
@@ -201,9 +201,9 @@ const FallbackVisualization = ({
                     {/* Subtle tags section */}
                     {event.tags && event.tags.length > 0 && (
                       <div className="flex flex-wrap justify-center gap-1 mt-2 opacity-60">
-                        {event.tags.slice(0, 2).map((tag: string) => (
+                        {event.tags.slice(0, 2).map((tag: string, tagIndex: number) => (
                           <span 
-                            key={tag} 
+                            key={`event-${event.id}-tag-${tagIndex}-${tag}`} 
                             className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white/80"
                           >
                             #{tag}
@@ -270,23 +270,27 @@ export const TagCenteredGraph = ({
     setMounted(true);
   }, []);
 
-  // Show loading state only during SSR
+  // Always render the same structure to avoid hydration mismatch
+  // Only show loading during actual loading states, not during hydration
   if (!mounted) {
+    // Render the same structure as the main component to avoid hydration issues
     return (
-      <div className={`${className} flex items-center justify-center h-[800px] bg-gradient-to-br from-slate-900/50 to-slate-800/50 backdrop-blur-sm`}>
-        <div className="flex flex-col items-center gap-6 text-gray-300">
-          <div className="relative">
-            <div className="w-16 h-16 border-4 border-purple-600/30 border-t-purple-600 rounded-full animate-spin"></div>
-            <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-blue-600 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
-            <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-green-600 rounded-full animate-spin" style={{ animationDuration: '2s' }}></div>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Brain className="w-6 h-6 text-purple-400" />
-              <p className="font-bold text-xl">AI Processing Your Vibe...</p>
-              <Zap className="w-6 h-6 text-blue-400" />
+      <div className="space-y-8">
+        <div className="w-full min-h-[800px] bg-gradient-to-br from-slate-900/50 via-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/20 flex flex-col items-center justify-center py-12 px-8">
+          <div className="flex flex-col items-center gap-6 text-gray-300">
+            <div className="relative">
+              <div className="w-16 h-16 border-4 border-purple-600/30 border-t-purple-600 rounded-full animate-spin"></div>
+              <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-blue-600 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+              <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-green-600 rounded-full animate-spin" style={{ animationDuration: '2s' }}></div>
             </div>
-            <p className="text-sm text-gray-400">LLaMA is analyzing semantic patterns and building your personalized graph</p>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Brain className="w-6 h-6 text-purple-400" />
+                <p className="font-bold text-xl">Loading Visualization...</p>
+                <Zap className="w-6 h-6 text-blue-400" />
+              </div>
+              <p className="text-sm text-gray-400">Preparing your personalized event graph</p>
+            </div>
           </div>
         </div>
       </div>
@@ -315,10 +319,9 @@ export const TagCenteredGraph = ({
                 <span className="text-gray-300">"{graphData.centralTag}" (AI-discovered)</span>
                 {graphData.similarTags && graphData.similarTags.length > 0 && (
                   <div className="mt-2 flex flex-wrap gap-1">
-                    <span className="text-xs text-gray-400 mr-1">Similar:</span>
                     {graphData.similarTags.map((tag, index) => (
                       <span 
-                        key={tag} 
+                        key={`similar-tag-${index}-${tag}`} 
                         className="text-xs bg-purple-500/20 text-purple-200 px-2 py-1 rounded-full border border-purple-400/30"
                       >
                         #{tag}

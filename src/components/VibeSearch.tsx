@@ -18,14 +18,18 @@ import {
   Tag,
   X,
   CalendarIcon,
+  Check,
+  ChevronsUpDown,
 } from "lucide-react";
 import { getAllTags } from "@/actions/vibeSearchActions";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -55,6 +59,9 @@ export const VibeSearch = ({
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [mounted, setMounted] = useState(false);
   const [date, setDate] = useState<Date[]>([]);
+  
+  // Combobox state for tag selection
+  const [tagComboboxOpen, setTagComboboxOpen] = useState(false);
   
   // Drag selection state
   const [isDragging, setIsDragging] = useState(false);
@@ -245,14 +252,19 @@ export const VibeSearch = ({
     }
   };
 
-  // Handle tag selection
-  const handleTagClick = (tag: string) => {
-    setSelectedTag(tag);
-    if (onTagSelect) {
-      onTagSelect(tag);
-    } else {
-      setQuery(tag);
-      onSearch(tag);
+  // Handle tag selection from combobox
+  const handleTagSelect = (tagValue: string) => {
+    const newTag = tagValue === selectedTag ? "" : tagValue;
+    setSelectedTag(newTag);
+    setTagComboboxOpen(false);
+    
+    if (newTag) {
+      if (onTagSelect) {
+        onTagSelect(newTag);
+      } else {
+        setQuery(newTag);
+        onSearch(newTag);
+      }
     }
   };
 
@@ -407,56 +419,78 @@ export const VibeSearch = ({
             </div>
           </div>
           <div className="flex flex-row gap-2 items-center w-full sm:w-auto">
-            {/* Shadcn dropdown for manual tag selection */}
-            {mounted && availableTags.length > 0 && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    disabled={isLoading}
-                    className="h-18 px-4 pr-3 bg-white/20 backdrop-blur-md text-gray-300 !text-xl rounded-2xl border border-white/40 hover:bg-white/22 hover:text-white focus:bg-white/25 focus:border-blue-400/80 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 min-w-[180px] justify-between font-normal shadow-lg"
-                  >
-                    <span className={selectedTag ? "text-white" : "opacity-75"}>
-                      {selectedTag || "Search by tag"}
-                    </span>
-                    <ChevronDown className="w-5 h-5 ml-2 opacity-75" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  className="w-[var(--radix-dropdown-menu-trigger-width)] max-h-60 overflow-hidden bg-white/15 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl"
-                  align="end"
+            {/* Combobox for tag selection - always render to avoid hydration issues */}
+            <Popover open={tagComboboxOpen} onOpenChange={setTagComboboxOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={tagComboboxOpen}
+                  disabled={isLoading || !mounted}
+                  className="h-18 px-4 pr-3 bg-white/20 backdrop-blur-md text-gray-300 !text-xl rounded-2xl border border-white/40 hover:bg-white/22 hover:text-white focus:bg-white/25 focus:border-blue-400/80 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 min-w-[180px] justify-between font-normal shadow-lg"
                 >
-                  <div className="max-h-60 overflow-y-auto pr-1 py-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:mr-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:mt-2 [&::-webkit-scrollbar-track]:mb-3 [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent">
-                    {selectedTag && (
-                      <DropdownMenuItem
-                        onClick={handleClearSelection}
-                        className="text-gray-300 hover:bg-white/10 focus:bg-white/10 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 border-b border-white/20 mb-1"
-                      >
-                        <X className="w-4 h-4 mr-2 text-gray-400" />
-                        Clear selection
-                      </DropdownMenuItem>
-                    )}
-                    {availableTags.map((tag) => (
-                      <DropdownMenuItem
-                        key={tag}
-                        onClick={() => handleTagClick(tag)}
-                        className={`text-white hover:bg-white/20 focus:bg-white/20 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 ${
-                          selectedTag === tag
-                            ? "bg-white/15 border border-purple-400/50"
-                            : ""
-                        }`}
-                      >
-                        <Tag className="w-4 h-4 mr-2 text-purple-400" />
-                        {tag}
-                        {selectedTag === tag && (
-                          <div className="ml-auto w-2 h-2 bg-purple-400 rounded-full"></div>
-                        )}
-                      </DropdownMenuItem>
-                    ))}
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
+                  <span className={selectedTag ? "text-white" : "opacity-75"}>
+                    {selectedTag || "Search by tag"}
+                  </span>
+                  <ChevronsUpDown className="w-5 h-5 ml-2 opacity-75" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent 
+                className="w-[var(--radix-popover-trigger-width)] p-0 bg-white/15 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl" 
+                align="end"
+              >
+                <Command className="bg-transparent">
+                  <CommandInput 
+                    placeholder="Search tags..." 
+                    className="h-12 text-white placeholder:text-gray-400 bg-transparent border-0 focus:ring-0"
+                  />
+                  <CommandList className="max-h-60 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:mr-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:mt-2 [&::-webkit-scrollbar-track]:mb-3 [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent">
+                    <CommandEmpty className="text-gray-300 py-6 text-center">
+                      {!mounted ? "Loading tags..." : "No tags found."}
+                    </CommandEmpty>
+                    <CommandGroup>
+                      {selectedTag && (
+                        <CommandItem
+                          value=""
+                          onSelect={() => {
+                            setSelectedTag("");
+                            setTagComboboxOpen(false);
+                            if (onClearSearch) {
+                              onClearSearch();
+                            }
+                          }}
+                          className="text-gray-300 hover:bg-white/10 focus:bg-white/10 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 border-b border-white/20 mb-1"
+                        >
+                          <X className="w-4 h-4 mr-2 text-gray-400" />
+                          Clear selection
+                        </CommandItem>
+                      )}
+                      {mounted && availableTags.map((tag) => (
+                        <CommandItem
+                          key={tag}
+                          value={tag}
+                          onSelect={handleTagSelect}
+                          className={`text-white hover:bg-white/20 focus:bg-white/20 rounded-xl mx-1 my-0.5 cursor-pointer transition-colors duration-200 ${
+                            selectedTag === tag
+                              ? "bg-white/15 border border-purple-400/50"
+                              : ""
+                          }`}
+                        >
+                          <Tag className="w-4 h-4 mr-2 text-purple-400" />
+                          {tag}
+                          <Check
+                            className={cn(
+                              "ml-auto w-4 h-4",
+                              selectedTag === tag ? "opacity-100" : "opacity-0"
+                            )}
+                          />
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
 
             {/* Date picker with calendar popup */}
             <Popover>

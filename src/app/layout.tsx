@@ -30,6 +30,7 @@ export default function RootLayout({
       <meta property="og:image:height" content="630" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning={true}
       >
         {children}
       </body>
