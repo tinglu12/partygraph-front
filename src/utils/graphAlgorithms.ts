@@ -742,6 +742,20 @@ export async function buildCytoscapeDataWithClusters(
   // Build base graph data
   const baseData = await buildCytoscapeData(events, k);
   
+  // Skip expensive clustering for very large datasets to improve performance
+  if (events.length > 1200) { // Increased from 800 to show clusters more often
+    console.log('📊 Skipping clustering for large dataset performance:', {
+      eventCount: events.length,
+      reason: 'Performance optimization for large graphs'
+    });
+    
+    return {
+      ...baseData,
+      clusters: [],
+      clusterNodes: []
+    };
+  }
+  
   // Find connected components (clusters) - only components with 2+ nodes
   const nodeIds = baseData.nodes.map(node => node.data.id);
   const edgeConnections = baseData.edges.map(edge => ({
@@ -751,14 +765,22 @@ export async function buildCytoscapeDataWithClusters(
   
   const components = findConnectedComponents(nodeIds, edgeConnections);
   
-  // Subdivide large clusters
-  const MAX_CLUSTER_SIZE = 300;
-  const allSubClusters: string[][] = [];
+  // Simplified clustering - skip subdivision for performance unless really necessary
+  let allSubClusters: string[][];
   
-  components.forEach(component => {
-    const subClusters = subdivideCluster(component, baseData.nodes, MAX_CLUSTER_SIZE);
-    allSubClusters.push(...subClusters);
-  });
+  if (components.some(c => c.length > 500)) {
+    // Only subdivide if we have truly massive clusters
+    const MAX_CLUSTER_SIZE = 500; // Increased threshold
+    allSubClusters = [];
+    
+    components.forEach(component => {
+      const subClusters = subdivideCluster(component, baseData.nodes, MAX_CLUSTER_SIZE);
+      allSubClusters.push(...subClusters);
+    });
+  } else {
+    // Use components as-is for better performance
+    allSubClusters = components;
+  }
   
   // Create cluster information for all sub-clusters
   const clusters = allSubClusters.map((subCluster, index) => 
@@ -782,21 +804,13 @@ export async function buildCytoscapeDataWithClusters(
   const clusteredNodeIds = new Set(allSubClusters.flat());
   const isolatedNodes = nodeIds.filter(id => !clusteredNodeIds.has(id));
   
-  console.log('🔗 Enhanced cluster analysis results:', {
+  console.log('🔗 Optimized cluster analysis results:', {
     totalNodes: nodeIds.length,
     originalComponents: components.length,
     finalClusters: clusters.length,
     clusteredNodes: clusteredNodeIds.size,
     isolatedNodes: isolatedNodes.length,
-    averageClusterSize: allSubClusters.length > 0 ? (allSubClusters.reduce((sum, cluster) => sum + cluster.length, 0) / allSubClusters.length).toFixed(1) : 0,
-    largestCluster: allSubClusters.length > 0 ? Math.max(...allSubClusters.map(cluster => cluster.length)) : 0,
-    clusterSizeDistribution: {
-      small: allSubClusters.filter(c => c.length < 50).length,
-      medium: allSubClusters.filter(c => c.length >= 50 && c.length < 150).length,
-      large: allSubClusters.filter(c => c.length >= 150 && c.length < 300).length,
-      oversized: allSubClusters.filter(c => c.length >= 300).length
-    },
-    isolatedNodeSample: isolatedNodes.slice(0, 5) // Show first 5 isolated nodes for debugging
+    skippedSubdivision: components.length === allSubClusters.length
   });
   
   return {

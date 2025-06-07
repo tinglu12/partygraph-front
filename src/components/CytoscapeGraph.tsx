@@ -70,6 +70,36 @@ export const CytoscapeGraph = ({
   
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Add performance optimization state
+  const [nodeCountCache, setNodeCountCache] = useState(0);
+  const [isLayoutRunning, setIsLayoutRunning] = useState(false);
+
+  // Optimize node count calculation - cache it instead of recalculating constantly
+  const updateNodeCountCache = useCallback((cy: any) => {
+    if (cy && !cy.destroyed?.()) {
+      const count = cy.nodes().not('[isCluster]').length;
+      setNodeCountCache(count);
+      return count;
+    }
+    return nodeCountCache;
+  }, [nodeCountCache]);
+
+  // Get dynamic node size based on cached count (much faster)
+  const getDynamicNodeSize = useCallback((isWidth: boolean = true) => {
+    if (nodeCountCache > 500) return isWidth ? 28 : 28;  // Reduced from 32
+    if (nodeCountCache > 200) return isWidth ? 32 : 32;  // Reduced from 36
+    if (nodeCountCache > 100) return isWidth ? 36 : 36;  // Reduced from 40
+    return isWidth ? 40 : 40;                           // Reduced from 44
+  }, [nodeCountCache]);
+
+  // Get dynamic font size based on cached count
+  const getDynamicFontSize = useCallback(() => {
+    if (nodeCountCache > 500) return '9px';   // Reduced from 10px
+    if (nodeCountCache > 200) return '10px';  // Reduced from 11px
+    if (nodeCountCache > 100) return '11px';  // Reduced from 12px
+    return '12px';                           // Reduced from 13px
+  }, [nodeCountCache]);
+
   // Debounce search query to prevent constant updates
   useEffect(() => {
     if (searchQuery !== debouncedSearchQuery) {
@@ -238,35 +268,14 @@ export const CytoscapeGraph = ({
           style: {
             'background-color': 'data(color)',
             'label': 'data(label)',
-            'width': (ele: any) => {
-              // Dynamic sizing: smaller nodes when graph is dense
-              const nodeCount = ele.cy().nodes().not('[isCluster]').length;
-              if (nodeCount > 500) return 32;      // Very dense graphs
-              if (nodeCount > 200) return 36;      // Dense graphs  
-              if (nodeCount > 100) return 40;      // Medium graphs
-              return 44;                           // Sparse graphs - larger for visibility
-            },
-            'height': (ele: any) => {
-              // Same logic as width for consistent circular nodes
-              const nodeCount = ele.cy().nodes().not('[isCluster]').length;
-              if (nodeCount > 500) return 32;
-              if (nodeCount > 200) return 36;
-              if (nodeCount > 100) return 40;
-              return 44;
-            },
+            'width': getDynamicNodeSize(true),
+            'height': getDynamicNodeSize(false),
             'color': '#ffffff',
             'text-opacity': 0.9, // Default visible - will be controlled by zoom handler
             'text-valign': 'bottom',
             'text-margin-y': 5,
             'font-family': 'Inter, system-ui, sans-serif',
-            'font-size': (ele: any) => {
-              // Scale font size with node size for readability
-              const nodeCount = ele.cy().nodes().not('[isCluster]').length;
-              if (nodeCount > 500) return '10px';
-              if (nodeCount > 200) return '11px';
-              if (nodeCount > 100) return '12px';
-              return '13px';
-            },
+            'font-size': getDynamicFontSize(),
             'font-weight': 500,
             'text-outline-width': 2,
             'text-outline-color': '#000000',
@@ -627,102 +636,101 @@ export const CytoscapeGraph = ({
       nodeIds: currentNodeIds
     };
 
+    // Update node count cache immediately for performance
+    updateNodeCountCache(cyInstance);
+
     // Run layout only if this is the first time or significant structural change
     const isStructuralChange = !hasElements || Math.abs(filteredData.nodes.length - prevData.nodeCount) > 5;
     
     if (isStructuralChange) {
       console.log('🎯 Running layout for structural change...');
+      setIsLayoutRunning(true);
+      
       cyInstance.layout({
         name: 'cose-bilkent',
         animate: true,
-        animationDuration: 800,
+        animationDuration: 600,        // Reduced from 800ms
         animationEasing: 'ease-out',
         
-        // Enhanced spacing to prevent overlap while maintaining similarity clustering
-        nodeRepulsion: 18000,        // Increased from 15000 - even stronger repulsion
-        idealEdgeLength: 140,        // Increased from 120 - longer edges for more spacing
-        edgeElasticity: 0.25,        // Reduced from 0.35 - less edge pull, more spreading
-        nestingFactor: 0.02,         // Reduced from 0.05 - minimal nesting compression
+        // Simplified spacing parameters for better performance
+        nodeRepulsion: 12000,          // Reduced from 18000 - still good spacing
+        idealEdgeLength: 100,          // Reduced from 140 - faster calculation
+        edgeElasticity: 0.35,          // Increased from 0.25 - less intensive
+        nestingFactor: 0.05,           // Increased from 0.02 - less complex
         
-        // Improved gravity and layout quality - reduced center clustering
-        gravity: 0.15,               // Reduced from 0.25 - much less center pull
-        numIter: 4000,              // Increased from 3000 - more iterations for better spacing
+        // Reduced iterations for much faster performance
+        gravity: 0.25,                 // Increased from 0.15 - faster convergence
+        numIter: 2000,                // Increased from 1500 - better layout quality
         
-        // Advanced spacing controls - more aggressive anti-overlap settings
-        tile: true,                  // Enable tiling to prevent overlap
-        tilingPaddingVertical: 30,   // Increased from 20 - more vertical spacing
-        tilingPaddingHorizontal: 30, // Increased from 20 - more horizontal spacing
-        gravityRangeCompound: 2.5,   // Increased from 2.0 - wider gravity range
-        gravityCompound: 0.5,        // Reduced from 0.8 - less compound gravity
-        gravityRange: 5.5,           // Increased from 4.5 - wider overall gravity range
-        initialEnergyOnIncremental: 0.2, // Reduced from 0.3 - gentler incremental changes
+        // Re-enabled essential spacing controls to fix linear layout
+        tile: true,                    // Re-enabled - prevents linear arrangements
+        tilingPaddingVertical: 15,     // Reduced but still present if needed
+        tilingPaddingHorizontal: 15,   // Reduced but still present if needed
+        gravityRangeCompound: 1.8,     // Reduced from 2.5
+        gravityCompound: 0.7,          // Increased from 0.5
+        gravityRange: 4.0,             // Reduced from 5.5
+        initialEnergyOnIncremental: 0.3, // Increased from 0.2
         
-        // Quality improvements
-        quality: 'proof',            // Highest quality layout calculation
-        randomize: false,            // Don't randomize - maintain similarity positioning
+        // Quality improvements - restore some quality to fix layout
+        quality: 'proof',              // Restored from 'default' - needed for proper layout
+        randomize: false,
         
-        // Additional spacing controls to prevent center density
-        nodeOverlap: 20,            // Minimum space between nodes
-        refresh: 20,                // Refresh frequency during layout
-        fit: !hasElements, // Only fit if this is the first layout
+        // Performance optimizations
+        nodeOverlap: 15,               // Reduced from 20
+        refresh: 30,                   // Increased from 20 - less frequent updates
+        fit: !hasElements,
         ready: () => {
           // Add defensive checks to prevent null reference errors
           if (!cyInstance || cyInstance.destroyed()) {
             console.warn('⚠️ Cytoscape instance not available during layout ready callback');
+            setIsLayoutRunning(false);
             return;
           }
           
-          console.log('🎯 Layout ready, positioning clusters and applying enhanced spacing fixes...');
+          console.log('🎯 Layout ready, applying optimized post-processing...');
           
           try {
-            // Ensure all nodes are properly positioned before cluster operations
-            const allNodes = cyInstance.nodes();
-            const validNodes = allNodes.filter((node: any) => {
-              const pos = node.position();
-              return pos && typeof pos.x === 'number' && typeof pos.y === 'number' && !isNaN(pos.x) && !isNaN(pos.y);
-            });
-            
-            console.log('📊 Node positioning validation:', {
-              totalNodes: allNodes.length,
-              validPositions: validNodes.length,
-              invalidNodes: allNodes.length - validNodes.length
-            });
-            
-            // Only proceed if we have valid node positions
-            if (validNodes.length > 0) {
-              // Calculate and position cluster nodes after layout
+            // Simplified cluster positioning - only if we have clusters
+            if (filteredData.clusters.length > 0) {
               setTimeout(() => {
                 if (cyInstance && !cyInstance.destroyed()) {
                   positionClusterNodes(cyInstance, filteredData.clusters);
                 }
-              }, 100);
-              
-              // Apply enhanced collision detection and spacing optimization
+              }, 50); // Reduced delay
+            }
+            
+            // Skip expensive collision detection for large graphs
+            const nodeCount = cyInstance.nodes().not('[isCluster]').length;
+            if (nodeCount < 400) { // Only run on smaller graphs
               setTimeout(() => {
                 if (cyInstance && !cyInstance.destroyed()) {
                   optimizeNodeSpacing(cyInstance);
                 }
-              }, 200);
+              }, 100); // Reduced delay
             } else {
-              console.warn('⚠️ No valid node positions found, skipping cluster operations');
+              console.log('📍 Skipping collision detection for large graph performance');
             }
             
+            // Restore view state after layout
+            if (hasElements) {
+              setTimeout(() => {
+                if (cyInstance && !cyInstance.destroyed()) {
+                  cyInstance.zoom(zoom);
+                  cyInstance.pan(pan);
+                  setIsLayoutRunning(false);
+                }
+              }, 150); // Reduced delay
+            } else {
+              setIsLayoutRunning(false);
+            }
           } catch (error) {
-            console.error('❌ Error in layout ready callback:', error);
-          }
-          
-          // Restore view state after layout
-          if (hasElements) {
-            setTimeout(() => {
-              if (cyInstance && !cyInstance.destroyed()) {
-                cyInstance.zoom(zoom);
-                cyInstance.pan(pan);
-              }
-            }, 300);
+            console.error('Error during layout ready callback:', error);
+            setIsLayoutRunning(false);
           }
         },
         stop: () => {
           console.log('🏁 Layout stopped successfully');
+          setIsLayoutRunning(false);
         }
       }).run();
     } else {
@@ -771,321 +779,97 @@ export const CytoscapeGraph = ({
     setIsFullscreen(!isFullscreen);
   }, [isFullscreen]);
 
-  // Helper function to position cluster nodes at the center of their component nodes
+  // Simplified and much faster cluster positioning
   const positionClusterNodes = useCallback((cy: any, clusters: any[]) => {
-    if (!cy || cy.destroyed?.() || !clusters?.length) {
-      console.warn('⚠️ Invalid parameters for cluster positioning:', {
-        hasInstance: !!cy,
-        isDestroyed: cy?.destroyed?.(),
-        clusterCount: clusters?.length || 0
+    if (!cy || cy.destroyed?.() || !clusters?.length) return;
+    
+    // Fast positioning without extensive validation/logging
+    clusters.forEach((cluster) => {
+      if (!cluster?.id || !cluster?.nodeIds?.length) return;
+      
+      // Find member nodes quickly
+      const memberNodes = cy.nodes().filter((n: any) => 
+        cluster.nodeIds.includes(n.data('id')) && !n.data('isCluster')
+      );
+      
+      if (memberNodes.length === 0) return;
+      
+      // Calculate centroid quickly
+      let centerX = 0, centerY = 0, validCount = 0;
+      
+      memberNodes.forEach((node: any) => {
+        const pos = node.position();
+        if (pos?.x != null && pos?.y != null && !isNaN(pos.x) && !isNaN(pos.y)) {
+          centerX += pos.x;
+          centerY += pos.y;
+          validCount++;
+        }
       });
-      return;
-    }
-    
-    console.log('📍 Positioning cluster nodes at centroids...');
-    
-    let successfulPositions = 0;
-    let failedPositions = 0;
-    
-    clusters.forEach((cluster, index) => {
-      try {
-        // Validate cluster data
-        if (!cluster?.id || !cluster?.nodeIds || !Array.isArray(cluster.nodeIds)) {
-          console.warn(`⚠️ Invalid cluster data at index ${index}:`, cluster);
-          failedPositions++;
-          return;
-        }
-        
-        // Find all member nodes in this cluster (excluding cluster node itself)
-        const memberNodes = cy.nodes().filter((n: any) => 
-          cluster.nodeIds.includes(n.data('id')) && !n.data('isCluster')
-        );
-        
-        if (memberNodes.length === 0) {
-          console.warn(`⚠️ Cluster ${cluster.id} has no member nodes found`);
-          failedPositions++;
-          return;
-        }
-        
-        // Calculate geometric centroid of member nodes
-        let centerX = 0;
-        let centerY = 0;
-        let validPositions = 0;
-        
-        memberNodes.forEach((node: any) => {
-          try {
-            const pos = node.position();
-            if (pos && typeof pos.x === 'number' && typeof pos.y === 'number' && !isNaN(pos.x) && !isNaN(pos.y)) {
-              centerX += pos.x;
-              centerY += pos.y;
-              validPositions++;
-            }
-          } catch (error) {
-            console.warn('⚠️ Error getting node position:', error);
-          }
-        });
-        
-        if (validPositions === 0) {
-          console.warn(`⚠️ Cluster ${cluster.id} has no valid member positions`);
-          failedPositions++;
-          return;
-        }
-        
-        // Calculate centroid
-        centerX /= validPositions;
-        centerY /= validPositions;
-        
-        // Position cluster node at centroid
+      
+      if (validCount > 0) {
         const clusterNode = cy.getElementById(cluster.id);
         if (clusterNode.length > 0) {
-          try {
-            clusterNode.position({ x: centerX, y: centerY });
-            successfulPositions++;
-            
-            // Log detailed positioning info for first few clusters
-            if (index < 3) {
-              console.log(`🎯 Positioned cluster "${cluster.label}" at centroid:`, {
-                clusterId: cluster.id,
-                memberCount: validPositions,
-                centroid: { x: centerX.toFixed(1), y: centerY.toFixed(1) },
-                memberSample: memberNodes.slice(0, 3).map((n: any) => ({
-                  id: n.data('id'),
-                  label: n.data('label'),
-                  pos: n.position()
-                }))
-              });
-            }
-          } catch (error) {
-            console.error(`❌ Error setting cluster position for ${cluster.id}:`, error);
-            failedPositions++;
-          }
-        } else {
-          console.warn(`⚠️ Cluster node ${cluster.id} not found in graph`);
-          failedPositions++;
+          clusterNode.position({ 
+            x: centerX / validCount, 
+            y: centerY / validCount 
+          });
         }
-      } catch (error) {
-        console.error(`❌ Error positioning cluster ${cluster?.id || index}:`, error);
-        failedPositions++;
       }
-    });
-    
-    console.log('📍 Cluster positioning complete:', {
-      totalClusters: clusters.length,
-      successfullyPositioned: successfulPositions,
-      failed: failedPositions,
-      successRate: clusters.length > 0 ? `${((successfulPositions / clusters.length) * 100).toFixed(1)}%` : '0%'
     });
   }, []);
 
-  // Enhanced collision detection and spacing optimization
+  // Simplified and much faster collision detection
   const optimizeNodeSpacing = useCallback((cy: any) => {
-    if (!cy || cy.destroyed?.()) {
-      console.warn('⚠️ Invalid Cytoscape instance for node spacing optimization:', {
-        hasInstance: !!cy,
-        isDestroyed: cy?.destroyed?.()
-      });
-      return;
-    }
+    if (!cy || cy.destroyed?.()) return;
     
-    console.log('📍 Enhanced node spacing optimization to eliminate overlaps...');
+    const nodes = cy.nodes().not('[isCluster]');
+    const nodeCount = nodes.length;
     
-    try {
-      const nodes = cy.nodes().not('[isCluster]'); // Only process regular event nodes
-      const nodeCount = nodes.length;
-      
-      if (nodeCount === 0) {
-        console.warn('⚠️ No nodes found for spacing optimization');
-        return;
-      }
-      
-      // Dynamic node radius based on graph density (matches the node size logic)
-      let nodeRadius: number;
-      if (nodeCount > 500) nodeRadius = 16;      // 32px diameter / 2
-      else if (nodeCount > 200) nodeRadius = 18; // 36px diameter / 2
-      else if (nodeCount > 100) nodeRadius = 20; // 40px diameter / 2
-      else nodeRadius = 22;                      // 44px diameter / 2
-      
-      // More aggressive minimum distance - increased from 2.5x to 3.2x for better spacing
-      const minDistance = nodeRadius * 3.2; 
-      
-      // Multi-pass optimization with increasing aggressiveness
-      const maxPasses = 3;
-      let totalAdjustments = 0;
-      
-      for (let pass = 0; pass < maxPasses; pass++) {
-        // Check if instance is still valid
-        if (!cy || cy.destroyed?.()) {
-          console.warn('⚠️ Cytoscape instance destroyed during spacing optimization');
-          break;
-        }
+    if (nodeCount === 0 || nodeCount > 300) return; // Skip for very large graphs
+    
+    // Quick node radius calculation
+    const nodeRadius = nodeCount > 200 ? 18 : nodeCount > 100 ? 20 : 22;
+    const minDistance = nodeRadius * 2.8; // Reduced multiplier for performance
+    
+    // Single pass collision detection (much faster)
+    let adjustments = 0;
+    const maxAdjustments = Math.min(100, nodeCount * 2); // Limit total adjustments
+    
+    for (let i = 0; i < nodes.length && adjustments < maxAdjustments; i++) {
+      for (let j = i + 1; j < nodes.length && adjustments < maxAdjustments; j++) {
+        const nodeA = nodes[i];
+        const nodeB = nodes[j];
         
-        console.log(`📍 Spacing pass ${pass + 1}/${maxPasses}...`);
+        const posA = nodeA.position();
+        const posB = nodeB.position();
         
-        let passAdjustments = 0;
-        let maxIterationsThisPass = Math.min(8, Math.ceil(nodeCount / 50)); // More iterations for denser graphs
+        // Skip invalid positions quickly
+        if (!posA || !posB || isNaN(posA.x) || isNaN(posA.y) || isNaN(posB.x) || isNaN(posB.y)) continue;
         
-        for (let iteration = 0; iteration < maxIterationsThisPass; iteration++) {
-          // Check if instance is still valid during iteration
-          if (!cy || cy.destroyed?.()) {
-            console.warn('⚠️ Cytoscape instance destroyed during spacing iteration');
-            break;
-          }
+        const dx = posB.x - posA.x;
+        const dy = posB.y - posA.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < minDistance && distance > 0) {
+          const pushDistance = (minDistance - distance) / 2;
+          const angle = Math.atan2(dy, dx);
           
-          let hasCollisions = false;
+          const pushX = Math.cos(angle) * pushDistance * 0.7; // Reduced push strength
+          const pushY = Math.sin(angle) * pushDistance * 0.7;
           
-          // Check all pairs of nodes for collisions
-          for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-              try {
-                const nodeA = nodes[i];
-                const nodeB = nodes[j];
-                
-                // Validate nodes before accessing positions
-                if (!nodeA || !nodeB) continue;
-                
-                const posA = nodeA.position();
-                const posB = nodeB.position();
-                
-                // Validate positions
-                if (!posA || !posB || 
-                    typeof posA.x !== 'number' || typeof posA.y !== 'number' ||
-                    typeof posB.x !== 'number' || typeof posB.y !== 'number' ||
-                    isNaN(posA.x) || isNaN(posA.y) || isNaN(posB.x) || isNaN(posB.y)) {
-                  continue;
-                }
-                
-                // Calculate distance between nodes
-                const dx = posB.x - posA.x;
-                const dy = posB.y - posA.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                // If nodes are too close, push them apart
-                if (distance < minDistance && distance > 0) {
-                  hasCollisions = true;
-                  
-                  // Calculate push direction (away from each other)
-                  const pushDistance = (minDistance - distance) / 2;
-                  const angle = Math.atan2(dy, dx);
-                  
-                  const pushX = Math.cos(angle) * pushDistance;
-                  const pushY = Math.sin(angle) * pushDistance;
-                  
-                  // Progressive push strength - more aggressive in later passes
-                  const pushStrength = 0.6 + (pass * 0.3); // 0.6, 0.9, 1.2 across passes
-                  
-                  // Move nodes apart with increasing aggressiveness
-                  try {
-                    nodeA.position({
-                      x: posA.x - pushX * pushStrength,
-                      y: posA.y - pushY * pushStrength
-                    });
-                    
-                    nodeB.position({
-                      x: posB.x + pushX * pushStrength,
-                      y: posB.y + pushY * pushStrength
-                    });
-                    
-                    passAdjustments++;
-                    totalAdjustments++;
-                  } catch (positionError) {
-                    console.warn('⚠️ Error adjusting node positions:', positionError);
-                  }
-                }
-              } catch (nodeError) {
-                console.warn('⚠️ Error processing node pair:', nodeError);
-                continue;
-              }
-            }
-          }
-          
-          // If no collisions found in this iteration, move to next pass
-          if (!hasCollisions) {
-            console.log(`📍 Pass ${pass + 1} complete after ${iteration + 1} iterations`);
-            break;
-          }
-        }
-        
-        // If no adjustments were made in this pass, we're done
-        if (passAdjustments === 0) {
-          console.log(`📍 No overlaps found in pass ${pass + 1}, spacing optimization complete`);
-          break;
-        }
-      }
-      
-      // Final cleanup pass for any remaining center clusters
-      if (totalAdjustments > 0 && cy && !cy.destroyed?.()) {
-        console.log('📍 Final cleanup pass for dense center areas...');
-        
-        try {
-          // Find the center of the graph
-          let centerX = 0, centerY = 0;
-          let validCenterNodes = 0;
-          
-          nodes.forEach((node: any) => {
-            try {
-              const pos = node.position();
-              if (pos && typeof pos.x === 'number' && typeof pos.y === 'number' && !isNaN(pos.x) && !isNaN(pos.y)) {
-                centerX += pos.x;
-                centerY += pos.y;
-                validCenterNodes++;
-              }
-            } catch (error) {
-              console.warn('⚠️ Error calculating center:', error);
-            }
+          nodeA.position({
+            x: posA.x - pushX,
+            y: posA.y - pushY
           });
           
-          if (validCenterNodes > 0) {
-            centerX /= validCenterNodes;
-            centerY /= validCenterNodes;
-            
-            // Apply additional spacing to nodes near the center
-            const centerRadius = Math.min(200, nodeCount * 2); // Define "center area"
-            
-            nodes.forEach((node: any) => {
-              try {
-                const pos = node.position();
-                if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number' || isNaN(pos.x) || isNaN(pos.y)) {
-                  return;
-                }
-                
-                const distFromCenter = Math.sqrt(
-                  Math.pow(pos.x - centerX, 2) + Math.pow(pos.y - centerY, 2)
-                );
-                
-                // If node is in the dense center area, apply additional outward push
-                if (distFromCenter < centerRadius) {
-                  const angle = Math.atan2(pos.y - centerY, pos.x - centerX);
-                  const pushStrength = (centerRadius - distFromCenter) / centerRadius * 15; // Stronger push for nodes closer to center
-                  
-                  node.position({
-                    x: pos.x + Math.cos(angle) * pushStrength,
-                    y: pos.y + Math.sin(angle) * pushStrength
-                  });
-                }
-              } catch (error) {
-                console.warn('⚠️ Error in center cleanup:', error);
-              }
-            });
-          }
-        } catch (centerError) {
-          console.warn('⚠️ Error in center cleanup pass:', centerError);
+          nodeB.position({
+            x: posB.x + pushX,
+            y: posB.y + pushY
+          });
+          
+          adjustments++;
         }
       }
-      
-      console.log('📍 Enhanced node spacing optimization complete:', {
-        nodeCount,
-        nodeRadius,
-        minDistance: minDistance.toFixed(1),
-        totalPasses: Math.min(maxPasses, totalAdjustments > 0 ? maxPasses : 1),
-        totalAdjustments,
-        densityLevel: nodeCount > 500 ? 'very high' : 
-                     nodeCount > 200 ? 'high' : 
-                     nodeCount > 100 ? 'medium' : 'low',
-        centerCleanupApplied: totalAdjustments > 0
-      });
-      
-    } catch (error) {
-      console.error('❌ Error during node spacing optimization:', error);
     }
   }, []);
 
