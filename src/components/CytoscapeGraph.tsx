@@ -60,6 +60,7 @@ export const CytoscapeGraph = ({
   const [cyInstance, setCyInstance] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [isBuilding, setIsBuilding] = useState(false);
+  const [showLabels, setShowLabels] = useState(true); // Track label visibility state
   
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -111,33 +112,41 @@ export const CytoscapeGraph = ({
   useEffect(() => {
     if (events.length === 0 || !isClient) return;
     
-    // Safety check for too many events
-    if (events.length > 100) {
-      console.warn(`⚠️ Large dataset detected: ${events.length} events. Performance may be impacted.`);
-    }
-    
     setIsBuilding(true);
     setError(null);
     
     try {
+      const startTime = performance.now();
+      
       console.log('🔬 Building Cytoscape graph data:', {
         eventCount: events.length,
         k,
         sampleEvents: events.slice(0, 3).map(e => ({ id: e.id, title: e.title, tags: e.tags, category: e.category }))
       });
       
+      // Always use full dataset - no artificial limits
       const data = buildCytoscapeData(events, k);
+      
+      const endTime = performance.now();
+      const buildTime = endTime - startTime;
+      
       setGraphData(data);
       
       console.log('📊 Cytoscape data built:', {
         nodeCount: data.nodes.length,
         edgeCount: data.edges.length,
-        avgConnections: data.edges.length / data.nodes.length,
+        avgConnections: (data.edges.length / data.nodes.length).toFixed(1),
+        buildTime: `${buildTime.toFixed(2)}ms`,
+        performance: `${(data.nodes.length / buildTime * 1000).toFixed(0)} nodes/second`,
         categories: [...new Set(data.nodes.map(n => n.data.category))]
       });
       
-      if (data.edges.length > 500) {
-        console.warn(`⚠️ High edge count: ${data.edges.length}. Consider reducing K or event count for better performance.`);
+      // Performance warnings (informational only)
+      if (buildTime > 3000) {
+        console.warn(`⚠️ Slow graph build: ${buildTime.toFixed(2)}ms for ${events.length} events.`);
+      }
+      if (data.edges.length > 2000) {
+        console.warn(`⚠️ High edge count: ${data.edges.length}. Graph may be dense.`);
       }
       
     } catch (error) {
@@ -195,7 +204,7 @@ export const CytoscapeGraph = ({
             'width': 40, // Same size for all nodes
             'height': 40, // Same size for all nodes
             'color': '#ffffff',
-            'text-opacity': 0.9,
+            'text-opacity': 0.9, // Default visible - will be controlled by zoom handler
             'text-valign': 'bottom',
             'text-margin-y': 5,
             'font-family': 'Inter, system-ui, sans-serif',
@@ -225,7 +234,8 @@ export const CytoscapeGraph = ({
             'shadow-blur': 20,
             'shadow-color': '#3B82F6',
             'shadow-opacity': 0.6,
-            'z-index': 1000
+            'z-index': 1000,
+            'text-opacity': 0.9 // Always show selected node label
           }
         },
         
@@ -238,7 +248,8 @@ export const CytoscapeGraph = ({
             'border-opacity': 0.8,
             'shadow-blur': 15,
             'shadow-color': '#8B5CF6',
-            'shadow-opacity': 0.5
+            'shadow-opacity': 0.5,
+            'text-opacity': 0.9 // Always show hovered node label
           }
         },
         
@@ -309,6 +320,55 @@ export const CytoscapeGraph = ({
 
     cy.on('mouseout', 'node', () => {
       cy.edges().removeClass('highlighted');
+    });
+
+    // Dynamic label visibility optimization based on zoom level
+    cy.on('zoom pan', () => {
+      const zoom = cy.zoom();
+      const nodeCount = cy.nodes().length;
+      const shouldShow = zoom > 0.8 || nodeCount < 300;
+      
+      // Always update labels, don't check previous state to avoid timing issues
+      cy.batch(() => {
+        cy.nodes().forEach((node: any) => {
+          // Don't hide labels for selected/hovered nodes
+          const isSelected = node.hasClass('selected') || node.hasClass('highlighted');
+          const opacity = (shouldShow || isSelected) ? 0.9 : 0;
+          node.style('text-opacity', opacity);
+        });
+      });
+      
+      // Only log when state actually changes
+      if (shouldShow !== showLabels) {
+        setShowLabels(shouldShow);
+        console.log('🔤 Label visibility changed:', {
+          zoom: zoom.toFixed(2),
+          nodeCount,
+          showLabels: shouldShow,
+          reason: zoom > 0.8 ? 'zoomed in' : nodeCount < 300 ? 'few nodes' : 'too many nodes'
+        });
+      }
+    });
+
+    // Set initial label visibility when graph first loads
+    cy.ready(() => {
+      const zoom = cy.zoom();
+      const nodeCount = cy.nodes().length;
+      const shouldShow = zoom > 0.8 || nodeCount < 300;
+      
+      cy.batch(() => {
+        cy.nodes().forEach((node: any) => {
+          const opacity = shouldShow ? 0.9 : 0;
+          node.style('text-opacity', opacity);
+        });
+      });
+      
+      setShowLabels(shouldShow);
+      console.log('🎯 Initial label visibility set:', {
+        zoom: zoom.toFixed(2),
+        nodeCount,
+        showLabels: shouldShow
+      });
     });
 
     setCyInstance(cy);
