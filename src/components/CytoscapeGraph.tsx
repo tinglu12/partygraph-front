@@ -2,9 +2,9 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { EventNode } from '@/types/EventGraph';
 import { 
-  buildCytoscapeData, 
+  buildCytoscapeDataWithClusters, 
   filterCytoscapeData, 
-  CytoscapeData 
+  CytoscapeDataWithClusters 
 } from '@/utils/graphAlgorithms';
 import { 
   Search, 
@@ -49,7 +49,12 @@ export const CytoscapeGraph = ({
   height = 600,
   className = ""
 }: CytoscapeGraphProps) => {
-  const [graphData, setGraphData] = useState<CytoscapeData>({ nodes: [], edges: [] });
+  const [graphData, setGraphData] = useState<CytoscapeDataWithClusters>({ 
+    nodes: [], 
+    edges: [], 
+    clusters: [], 
+    clusterNodes: [] 
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
@@ -139,7 +144,7 @@ export const CytoscapeGraph = ({
         await new Promise(resolve => setTimeout(resolve, 50)); // Longer initial delay for better UI responsiveness
         
         // Always use full dataset - no artificial limits
-        const data = await buildCytoscapeData(events, k);
+        const data = await buildCytoscapeDataWithClusters(events, k);
         
         // Yield control again after computation
         await new Promise(resolve => setTimeout(resolve, 50)); // Longer delay after computation
@@ -184,15 +189,24 @@ export const CytoscapeGraph = ({
   const filteredData = useMemo(() => {
     const filtered = filterCytoscapeData(graphData, debouncedSearchQuery);
     
+    // Note: For now, clusters are not filtered by search - they represent the full graph structure
+    // Individual nodes within clusters will be filtered, but cluster nodes themselves remain
+    // This maintains the overall graph structure visualization
+    
     console.log('🔍 Cytoscape graph filtered:', {
       originalNodes: graphData.nodes.length,
       filteredNodes: filtered.nodes.length,
       originalEdges: graphData.edges.length,
       filteredEdges: filtered.edges.length,
+      clusterCount: graphData.clusters.length,
       searchQuery: debouncedSearchQuery
     });
     
-    return filtered;
+    return {
+      ...filtered,
+      clusters: graphData.clusters,
+      clusterNodes: graphData.clusterNodes
+    };
   }, [graphData, debouncedSearchQuery]);
 
   // Track previous data to detect meaningful changes
@@ -218,20 +232,41 @@ export const CytoscapeGraph = ({
       elements: [], // Start with empty elements
       
       style: [
-        // Node styles - all same size, colored by category
+        // Node styles - dynamically sized based on graph density to reduce overlap
         {
           selector: 'node',
           style: {
             'background-color': 'data(color)',
             'label': 'data(label)',
-            'width': 40, // Same size for all nodes
-            'height': 40, // Same size for all nodes
+            'width': (ele: any) => {
+              // Dynamic sizing: smaller nodes when graph is dense
+              const nodeCount = ele.cy().nodes().not('[isCluster]').length;
+              if (nodeCount > 500) return 32;      // Very dense graphs
+              if (nodeCount > 200) return 36;      // Dense graphs  
+              if (nodeCount > 100) return 40;      // Medium graphs
+              return 44;                           // Sparse graphs - larger for visibility
+            },
+            'height': (ele: any) => {
+              // Same logic as width for consistent circular nodes
+              const nodeCount = ele.cy().nodes().not('[isCluster]').length;
+              if (nodeCount > 500) return 32;
+              if (nodeCount > 200) return 36;
+              if (nodeCount > 100) return 40;
+              return 44;
+            },
             'color': '#ffffff',
             'text-opacity': 0.9, // Default visible - will be controlled by zoom handler
             'text-valign': 'bottom',
             'text-margin-y': 5,
             'font-family': 'Inter, system-ui, sans-serif',
-            'font-size': '12px',
+            'font-size': (ele: any) => {
+              // Scale font size with node size for readability
+              const nodeCount = ele.cy().nodes().not('[isCluster]').length;
+              if (nodeCount > 500) return '10px';
+              if (nodeCount > 200) return '11px';
+              if (nodeCount > 100) return '12px';
+              return '13px';
+            },
             'font-weight': 500,
             'text-outline-width': 2,
             'text-outline-color': '#000000',
@@ -244,6 +279,37 @@ export const CytoscapeGraph = ({
             'shadow-opacity': 0.3,
             'shadow-offset-x': 0,
             'shadow-offset-y': 0
+          }
+        },
+        
+        // Cluster node styles - larger and more prominent
+        {
+          selector: 'node[isCluster]',
+          style: {
+            'background-color': 'data(color)',
+            'label': 'data(label)',
+            'width': 'data(size)', // Variable size based on cluster size
+            'height': 'data(size)', // Variable size based on cluster size
+            'color': '#ffffff',
+            'text-opacity': 0, // Start hidden, controlled by zoom
+            'text-valign': 'center',
+            'text-halign': 'center',
+            'text-margin-y': 0,
+            'font-family': 'Inter, system-ui, sans-serif',
+            'font-size': '14px', // Larger font for clusters
+            'font-weight': 600, // Bolder for clusters
+            'text-outline-width': 3,
+            'text-outline-color': '#000000',
+            'text-outline-opacity': 0.8,
+            'border-width': 3,
+            'border-color': '#ffffff',
+            'border-opacity': 0.5,
+            'shadow-blur': 15,
+            'shadow-color': 'data(color)',
+            'shadow-opacity': 0.4,
+            'shadow-offset-x': 0,
+            'shadow-offset-y': 0,
+            'opacity': 0 // Start hidden, controlled by zoom
           }
         },
         
@@ -319,14 +385,54 @@ export const CytoscapeGraph = ({
     // Event handlers
     cy.on('tap', 'node', (event: any) => {
       const node = event.target;
-      const eventData = node.data('event');
-      console.log('🎯 Cytoscape node clicked:', eventData.title);
-      onEventClick?.(eventData);
+      const nodeData = node.data();
+      
+      // Handle cluster clicks - zoom to cluster
+      if (nodeData.isCluster) {
+        console.log('🎯 Cluster clicked:', nodeData.label);
+        
+        // Find all nodes in this cluster
+        const clusterNodeIds = nodeData.clusterInfo.nodeIds;
+        const clusterNodes = cy.nodes().filter((n: any) => 
+          clusterNodeIds.includes(n.data('id')) && !n.data('isCluster')
+        );
+        
+        if (clusterNodes.length > 0) {
+          // Animate zoom to fit cluster nodes
+          cy.animate({
+            fit: {
+              eles: clusterNodes,
+              padding: 80
+            }
+          }, {
+            duration: 800,
+            easing: 'ease-out'
+          });
+        }
+      } else {
+        // Handle regular event node clicks
+        const eventData = nodeData.event;
+        console.log('🎯 Event node clicked:', eventData.title);
+        onEventClick?.(eventData);
+      }
     });
 
     cy.on('mouseover', 'node', (event: any) => {
       const node = event.target;
-      setHoveredNode(node.data());
+      const nodeData = node.data();
+      
+      // Set hovered node data with proper structure
+      setHoveredNode({
+        ...nodeData,
+        // Ensure we have the necessary properties for both event and cluster nodes
+        label: nodeData.label || 'Unknown',
+        category: nodeData.category || 'general',
+        tags: nodeData.tags || [],
+        event: nodeData.event || null,
+        isCluster: nodeData.isCluster || false,
+        clusterInfo: nodeData.clusterInfo || null
+      });
+      
       node.addClass('highlighted');
     });
 
@@ -346,70 +452,129 @@ export const CytoscapeGraph = ({
       cy.edges().removeClass('highlighted');
     });
 
-    // Dynamic label and edge visibility optimization based on zoom level
+    // Level-of-Detail zoom handler with cluster transitions
     cy.on('zoom pan', () => {
       const zoom = cy.zoom();
-      const nodeCount = cy.nodes().length;
-      const shouldShow = zoom > 0.8 || nodeCount < 300;
+      const nodeCount = cy.nodes().not('[isCluster]').length; // Count only event nodes
       
-      // Update both labels and edges in a single batch for performance
+      // New LOD thresholds:
+      // zoom < 0.5: Show cluster labels only
+      // 0.5 <= zoom <= 0.8: Transition zone
+      // zoom > 0.8: Show individual labels only
+      
+      const showClusters = zoom < 0.5;
+      const showIndividuals = zoom > 0.8 || nodeCount < 100;
+      const inTransition = zoom >= 0.5 && zoom <= 0.8;
+      
+      // Update visibility in a single batch for performance
       cy.batch(() => {
-        // Update label visibility
-        cy.nodes().forEach((node: any) => {
-          // Don't hide labels for selected/hovered nodes
-          const isSelected = node.hasClass('selected') || node.hasClass('highlighted');
-          const opacity = (shouldShow || isSelected) ? 0.9 : 0;
-          node.style('text-opacity', opacity);
+        // Handle cluster nodes
+        cy.nodes('[isCluster]').forEach((clusterNode: any) => {
+          const opacity = showClusters ? 1 : 0;
+          const textOpacity = showClusters ? 0.9 : 0;
+          
+          clusterNode.style({
+            'opacity': opacity,
+            'text-opacity': textOpacity
+          });
         });
         
-        // Update edge visibility - hide edges when zoomed out for major performance boost
+        // Handle individual event nodes
+        cy.nodes().not('[isCluster]').forEach((eventNode: any) => {
+          // Don't hide labels for selected/hovered nodes
+          const isSelected = eventNode.hasClass('selected') || eventNode.hasClass('highlighted');
+          
+          let textOpacity = 0;
+          let nodeOpacity = 1;
+          
+          if (showIndividuals || isSelected) {
+            textOpacity = 0.9;
+            nodeOpacity = 1;
+          } else if (inTransition) {
+            // Fade transition based on zoom level
+            const transitionProgress = (zoom - 0.5) / 0.3; // 0.5-0.8 range mapped to 0-1
+            textOpacity = isSelected ? 0.9 : transitionProgress * 0.9;
+            nodeOpacity = 0.3 + (transitionProgress * 0.7); // Fade from 30% to 100%
+          } else {
+            // zoom < 0.5: hide individual nodes when clusters are shown
+            textOpacity = isSelected ? 0.9 : 0;
+            nodeOpacity = isSelected ? 1 : 0.3; // Dim but don't hide completely
+          }
+          
+          eventNode.style({
+            'text-opacity': textOpacity,
+            'opacity': nodeOpacity
+          });
+        });
+        
+        // Handle edges - hide when zoomed out for performance
+        const showEdges = zoom > 0.5 || nodeCount < 200;
         cy.edges().forEach((edge: any) => {
-          // Always show highlighted/selected edges for better UX
           const isHighlighted = edge.hasClass('highlighted') || edge.hasClass('selected');
-          const opacity = (shouldShow || isHighlighted) ? 0.6 : 0;
+          const opacity = (showEdges || isHighlighted) ? 0.6 : 0;
           edge.style('opacity', opacity);
         });
       });
       
-      // Only log when state actually changes
-      if (shouldShow !== showLabels) {
-        setShowLabels(shouldShow);
-        console.log('🔤 Label & Edge visibility changed:', {
+      // Log visibility changes for debugging
+      const prevState = { showClusters: showLabels }; // Reuse existing state tracking
+      if (showClusters !== prevState.showClusters) {
+        setShowLabels(showClusters || showIndividuals);
+        console.log('🔤 LOD visibility changed:', {
           zoom: zoom.toFixed(2),
           nodeCount,
-          showLabels: shouldShow,
-          edgeCount: cy.edges().length,
-          reason: zoom > 0.8 ? 'zoomed in' : nodeCount < 300 ? 'few nodes' : 'too many nodes'
+          showClusters,
+          showIndividuals,
+          inTransition,
+          edgeCount: cy.edges().length
         });
       }
     });
 
-    // Set initial label and edge visibility when graph first loads
+    // Set initial LOD visibility when graph first loads
     cy.ready(() => {
       const zoom = cy.zoom();
-      const nodeCount = cy.nodes().length;
-      const shouldShow = zoom > 0.8 || nodeCount < 300;
+      const nodeCount = cy.nodes().not('[isCluster]').length;
+      
+      const showClusters = zoom < 0.5;
+      const showIndividuals = zoom > 0.8 || nodeCount < 100;
+      const inTransition = zoom >= 0.5 && zoom <= 0.8;
       
       cy.batch(() => {
-        // Set initial label visibility
-        cy.nodes().forEach((node: any) => {
-          const opacity = shouldShow ? 0.9 : 0;
-          node.style('text-opacity', opacity);
+        // Set initial cluster visibility
+        cy.nodes('[isCluster]').forEach((clusterNode: any) => {
+          clusterNode.style({
+            'opacity': showClusters ? 1 : 0,
+            'text-opacity': showClusters ? 0.9 : 0
+          });
+        });
+        
+        // Set initial individual node visibility
+        cy.nodes().not('[isCluster]').forEach((eventNode: any) => {
+          const textOpacity = showIndividuals ? 0.9 : 0;
+          const nodeOpacity = showIndividuals ? 1 : (inTransition ? 0.5 : 0.3);
+          
+          eventNode.style({
+            'text-opacity': textOpacity,
+            'opacity': nodeOpacity
+          });
         });
         
         // Set initial edge visibility
+        const showEdges = zoom > 0.5 || nodeCount < 200;
         cy.edges().forEach((edge: any) => {
-          const opacity = shouldShow ? 0.6 : 0;
-          edge.style('opacity', opacity);
+          edge.style('opacity', showEdges ? 0.6 : 0);
         });
       });
       
-      setShowLabels(shouldShow);
-      console.log('🎯 Initial label & edge visibility set:', {
+      setShowLabels(showClusters || showIndividuals);
+      console.log('🎯 Initial LOD visibility set:', {
         zoom: zoom.toFixed(2),
         nodeCount,
-        edgeCount: cy.edges().length,
-        showLabels: shouldShow
+        clusterCount: cy.nodes('[isCluster]').length,
+        showClusters,
+        showIndividuals,
+        edgeCount: cy.edges().length
       });
     });
 
@@ -451,7 +616,8 @@ export const CytoscapeGraph = ({
     cyInstance.elements().remove(); // Clear existing
     cyInstance.add([
       ...filteredData.nodes,
-      ...filteredData.edges
+      ...filteredData.edges,
+      ...filteredData.clusterNodes // Add cluster nodes to the graph
     ]);
 
     // Update tracking data
@@ -471,28 +637,92 @@ export const CytoscapeGraph = ({
         animate: true,
         animationDuration: 800,
         animationEasing: 'ease-out',
-        nodeRepulsion: 8000,
-        idealEdgeLength: 100,
-        edgeElasticity: 0.45,
-        nestingFactor: 0.1,
-        gravity: 0.4,
-        numIter: 2500,
-        tile: false,
-        tilingPaddingVertical: 10,
-        tilingPaddingHorizontal: 10,
-        gravityRangeCompound: 1.5,
-        gravityCompound: 1.0,
-        gravityRange: 3.8,
-        initialEnergyOnIncremental: 0.5,
+        
+        // Enhanced spacing to prevent overlap while maintaining similarity clustering
+        nodeRepulsion: 18000,        // Increased from 15000 - even stronger repulsion
+        idealEdgeLength: 140,        // Increased from 120 - longer edges for more spacing
+        edgeElasticity: 0.25,        // Reduced from 0.35 - less edge pull, more spreading
+        nestingFactor: 0.02,         // Reduced from 0.05 - minimal nesting compression
+        
+        // Improved gravity and layout quality - reduced center clustering
+        gravity: 0.15,               // Reduced from 0.25 - much less center pull
+        numIter: 4000,              // Increased from 3000 - more iterations for better spacing
+        
+        // Advanced spacing controls - more aggressive anti-overlap settings
+        tile: true,                  // Enable tiling to prevent overlap
+        tilingPaddingVertical: 30,   // Increased from 20 - more vertical spacing
+        tilingPaddingHorizontal: 30, // Increased from 20 - more horizontal spacing
+        gravityRangeCompound: 2.5,   // Increased from 2.0 - wider gravity range
+        gravityCompound: 0.5,        // Reduced from 0.8 - less compound gravity
+        gravityRange: 5.5,           // Increased from 4.5 - wider overall gravity range
+        initialEnergyOnIncremental: 0.2, // Reduced from 0.3 - gentler incremental changes
+        
+        // Quality improvements
+        quality: 'proof',            // Highest quality layout calculation
+        randomize: false,            // Don't randomize - maintain similarity positioning
+        
+        // Additional spacing controls to prevent center density
+        nodeOverlap: 20,            // Minimum space between nodes
+        refresh: 20,                // Refresh frequency during layout
         fit: !hasElements, // Only fit if this is the first layout
         ready: () => {
+          // Add defensive checks to prevent null reference errors
+          if (!cyInstance || cyInstance.destroyed()) {
+            console.warn('⚠️ Cytoscape instance not available during layout ready callback');
+            return;
+          }
+          
+          console.log('🎯 Layout ready, positioning clusters and applying enhanced spacing fixes...');
+          
+          try {
+            // Ensure all nodes are properly positioned before cluster operations
+            const allNodes = cyInstance.nodes();
+            const validNodes = allNodes.filter((node: any) => {
+              const pos = node.position();
+              return pos && typeof pos.x === 'number' && typeof pos.y === 'number' && !isNaN(pos.x) && !isNaN(pos.y);
+            });
+            
+            console.log('📊 Node positioning validation:', {
+              totalNodes: allNodes.length,
+              validPositions: validNodes.length,
+              invalidNodes: allNodes.length - validNodes.length
+            });
+            
+            // Only proceed if we have valid node positions
+            if (validNodes.length > 0) {
+              // Calculate and position cluster nodes after layout
+              setTimeout(() => {
+                if (cyInstance && !cyInstance.destroyed()) {
+                  positionClusterNodes(cyInstance, filteredData.clusters);
+                }
+              }, 100);
+              
+              // Apply enhanced collision detection and spacing optimization
+              setTimeout(() => {
+                if (cyInstance && !cyInstance.destroyed()) {
+                  optimizeNodeSpacing(cyInstance);
+                }
+              }, 200);
+            } else {
+              console.warn('⚠️ No valid node positions found, skipping cluster operations');
+            }
+            
+          } catch (error) {
+            console.error('❌ Error in layout ready callback:', error);
+          }
+          
           // Restore view state after layout
           if (hasElements) {
             setTimeout(() => {
-              cyInstance.zoom(zoom);
-              cyInstance.pan(pan);
-            }, 100);
+              if (cyInstance && !cyInstance.destroyed()) {
+                cyInstance.zoom(zoom);
+                cyInstance.pan(pan);
+              }
+            }, 300);
           }
+        },
+        stop: () => {
+          console.log('🏁 Layout stopped successfully');
         }
       }).run();
     } else {
@@ -500,6 +730,9 @@ export const CytoscapeGraph = ({
       console.log('🔧 Minor update - preserving view state');
       cyInstance.zoom(zoom);
       cyInstance.pan(pan);
+      
+      // Still update cluster positions for minor changes
+      positionClusterNodes(cyInstance, filteredData.clusters);
     }
   }, [cyInstance, filteredData]);
 
@@ -538,6 +771,324 @@ export const CytoscapeGraph = ({
     setIsFullscreen(!isFullscreen);
   }, [isFullscreen]);
 
+  // Helper function to position cluster nodes at the center of their component nodes
+  const positionClusterNodes = useCallback((cy: any, clusters: any[]) => {
+    if (!cy || cy.destroyed?.() || !clusters?.length) {
+      console.warn('⚠️ Invalid parameters for cluster positioning:', {
+        hasInstance: !!cy,
+        isDestroyed: cy?.destroyed?.(),
+        clusterCount: clusters?.length || 0
+      });
+      return;
+    }
+    
+    console.log('📍 Positioning cluster nodes at centroids...');
+    
+    let successfulPositions = 0;
+    let failedPositions = 0;
+    
+    clusters.forEach((cluster, index) => {
+      try {
+        // Validate cluster data
+        if (!cluster?.id || !cluster?.nodeIds || !Array.isArray(cluster.nodeIds)) {
+          console.warn(`⚠️ Invalid cluster data at index ${index}:`, cluster);
+          failedPositions++;
+          return;
+        }
+        
+        // Find all member nodes in this cluster (excluding cluster node itself)
+        const memberNodes = cy.nodes().filter((n: any) => 
+          cluster.nodeIds.includes(n.data('id')) && !n.data('isCluster')
+        );
+        
+        if (memberNodes.length === 0) {
+          console.warn(`⚠️ Cluster ${cluster.id} has no member nodes found`);
+          failedPositions++;
+          return;
+        }
+        
+        // Calculate geometric centroid of member nodes
+        let centerX = 0;
+        let centerY = 0;
+        let validPositions = 0;
+        
+        memberNodes.forEach((node: any) => {
+          try {
+            const pos = node.position();
+            if (pos && typeof pos.x === 'number' && typeof pos.y === 'number' && !isNaN(pos.x) && !isNaN(pos.y)) {
+              centerX += pos.x;
+              centerY += pos.y;
+              validPositions++;
+            }
+          } catch (error) {
+            console.warn('⚠️ Error getting node position:', error);
+          }
+        });
+        
+        if (validPositions === 0) {
+          console.warn(`⚠️ Cluster ${cluster.id} has no valid member positions`);
+          failedPositions++;
+          return;
+        }
+        
+        // Calculate centroid
+        centerX /= validPositions;
+        centerY /= validPositions;
+        
+        // Position cluster node at centroid
+        const clusterNode = cy.getElementById(cluster.id);
+        if (clusterNode.length > 0) {
+          try {
+            clusterNode.position({ x: centerX, y: centerY });
+            successfulPositions++;
+            
+            // Log detailed positioning info for first few clusters
+            if (index < 3) {
+              console.log(`🎯 Positioned cluster "${cluster.label}" at centroid:`, {
+                clusterId: cluster.id,
+                memberCount: validPositions,
+                centroid: { x: centerX.toFixed(1), y: centerY.toFixed(1) },
+                memberSample: memberNodes.slice(0, 3).map((n: any) => ({
+                  id: n.data('id'),
+                  label: n.data('label'),
+                  pos: n.position()
+                }))
+              });
+            }
+          } catch (error) {
+            console.error(`❌ Error setting cluster position for ${cluster.id}:`, error);
+            failedPositions++;
+          }
+        } else {
+          console.warn(`⚠️ Cluster node ${cluster.id} not found in graph`);
+          failedPositions++;
+        }
+      } catch (error) {
+        console.error(`❌ Error positioning cluster ${cluster?.id || index}:`, error);
+        failedPositions++;
+      }
+    });
+    
+    console.log('📍 Cluster positioning complete:', {
+      totalClusters: clusters.length,
+      successfullyPositioned: successfulPositions,
+      failed: failedPositions,
+      successRate: clusters.length > 0 ? `${((successfulPositions / clusters.length) * 100).toFixed(1)}%` : '0%'
+    });
+  }, []);
+
+  // Enhanced collision detection and spacing optimization
+  const optimizeNodeSpacing = useCallback((cy: any) => {
+    if (!cy || cy.destroyed?.()) {
+      console.warn('⚠️ Invalid Cytoscape instance for node spacing optimization:', {
+        hasInstance: !!cy,
+        isDestroyed: cy?.destroyed?.()
+      });
+      return;
+    }
+    
+    console.log('📍 Enhanced node spacing optimization to eliminate overlaps...');
+    
+    try {
+      const nodes = cy.nodes().not('[isCluster]'); // Only process regular event nodes
+      const nodeCount = nodes.length;
+      
+      if (nodeCount === 0) {
+        console.warn('⚠️ No nodes found for spacing optimization');
+        return;
+      }
+      
+      // Dynamic node radius based on graph density (matches the node size logic)
+      let nodeRadius: number;
+      if (nodeCount > 500) nodeRadius = 16;      // 32px diameter / 2
+      else if (nodeCount > 200) nodeRadius = 18; // 36px diameter / 2
+      else if (nodeCount > 100) nodeRadius = 20; // 40px diameter / 2
+      else nodeRadius = 22;                      // 44px diameter / 2
+      
+      // More aggressive minimum distance - increased from 2.5x to 3.2x for better spacing
+      const minDistance = nodeRadius * 3.2; 
+      
+      // Multi-pass optimization with increasing aggressiveness
+      const maxPasses = 3;
+      let totalAdjustments = 0;
+      
+      for (let pass = 0; pass < maxPasses; pass++) {
+        // Check if instance is still valid
+        if (!cy || cy.destroyed?.()) {
+          console.warn('⚠️ Cytoscape instance destroyed during spacing optimization');
+          break;
+        }
+        
+        console.log(`📍 Spacing pass ${pass + 1}/${maxPasses}...`);
+        
+        let passAdjustments = 0;
+        let maxIterationsThisPass = Math.min(8, Math.ceil(nodeCount / 50)); // More iterations for denser graphs
+        
+        for (let iteration = 0; iteration < maxIterationsThisPass; iteration++) {
+          // Check if instance is still valid during iteration
+          if (!cy || cy.destroyed?.()) {
+            console.warn('⚠️ Cytoscape instance destroyed during spacing iteration');
+            break;
+          }
+          
+          let hasCollisions = false;
+          
+          // Check all pairs of nodes for collisions
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              try {
+                const nodeA = nodes[i];
+                const nodeB = nodes[j];
+                
+                // Validate nodes before accessing positions
+                if (!nodeA || !nodeB) continue;
+                
+                const posA = nodeA.position();
+                const posB = nodeB.position();
+                
+                // Validate positions
+                if (!posA || !posB || 
+                    typeof posA.x !== 'number' || typeof posA.y !== 'number' ||
+                    typeof posB.x !== 'number' || typeof posB.y !== 'number' ||
+                    isNaN(posA.x) || isNaN(posA.y) || isNaN(posB.x) || isNaN(posB.y)) {
+                  continue;
+                }
+                
+                // Calculate distance between nodes
+                const dx = posB.x - posA.x;
+                const dy = posB.y - posA.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                // If nodes are too close, push them apart
+                if (distance < minDistance && distance > 0) {
+                  hasCollisions = true;
+                  
+                  // Calculate push direction (away from each other)
+                  const pushDistance = (minDistance - distance) / 2;
+                  const angle = Math.atan2(dy, dx);
+                  
+                  const pushX = Math.cos(angle) * pushDistance;
+                  const pushY = Math.sin(angle) * pushDistance;
+                  
+                  // Progressive push strength - more aggressive in later passes
+                  const pushStrength = 0.6 + (pass * 0.3); // 0.6, 0.9, 1.2 across passes
+                  
+                  // Move nodes apart with increasing aggressiveness
+                  try {
+                    nodeA.position({
+                      x: posA.x - pushX * pushStrength,
+                      y: posA.y - pushY * pushStrength
+                    });
+                    
+                    nodeB.position({
+                      x: posB.x + pushX * pushStrength,
+                      y: posB.y + pushY * pushStrength
+                    });
+                    
+                    passAdjustments++;
+                    totalAdjustments++;
+                  } catch (positionError) {
+                    console.warn('⚠️ Error adjusting node positions:', positionError);
+                  }
+                }
+              } catch (nodeError) {
+                console.warn('⚠️ Error processing node pair:', nodeError);
+                continue;
+              }
+            }
+          }
+          
+          // If no collisions found in this iteration, move to next pass
+          if (!hasCollisions) {
+            console.log(`📍 Pass ${pass + 1} complete after ${iteration + 1} iterations`);
+            break;
+          }
+        }
+        
+        // If no adjustments were made in this pass, we're done
+        if (passAdjustments === 0) {
+          console.log(`📍 No overlaps found in pass ${pass + 1}, spacing optimization complete`);
+          break;
+        }
+      }
+      
+      // Final cleanup pass for any remaining center clusters
+      if (totalAdjustments > 0 && cy && !cy.destroyed?.()) {
+        console.log('📍 Final cleanup pass for dense center areas...');
+        
+        try {
+          // Find the center of the graph
+          let centerX = 0, centerY = 0;
+          let validCenterNodes = 0;
+          
+          nodes.forEach((node: any) => {
+            try {
+              const pos = node.position();
+              if (pos && typeof pos.x === 'number' && typeof pos.y === 'number' && !isNaN(pos.x) && !isNaN(pos.y)) {
+                centerX += pos.x;
+                centerY += pos.y;
+                validCenterNodes++;
+              }
+            } catch (error) {
+              console.warn('⚠️ Error calculating center:', error);
+            }
+          });
+          
+          if (validCenterNodes > 0) {
+            centerX /= validCenterNodes;
+            centerY /= validCenterNodes;
+            
+            // Apply additional spacing to nodes near the center
+            const centerRadius = Math.min(200, nodeCount * 2); // Define "center area"
+            
+            nodes.forEach((node: any) => {
+              try {
+                const pos = node.position();
+                if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number' || isNaN(pos.x) || isNaN(pos.y)) {
+                  return;
+                }
+                
+                const distFromCenter = Math.sqrt(
+                  Math.pow(pos.x - centerX, 2) + Math.pow(pos.y - centerY, 2)
+                );
+                
+                // If node is in the dense center area, apply additional outward push
+                if (distFromCenter < centerRadius) {
+                  const angle = Math.atan2(pos.y - centerY, pos.x - centerX);
+                  const pushStrength = (centerRadius - distFromCenter) / centerRadius * 15; // Stronger push for nodes closer to center
+                  
+                  node.position({
+                    x: pos.x + Math.cos(angle) * pushStrength,
+                    y: pos.y + Math.sin(angle) * pushStrength
+                  });
+                }
+              } catch (error) {
+                console.warn('⚠️ Error in center cleanup:', error);
+              }
+            });
+          }
+        } catch (centerError) {
+          console.warn('⚠️ Error in center cleanup pass:', centerError);
+        }
+      }
+      
+      console.log('📍 Enhanced node spacing optimization complete:', {
+        nodeCount,
+        nodeRadius,
+        minDistance: minDistance.toFixed(1),
+        totalPasses: Math.min(maxPasses, totalAdjustments > 0 ? maxPasses : 1),
+        totalAdjustments,
+        densityLevel: nodeCount > 500 ? 'very high' : 
+                     nodeCount > 200 ? 'high' : 
+                     nodeCount > 100 ? 'medium' : 'low',
+        centerCleanupApplied: totalAdjustments > 0
+      });
+      
+    } catch (error) {
+      console.error('❌ Error during node spacing optimization:', error);
+    }
+  }, []);
+
   if (!isClient) {
     return (
       <div className={`${className} bg-slate-900 rounded-2xl border border-white/20`} style={{ height }}>
@@ -563,7 +1114,7 @@ export const CytoscapeGraph = ({
             Event Knowledge Graph
           </h3>
           <div className="text-sm text-gray-400">
-            {filteredData.nodes.length} events • {filteredData.edges.length} connections
+            {filteredData.nodes.length} events • {filteredData.edges.length} connections • {filteredData.clusters.length} clusters
           </div>
         </div>
         
@@ -666,24 +1217,35 @@ export const CytoscapeGraph = ({
                 {hoveredNode.category}
               </span>
             </div>
-            <p className="text-gray-300 text-sm mb-3 line-clamp-3">
-              {hoveredNode.event.description}
-            </p>
-            <div className="flex flex-wrap gap-1">
-              {hoveredNode.tags.slice(0, 3).map((tag: string, index: number) => (
-                <span 
-                  key={index}
-                  className="text-xs px-2 py-1 bg-white/10 text-white/80 rounded-full border border-white/20"
-                >
-                  #{tag}
-                </span>
-              ))}
-              {hoveredNode.tags.length > 3 && (
-                <span className="text-xs text-gray-400">
-                  +{hoveredNode.tags.length - 3} more
-                </span>
-              )}
-            </div>
+            {hoveredNode.event?.description && (
+              <p className="text-gray-300 text-sm mb-3 line-clamp-3">
+                {hoveredNode.event.description}
+              </p>
+            )}
+            {hoveredNode.tags && hoveredNode.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {hoveredNode.tags.slice(0, 3).map((tag: string, index: number) => (
+                  <span 
+                    key={index}
+                    className="text-xs px-2 py-1 bg-white/10 text-white/80 rounded-full border border-white/20"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+                {hoveredNode.tags.length > 3 && (
+                  <span className="text-xs text-gray-400">
+                    +{hoveredNode.tags.length - 3} more
+                  </span>
+                )}
+              </div>
+            )}
+            {hoveredNode.isCluster && hoveredNode.clusterInfo && (
+              <div className="text-xs text-gray-400 mt-2 border-t border-white/10 pt-2">
+                <div>Cluster: {hoveredNode.clusterInfo.nodeIds.length} events</div>
+                <div>Common tags: {hoveredNode.clusterInfo.commonTags.join(', ')}</div>
+                <div className="text-purple-300 mt-1">Click to zoom to cluster</div>
+              </div>
+            )}
           </div>
         )}
         
@@ -696,15 +1258,24 @@ export const CytoscapeGraph = ({
           <div className="space-y-2 text-xs text-gray-300">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-              <span>Nodes colored by category</span>
+              <span>Events colored by category</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-1 bg-purple-400/60"></div>
-              <span>Edge thickness = tag similarity</span>
+              <span>Edge thickness = similarity</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full border-2 border-blue-400"></div>
+              <div className="w-4 h-4 rounded-full border-2 border-blue-400"></div>
               <span>Selected for chat</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-full bg-purple-600 border-2 border-white/50"></div>
+              <span>Cluster (zoom &lt; 0.5)</span>
+            </div>
+            <div className="text-xs text-gray-400 mt-2 border-t border-white/10 pt-2">
+              <div>Zoom out: see clusters</div>
+              <div>Zoom in: see individual events</div>
+              <div>Click cluster to zoom to it</div>
             </div>
           </div>
         </div>
