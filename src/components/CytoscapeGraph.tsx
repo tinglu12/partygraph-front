@@ -61,6 +61,7 @@ export const CytoscapeGraph = ({
   const [error, setError] = useState<string | null>(null);
   const [isBuilding, setIsBuilding] = useState(false);
   const [showLabels, setShowLabels] = useState(true); // Track label visibility state
+  const [isInitialLoading, setIsInitialLoading] = useState(true); // Track initial loading state
   
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -102,11 +103,19 @@ export const CytoscapeGraph = ({
       } catch (error) {
         console.error('Error loading Cytoscape:', error);
         setError('Failed to load graph library. Please refresh the page.');
+        setIsInitialLoading(false);
       }
     };
     
     loadCytoscape();
   }, []);
+
+  // Reset loading state when events change
+  useEffect(() => {
+    if (events.length > 0) {
+      setIsInitialLoading(true);
+    }
+  }, [events.length]);
 
   // Build graph data when events change
   useEffect(() => {
@@ -115,46 +124,60 @@ export const CytoscapeGraph = ({
     setIsBuilding(true);
     setError(null);
     
-    try {
-      const startTime = performance.now();
-      
-      console.log('🔬 Building Cytoscape graph data:', {
-        eventCount: events.length,
-        k,
-        sampleEvents: events.slice(0, 3).map(e => ({ id: e.id, title: e.title, tags: e.tags, category: e.category }))
-      });
-      
-      // Always use full dataset - no artificial limits
-      const data = buildCytoscapeData(events, k);
-      
-      const endTime = performance.now();
-      const buildTime = endTime - startTime;
-      
-      setGraphData(data);
-      
-      console.log('📊 Cytoscape data built:', {
-        nodeCount: data.nodes.length,
-        edgeCount: data.edges.length,
-        avgConnections: (data.edges.length / data.nodes.length).toFixed(1),
-        buildTime: `${buildTime.toFixed(2)}ms`,
-        performance: `${(data.nodes.length / buildTime * 1000).toFixed(0)} nodes/second`,
-        categories: [...new Set(data.nodes.map(n => n.data.category))]
-      });
-      
-      // Performance warnings (informational only)
-      if (buildTime > 3000) {
-        console.warn(`⚠️ Slow graph build: ${buildTime.toFixed(2)}ms for ${events.length} events.`);
+    // Make graph building asynchronous to prevent UI freezing
+    const buildGraphAsync = async () => {
+      try {
+        const startTime = performance.now();
+        
+        console.log('🔬 Building Cytoscape graph data:', {
+          eventCount: events.length,
+          k,
+          sampleEvents: events.slice(0, 3).map(e => ({ id: e.id, title: e.title, tags: e.tags, category: e.category }))
+        });
+        
+        // Yield control to browser before heavy computation
+        await new Promise(resolve => setTimeout(resolve, 50)); // Longer initial delay for better UI responsiveness
+        
+        // Always use full dataset - no artificial limits
+        const data = await buildCytoscapeData(events, k);
+        
+        // Yield control again after computation
+        await new Promise(resolve => setTimeout(resolve, 50)); // Longer delay after computation
+        
+        const endTime = performance.now();
+        const buildTime = endTime - startTime;
+        
+        setGraphData(data);
+        setIsInitialLoading(false); // Hide initial loading when graph is ready
+        
+        console.log('📊 Cytoscape data built:', {
+          nodeCount: data.nodes.length,
+          edgeCount: data.edges.length,
+          avgConnections: (data.edges.length / data.nodes.length).toFixed(1),
+          buildTime: `${buildTime.toFixed(2)}ms`,
+          performance: `${(data.nodes.length / buildTime * 1000).toFixed(0)} nodes/second`,
+          categories: [...new Set(data.nodes.map(n => n.data.category))]
+        });
+        
+        // Performance warnings (informational only)
+        if (buildTime > 3000) {
+          console.warn(`⚠️ Slow graph build: ${buildTime.toFixed(2)}ms for ${events.length} events.`);
+        }
+        if (data.edges.length > 2000) {
+          console.warn(`⚠️ High edge count: ${data.edges.length}. Graph may be dense.`);
+        }
+        
+      } catch (error) {
+        console.error('Error building graph data:', error);
+        setError('Failed to build graph. Dataset may be too large.');
+        setIsInitialLoading(false);
+      } finally {
+        setIsBuilding(false);
       }
-      if (data.edges.length > 2000) {
-        console.warn(`⚠️ High edge count: ${data.edges.length}. Graph may be dense.`);
-      }
-      
-    } catch (error) {
-      console.error('Error building graph data:', error);
-      setError('Failed to build graph. Dataset may be too large.');
-    } finally {
-      setIsBuilding(false);
-    }
+    };
+    
+    // Start async build
+    buildGraphAsync();
   }, [events, k, isClient]);
 
   // Filter graph data when search changes (memoized to prevent unnecessary updates)
@@ -686,8 +709,33 @@ export const CytoscapeGraph = ({
           </div>
         </div>
         
+        {/* Initial Loading Overlay - "Loading events in your area..." */}
+        {isInitialLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm z-30">
+            <div className="flex flex-col items-center gap-6 text-center max-w-md">
+              <div className="relative">
+                <div className="w-16 h-16 border-4 border-purple-600/30 border-t-purple-600 rounded-full animate-spin"></div>
+                <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-blue-600 rounded-full animate-spin" 
+                     style={{ animationDirection: 'reverse', animationDuration: '2s' }}></div>
+              </div>
+              
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-white mb-2">
+                  Loading events in your area...
+                </h3>
+                <p className="text-sm text-gray-400 mb-2">
+                  Discovering amazing experiences and building connections
+                </p>
+                <p className="text-xs text-gray-500">
+                  This may take around 30 seconds for large datasets
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+        
         {/* Loading Overlay */}
-        {(filteredData.nodes.length === 0 && events.length > 0) || isBuilding && (
+        {!isInitialLoading && ((filteredData.nodes.length === 0 && events.length > 0) || isBuilding) && (
           <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm z-20">
             <div className="flex flex-col items-center gap-4 text-gray-300">
               <div className="relative">

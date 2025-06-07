@@ -22,10 +22,10 @@ export function calculateJaccardSimilarity(tagsA: string[], tagsB: string[]): nu
  * Find k nearest neighbors for each event based on tag similarity
  * Optimized version with performance monitoring and limits
  */
-export function findKNearestNeighbors(
+export async function findKNearestNeighbors(
   events: EventNode[], 
   k: number = 5  // Increased from 3 to 5 for more connections
-): Array<{ source: string; target: string; similarity: number }> {
+): Promise<Array<{ source: string; target: string; similarity: number }>> {
   const startTime = performance.now();
   const edges: Array<{ source: string; target: string; similarity: number }> = [];
   
@@ -43,23 +43,28 @@ export function findKNearestNeighbors(
   const SIMILARITY_THRESHOLD = 0.15; // Increased from 0.1 to 0.15 for better quality connections
   
   // Performance optimization: Process in batches for better memory management
-  const BATCH_SIZE = 100;
+  // Reduced batch size for more frequent yielding to prevent "page unresponsive" warnings
+  const BATCH_SIZE = 25; // Reduced from 100 to 25 for more responsive UI
   let processedEvents = 0;
   
   // Calculate similarity matrix and find k nearest neighbors
-  eventsWithTags.forEach((sourceEvent, sourceIndex) => {
+  for (let sourceIndex = 0; sourceIndex < eventsWithTags.length; sourceIndex++) {
+    const sourceEvent = eventsWithTags[sourceIndex];
+    
     // Calculate similarities to all other events
     const similarities: Array<{ eventId: string; similarity: number; index: number }> = [];
     
-    eventsWithTags.forEach((targetEvent, targetIndex) => {
-      if (sourceIndex === targetIndex) return; // Skip self
+    for (let targetIndex = 0; targetIndex < eventsWithTags.length; targetIndex++) {
+      if (sourceIndex === targetIndex) continue; // Skip self
+      
+      const targetEvent = eventsWithTags[targetIndex];
       
       // Performance optimization: Early exit for events with no shared tags
       const sourceTags = new Set(sourceEvent.tags || []);
       const targetTags = targetEvent.tags || [];
       const hasSharedTags = targetTags.some(tag => sourceTags.has(tag));
       
-      if (!hasSharedTags) return; // Skip if no shared tags at all
+      if (!hasSharedTags) continue; // Skip if no shared tags at all
       
       const similarity = calculateJaccardSimilarity(sourceEvent.tags || [], targetEvent.tags || []);
       
@@ -71,7 +76,12 @@ export function findKNearestNeighbors(
           index: targetIndex
         });
       }
-    });
+      
+      // Extra yield point for very large inner loops to prevent unresponsiveness
+      if (targetIndex % 200 === 0 && targetIndex > 0) {
+        await new Promise(resolve => setTimeout(resolve, 0));
+      }
+    }
     
     // Sort by similarity (descending) and take k nearest
     similarities
@@ -86,12 +96,14 @@ export function findKNearestNeighbors(
         });
       });
       
-    // Progress logging for large datasets
+    // Progress logging for large datasets - more frequent yielding
     processedEvents++;
     if (processedEvents % BATCH_SIZE === 0) {
       console.log(`📈 Processed ${processedEvents}/${eventsWithTags.length} events`);
+      // Yield control to browser every batch to prevent freezing
+      await new Promise(resolve => setTimeout(resolve, 1)); // Slightly longer yield
     }
-  });
+  }
   
   const endTime = performance.now();
   console.log(`⏱️ KNN analysis completed in ${(endTime - startTime).toFixed(2)}ms`);
@@ -219,12 +231,12 @@ export interface CytoscapeData {
   }>;
 }
 
-export function buildCytoscapeData(
+export async function buildCytoscapeData(
   events: EventNode[], 
   k: number = 5
-): CytoscapeData {
+): Promise<CytoscapeData> {
   // Build k-nearest neighbor edges
-  const connections = findKNearestNeighbors(events, k);
+  const connections = await findKNearestNeighbors(events, k);
   
   // Create nodes with consistent styling
   const nodes = events.map(event => ({
@@ -312,18 +324,18 @@ export function filterCytoscapeData(
  * Progressive graph building for better performance
  * Allows loading more events incrementally
  */
-export function buildProgressiveGraph(
+export async function buildProgressiveGraph(
   events: EventNode[], 
   currentSize: number = 500,
   batchSize: number = 200,
   k: number = 5
-): { data: CytoscapeData; hasMore: boolean; nextSize: number } {
+): Promise<{ data: CytoscapeData; hasMore: boolean; nextSize: number }> {
   const maxEvents = Math.min(events.length, currentSize);
   const eventsToProcess = events.slice(0, maxEvents);
   
   console.log(`📈 Building progressive graph: ${maxEvents}/${events.length} events`);
   
-  const data = buildCytoscapeData(eventsToProcess, k);
+  const data = await buildCytoscapeData(eventsToProcess, k);
   
   return {
     data,
