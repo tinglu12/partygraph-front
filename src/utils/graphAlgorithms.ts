@@ -238,8 +238,22 @@ export function buildCytoscapeData(
     }
   }));
   
-  // Create edges with thickness based on similarity
-  const edges = connections.map((connection, index) => ({
+  // Deduplicate bidirectional edges to prevent overlapping connections
+  const edgeMap = new Map<string, { source: string; target: string; similarity: number }>();
+  
+  connections.forEach(connection => {
+    // Create a consistent edge key regardless of direction (A-B same as B-A)
+    const edgeKey = [connection.source, connection.target].sort().join('-');
+    
+    // Only keep the edge with higher similarity if duplicate found
+    const existing = edgeMap.get(edgeKey);
+    if (!existing || connection.similarity > existing.similarity) {
+      edgeMap.set(edgeKey, connection);
+    }
+  });
+  
+  // Create edges with thickness based on similarity (deduplicated)
+  const edges = Array.from(edgeMap.values()).map((connection, index) => ({
     data: {
       id: `edge_${index}`,
       source: connection.source,
@@ -248,6 +262,12 @@ export function buildCytoscapeData(
       weight: Math.max(1, connection.similarity * 10) // Scale for visual thickness
     }
   }));
+  
+  console.log('📊 Edge deduplication results:', {
+    originalConnections: connections.length,
+    deduplicatedEdges: edges.length,
+    duplicatesRemoved: connections.length - edges.length
+  });
   
   return { nodes, edges };
 }
