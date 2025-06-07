@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Network } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 
 export const Hero = () => {
   const router = useRouter();
@@ -47,25 +45,6 @@ export const Hero = () => {
 
         <div className="mt-12 text-sm text-gray-400">
           Trusted by 50,000+ event enthusiasts worldwide
-        </div>
-
-        {/* Meta Llama API Branding - More Prominent */}
-        <div className="mt-20 flex flex-col items-center space-y-6">
-          <p className="text-base text-gray-300 font-medium">Powered by Meta Llama API</p>
-          <Link 
-            href="https://www.llama.com/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex justify-center p-4 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer transform hover:scale-105"
-          >
-            <Image
-              src="/Meta_Company Lockup/1 Positive Primary/RGB/Meta_lockup_positive primary_RGB.svg"
-              alt="Meta Logo"
-              width={200}
-              height={60}
-              className="opacity-90 hover:opacity-100 transition-opacity duration-300"
-            />
-          </Link>
         </div>
       </div>
     </section>
