@@ -289,7 +289,8 @@ export const CytoscapeGraph = ({
       selectionType: 'single',
       boxSelectionEnabled: false,
       autoungrabify: false,
-      autounselectify: false
+      autounselectify: false,
+      textureOnViewport: false, // Reduce memory usage by not caching viewport textures
     });
 
     // Event handlers
@@ -322,51 +323,69 @@ export const CytoscapeGraph = ({
       cy.edges().removeClass('highlighted');
     });
 
-    // Dynamic label visibility optimization based on zoom level
+    // Dynamic label and edge visibility optimization based on zoom level
     cy.on('zoom pan', () => {
       const zoom = cy.zoom();
       const nodeCount = cy.nodes().length;
       const shouldShow = zoom > 0.8 || nodeCount < 300;
       
-      // Always update labels, don't check previous state to avoid timing issues
+      // Update both labels and edges in a single batch for performance
       cy.batch(() => {
+        // Update label visibility
         cy.nodes().forEach((node: any) => {
           // Don't hide labels for selected/hovered nodes
           const isSelected = node.hasClass('selected') || node.hasClass('highlighted');
           const opacity = (shouldShow || isSelected) ? 0.9 : 0;
           node.style('text-opacity', opacity);
         });
+        
+        // Update edge visibility - hide edges when zoomed out for major performance boost
+        cy.edges().forEach((edge: any) => {
+          // Always show highlighted/selected edges for better UX
+          const isHighlighted = edge.hasClass('highlighted') || edge.hasClass('selected');
+          const opacity = (shouldShow || isHighlighted) ? 0.6 : 0;
+          edge.style('opacity', opacity);
+        });
       });
       
       // Only log when state actually changes
       if (shouldShow !== showLabels) {
         setShowLabels(shouldShow);
-        console.log('🔤 Label visibility changed:', {
+        console.log('🔤 Label & Edge visibility changed:', {
           zoom: zoom.toFixed(2),
           nodeCount,
           showLabels: shouldShow,
+          edgeCount: cy.edges().length,
           reason: zoom > 0.8 ? 'zoomed in' : nodeCount < 300 ? 'few nodes' : 'too many nodes'
         });
       }
     });
 
-    // Set initial label visibility when graph first loads
+    // Set initial label and edge visibility when graph first loads
     cy.ready(() => {
       const zoom = cy.zoom();
       const nodeCount = cy.nodes().length;
       const shouldShow = zoom > 0.8 || nodeCount < 300;
       
       cy.batch(() => {
+        // Set initial label visibility
         cy.nodes().forEach((node: any) => {
           const opacity = shouldShow ? 0.9 : 0;
           node.style('text-opacity', opacity);
         });
+        
+        // Set initial edge visibility
+        cy.edges().forEach((edge: any) => {
+          const opacity = shouldShow ? 0.6 : 0;
+          edge.style('opacity', opacity);
+        });
       });
       
       setShowLabels(shouldShow);
-      console.log('🎯 Initial label visibility set:', {
+      console.log('🎯 Initial label & edge visibility set:', {
         zoom: zoom.toFixed(2),
         nodeCount,
+        edgeCount: cy.edges().length,
         showLabels: shouldShow
       });
     });
