@@ -290,7 +290,7 @@ export const CytoscapeGraph = ({
       boxSelectionEnabled: false,
       autoungrabify: false,
       autounselectify: false,
-      textureOnViewport: false, // Reduce memory usage by not caching viewport textures
+      textureOnViewport: true, // False reduces memory usage by not caching viewport textures
     });
 
     // Event handlers
