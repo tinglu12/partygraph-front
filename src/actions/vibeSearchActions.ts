@@ -5,6 +5,8 @@ import { searchEvent, searchEventsByTags } from "@/server/LamService";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { EventType } from "@/types/EventType";
 import { sampleEvents } from "@/constants/sampleEvents";
+import { SemanticAnalysisService } from '@/services/semanticAnalysis';
+import { extractTagNodes, findCentralConcept, extractSimilarTags } from '@/utils/graphUtils';
 
 /**
  * Simple function to get a random sample from an array
@@ -328,6 +330,72 @@ function searchEventsByKeywordsWithTags(query: string): EnhancedSearchResult {
 }
 
 /**
+ * Create a graph using semantic analysis for connections
+ */
+async function createSemanticGraph(events: EventNode[]): Promise<TagCenteredGraphData> {
+  // Ensure all events have semantic analysis
+  const eventsWithSemantic = await Promise.all(
+    events.map(async (event) => {
+      if (!event.semantic) {
+        // Generate semantic analysis if not exists
+        const analysis = await SemanticAnalysisService.analyzeEvent(
+          `${event.title} ${event.description || ''}`
+        );
+        return { ...event, semantic: analysis };
+      }
+      return event;
+    })
+  );
+
+  // Calculate connections between events
+  const nodes = eventsWithSemantic.map((event) => ({
+    id: event.id,
+    type: 'event',
+    data: event,
+    position: event.graph_data.position
+  }));
+
+  const edges = [];
+  const similarityThreshold = 0.6; // Minimum similarity to create connection
+
+  // Create connections between events based on semantic similarity
+  for (let i = 0; i < eventsWithSemantic.length; i++) {
+    for (let j = i + 1; j < eventsWithSemantic.length; j++) {
+      const event1 = eventsWithSemantic[i];
+      const event2 = eventsWithSemantic[j];
+
+      if (event1.semantic && event2.semantic) {
+        const similarity = SemanticAnalysisService.calculateEventSimilarity(
+          event1.semantic,
+          event2.semantic
+        );
+
+        if (similarity.overallSimilarity >= similarityThreshold) {
+          edges.push({
+            id: `edge-${event1.id}-${event2.id}`,
+            source: event1.id,
+            target: event2.id,
+            weight: similarity.overallSimilarity,
+            semanticSimilarity: similarity.semanticSimilarity,
+            vibeSimilarity: similarity.vibeSimilarity
+          });
+        }
+      }
+    }
+  }
+
+  // Create tag nodes from most common concepts
+  const tagNodes = extractTagNodes(eventsWithSemantic);
+
+  return {
+    nodes: [...nodes, ...tagNodes],
+    edges,
+    centralTag: findCentralConcept(eventsWithSemantic),
+    similarTags: extractSimilarTags(eventsWithSemantic)
+  };
+}
+
+/**
  * Enhanced server action for tag-centered vibe search using semantic matching
  * Now captures and displays both LLaMA-selected tags and fallback search tags
  * Returns a graph structure with central concept and connected events
@@ -372,12 +440,7 @@ export async function searchTagCenteredByVibe(
 
         if (finalEvents.length > 0) {
           // Use LLaMA's results and tags
-          return createTagCenteredGraphFromEvents(
-            finalEvents,
-            similarTags,
-            searchMethod,
-            vibeQuery
-          );
+          return createSemanticGraph(finalEvents);
         }
       }
     } catch (llamaError) {
@@ -397,14 +460,9 @@ export async function searchTagCenteredByVibe(
       }
     }
 
-    return createTagCenteredGraphFromEvents(
-      finalEvents,
-      similarTags,
-      searchMethod,
-      vibeQuery
-    );
+    return createSemanticGraph(finalEvents);
   } catch (error) {
-    console.error("Error in tag-centered vibe search:", error);
+    console.error("Error in semantic vibe search:", error);
     return null;
   }
 }

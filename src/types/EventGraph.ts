@@ -1,4 +1,12 @@
-// Define the semantic analysis type
+// New types for semantic analysis
+export interface VibeScore {
+  energy: number;      // 0-1 scale of event energy
+  formality: number;   // 0-1 scale of formality (0=casual, 1=formal)
+  social: number;      // 0-1 scale of social interaction
+  artistic: number;    // 0-1 scale of artistic/creative focus
+  outdoor: number;     // 0-1 scale of outdoor vs indoor
+}
+
 export interface SemanticAnalysis {
   vector: number[];  // 384-dimensional semantic vector
   vibeScore: {
@@ -11,12 +19,13 @@ export interface SemanticAnalysis {
   confidence: number;    // 0-1 scale of confidence in the analysis
 }
 
+// Update EventNode to include semantic analysis
 export interface EventNode {
   id: string;
   title: string;
   description?: string;
-  date?: string; // Keep for backward compatibility with legacy single-date format
-  dates?: string[]; // New: array of ISO date strings for flexible date patterns
+  date?: string;
+  dates?: string[];
   category?: string;
   location?: {
     name: string;
@@ -49,35 +58,24 @@ export interface EventNode {
   };
 }
 
-export interface GraphData {
-  nodes: EventNode[];
-  edges?: Array<{
-    source: string;
-    target: string;
-    label: string;
-  }>;
-}
-
-// Enhanced interfaces for tag-centered visualization
-export interface TagCenteredNode {
+export interface GraphEdge {
   id: string;
-  type: "tag" | "event";
-  data: EventNode | { tag: string };
+  source: string;
+  target: string;
+  weight: number;
+  semanticSimilarity: number;
+  vibeSimilarity: number;
+  label?: string;  // Optional for backward compatibility
 }
 
 export interface TagCenteredGraphData {
-  centralTag: string;
-  similarTags?: string[]; // The 5 most similar tags found during search
-  nodes: TagCenteredNode[];
-  edges: Array<{
-    source: string;
-    target: string;
-    label: string;
+  nodes: Array<{
+    id: string;
+    type: 'event' | 'tag';
+    data: EventNode | { id: string; name: string };
+    position: { x: number; y: number };
   }>;
-}
-
-export interface Tag {
-  id: string;
-  name: string;
-  type: string;
-}
+  edges: GraphEdge[];
+  centralTag: string;
+  similarTags: string[];
+} 
