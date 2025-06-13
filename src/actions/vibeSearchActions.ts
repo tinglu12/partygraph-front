@@ -7,13 +7,28 @@ import { EventType } from "@/types/EventType";
 import { sampleEvents } from "@/constants/sampleEvents";
 import { SemanticAnalysisService } from '@/services/semanticAnalysis';
 import { extractTagNodes, findCentralConcept, extractSimilarTags } from '@/utils/graphUtils';
+import { techweekEvents } from "@/constants/techweekEvents";
+import { sampleDateRangeEvents } from "@/constants/sampleDateRangeEvents";
+
+// Combine all event sources for testing
+// Note: For production, replace with getAllEvents() from database
+const allSampleEvents: EventNode[] = [
+  ...sampleEvents,
+  ...sampleDateRangeEvents,
+  ...techweekEvents
+];
+
+// Initialize semantic analysis service
+const semanticService = new SemanticAnalysisService();
 
 /**
- * Simple function to get a random sample from an array
+ * Get all events from the database (when database is implemented)
+ * Currently returns all sample events + date range events
  */
-function sampleSize<T>(array: T[], size: number): T[] {
-  const shuffled = [...array].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, size);
+export async function getAllEventsFromDatabase(): Promise<EventNode[]> {
+  // TODO: Replace with actual database query
+  console.log(`Total events available: ${allSampleEvents.length}`);
+  return allSampleEvents;
 }
 
 /**
@@ -31,9 +46,8 @@ function convertToEventType(eventNode: EventNode): EventType {
 }
 
 /**
- * Enhanced server action for semantic vibe search using LamService
- * Now uses tag-based LLaMA search that constrains AI to existing vocabulary
- * Falls back to local multi-tag search if AI fails
+ * Enhanced server action for semantic vibe search using LamService and semantic vectors
+ * Uses both tag-based LLaMA search and semantic vector similarity
  */
 export async function searchEventsByVibe(
   vibeQuery: string
@@ -41,81 +55,76 @@ export async function searchEventsByVibe(
   try {
     console.log(`Starting enhanced vibe search for: "${vibeQuery}"`);
 
+    // Get semantic vector for the query
+    const queryVector = await semanticService.getSemanticVector(vibeQuery);
+    
     // Convert EventNodes to EventTypes for LamService compatibility
-    const eventTypes = sampleEvents.map(convertToEventType);
+    const eventTypes = allSampleEvents.map(convertToEventType);
 
-    // ENHANCED APPROACH: Use new tag-based LLaMA search
-    // This constrains LLaMA to existing tags and provides consistent ranking
+    // 1. Try LLaMA tag-based search first
     const llamaResult = await searchEventsByTags(vibeQuery, eventTypes);
+    let matchingEvents: EventNode[] = [];
 
-    if (
-      llamaResult.selectedTags.length > 0 &&
-      llamaResult.matchingEvents.length > 0
-    ) {
+    if (llamaResult.selectedTags.length > 0 && llamaResult.matchingEvents.length > 0) {
       // Success! LLaMA found relevant tags and matching events
       console.log(
         `LLaMA success: ${llamaResult.selectedTags.length} tags, ${llamaResult.matchingEvents.length} events`
       );
-      console.log(
-        `LLaMA selected tags: [${llamaResult.selectedTags.join(", ")}]`
+      
+      // Convert EventTypes back to EventNodes
+      const matchingIds = new Set(llamaResult.matchingEvents.map((e) => e.title));
+      matchingEvents = allSampleEvents.filter((event) => matchingIds.has(event.title));
+    } else {
+      // 2. Try semantic vector similarity search
+      console.log("Using semantic vector similarity search...");
+      
+      // Calculate similarity scores for all events
+      const eventScores = await Promise.all(
+        allSampleEvents.map(async (event) => {
+          if (!event.semantic?.vector) return { event, score: 0 };
+          
+          const similarity = await semanticService.calculateCosineSimilarity(
+            queryVector,
+            event.semantic.vector
+          );
+          
+          return { event, score: similarity };
+        })
       );
 
-      // Convert EventTypes back to EventNodes and find them in our dataset
-      const matchingIds = new Set(
-        llamaResult.matchingEvents.map((e) => e.title)
-      );
-      const matchingNodes = sampleEvents.filter((event) =>
-        matchingIds.has(event.title)
-      );
-
-      return matchingNodes;
+      // Sort by similarity score and take top matches
+      matchingEvents = eventScores
+        .filter(item => item.score > 0.5) // Only keep reasonably similar events
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 20) // Limit to top 20 matches
+        .map(item => item.event);
     }
 
-    // FALLBACK 1: Try legacy LLaMA search for backward compatibility
-    console.log("New LLaMA search found no results, trying legacy approach...");
-    const legacyResult = await searchEvent(vibeQuery, eventTypes);
-
-    if (legacyResult) {
-      // Legacy LLaMA found a matching event title
-      const matchingEvents = sampleEvents.filter(
-        (event) =>
-          event.title.toLowerCase().includes(legacyResult.toLowerCase()) ||
-          legacyResult.toLowerCase().includes(event.title.toLowerCase())
-      );
-
-      // Include connected events for richer results (existing logic)
-      if (matchingEvents.length > 0) {
-        const connectedEventIds = new Set<string>();
-        matchingEvents.forEach((event) => {
-          if (event.connections) {
-            event.connections.forEach((id) => connectedEventIds.add(id));
-          }
-        });
-
-        const connectedEvents = sampleEvents.filter((event) =>
-          connectedEventIds.has(event.id)
-        );
-
-        const allRelevantEvents = [...matchingEvents, ...connectedEvents];
-        const uniqueEvents = Array.from(
-          new Map(allRelevantEvents.map((event) => [event.id, event])).values()
-        );
-
-        console.log(
-          `Legacy LLaMA found ${uniqueEvents.length} events for: "${vibeQuery}"`
-        );
-        return uniqueEvents;
+    // 3. Add connected events for richer results
+    const connectedEventIds = new Set<string>();
+    matchingEvents.forEach((event) => {
+      if (event.connections) {
+        event.connections.forEach((id) => connectedEventIds.add(id));
       }
-    }
-  } catch (error) {
-    console.error("Error in LLaMA searches:", error);
-  }
+    });
 
-  // FALLBACK 2: Enhanced local multi-tag search
-  // This provides the same 5-tag functionality as our fallback search
-  console.log("All LLaMA approaches failed, using enhanced local search...");
-  const fallbackResult = searchEventsByKeywordsWithTags(vibeQuery);
-  return fallbackResult.events;
+    const connectedEvents = allSampleEvents.filter((event) =>
+      connectedEventIds.has(event.id)
+    );
+
+    const allRelevantEvents = [...matchingEvents, ...connectedEvents];
+    const uniqueEvents = Array.from(
+      new Map(allRelevantEvents.map((event) => [event.id, event])).values()
+    );
+
+    console.log(`Found ${uniqueEvents.length} events for: "${vibeQuery}"`);
+    return uniqueEvents;
+
+  } catch (error) {
+    console.error("Error in vibe search:", error);
+    // Fallback to local search if both approaches fail
+    return searchEventsByKeywordsWithTags(vibeQuery).events;
+  }
 }
 
 /**
@@ -183,7 +192,7 @@ function findSimilarTags(query: string, allTags: string[]): string[] {
 function searchEventsByMultipleTags(query: string): EventNode[] {
   // Get all unique tags from events
   const allTags = Array.from(
-    new Set(sampleEvents.flatMap((event) => event.tags || []))
+    new Set(allSampleEvents.flatMap((event) => event.tags || []))
   );
 
   // Find the 5 most similar tags
@@ -200,7 +209,7 @@ function searchEventsByMultipleTags(query: string): EventNode[] {
     { event: EventNode; score: number; matchingTags: string[] }
   >();
 
-  sampleEvents.forEach((event) => {
+  allSampleEvents.forEach((event) => {
     if (!event.tags) return;
 
     const matchingTags = event.tags.filter((tag) => similarTags.includes(tag));
@@ -247,7 +256,7 @@ function searchEventsByMultipleTags(query: string): EventNode[] {
 //   // If no tag matches, fall back to original keyword search
 //   const searchTerms = query.toLowerCase().split(" ");
 
-//   return sampleEvents.filter((event) => {
+//   return allSampleEvents.filter((event) => {
 //     const searchText = `${event.title} ${event.description} ${
 //       event.tags?.join(" ") || ""
 //     }`.toLowerCase();
@@ -269,7 +278,7 @@ interface EnhancedSearchResult {
 function searchEventsByKeywordsWithTags(query: string): EnhancedSearchResult {
   // Get all unique tags from events
   const allTags = Array.from(
-    new Set(sampleEvents.flatMap((event) => event.tags || []))
+    new Set(allSampleEvents.flatMap((event) => event.tags || []))
   );
 
   // Find the 5 most similar tags
@@ -279,7 +288,7 @@ function searchEventsByKeywordsWithTags(query: string): EnhancedSearchResult {
   if (similarTags.length === 0) {
     // Fallback to original keyword search
     const searchTerms = query.toLowerCase().split(" ");
-    const events = sampleEvents.filter((event) => {
+    const events = allSampleEvents.filter((event) => {
       const searchText = `${event.title} ${event.description} ${
         event.tags?.join(" ") || ""
       }`.toLowerCase();
@@ -295,7 +304,7 @@ function searchEventsByKeywordsWithTags(query: string): EnhancedSearchResult {
     { event: EventNode; score: number; matchingTags: string[] }
   >();
 
-  sampleEvents.forEach((event) => {
+  allSampleEvents.forEach((event) => {
     if (!event.tags) return;
 
     const matchingTags = event.tags.filter((tag) => similarTags.includes(tag));
@@ -412,7 +421,7 @@ export async function searchTagCenteredByVibe(
     let searchMethod: "llama" | "fallback" = "fallback";
 
     // Try enhanced LLaMA search first - this is our preferred method
-    const eventTypes = sampleEvents.map(convertToEventType);
+    const eventTypes = allSampleEvents.map(convertToEventType);
 
     try {
       const llamaResult = await searchEventsByTags(vibeQuery, eventTypes);
@@ -434,7 +443,7 @@ export async function searchTagCenteredByVibe(
         const matchingIds = new Set(
           llamaResult.matchingEvents.map((e) => e.title)
         );
-        const finalEvents = sampleEvents.filter((event) =>
+        const finalEvents = allSampleEvents.filter((event) =>
           matchingIds.has(event.title)
         );
 
@@ -503,7 +512,7 @@ function createTagCenteredGraphFromEvents(
   }
 
   // Get all events that share this central tag for the full graph
-  const relatedEvents = sampleEvents.filter(
+  const relatedEvents = allSampleEvents.filter(
     (event) => event.tags?.includes(centralTag) || event.category === centralTag
   );
 
@@ -568,7 +577,7 @@ export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
   } catch (error) {
     console.error("Error fetching events by tag:", error);
     // Fallback to local search - ensure this also returns an array
-    const localResults = sampleEvents.filter((event) =>
+    const localResults = allSampleEvents.filter((event) =>
       event.tags?.includes(tag)
     );
     console.log(
@@ -580,22 +589,22 @@ export async function searchEventsByTag(tag: string): Promise<EventNode[]> {
 
 /**
  * Server action to get all unique tags from events
- * LIMITE to 100 tags
+ * Now returns ALL tags without arbitrary limits
  */
 export async function getAllTags(): Promise<string[]> {
-  const maxTags = 300;
   const tagSet = new Set<string>();
-  sampleEvents.forEach((event) => {
+  allSampleEvents.forEach((event) => {
     if (event.tags) {
       event.tags.forEach((tag) => tagSet.add(tag));
     }
   });
-  const arr = Array.from(tagSet);
-  console.log("all tags", arr.length);
-  const filtered = arr.filter((tag) => tag.length < 10);
-  const sample = sampleSize(filtered, maxTags);
-  const sorted = sample.sort();
-  const final = ["nytechweek", ...sorted]; // insert nytechweek at the beginning
+  const allTags = Array.from(tagSet);
+  console.log(`Total available tags: ${allTags.length}`);
+  
+  // Sort all tags alphabetically, with nytechweek at the beginning
+  const sorted = allTags.filter(tag => tag !== "nytechweek").sort();
+  const final = ["nytechweek", ...sorted];
+  
   return final;
 }
 
@@ -604,10 +613,19 @@ export async function getAllTags(): Promise<string[]> {
  */
 export async function getAllCategories(): Promise<string[]> {
   const categorySet = new Set<string>();
-  sampleEvents.forEach((event) => {
+  allSampleEvents.forEach((event) => {
     if (event.category) {
       categorySet.add(event.category);
     }
   });
   return Array.from(categorySet).sort();
+}
+
+/**
+ * Server action to get ALL events without any filtering
+ * Useful for displaying the complete event catalog
+ */
+export async function getAllEvents(): Promise<EventNode[]> {
+  console.log(`Returning all ${allSampleEvents.length} available events`);
+  return allSampleEvents;
 }
