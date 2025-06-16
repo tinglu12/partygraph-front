@@ -25,6 +25,7 @@ import {
   PopoverContent, 
   PopoverTrigger 
 } from '@/components/ui/popover';
+import { Switch } from '@/components/ui/switch';
 
 // Dynamically import cytoscape to avoid SSR issues
 let cytoscape: any = null;
@@ -36,6 +37,8 @@ interface CytoscapeGraphProps {
   selectedEventId?: string;
   height?: number;
   className?: string;
+  tagWeight?: number;  // New prop for tag similarity weight
+  semanticWeight?: number;  // New prop for semantic similarity weight
 }
 
 /**
@@ -47,7 +50,9 @@ export const CytoscapeGraph = ({
   onEventClick,
   selectedEventId,
   height = 600,
-  className = ""
+  className = "",
+  tagWeight = 0.6,  // Default weights
+  semanticWeight = 0.4
 }: CytoscapeGraphProps) => {
   const [graphData, setGraphData] = useState<CytoscapeData>({ nodes: [], edges: [] });
   const [searchQuery, setSearchQuery] = useState('');
@@ -62,6 +67,9 @@ export const CytoscapeGraph = ({
   const [isBuilding, setIsBuilding] = useState(false);
   const [showLabels, setShowLabels] = useState(true); // Track label visibility state
   const [isInitialLoading, setIsInitialLoading] = useState(true); // Track initial loading state
+  const [localTagWeight, setLocalTagWeight] = useState(tagWeight);
+  const [localSemanticWeight, setLocalSemanticWeight] = useState(semanticWeight);
+  const [showConnectionDetails, setShowConnectionDetails] = useState(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -124,7 +132,6 @@ export const CytoscapeGraph = ({
     setIsBuilding(true);
     setError(null);
     
-    // Make graph building asynchronous to prevent UI freezing
     const buildGraphAsync = async () => {
       try {
         const startTime = performance.now();
@@ -132,28 +139,39 @@ export const CytoscapeGraph = ({
         console.log('🔬 Building Cytoscape graph data:', {
           eventCount: events.length,
           k,
-          sampleEvents: events.slice(0, 3).map(e => ({ id: e.id, title: e.title, tags: e.tags, category: e.category }))
+          tagWeight: localTagWeight,
+          semanticWeight: localSemanticWeight,
+          sampleEvents: events.slice(0, 3).map(e => ({ 
+            id: e.id, 
+            title: e.title, 
+            tags: e.tags, 
+            category: e.category 
+          }))
         });
         
-        // Yield control to browser before heavy computation
-        await new Promise(resolve => setTimeout(resolve, 50)); // Longer initial delay for better UI responsiveness
+        await new Promise(resolve => setTimeout(resolve, 50));
         
-        // Always use full dataset - no artificial limits
-        const data = await buildCytoscapeData(events, k);
+        const data = await buildCytoscapeData(
+          events, 
+          k,
+          localTagWeight,
+          localSemanticWeight
+        );
         
-        // Yield control again after computation
-        await new Promise(resolve => setTimeout(resolve, 50)); // Longer delay after computation
+        await new Promise(resolve => setTimeout(resolve, 50));
         
         const endTime = performance.now();
         const buildTime = endTime - startTime;
         
         setGraphData(data);
-        setIsInitialLoading(false); // Hide initial loading when graph is ready
+        setIsInitialLoading(false);
         
         console.log('📊 Cytoscape data built:', {
           nodeCount: data.nodes.length,
           edgeCount: data.edges.length,
           avgConnections: (data.edges.length / data.nodes.length).toFixed(1),
+          avgTagSimilarity: (data.edges.reduce((sum, e) => sum + e.data.tagSimilarity, 0) / data.edges.length).toFixed(2),
+          avgSemanticSimilarity: (data.edges.reduce((sum, e) => sum + e.data.semanticSimilarity, 0) / data.edges.length).toFixed(2),
           buildTime: `${buildTime.toFixed(2)}ms`,
           performance: `${(data.nodes.length / buildTime * 1000).toFixed(0)} nodes/second`,
           categories: [...new Set(data.nodes.map(n => n.data.category))]
@@ -176,9 +194,8 @@ export const CytoscapeGraph = ({
       }
     };
     
-    // Start async build
     buildGraphAsync();
-  }, [events, k, isClient]);
+  }, [events, k, isClient, localTagWeight, localSemanticWeight]);
 
   // Filter graph data when search changes (memoized to prevent unnecessary updates)
   const filteredData = useMemo(() => {
@@ -276,19 +293,59 @@ export const CytoscapeGraph = ({
           }
         },
         
-        // Edge styles - thickness based on similarity
+        // Edge styles with connection type visualization
         {
           selector: 'edge',
           style: {
             'width': 'data(weight)',
-            'line-color': '#8B5CF6',
+            'line-color': (ele: any) => {
+              const tagSim = ele.data('tagSimilarity');
+              const semSim = ele.data('semanticSimilarity');
+              // Color based on which similarity is stronger
+              if (tagSim > semSim) {
+                return '#8B5CF6'; // Purple for tag-based
+              } else {
+                return '#3B82F6'; // Blue for semantic-based
+              }
+            },
             'line-opacity': 0.6,
             'curve-style': 'bezier',
             'target-arrow-shape': 'none',
             'source-arrow-shape': 'none',
             'shadow-blur': 5,
-            'shadow-color': '#8B5CF6',
-            'shadow-opacity': 0.2
+            'shadow-color': (ele: any) => {
+              const tagSim = ele.data('tagSimilarity');
+              const semSim = ele.data('semanticSimilarity');
+              return tagSim > semSim ? '#8B5CF6' : '#3B82F6';
+            },
+            'shadow-opacity': 0.2,
+            'text-rotation': 'autorotate',
+            'text-margin-y': -10,
+            'text-background-color': '#1E293B',
+            'text-background-opacity': 0.8,
+            'text-background-padding': '3px',
+            'text-border-color': '#475569',
+            'text-border-width': 1,
+            'text-border-opacity': 0.5,
+            'text-border-style': 'solid',
+            'text-border-radius': 3,
+            'text-events': 'yes',
+            'text-valign': 'top',
+            'text-halign': 'center',
+            'text-wrap': 'wrap',
+            'text-max-width': '100px',
+            'text-overflow-wrap': 'whitespace',
+            'text-justification': 'center',
+            'text-margin-x': 0,
+            'text-transform': 'uppercase',
+            'text-outline-width': 2,
+            'text-outline-color': '#000000',
+            'text-outline-opacity': 0.7,
+            'font-family': 'Inter, system-ui, sans-serif',
+            'font-size': '10px',
+            'font-weight': 500,
+            'color': '#ffffff',
+            'text-opacity': (ele: any) => showConnectionDetails ? 0.9 : 0
           }
         },
         
@@ -622,13 +679,62 @@ export const CytoscapeGraph = ({
                 </div>
                 
                 <div>
-                  <label className="text-sm font-medium">Similarity Method</label>
-                  <div className="mt-1 p-2 bg-white/10 border border-white/20 rounded text-white">
-                    Jaccard (Tag Overlap)
+                  <label className="text-sm font-medium">Tag Similarity Weight</label>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.1"
+                      value={localTagWeight}
+                      onChange={(e) => {
+                        const newTagWeight = parseFloat(e.target.value);
+                        setLocalTagWeight(newTagWeight);
+                        setLocalSemanticWeight(1 - newTagWeight);
+                      }}
+                      className="flex-1 bg-white/10 border-white/20"
+                    />
+                    <span className="text-sm text-gray-300 w-12 text-right">
+                      {(localTagWeight * 100).toFixed(0)}%
+                    </span>
                   </div>
                   <p className="text-xs text-gray-400 mt-1">
-                    Connections based on shared tags between events
+                    Weight for tag-based similarity
                   </p>
+                </div>
+                
+                <div>
+                  <label className="text-sm font-medium">Semantic Similarity Weight</label>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.1"
+                      value={localSemanticWeight}
+                      onChange={(e) => {
+                        const newSemanticWeight = parseFloat(e.target.value);
+                        setLocalSemanticWeight(newSemanticWeight);
+                        setLocalTagWeight(1 - newSemanticWeight);
+                      }}
+                      className="flex-1 bg-white/10 border-white/20"
+                    />
+                    <span className="text-sm text-gray-300 w-12 text-right">
+                      {(localSemanticWeight * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">
+                    Weight for content-based similarity
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <Switch
+                    checked={showConnectionDetails}
+                    onCheckedChange={setShowConnectionDetails}
+                    className="data-[state=checked]:bg-purple-600"
+                  />
+                  <label className="text-sm font-medium">Show Connection Details</label>
                 </div>
               </div>
             </PopoverContent>
@@ -712,12 +818,25 @@ export const CytoscapeGraph = ({
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-1 bg-purple-400/60"></div>
-              <span>Edge thickness = tag similarity</span>
+              <span>Tag-based connection</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-1 bg-blue-400/60"></div>
+              <span>Semantic connection</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full border-2 border-blue-400"></div>
               <span>Selected for chat</span>
             </div>
+            {showConnectionDetails && (
+              <div className="mt-2 pt-2 border-t border-white/10">
+                <p className="text-xs text-gray-400">
+                  Edge thickness = connection strength<br/>
+                  Edge color = connection type<br/>
+                  Hover for details
+                </p>
+              </div>
+            )}
           </div>
         </div>
         

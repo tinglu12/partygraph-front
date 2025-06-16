@@ -19,95 +19,162 @@ export function calculateJaccardSimilarity(tagsA: string[], tagsB: string[]): nu
 }
 
 /**
- * Find k nearest neighbors for each event based on tag similarity
- * Optimized version with performance monitoring and limits
+ * Calculate semantic similarity between two events using their titles and descriptions
+ * Uses a simple word overlap approach for now, can be enhanced with embeddings later
+ */
+export function calculateSemanticSimilarity(eventA: EventNode, eventB: EventNode): number {
+  // Combine title and description for better semantic matching
+  const textA = `${eventA.title} ${eventA.description || ''}`.toLowerCase();
+  const textB = `${eventB.title} ${eventB.description || ''}`.toLowerCase();
+  
+  // Split into words and create sets
+  const wordsA = new Set(textA.split(/\W+/).filter(w => w.length > 2));
+  const wordsB = new Set(textB.split(/\W+/).filter(w => w.length > 2));
+  
+  // Calculate Jaccard similarity for words
+  const intersection = new Set([...wordsA].filter(x => wordsB.has(x)));
+  const union = new Set([...wordsA, ...wordsB]);
+  
+  return union.size > 0 ? intersection.size / union.size : 0;
+}
+
+/**
+ * Calculate hybrid similarity score combining tag and semantic similarity
+ * @param tagSimilarity - Jaccard similarity of tags (0-1)
+ * @param semanticSimilarity - Semantic similarity of content (0-1)
+ * @param tagWeight - Weight for tag similarity (0-1)
+ * @param semanticWeight - Weight for semantic similarity (0-1)
+ */
+export function calculateHybridSimilarity(
+  tagSimilarity: number,
+  semanticSimilarity: number,
+  tagWeight: number = 0.6,
+  semanticWeight: number = 0.4
+): number {
+  // Normalize weights to sum to 1
+  const totalWeight = tagWeight + semanticWeight;
+  const normalizedTagWeight = tagWeight / totalWeight;
+  const normalizedSemanticWeight = semanticWeight / totalWeight;
+  
+  // Calculate weighted average
+  return (tagSimilarity * normalizedTagWeight) + (semanticSimilarity * normalizedSemanticWeight);
+}
+
+/**
+ * Find k nearest neighbors for each event based on hybrid similarity
+ * Combines tag similarity and semantic similarity
  */
 export async function findKNearestNeighbors(
   events: EventNode[], 
-  k: number = 5  // Increased from 3 to 5 for more connections
-): Promise<Array<{ source: string; target: string; similarity: number }>> {
+  k: number = 5,
+  tagWeight: number = 0.6,
+  semanticWeight: number = 0.4
+): Promise<Array<{ source: string; target: string; similarity: number; tagSimilarity: number; semanticSimilarity: number }>> {
   const startTime = performance.now();
-  const edges: Array<{ source: string; target: string; similarity: number }> = [];
+  const edges: Array<{ 
+    source: string; 
+    target: string; 
+    similarity: number;
+    tagSimilarity: number;
+    semanticSimilarity: number;
+  }> = [];
   
-  // Safety limit to prevent crashes - increased for better coverage
+  // Safety limit to prevent crashes
   const MAX_EVENTS = 1500;
   const limitedEvents = events.slice(0, MAX_EVENTS);
   
-  console.log(`🔬 Starting KNN analysis for ${limitedEvents.length} events (limited from ${events.length})`);
+  console.log(`🔬 Starting hybrid KNN analysis for ${limitedEvents.length} events (limited from ${events.length})`);
   
-  // Pre-filter events that have tags
-  const eventsWithTags = limitedEvents.filter(event => event.tags && event.tags.length > 0);
-  console.log(`📊 Events with tags: ${eventsWithTags.length}/${limitedEvents.length}`);
+  // Pre-filter events that have content
+  const eventsWithContent = limitedEvents.filter(event => 
+    (event.tags && event.tags.length > 0) || 
+    (event.title && event.title.length > 0)
+  );
+  console.log(`📊 Events with content: ${eventsWithContent.length}/${limitedEvents.length}`);
   
-  // Performance optimization: Higher similarity threshold to reduce noise and computation
-  const SIMILARITY_THRESHOLD = 0.15; // Increased from 0.1 to 0.15 for better quality connections
+  // Performance optimization: Higher similarity threshold
+  const SIMILARITY_THRESHOLD = 0.15;
   
-  // Performance optimization: Process in batches for better memory management
-  // Reduced batch size for more frequent yielding to prevent "page unresponsive" warnings
-  const BATCH_SIZE = 25; // Reduced from 100 to 25 for more responsive UI
+  // Process in batches for better memory management
+  const BATCH_SIZE = 25;
   let processedEvents = 0;
   
   // Calculate similarity matrix and find k nearest neighbors
-  for (let sourceIndex = 0; sourceIndex < eventsWithTags.length; sourceIndex++) {
-    const sourceEvent = eventsWithTags[sourceIndex];
+  for (let sourceIndex = 0; sourceIndex < eventsWithContent.length; sourceIndex++) {
+    const sourceEvent = eventsWithContent[sourceIndex];
     
     // Calculate similarities to all other events
-    const similarities: Array<{ eventId: string; similarity: number; index: number }> = [];
+    const similarities: Array<{ 
+      eventId: string; 
+      similarity: number;
+      tagSimilarity: number;
+      semanticSimilarity: number;
+      index: number 
+    }> = [];
     
-    for (let targetIndex = 0; targetIndex < eventsWithTags.length; targetIndex++) {
-      if (sourceIndex === targetIndex) continue; // Skip self
+    for (let targetIndex = 0; targetIndex < eventsWithContent.length; targetIndex++) {
+      if (sourceIndex === targetIndex) continue;
       
-      const targetEvent = eventsWithTags[targetIndex];
+      const targetEvent = eventsWithContent[targetIndex];
       
-      // Performance optimization: Early exit for events with no shared tags
-      const sourceTags = new Set(sourceEvent.tags || []);
-      const targetTags = targetEvent.tags || [];
-      const hasSharedTags = targetTags.some(tag => sourceTags.has(tag));
+      // Calculate both similarities
+      const tagSimilarity = calculateJaccardSimilarity(
+        sourceEvent.tags || [], 
+        targetEvent.tags || []
+      );
       
-      if (!hasSharedTags) continue; // Skip if no shared tags at all
+      const semanticSimilarity = calculateSemanticSimilarity(sourceEvent, targetEvent);
       
-      const similarity = calculateJaccardSimilarity(sourceEvent.tags || [], targetEvent.tags || []);
+      // Calculate hybrid similarity
+      const hybridSimilarity = calculateHybridSimilarity(
+        tagSimilarity,
+        semanticSimilarity,
+        tagWeight,
+        semanticWeight
+      );
       
-      // Only add if similarity is above threshold to reduce noise and improve performance
-      if (similarity > SIMILARITY_THRESHOLD) {
+      // Only add if hybrid similarity is above threshold
+      if (hybridSimilarity > SIMILARITY_THRESHOLD) {
         similarities.push({
           eventId: targetEvent.id,
-          similarity,
+          similarity: hybridSimilarity,
+          tagSimilarity,
+          semanticSimilarity,
           index: targetIndex
         });
       }
       
-      // Extra yield point for very large inner loops to prevent unresponsiveness
+      // Yield point for large inner loops
       if (targetIndex % 200 === 0 && targetIndex > 0) {
         await new Promise(resolve => setTimeout(resolve, 0));
       }
     }
     
-    // Sort by similarity (descending) and take k nearest
+    // Sort by hybrid similarity and take k nearest
     similarities
       .sort((a, b) => b.similarity - a.similarity)
       .slice(0, k)
       .forEach(neighbor => {
-        // Add edge with similarity as weight
         edges.push({
           source: sourceEvent.id,
           target: neighbor.eventId,
-          similarity: neighbor.similarity
+          similarity: neighbor.similarity,
+          tagSimilarity: neighbor.tagSimilarity,
+          semanticSimilarity: neighbor.semanticSimilarity
         });
       });
       
-    // Progress logging for large datasets - more frequent yielding
+    // Progress logging and yielding
     processedEvents++;
     if (processedEvents % BATCH_SIZE === 0) {
-      console.log(`📈 Processed ${processedEvents}/${eventsWithTags.length} events`);
-      // Yield control to browser every batch to prevent freezing
-      await new Promise(resolve => setTimeout(resolve, 1)); // Slightly longer yield
+      console.log(`📈 Processed ${processedEvents}/${eventsWithContent.length} events`);
+      await new Promise(resolve => setTimeout(resolve, 1));
     }
   }
   
   const endTime = performance.now();
-  console.log(`⏱️ KNN analysis completed in ${(endTime - startTime).toFixed(2)}ms`);
-  console.log(`📈 Generated ${edges.length} connections (avg ${(edges.length / eventsWithTags.length).toFixed(1)} per event)`);
+  console.log(`⏱️ Hybrid KNN analysis completed in ${(endTime - startTime).toFixed(2)}ms`);
+  console.log(`📈 Generated ${edges.length} connections (avg ${(edges.length / eventsWithContent.length).toFixed(1)} per event)`);
   console.log(`🚀 Performance: ${(edges.length / (endTime - startTime) * 1000).toFixed(0)} connections/second`);
   
   return edges;
@@ -226,6 +293,8 @@ export interface CytoscapeData {
       source: string;
       target: string;
       similarity: number;
+      tagSimilarity: number;
+      semanticSimilarity: number;
       weight: number;
     };
   }>;
@@ -233,10 +302,12 @@ export interface CytoscapeData {
 
 export async function buildCytoscapeData(
   events: EventNode[], 
-  k: number = 5
+  k: number = 5,
+  tagWeight: number = 0.6,
+  semanticWeight: number = 0.4
 ): Promise<CytoscapeData> {
-  // Build k-nearest neighbor edges
-  const connections = await findKNearestNeighbors(events, k);
+  // Build k-nearest neighbor edges with hybrid similarity
+  const connections = await findKNearestNeighbors(events, k, tagWeight, semanticWeight);
   
   // Create nodes with consistent styling
   const nodes = events.map(event => ({
@@ -250,27 +321,32 @@ export async function buildCytoscapeData(
     }
   }));
   
-  // Deduplicate bidirectional edges to prevent overlapping connections
-  const edgeMap = new Map<string, { source: string; target: string; similarity: number }>();
+  // Deduplicate bidirectional edges
+  const edgeMap = new Map<string, { 
+    source: string; 
+    target: string; 
+    similarity: number;
+    tagSimilarity: number;
+    semanticSimilarity: number;
+  }>();
   
   connections.forEach(connection => {
-    // Create a consistent edge key regardless of direction (A-B same as B-A)
     const edgeKey = [connection.source, connection.target].sort().join('-');
-    
-    // Only keep the edge with higher similarity if duplicate found
     const existing = edgeMap.get(edgeKey);
     if (!existing || connection.similarity > existing.similarity) {
       edgeMap.set(edgeKey, connection);
     }
   });
   
-  // Create edges with thickness based on similarity (deduplicated)
+  // Create edges with metadata
   const edges = Array.from(edgeMap.values()).map((connection, index) => ({
     data: {
       id: `edge_${index}`,
       source: connection.source,
       target: connection.target,
       similarity: connection.similarity,
+      tagSimilarity: connection.tagSimilarity,
+      semanticSimilarity: connection.semanticSimilarity,
       weight: Math.max(1, connection.similarity * 10) // Scale for visual thickness
     }
   }));
@@ -278,7 +354,9 @@ export async function buildCytoscapeData(
   console.log('📊 Edge deduplication results:', {
     originalConnections: connections.length,
     deduplicatedEdges: edges.length,
-    duplicatesRemoved: connections.length - edges.length
+    duplicatesRemoved: connections.length - edges.length,
+    avgTagSimilarity: (edges.reduce((sum, e) => sum + e.data.tagSimilarity, 0) / edges.length).toFixed(2),
+    avgSemanticSimilarity: (edges.reduce((sum, e) => sum + e.data.semanticSimilarity, 0) / edges.length).toFixed(2)
   });
   
   return { nodes, edges };

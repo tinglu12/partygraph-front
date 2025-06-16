@@ -24,6 +24,7 @@ import {
   X,
   MessageCircle,
   CheckCircle,
+  Network,
 } from "lucide-react";
 import { EventNode, TagCenteredGraphData } from "@/types/EventGraph";
 import { EventType } from "@/types/EventType";
@@ -32,9 +33,99 @@ import {
   convertDayOfWeekToDate,
   isDayOfWeekFormat,
 } from "@/utils/dateConversion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// Union type to handle both EventNode and EventType (same as in EventsList)
+// Union type to handle both EventNode and EventType
 type UnifiedEvent = EventNode | EventType;
+
+// Type guard to check if event is EventNode
+function isEventNode(event: UnifiedEvent): event is EventNode {
+  return 'connections' in event;
+}
+
+// Helper to get dates from either event type
+function getEventDates(event: UnifiedEvent): string[] {
+  if (isEventNode(event)) {
+    // For EventNode, always use the date property
+    return [event.date];
+  } else {
+    // For EventType, prefer dates array if available, otherwise use single date
+    return event.dates || (event.date ? [event.date] : []);
+  }
+}
+
+// Helper to normalize a date for comparison
+function normalizeDateForComparison(date: Date | string): string {
+  if (typeof date === 'string') {
+    // Handle day of week format
+    if (isDayOfWeekFormat(date)) {
+      const convertedDate = convertDayOfWeekToDate(date);
+      if (!convertedDate) return date;
+      return new Date(convertedDate).toISOString().split('T')[0];
+    }
+    // Handle ISO date format
+    try {
+      return new Date(date).toISOString().split('T')[0];
+    } catch (error) {
+      console.error('Error normalizing date for comparison:', date, error);
+      return date;
+    }
+  }
+  // Handle Date object
+  return date.toISOString().split('T')[0];
+}
+
+// Helper to check if an event matches any of the filter dates
+function eventMatchesFilterDates(event: UnifiedEvent, filterDateStrings: string[]): boolean {
+  const eventDates = getEventDates(event);
+  
+  return eventDates.some(eventDateStr => {
+    const normalizedDate = normalizeDateForComparison(eventDateStr);
+    if (!normalizedDate) return false;
+    return filterDateStrings.includes(normalizedDate);
+  });
+}
+
+// Helper to format a date for display
+function formatDateForDisplay(date: Date | string): string {
+  if (typeof date === 'string') {
+    // Handle day of week format
+    if (isDayOfWeekFormat(date)) {
+      const convertedDate = convertDayOfWeekToDate(date);
+      if (!convertedDate) return date;
+      const dateObj = new Date(convertedDate);
+      return dateObj.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    }
+    
+    // Handle ISO date format
+    try {
+      const dateObj = new Date(date);
+      if (isNaN(dateObj.getTime())) return date;
+      return dateObj.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    } catch (error) {
+      console.error('Error formatting date:', date, error);
+      return date;
+    }
+  }
+  
+  // Handle Date object
+  return date.toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+}
 
 /**
  * Enhanced AI-powered vibe discovery page with semantic search capabilities
@@ -44,20 +135,20 @@ export default function VibePage() {
   const [tagGraphData, setTagGraphData] = useState<TagCenteredGraphData | null>(
     null
   );
-  const [searchResults, setSearchResults] = useState<EventNode[]>([]);
+  const [searchResults, setSearchResults] = useState<UnifiedEvent[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchMode, setSearchMode] = useState<"semantic" | "tag">("semantic");
   const [showUpload, setShowUpload] = useState(false);
-  const [recentlyAddedEvent, setRecentlyAddedEvent] =
-    useState<EventNode | null>(null);
+  const [recentlyAddedEvent, setRecentlyAddedEvent] = useState<UnifiedEvent | null>(null);
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const [showChat, setShowChat] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<UnifiedEvent | null>(null);
   const [dateFilter, setDateFilter] = useState<Date[]>([]);
   const [isClient, setIsClient] = useState(false);
+  const [activeTab, setActiveTab] = useState("hybrid");
 
   // Example searches that rotate
   const exampleSearches = useMemo(
@@ -151,8 +242,8 @@ export default function VibePage() {
   };
 
   // Helper function to filter events by date
-  const filterEventsByDate = useCallback((events: EventNode[], filterDates?: Date[]): EventNode[] => {
-    // Ensure events is always an array to prevent .slice() and other array method errors
+  const filterEventsByDate = useCallback((events: UnifiedEvent[], filterDates?: Date[]): UnifiedEvent[] => {
+    // Ensure events is always an array
     if (!Array.isArray(events)) {
       console.warn('⚠️ filterEventsByDate received non-array events:', { events, type: typeof events });
       return [];
@@ -166,87 +257,18 @@ export default function VibePage() {
     console.log('🔍 Filtering events by date:', {
       totalEvents: events.length,
       dateFilter: datesToFilter.map(d => d.toISOString().split('T')[0]),
-      sampleEventDates: events.slice(0, 3).map(e => ({ title: e.title, date: e.date, dates: e.dates }))
+      sampleEventDates: events.slice(0, 3).map(e => ({ 
+        title: e.title, 
+        dates: getEventDates(e)
+      }))
     });
     
     // Normalize filter dates to ISO date strings (YYYY-MM-DD)
     const filterDateStrings = datesToFilter.map(date => 
-      date.toISOString().split('T')[0] // Convert to YYYY-MM-DD format
+      date.toISOString().split('T')[0]
     );
     
-    const filteredEvents = events.filter(event => {
-      try {
-        // Handle events with dates array (new flexible format)
-        if (event.dates && event.dates.length > 0) {
-          // Check if any of the event's dates match any of the selected filter dates
-          const matches = event.dates.some(eventDateStr => {
-            // Normalize event date to YYYY-MM-DD format
-            const eventDateOnly = new Date(eventDateStr).toISOString().split('T')[0];
-            return filterDateStrings.includes(eventDateOnly);
-          });
-          
-          if (matches) {
-            console.log('✅ Event matches (dates array):', { title: event.title, dates: event.dates });
-          }
-          return matches;
-        }
-        
-        // Fallback to original date field for backward compatibility
-        if (event.date && !event.dates) {
-          // Check if it's a day-of-week format that needs conversion
-          if (isDayOfWeekFormat(event.date)) {
-            const convertedDate = convertDayOfWeekToDate(event.date);
-            if (convertedDate) {
-              const eventDateOnly = new Date(convertedDate).toISOString().split('T')[0];
-              const matches = filterDateStrings.includes(eventDateOnly);
-              
-              console.log('🔄 Day-of-week conversion:', {
-                title: event.title,
-                originalDate: event.date,
-                convertedDate,
-                eventDateOnly,
-                filterDates: filterDateStrings,
-                matches
-              });
-              
-              return matches;
-            }
-          } else {
-            // Try to parse as regular date
-            const eventDate = new Date(event.date);
-            if (!isNaN(eventDate.getTime())) {
-              const eventDateOnly = eventDate.toISOString().split('T')[0];
-              const matches = filterDateStrings.includes(eventDateOnly);
-              
-              if (matches) {
-                console.log('✅ Event matches (regular date):', { title: event.title, date: event.date });
-              }
-              return matches;
-            }
-          }
-        }
-        
-        // If no date information is available, exclude from results
-        console.log('❌ Event excluded (no date info):', { title: event.title, date: event.date, dates: event.dates });
-        return false;
-      } catch (error) {
-        console.error('Error parsing event date:', {
-          eventId: event.id,
-          date: event.date,
-          dates: event.dates,
-          error
-        });
-        return false;
-      }
-    });
-    
-    console.log('🎯 Filtering result:', {
-      originalCount: events.length,
-      filteredCount: filteredEvents.length,
-      removedCount: events.length - filteredEvents.length
-    });
-    
-    return filteredEvents;
+    return events.filter(event => eventMatchesFilterDates(event, filterDateStrings));
   }, [dateFilter]);
 
   // Helper search functions that accept dates directly (to avoid async state issues)
@@ -273,7 +295,11 @@ export default function VibePage() {
         console.log('📊 Graph data events extracted (with dates):', {
           totalGraphNodes: graphData.nodes.length,
           eventNodes: events.length,
-          sampleEvents: events.slice(0, 2).map(e => ({ title: e.title, date: e.date, dates: e.dates })),
+          sampleEvents: events.slice(0, 2).map(e => ({ 
+            title: e.title, 
+            date: e.date,
+            dates: getEventDates(e)
+          })),
           filterDates: filterDates.map(d => d.toISOString().split('T')[0])
         });
         
@@ -432,179 +458,28 @@ export default function VibePage() {
   // Handle semantic vibe search using AI
   const handleVibeSearch = async (query: string) => {
     setIsLoading(true);
-    setSearchQuery(query);
-    setHasSearched(true);
     setError(null);
-    setSearchMode("semantic");
-    setRecentlyAddedEvent(null);
-
     try {
-      console.log(`Starting AI semantic search for: "${query}"`);
-
-      // Try tag-centered search first for better visualization
-      const graphData = await searchTagCenteredByVibe(query);
-
-      if (graphData) {
-        // Extract events from graph for filtering
-        const events = graphData.nodes
-          .filter((node: any) => node.type === "event")
-          .map((node: any) => node.data as EventNode);
-        
-        console.log('📊 Graph data events extracted:', {
-          totalGraphNodes: graphData.nodes.length,
-          eventNodes: events.length,
-          sampleEvents: events.slice(0, 2).map(e => ({ title: e.title, date: e.date, dates: e.dates })),
-          currentDateFilter: dateFilter.map(d => d.toISOString().split('T')[0])
-        });
-        
-        // Apply date filter to events
-        const filteredEvents = filterEventsByDate(events);
-        
-        if (dateFilter.length > 0) {
-          // Filter the graph data itself to only include filtered events
-          const filteredEventIds = new Set(filteredEvents.map(e => e.id));
-          const filteredGraphData = {
-            ...graphData,
-            nodes: graphData.nodes.filter((node: any) => 
-              node.type === "tag" || filteredEventIds.has(node.data.id)
-            ),
-            edges: graphData.edges.filter((edge: any) => {
-              const sourceIsTag = graphData.nodes.find((n: any) => n.id === edge.source)?.type === "tag";
-              const targetIsTag = graphData.nodes.find((n: any) => n.id === edge.target)?.type === "tag";
-              return (sourceIsTag && filteredEventIds.has(edge.target)) || 
-                     (targetIsTag && filteredEventIds.has(edge.source)) ||
-                     (filteredEventIds.has(edge.source) && filteredEventIds.has(edge.target));
-            })
-          };
-          setTagGraphData(filteredGraphData);
-        } else {
-          setTagGraphData(graphData);
-        }
-        
-        setSearchResults(filteredEvents);
-        
-        // Show message if date filter removed results
-        if (dateFilter.length > 0 && filteredEvents.length === 0 && events.length > 0) {
-          setError(`Found ${events.length} matching events, but none on the selected dates. Try different dates or remove the date filter.`);
-        }
-      } else {
-        // Fallback to direct event search
-        const events = await searchEventsByVibe(query);
-        const filteredEvents = filterEventsByDate(events);
-        
-        if (filteredEvents.length > 0) {
-          setSearchResults(filteredEvents);
-          setTagGraphData(null);
-        } else if (dateFilter.length > 0 && events.length > 0) {
-          setError(`Found ${events.length} matching events, but none on the selected dates. Try different dates or remove the date filter.`);
-          setSearchResults([]);
-          setTagGraphData(null);
-        } else {
-          setError(
-            "No events found matching your vibe. Try a different description or browse available tags below."
-          );
-          setSearchResults([]);
-          setTagGraphData(null);
-        }
-      }
-    } catch (error) {
-      console.error("Error in AI vibe search:", error);
-      setError(
-        "AI search encountered an error. Please try again or use a simpler description."
-      );
-      setSearchResults([]);
-      setTagGraphData(null);
+      const results = await searchEventsByVibe(query);
+      setSearchResults(results as UnifiedEvent[]);
+      setHasSearched(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred during search');
     } finally {
       setIsLoading(false);
     }
   };
 
   // Handle tag-based search
-  const handleTagSearch = async (tag: string) => {
+  const handleTagSearch = async (query: string) => {
     setIsLoading(true);
-    setSearchQuery(tag);
-    setHasSearched(true);
     setError(null);
-    setSearchMode("tag");
-    setRecentlyAddedEvent(null);
-
     try {
-      console.log(`Searching by tag: "${tag}"`);
-
-      // Try to create a tag-centered graph visualization first (like the search bar does)
-      try {
-        const graphData = await searchTagCenteredByVibe(tag);
-        
-        if (graphData) {
-          // Extract events from graph for filtering
-          const events = graphData.nodes
-            .filter((node: any) => node.type === "event")
-            .map((node: any) => node.data as EventNode);
-          
-          console.log('📊 Tag search - Graph data events extracted:', {
-            totalGraphNodes: graphData.nodes.length,
-            eventNodes: events.length,
-            currentDateFilter: dateFilter.map(d => d.toISOString().split('T')[0])
-          });
-          
-          // Apply date filter to events
-          const filteredEvents = filterEventsByDate(events);
-          
-          if (dateFilter.length > 0) {
-            // Filter the graph data itself to only include filtered events
-            const filteredEventIds = new Set(filteredEvents.map(e => e.id));
-            const filteredGraphData = {
-              ...graphData,
-              nodes: graphData.nodes.filter((node: any) => 
-                node.type === "tag" || filteredEventIds.has(node.data.id)
-              ),
-              edges: graphData.edges.filter((edge: any) => {
-                const sourceIsTag = graphData.nodes.find((n: any) => n.id === edge.source)?.type === "tag";
-                const targetIsTag = graphData.nodes.find((n: any) => n.id === edge.target)?.type === "tag";
-                return (sourceIsTag && filteredEventIds.has(edge.target)) || 
-                       (targetIsTag && filteredEventIds.has(edge.source)) ||
-                       (filteredEventIds.has(edge.source) && filteredEventIds.has(edge.target));
-              })
-            };
-            setTagGraphData(filteredGraphData);
-          } else {
-            setTagGraphData(graphData);
-          }
-          
-          setSearchResults(filteredEvents);
-          
-          // Show message if date filter removed results
-          if (dateFilter.length > 0 && filteredEvents.length === 0 && events.length > 0) {
-            setError(`Found ${events.length} events with tag "${tag}", but none on the selected dates. Try different dates or remove the date filter.`);
-          }
-          
-          return; // Success - exit early
-        }
-      } catch (graphError) {
-        console.log("Tag-centered graph creation failed for tag search, falling back to direct search:", graphError);
-      }
-      
-      // Fallback: Use direct tag search if graph creation fails
-      const events = await searchEventsByTag(tag);
-      const filteredEvents = filterEventsByDate(events);
-      
-      if (filteredEvents.length > 0) {
-        setSearchResults(filteredEvents);
-        setTagGraphData(null);
-      } else if (dateFilter.length > 0 && events.length > 0) {
-        setError(`Found ${events.length} events with tag "${tag}", but none on the selected dates. Try different dates or remove the date filter.`);
-        setSearchResults([]);
-        setTagGraphData(null);
-      } else {
-        setError(`No events found with tag "${tag}".`);
-        setSearchResults([]);
-        setTagGraphData(null);
-      }
-    } catch (error) {
-      console.error("Error in tag search:", error);
-      setError("Tag search failed. Please try again.");
-      setSearchResults([]);
-      setTagGraphData(null);
+      const results = await searchEventsByTag(query);
+      setSearchResults(results as UnifiedEvent[]);
+      setHasSearched(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred during search');
     } finally {
       setIsLoading(false);
     }
@@ -630,6 +505,37 @@ export default function VibePage() {
       setShowChat(true);
     }
   }, []);
+
+  // Update date filtering to use the helper
+  const filteredEvents = useMemo(() => {
+    return sampleEvents.filter((event: UnifiedEvent) => {
+      // Search query filtering
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesTitle = event.title.toLowerCase().includes(query);
+        const matchesDescription = event.description?.toLowerCase().includes(query) || false;
+        const matchesTags = event.tags?.some(tag => tag.toLowerCase().includes(query)) || false;
+        const matchesCategory = event.category?.toLowerCase().includes(query) || false;
+        
+        if (!matchesTitle && !matchesDescription && !matchesTags && !matchesCategory) {
+          return false;
+        }
+      }
+      
+      // Date filtering
+      if (dateFilter.length > 0) {
+        const eventDates = getEventDates(event);
+        const filterDateStrings = dateFilter.map(d => d.toISOString().split('T')[0]);
+        
+        return eventDates.some(eventDateStr => {
+          const normalizedEventDate = normalizeDateForComparison(eventDateStr);
+          return filterDateStrings.includes(normalizedEventDate);
+        });
+      }
+      
+      return true;
+    });
+  }, [sampleEvents, searchQuery, dateFilter]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
@@ -884,14 +790,14 @@ export default function VibePage() {
                           ? `Events discovered through AI semantic analysis of your vibe description${
                               dateFilter.length > 0
                                 ? dateFilter.length === 1
-                                  ? ` • Filtered for ${dateFilter[0].toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
+                                  ? ` • Filtered for ${formatDateForDisplay(dateFilter[0])}`
                                   : ` • Filtered for ${dateFilter.length} selected dates`
                                 : ""
                             }`
                           : `Events tagged with "${searchQuery}"${
                               dateFilter.length > 0
                                 ? dateFilter.length === 1
-                                  ? ` • Filtered for ${dateFilter[0].toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`
+                                  ? ` • Filtered for ${formatDateForDisplay(dateFilter[0])}`
                                   : ` • Filtered for ${dateFilter.length} selected dates`
                                 : ""
                             }`
@@ -941,20 +847,44 @@ export default function VibePage() {
                     </h3>
                   </div>
 
-                  {/* Cytoscape Knowledge Graph */}
-                  <div className="h-[600px] pb-4 px-4 md:px-8 lg:px-16">
-                    <CytoscapeGraph 
-                      events={sampleEvents}
-                      onEventClick={(event) => handleEventSelect(event)}
-                      selectedEventId={selectedEvent?.id}
-                      height={550}
-                    />
-                  </div>
+                  {/* Tabbed Graph Interface */}
+                  <Tabs defaultValue="hybrid" className="w-full" onValueChange={setActiveTab}>
+                    <div className="flex justify-center border-b border-white/10">
+                      <TabsList className="bg-white/5 backdrop-blur-sm">
+                        <TabsTrigger 
+                          value="hybrid" 
+                          className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-200"
+                        >
+                          <Brain className="w-4 h-4 mr-2" />
+                          Network Graph
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="original" 
+                          className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-200"
+                        >
+                          <Network className="w-4 h-4 mr-2" />
+                          Tag Explorer
+                        </TabsTrigger>
+                      </TabsList>
+                    </div>
 
-                  {/* Original Graph container spanning full browser width */}
-                  <div className="h-[700px] pb-8 px-0 md:px-8 lg:px-16">
-                    <Graph onEventSelect={handleEventSelect} />
-                  </div>
+                    <TabsContent value="hybrid" className="mt-0">
+                      <div className="h-[700px] pb-4 px-4 md:px-8 lg:px-16">
+                        <CytoscapeGraph 
+                          events={sampleEvents}
+                          onEventClick={(event) => handleEventSelect(event)}
+                          selectedEventId={selectedEvent?.id}
+                          height={650}
+                        />
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="original" className="mt-0">
+                      <div className="h-[700px] pb-4 px-4 md:px-8 lg:px-16">
+                        <Graph onEventSelect={handleEventSelect} />
+                      </div>
+                    </TabsContent>
+                  </Tabs>
                 </div>
               </div>
 
