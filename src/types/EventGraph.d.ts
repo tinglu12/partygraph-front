@@ -15,37 +15,24 @@ export interface EventNode {
   id: string;
   title: string;
   description?: string;
-  date?: string; // Keep for backward compatibility with legacy single-date format
-  dates?: string[]; // New: array of ISO date strings for flexible date patterns
+  date: string;
   category?: string;
-  location?: {
-    name: string;
-    coordinates: {
-      lat: number;
-      lng: number;
-    };
-  };
   tags?: string[];
-  keywords?: string[];
   venue?: string;
   address?: string;
   neighborhood?: string;
-  url?: string;
+  location?: {
+    lat: number;
+    lng: number;
+  };
   semantic?: SemanticAnalysis;
-  graph_data: {
-    position: { x: number; y: number };
-    connections: {
-      events: Array<{
-        id: string;
-        similarity: number;
-        semanticSimilarity: number;
-        vibeSimilarity: number;
-      }>;
-      tags: Array<{
-        id: string;
-        weight: number;
-      }>;
-    };
+  connections?: string[]; // IDs of connected events
+  graph_data?: {
+    connections: Array<{
+      id: string;
+      similarity: number;
+    }>;
+    tags: string[];
   };
 }
 

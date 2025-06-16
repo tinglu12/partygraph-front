@@ -19,43 +19,45 @@ export interface SemanticAnalysis {
   confidence: number;    // 0-1 scale of confidence in the analysis
 }
 
-// Update EventNode to include semantic analysis
+// Add Tag type for backward compatibility
+export interface Tag {
+  id: string;
+  name: string;
+}
+
+// Add GraphData type for backward compatibility
+export interface GraphData {
+  nodes: EventNode[];
+  edges: GraphEdge[];
+  tags?: Tag[];
+}
+
+// Update EventNode to include legacy fields for backward compatibility
 export interface EventNode {
   id: string;
   title: string;
   description?: string;
-  date?: string;
-  dates?: string[];
+  date: string;
   category?: string;
-  location?: {
-    name: string;
-    coordinates: {
-      lat: number;
-      lng: number;
-    };
-  };
   tags?: string[];
-  keywords?: string[];
   venue?: string;
-  address?: string;
-  neighborhood?: string;
-  url?: string;
-  semantic?: SemanticAnalysis;
-  graph_data: {
-    position: { x: number; y: number };
-    connections: {
-      events: Array<{
-        id: string;
-        similarity: number;
-        semanticSimilarity: number;
-        vibeSimilarity: number;
-      }>;
-      tags: Array<{
-        id: string;
-        weight: number;
-      }>;
-    };
+  address?: {
+    lat: number;
+    lng: number;
   };
+  neighborhood?: string;
+  url?: string;  // Keep URL for event links
+  semantic?: SemanticAnalysis;
+  connections?: string[]; // IDs of connected events
+  graph_data?: {
+    connections: Array<{
+      id: string;
+      similarity: number;
+    }>;
+    tags: string[];
+  };
+  // Legacy fields for backward compatibility
+  keywords?: string[];  // Legacy keywords field (use tags instead)
 }
 
 export interface GraphEdge {
@@ -68,13 +70,17 @@ export interface GraphEdge {
   label?: string;  // Optional for backward compatibility
 }
 
+// Add TagCenteredNode type for backward compatibility
+export interface TagCenteredNode {
+  id: string;
+  type: 'event' | 'tag';
+  data: EventNode | Tag;
+  position: { x: number; y: number };
+}
+
+// Update TagCenteredGraphData to use TagCenteredNode
 export interface TagCenteredGraphData {
-  nodes: Array<{
-    id: string;
-    type: 'event' | 'tag';
-    data: EventNode | { id: string; name: string };
-    position: { x: number; y: number };
-  }>;
+  nodes: TagCenteredNode[];
   edges: GraphEdge[];
   centralTag: string;
   similarTags: string[];

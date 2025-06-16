@@ -28,7 +28,7 @@ import {
 
 // Dynamically import cytoscape to avoid SSR issues
 let cytoscape: any = null;
-let coseBilkent: any = null;
+let cola: any = null;  // Change from coseBilkent to cola
 
 interface CytoscapeGraphProps {
   events: EventNode[];
@@ -89,16 +89,16 @@ export const CytoscapeGraph = ({
     const loadCytoscape = async () => {
       try {
         if (typeof window !== 'undefined') {
-          const [cytoscapeModule, coseBilkentModule] = await Promise.all([
+          const [cytoscapeModule, colaModule] = await Promise.all([
             import('cytoscape'),
-            import('cytoscape-cose-bilkent')
+            import('cytoscape-cola')
           ]);
           
           cytoscape = cytoscapeModule.default;
-          coseBilkent = coseBilkentModule.default;
+          cola = colaModule.default;
           
           // Register the layout
-          cytoscape.use(coseBilkent);
+          cytoscape.use(cola);
         }
       } catch (error) {
         console.error('Error loading Cytoscape:', error);
@@ -467,24 +467,36 @@ export const CytoscapeGraph = ({
     if (isStructuralChange) {
       console.log('🎯 Running layout for structural change...');
       cyInstance.layout({
-        name: 'cose-bilkent',
+        name: 'cola',
         animate: true,
         animationDuration: 800,
         animationEasing: 'ease-out',
-        nodeRepulsion: 8000,
-        idealEdgeLength: 100,
-        edgeElasticity: 0.45,
-        nestingFactor: 0.1,
-        gravity: 0.4,
-        numIter: 2500,
-        tile: false,
-        tilingPaddingVertical: 10,
-        tilingPaddingHorizontal: 10,
-        gravityRangeCompound: 1.5,
-        gravityCompound: 1.0,
-        gravityRange: 3.8,
-        initialEnergyOnIncremental: 0.5,
-        fit: !hasElements, // Only fit if this is the first layout
+        
+        // Prevent node overlap
+        avoidOverlap: true,
+        nodeSpacing: (node: any) => {
+          // Base spacing on node content
+          const label = node.data('label') || '';
+          const labelLength = label.length;
+          // Minimum spacing of 20px, plus 2px per character in label
+          return 20 + (labelLength * 2);
+        },
+        
+        // Edge settings
+        edgeLength: 50,  // Preferred edge length
+        edgeLengthVal: 50,  // Fixed edge length
+        edgeSymDiffLength: 0.5,  // Edge length difference for symmetric diff
+        edgeJaccardLength: 0.3,  // Edge length for Jaccard similarity
+        
+        // Layout settings
+        randomize: true,  // Start from random positions
+        maxSimulationTime: 1500,  // Stop after 1.5s
+        handleDisconnected: true,  // Keep disconnected components separate
+        
+        // Fit and padding
+        fit: !hasElements,  // Only fit if this is the first layout
+        padding: 50,
+        
         ready: () => {
           // Restore view state after layout
           if (hasElements) {
