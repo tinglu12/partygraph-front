@@ -26,6 +26,8 @@ import {
   PopoverTrigger 
 } from '@/components/ui/popover';
 import { Switch } from '@/components/ui/switch';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Graph } from '@/features/components/Graph';
 
 // Dynamically import cytoscape to avoid SSR issues
 let cytoscape: any = null;
@@ -70,6 +72,7 @@ export const CytoscapeGraph = ({
   const [localTagWeight, setLocalTagWeight] = useState(tagWeight);
   const [localSemanticWeight, setLocalSemanticWeight] = useState(semanticWeight);
   const [showConnectionDetails, setShowConnectionDetails] = useState(false);
+  const [activeTab, setActiveTab] = useState<'network' | 'tag'>('network');
   
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -624,8 +627,8 @@ export const CytoscapeGraph = ({
 
   return (
     <div className={`${className} relative ${isFullscreen ? 'fixed inset-0 z-50 bg-slate-900' : ''}`}>
-      {/* Header Controls */}
-      <div className="flex items-center justify-between p-4 bg-slate-900/95 backdrop-blur-sm border-b border-white/10 rounded-t-2xl">
+      {/* Header Controls - all in one row */}
+      <div className="flex items-center justify-between p-4 bg-slate-900/95 backdrop-blur-sm border-b border-white/10 rounded-t-2xl gap-4">
         <div className="flex items-center gap-3">
           <Layers className="w-6 h-6 text-purple-400" />
           <h3 className="text-lg font-bold text-white">
@@ -635,284 +638,298 @@ export const CytoscapeGraph = ({
             {filteredData.nodes.length} events • {filteredData.edges.length} connections
           </div>
         </div>
-        
-        <div className="flex items-center gap-2">
-          {/* Search */}
-          <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <Input
-              type="text"
-              placeholder="Search events..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-10 w-64 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:bg-white/15"
-            />
-            {isSearching && (
-              <div className="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2">
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-              </div>
-            )}
-          </div>
-          
-          {/* Settings */}
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline" size="sm" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-                <Settings className="w-4 h-4" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-80 bg-slate-900/95 border-white/20 text-white">
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium">Connections per Event (k)</label>
-                  <Input
-                    type="number"
-                    min="1"
-                    max="10"
-                    value={k}
-                    onChange={(e) => setK(parseInt(e.target.value) || 3)}
-                    className="mt-1 bg-white/10 border-white/20 text-white"
-                  />
-                  <p className="text-xs text-gray-400 mt-1">
-                    Number of similar events to connect to each event
-                  </p>
+        <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as 'network' | 'tag')}>
+          <TabsList>
+            <TabsTrigger value="network">Network Graph</TabsTrigger>
+            <TabsTrigger value="tag">Tag Explorer</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        {/* Search bar and controls on the right, only for network tab */}
+        {activeTab === 'network' && (
+          <div className="flex items-center gap-2 ml-auto">
+            {/* Search */}
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <Input
+                type="text"
+                placeholder="Search events..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-10 w-64 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:bg-white/15"
+              />
+              {isSearching && (
+                <div className="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                 </div>
-                
-                <div>
-                  <label className="text-sm font-medium">Tag Similarity Weight</label>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.1"
-                      value={localTagWeight}
-                      onChange={(e) => {
-                        const newTagWeight = parseFloat(e.target.value);
-                        setLocalTagWeight(newTagWeight);
-                        setLocalSemanticWeight(1 - newTagWeight);
-                      }}
-                      className="flex-1 bg-white/10 border-white/20"
-                    />
-                    <span className="text-sm text-gray-300 w-12 text-right">
-                      {(localTagWeight * 100).toFixed(0)}%
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-400 mt-1">
-                    Weight for tag-based similarity
-                  </p>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium">Semantic Similarity Weight</label>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.1"
-                      value={localSemanticWeight}
-                      onChange={(e) => {
-                        const newSemanticWeight = parseFloat(e.target.value);
-                        setLocalSemanticWeight(newSemanticWeight);
-                        setLocalTagWeight(1 - newSemanticWeight);
-                      }}
-                      className="flex-1 bg-white/10 border-white/20"
-                    />
-                    <span className="text-sm text-gray-300 w-12 text-right">
-                      {(localSemanticWeight * 100).toFixed(0)}%
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-400 mt-1">
-                    Weight for content-based similarity
-                  </p>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <Switch
-                    checked={showConnectionDetails}
-                    onCheckedChange={setShowConnectionDetails}
-                    className="data-[state=checked]:bg-purple-600"
-                  />
-                  <label className="text-sm font-medium">Show Connection Details</label>
-                </div>
-              </div>
-            </PopoverContent>
-          </Popover>
-          
-          {/* Reset */}
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={resetGraph}
-            className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-          >
-            <RotateCcw className="w-4 h-4" />
-          </Button>
-          
-          {/* Fullscreen */}
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={toggleFullscreen}
-            className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-          >
-            {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-          </Button>
-        </div>
-      </div>
-
-      {/* Graph Container */}
-      <div 
-        className="relative overflow-hidden bg-slate-900 border-white/20 rounded-b-2xl"
-        style={{ 
-          height: isFullscreen ? 'calc(100vh - 80px)' : height,
-          background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.03) 0%, rgba(15, 23, 42, 1) 70%)'
-        }}
-      >
-        <div 
-          ref={containerRef} 
-          className="w-full h-full"
-        />
-        
-        {/* Node Info Overlay */}
-        {hoveredNode && (
-          <div className="absolute top-4 left-4 bg-slate-800/95 backdrop-blur-sm rounded-lg p-4 border border-white/20 max-w-sm z-10">
-            <h4 className="font-bold text-white mb-2">{hoveredNode.label}</h4>
-            <div className="text-sm text-gray-300 mb-2">
-              <span className="inline-block px-2 py-1 bg-purple-500/20 text-purple-200 rounded-full border border-purple-400/30 text-xs">
-                {hoveredNode.category}
-              </span>
+              )}
             </div>
-            <p className="text-gray-300 text-sm mb-3 line-clamp-3">
-              {hoveredNode.event.description}
-            </p>
-            <div className="flex flex-wrap gap-1">
-              {hoveredNode.tags.slice(0, 3).map((tag: string, index: number) => (
-                <span 
-                  key={index}
-                  className="text-xs px-2 py-1 bg-white/10 text-white/80 rounded-full border border-white/20"
-                >
-                  #{tag}
+            
+            {/* Settings */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="sm" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+                  <Settings className="w-4 h-4" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80 bg-slate-900/95 border-white/20 text-white">
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium">Connections per Event (k)</label>
+                    <Input
+                      type="number"
+                      min="1"
+                      max="10"
+                      value={k}
+                      onChange={(e) => setK(parseInt(e.target.value) || 3)}
+                      className="mt-1 bg-white/10 border-white/20 text-white"
+                    />
+                    <p className="text-xs text-gray-400 mt-1">
+                      Number of similar events to connect to each event
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <label className="text-sm font-medium">Tag Similarity Weight</label>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value={localTagWeight}
+                        onChange={(e) => {
+                          const newTagWeight = parseFloat(e.target.value);
+                          setLocalTagWeight(newTagWeight);
+                          setLocalSemanticWeight(1 - newTagWeight);
+                        }}
+                        className="flex-1 bg-white/10 border-white/20"
+                      />
+                      <span className="text-sm text-gray-300 w-12 text-right">
+                        {(localTagWeight * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1">
+                      Weight for tag-based similarity
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <label className="text-sm font-medium">Semantic Similarity Weight</label>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value={localSemanticWeight}
+                        onChange={(e) => {
+                          const newSemanticWeight = parseFloat(e.target.value);
+                          setLocalSemanticWeight(newSemanticWeight);
+                          setLocalTagWeight(1 - newSemanticWeight);
+                        }}
+                        className="flex-1 bg-white/10 border-white/20"
+                      />
+                      <span className="text-sm text-gray-300 w-12 text-right">
+                        {(localSemanticWeight * 100).toFixed(0)}%
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1">
+                      Weight for content-based similarity
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <Switch
+                      checked={showConnectionDetails}
+                      onCheckedChange={setShowConnectionDetails}
+                      className="data-[state=checked]:bg-purple-600"
+                    />
+                    <label className="text-sm font-medium">Show Connection Details</label>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+            
+            {/* Reset */}
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={resetGraph}
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </Button>
+            
+            {/* Fullscreen */}
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={toggleFullscreen}
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+            </Button>
+          </div>
+        )}
+      </div>
+      {/* Graph Containers - both always mounted, only one visible */}
+      <div className={activeTab === 'network' ? '' : 'hidden'}>
+        <div 
+          className="relative overflow-hidden bg-slate-900 border-white/20 rounded-b-2xl"
+          style={{ 
+            height: isFullscreen ? 'calc(100vh - 80px)' : height,
+            background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.03) 0%, rgba(15, 23, 42, 1) 70%)'
+          }}
+        >
+          <div 
+            ref={containerRef} 
+            className="w-full h-full"
+          />
+          
+          {/* Node Info Overlay */}
+          {hoveredNode && (
+            <div className="absolute top-4 left-4 bg-slate-800/95 backdrop-blur-sm rounded-lg p-4 border border-white/20 max-w-sm z-10">
+              <h4 className="font-bold text-white mb-2">{hoveredNode.label}</h4>
+              <div className="text-sm text-gray-300 mb-2">
+                <span className="inline-block px-2 py-1 bg-purple-500/20 text-purple-200 rounded-full border border-purple-400/30 text-xs">
+                  {hoveredNode.category}
                 </span>
-              ))}
-              {hoveredNode.tags.length > 3 && (
-                <span className="text-xs text-gray-400">
-                  +{hoveredNode.tags.length - 3} more
-                </span>
+              </div>
+              <p className="text-gray-300 text-sm mb-3 line-clamp-3">
+                {hoveredNode.event.description}
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {hoveredNode.tags.slice(0, 3).map((tag: string, index: number) => (
+                  <span 
+                    key={index}
+                    className="text-xs px-2 py-1 bg-white/10 text-white/80 rounded-full border border-white/20"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+                {hoveredNode.tags.length > 3 && (
+                  <span className="text-xs text-gray-400">
+                    +{hoveredNode.tags.length - 3} more
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+          
+          {/* Legend */}
+          <div className="absolute bottom-4 right-4 bg-slate-800/95 backdrop-blur-sm rounded-lg p-4 border border-white/20 z-10">
+            <div className="flex items-center gap-2 mb-3">
+              <Eye className="w-4 h-4 text-purple-400" />
+              <h5 className="font-semibold text-white text-sm">Graph Legend</h5>
+            </div>
+            <div className="space-y-2 text-xs text-gray-300">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                <span>Nodes colored by category</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-1 bg-purple-400/60"></div>
+                <span>Tag-based connection</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-1 bg-blue-400/60"></div>
+                <span>Semantic connection</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full border-2 border-blue-400"></div>
+                <span>Selected for chat</span>
+              </div>
+              {showConnectionDetails && (
+                <div className="mt-2 pt-2 border-t border-white/10">
+                  <p className="text-xs text-gray-400">
+                    Edge thickness = connection strength<br/>
+                    Edge color = connection type<br/>
+                    Hover for details
+                  </p>
+                </div>
               )}
             </div>
           </div>
-        )}
-        
-        {/* Legend */}
-        <div className="absolute bottom-4 right-4 bg-slate-800/95 backdrop-blur-sm rounded-lg p-4 border border-white/20 z-10">
-          <div className="flex items-center gap-2 mb-3">
-            <Eye className="w-4 h-4 text-purple-400" />
-            <h5 className="font-semibold text-white text-sm">Graph Legend</h5>
-          </div>
-          <div className="space-y-2 text-xs text-gray-300">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-              <span>Nodes colored by category</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-1 bg-purple-400/60"></div>
-              <span>Tag-based connection</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-1 bg-blue-400/60"></div>
-              <span>Semantic connection</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full border-2 border-blue-400"></div>
-              <span>Selected for chat</span>
-            </div>
-            {showConnectionDetails && (
-              <div className="mt-2 pt-2 border-t border-white/10">
-                <p className="text-xs text-gray-400">
-                  Edge thickness = connection strength<br/>
-                  Edge color = connection type<br/>
-                  Hover for details
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-        
-        {/* Initial Loading Overlay - "Loading events in your area..." */}
-        {isInitialLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm z-30">
-            <div className="flex flex-col items-center gap-6 text-center max-w-md">
-              <div className="relative">
-                <div className="w-16 h-16 border-4 border-purple-600/30 border-t-purple-600 rounded-full animate-spin"></div>
-                <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-blue-600 rounded-full animate-spin" 
-                     style={{ animationDirection: 'reverse', animationDuration: '2s' }}></div>
-              </div>
-              
-              <div className="text-center">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Loading events in your area...
-                </h3>
-                <p className="text-sm text-gray-400 mb-2">
-                  Discovering amazing experiences and building connections
-                </p>
-                <p className="text-xs text-gray-500">
-                  This may take around 30 seconds for large datasets
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {/* Loading Overlay */}
-        {!isInitialLoading && ((filteredData.nodes.length === 0 && events.length > 0) || isBuilding) && (
-          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm z-20">
-            <div className="flex flex-col items-center gap-4 text-gray-300">
-              <div className="relative">
-                <div className="w-12 h-12 border-4 border-purple-600/30 border-t-purple-600 rounded-full animate-spin"></div>
-                <div className="absolute inset-0 w-12 h-12 border-4 border-transparent border-t-blue-600 rounded-full animate-spin" 
-                     style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center gap-2 mb-2">
-                  <Brain className="w-5 h-5 text-purple-400" />
-                  <p className="font-bold">
-                    {isBuilding ? 'Analyzing Event Relationships...' : 'Building Knowledge Graph...'}
+          
+          {/* Initial Loading Overlay - "Loading events in your area..." */}
+          {isInitialLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm z-30">
+              <div className="flex flex-col items-center gap-6 text-center max-w-md">
+                <div className="relative">
+                  <div className="w-16 h-16 border-4 border-purple-600/30 border-t-purple-600 rounded-full animate-spin"></div>
+                  <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-blue-600 rounded-full animate-spin" 
+                       style={{ animationDirection: 'reverse', animationDuration: '2s' }}></div>
+                </div>
+                
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    Loading events in your area...
+                  </h3>
+                  <p className="text-sm text-gray-400 mb-2">
+                    Discovering amazing experiences and building connections
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    This may take around 30 seconds for large datasets
                   </p>
                 </div>
-                <p className="text-sm text-gray-400">
-                  {isBuilding 
-                    ? `Processing ${events.length} events with K-nearest neighbor analysis`
-                    : `Analyzing ${events.length} events and calculating tag similarities`
-                  }
-                </p>
               </div>
             </div>
-          </div>
-        )}
-        
-        {/* Error Overlay */}
-        {error && (
-          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm z-30">
-            <div className="bg-red-900/50 border border-red-500/50 rounded-lg p-6 max-w-md text-center">
-              <div className="flex items-center justify-center gap-2 mb-3 text-red-400">
-                <AlertCircle className="w-6 h-6" />
-                <h3 className="font-bold text-lg">Graph Error</h3>
+          )}
+          
+          {/* Loading Overlay */}
+          {!isInitialLoading && ((filteredData.nodes.length === 0 && events.length > 0) || isBuilding) && (
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm z-20">
+              <div className="flex flex-col items-center gap-4 text-gray-300">
+                <div className="relative">
+                  <div className="w-12 h-12 border-4 border-purple-600/30 border-t-purple-600 rounded-full animate-spin"></div>
+                  <div className="absolute inset-0 w-12 h-12 border-4 border-transparent border-t-blue-600 rounded-full animate-spin" 
+                       style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+                </div>
+                <div className="text-center">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Brain className="w-5 h-5 text-purple-400" />
+                    <p className="font-bold">
+                      {isBuilding ? 'Analyzing Event Relationships...' : 'Building Knowledge Graph...'}
+                    </p>
+                  </div>
+                  <p className="text-sm text-gray-400">
+                    {isBuilding 
+                      ? `Processing ${events.length} events with K-nearest neighbor analysis`
+                      : `Analyzing ${events.length} events and calculating tag similarities`
+                    }
+                  </p>
+                </div>
               </div>
-              <p className="text-red-200 mb-4">{error}</p>
-              <Button 
-                onClick={() => {
-                  setError(null);
-                  setIsBuilding(false);
-                }}
-                className="bg-red-600 hover:bg-red-700 text-white"
-              >
-                Retry
-              </Button>
             </div>
-          </div>
-        )}
+          )}
+          
+          {/* Error Overlay */}
+          {error && (
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm z-30">
+              <div className="bg-red-900/50 border border-red-500/50 rounded-lg p-6 max-w-md text-center">
+                <div className="flex items-center justify-center gap-2 mb-3 text-red-400">
+                  <AlertCircle className="w-6 h-6" />
+                  <h3 className="font-bold text-lg">Graph Error</h3>
+                </div>
+                <p className="text-red-200 mb-4">{error}</p>
+                <Button 
+                  onClick={() => {
+                    setError(null);
+                    setIsBuilding(false);
+                  }}
+                  className="bg-red-600 hover:bg-red-700 text-white"
+                >
+                  Retry
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className={activeTab === 'tag' ? '' : 'hidden'}>
+        <div className="relative overflow-hidden bg-slate-900 border-white/20 rounded-b-2xl" style={{ height }}>
+          <Graph onEventSelect={onEventClick ? (e) => e && onEventClick(e) : undefined} />
+        </div>
       </div>
     </div>
   );

@@ -591,44 +591,6 @@ export default function VibePage() {
             isLoading={isLoading}
             onDateFilter={handleDateFilter}
           />
-
-          {/* Rotating example searches panel - moved back above graph */}
-          {!hasSearched && (
-            <div className="max-w-5xl mx-auto px-6 mt-6">
-              <div className="text-center">
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                  <div className="flex items-center justify-center gap-2 mb-4">
-                    <TrendingUp className="w-5 h-5 text-purple-400" />
-                    <span className="text-white font-semibold">
-                      Try searching for:
-                    </span>
-                  </div>
-                  <div className="relative h-8 overflow-hidden">
-                    <div
-                      className="absolute inset-0 transition-transform duration-500 ease-in-out"
-                      style={{
-                        transform: `translateY(-${currentExampleIndex * 32}px)`,
-                      }}
-                    >
-                      {exampleSearches.map((example, index) => (
-                        <div
-                          key={index}
-                          className="h-8 flex items-center justify-center"
-                        >
-                          <button
-                            onClick={() => handleVibeSearch(example)}
-                            className="text-purple-200 hover:text-white transition-colors duration-200 font-medium"
-                          >
-                            "{example}"
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Enhanced results section */}
@@ -838,52 +800,24 @@ export default function VibePage() {
               {/* Full width graph container - no max-width constraint */}
               <div className="w-full h-full">
                 <div className="bg-white/5 backdrop-blur-sm border-b border-white/10 h-full">
-                  {/* Header with padding */}
-                  <div className="h-16 flex items-center justify-center">
-                    <h3 className="text-2xl font-bold text-white flex items-center justify-center gap-3">
-                      <Sparkles className="w-6 h-6 text-purple-400" />
-                      Event Network Overview
-                      <Sparkles className="w-6 h-6 text-blue-400" />
-                    </h3>
-                  </div>
-
-                  {/* Tabbed Graph Interface */}
-                  <Tabs defaultValue="hybrid" className="w-full" onValueChange={setActiveTab}>
-                    <div className="flex justify-center border-b border-white/10">
-                      <TabsList className="bg-white/5 backdrop-blur-sm">
-                        <TabsTrigger 
-                          value="hybrid" 
-                          className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-200"
-                        >
-                          <Brain className="w-4 h-4 mr-2" />
-                          Network Graph
-                        </TabsTrigger>
-                        <TabsTrigger 
-                          value="original" 
-                          className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-200"
-                        >
-                          <Network className="w-4 h-4 mr-2" />
-                          Tag Explorer
-                        </TabsTrigger>
-                      </TabsList>
+                  {/* Tabbed Graph Interface - Tabs wraps both header and content */}
+                  <Tabs defaultValue="hybrid" className="w-full" value={activeTab} onValueChange={setActiveTab}>
+                    <div className="bg-white/5 backdrop-blur-sm border-b border-white/10 h-full">
+                      {/* Tab content area - keep both graphs mounted, only show active */}
+                      <div className="h-[700px] pb-4 px-4 md:px-8 lg:px-16 relative">
+                        <div className={activeTab === 'hybrid' ? '' : 'hidden'}>
+                          <CytoscapeGraph 
+                            events={sampleEvents}
+                            onEventClick={(event) => handleEventSelect(event)}
+                            selectedEventId={selectedEvent?.id}
+                            height={650}
+                          />
+                        </div>
+                        <div className={activeTab === 'original' ? '' : 'hidden'}>
+                          <Graph onEventSelect={handleEventSelect} />
+                        </div>
+                      </div>
                     </div>
-
-                    <TabsContent value="hybrid" className="mt-0">
-                      <div className="h-[700px] pb-4 px-4 md:px-8 lg:px-16">
-                        <CytoscapeGraph 
-                          events={sampleEvents}
-                          onEventClick={(event) => handleEventSelect(event)}
-                          selectedEventId={selectedEvent?.id}
-                          height={650}
-                        />
-                      </div>
-                    </TabsContent>
-
-                    <TabsContent value="original" className="mt-0">
-                      <div className="h-[700px] pb-4 px-4 md:px-8 lg:px-16">
-                        <Graph onEventSelect={handleEventSelect} />
-                      </div>
-                    </TabsContent>
                   </Tabs>
                 </div>
               </div>
