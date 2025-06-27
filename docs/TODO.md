@@ -4,6 +4,11 @@
 - [x] enrich techweek events
 - [ ] cleanup all events - check length of description, number of tags, tags aren't junk, etc.
 
+
+- [ ] https://www.eventbrite.com/d/ny--new-york/book-launch/
+
+
+
 ## Hannah
 - [ ] image analysis (offline)
 - [ ] analyzed image display?

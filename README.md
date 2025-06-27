@@ -59,3 +59,8 @@ Open [https://www.partygraph.app/](https://www.partygraph.app/) to see the deplo
 
 *   Powered by **Meta Llama**.
 *   Thanks to Cerebral Valley and Meta for the opportunity to build this project.
+
+## Usage and scripts
+
+`just plex-many` - scrape new events to `public/scraped/plex-many.json`
+

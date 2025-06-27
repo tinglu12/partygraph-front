@@ -42,3 +42,11 @@ scrape-partiful:
 test-jina:
   echo "using api key: $JINA_READER_API_KEY"
 
+json-to-md path="public/scraped/plex-many.json":
+  bun cli.ts json-to-md {{path}}
+
+# json-to-md-all:
+#   bun cli.ts json-to-md public/scraped/plex-many.json
+#   bun cli.ts json-to-md public/scraped/partiful-many.json
+#   bun cli.ts json-to-md public/scraped/nytechweek-many.json
+#   bun cli.ts json-to-md public/scraped/nytechweek-many.json

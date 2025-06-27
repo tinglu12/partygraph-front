@@ -5,7 +5,7 @@ import {
   plexEnrichEvents,
   plexSearchEvent,
   plexSearchMany,
-} from "@/server/PerplxService";
+} from "@/server/PlexService";
 import { EventType } from "@/types/EventType";
 import LlamaAPIClient from "llama-api-client";
 import fs from "fs";
@@ -15,6 +15,7 @@ import { safeName } from "@/lib/utils";
 import { sampleEvents } from "@/constants/sampleEvents";
 import { jinaScrapeEvent, scrapeAndFormatEvent } from "@/server/JinaService";
 import { sampleSize } from "lodash";
+import { jsonToMarkdown } from "@/lib/utils/markdown";
 
 const client = new LlamaAPIClient({
   apiKey: process.env["LLAMA_API_KEY"], // This is the default and can be omitted
@@ -27,7 +28,7 @@ async function main() {
       await plexTest();
       break;
     case "plex-many":
-      await plexManyTest();
+      await plexMany();
       break;
     case "tech-week":
       await techWeekFormat();
@@ -44,6 +45,7 @@ async function main() {
     case "dedupe":
       await dedupeEvents();
       break;
+
     case "classify-image":
       // Pass the image path from the command line
       const imagePath = process.argv[3];
@@ -53,6 +55,18 @@ async function main() {
       }
       const result = await classifyImage(imagePath);
       console.log("classifyImage result", result);
+      break;
+    case "json-to-md":
+      const jsonPath = process.argv[3];
+      if (!jsonPath) {
+        console.error("Please provide a JSON file path.");
+        process.exit(1);
+      }
+      const jsonContent = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+      const markdown = jsonToMarkdown(jsonContent);
+      const outputPath = jsonPath.replace(".json", ".md");
+      fs.writeFileSync(outputPath, markdown);
+      console.log(`Converted ${jsonPath} to ${outputPath}`);
       break;
     case "search":
   }
@@ -114,9 +128,12 @@ async function plexTest() {
   return result;
 }
 
-async function plexManyTest() {
-  const result = await plexSearchMany();
-  console.log("plexManyTest result", { result });
+async function plexMany() {
+  const result = await plexSearchMany({
+    maxCats: 100,
+    maxEventsPerTag: 100,
+  });
+  console.log("plexMany result", { result });
   fs.writeFileSync(
     "./public/scraped/plex-many.json",
     JSON.stringify(result, null, 2)

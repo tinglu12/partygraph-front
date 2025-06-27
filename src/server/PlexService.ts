@@ -5,6 +5,8 @@ import { EventType } from "@/types/EventType";
 import axios from "axios";
 
 // TypeScript interfaces for the schemas
+// TODO there is also a EventNode type in @/types/EventGraph.ts
+// we should merge?
 interface EventSchema {
   title: string;
   description: string;
@@ -160,7 +162,11 @@ class PerplexityService {
     try {
       result = JSON.parse(content);
     } catch (e) {
-      throw new Error("Failed to parse Perplexity API response as JSON array");
+      console.error(
+        "Failed to parse Perplexity API response as JSON array",
+        content
+      );
+      // continue
     }
     return result.items;
   }
@@ -234,8 +240,11 @@ export async function plexEnrichEvents(events: EventType[]) {
   }
 }
 
-export async function plexSearchMany(maxCats?: number, eventCount?: number) {
-  eventCount = eventCount ?? 10;
+export async function plexSearchMany(opts: {
+  maxCats?: number;
+  maxEventsPerTag?: number;
+}) {
+  const { maxCats = 10, maxEventsPerTag = 10 } = opts;
   const tags = [
     "book launch",
     "indie rock concert",
@@ -268,7 +277,7 @@ export async function plexSearchMany(maxCats?: number, eventCount?: number) {
   // const results = await Promise.all(promises);
   const results: any[] = [];
   for (const tag of activeTags) {
-    const catResults: any[] = await plexSearchEvent(tag, eventCount);
+    const catResults: any[] = await plexSearchEvent(tag, maxEventsPerTag);
     console.log("Perplexity searchMany result =>", { tag, catResults });
 
     results.push(...catResults);
